@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <temp@temp.com>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 20:58:15 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 01:38:45 by vblanc           ###   ########.fr       */
+/*   Created: 2024/10/10 01:32:44 by vblanc            #+#    #+#             */
+/*   Updated: 2024/10/10 01:35:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
+void	*memccpy(void *dest, const void *src, int c, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
 
-/* Libc functions */
-void	*ft_memset(void *s, int c, size_t n);
-void	bzero(void *s, size_t n);
-void	*memcpy(void *dest, const void *src, size_t n);
-void	*memccpy(void *dest, const void *src, int c, size_t n);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-
-#endif
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	while (n--)
+	{
+		if (*s == (unsigned char)c)
+			return ((void *)(d + n));
+		*d++ = *s++;
+	}
+	return (NULL);
+}
