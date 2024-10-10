@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 22:56:13 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 02:19:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/10 02:32:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 	d = (unsigned char *)dest;
 	s = (const unsigned char *)src;
-	while (n--)
+	while (n-- > 0)
 		*d++ = *s++;
 	return (dest);
 }
