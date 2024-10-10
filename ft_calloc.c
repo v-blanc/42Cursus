@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 22:52:26 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 17:06:29 by vblanc           ###   ########.fr       */
+/*   Created: 2024/10/10 16:54:19 by vblanc            #+#    #+#             */
+/*   Updated: 2024/10/10 17:10:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+/* Allocate NMEMB elements of SIZE bytes each, all initialized to 0. */
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	ft_memset(s, 0, n);
+	void	*ptr;
+
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }
