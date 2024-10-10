@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:54:15 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 02:19:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/10 02:40:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	while (s[i++])
+		;
+	return (--i);
 }
