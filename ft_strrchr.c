@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 03:19:37 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 11:14:27 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/10 16:52:52 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strrchr(const char *s, int c)
 	while (*s)
 	{
 		if (*s == (unsigned char)c)
-			last = s;
+			last = (char *)s;
 		s++;
 	}
 	return (last);
