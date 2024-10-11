@@ -6,14 +6,19 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:58:15 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/12 00:29:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/12 00:43:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+/* ************************************************************************** */
+/* ******************************* Libraries ******************************** */
+/* ************************************************************************** */
+
 # include <stdlib.h>
+# include <unistd.h>
 
 /* ************************************************************************** */
 /* ***************************** Libc functions ***************************** */
@@ -54,6 +59,10 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
 
 /* ************************************************************************** */
 /* ***************************** Own functions ****************************** */
