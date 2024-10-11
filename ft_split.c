@@ -6,12 +6,16 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:54 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/11 23:09:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/12 00:24:49 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/* Allocates (with malloc(3)) and returns an array
+of strings obtained by splitting ’s’ using the
+character ’c’ as a delimiter.
+The array is NULL-terminated. */
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;

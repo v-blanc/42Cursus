@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 23:45:07 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/12 00:25:37 by vblanc           ###   ########.fr       */
+/*   Created: 2024/10/11 23:23:40 by vblanc            #+#    #+#             */
+/*   Updated: 2024/10/12 00:26:19 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Allocates (with malloc(3)) and returns a substring
-from the string ’s’.
-The substring begins at index ’start’ and is of
-maximum size ’len’. */
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+/*  Reverses the content of ’s’. */
+void	ft_strrev(char *s)
 {
-	char	*sub;
+	int		i;
+	int		len_s;
+	char	temp;
 
-	sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (NULL);
-	ft_memcpy(sub, s + start, len);
-	sub[len] = '\0';
-	return (sub);
+	len_s = ft_strlen(s);
+	i = 0;
+	while (i < len_s / 2)
+	{
+		temp = s[i];
+		s[i] = s[len_s - i - 1];
+		s[len_s - i - 1] = temp;
+		i++;
+	}
 }
