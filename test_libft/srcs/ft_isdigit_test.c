@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_isdigit_test.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 00:44:03 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/14 15:59:30 by vblanc           ###   ########.fr       */
+/*   Created: 2024/10/14 15:55:18 by vblanc            #+#    #+#             */
+/*   Updated: 2024/10/14 15:56:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../libft.h"
+#include <ctype.h>
+#include <stdio.h>
 
-/* Outputs the integer ’n’ to the given file descriptor. */
-void	ft_putnbr_fd(int n, int fd)
+int	main(void)
 {
-	char	c;
+	int	i;
 
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	if (n < 0)
+	i = 0;
+	while (i <= 255)
 	{
-		write(fd, "-", 1);
-		n = -n;
+		if (isprint(i))
+			printf("(%d)\t’%c’ %s\n", i, i,
+				ft_isdigit(i) ? "is digit" : "is not digit");
+		else
+			printf("(%d)\t’.%x’ %s\n", i, i,
+				ft_isdigit(i) ? "is digit" : "is not digit");
+		i++;
 	}
-	while (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		c = n % 10 + '0';
-		write(fd, &c, 1);
-		n = n / 10;
-	}
-	c = n + '0';
-	write(fd, &c, 1);
 }

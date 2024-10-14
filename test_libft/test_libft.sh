@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 16:47:10 by vblanc            #+#    #+#              #
-#    Updated: 2024/10/14 14:36:53 by vblanc           ###   ########.fr        #
+#    Updated: 2024/10/14 15:50:30 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ for file in bin/*; do
     output_ref_file="${basename_file##ft_}_output.txt"
     result_file="res_${basename_file##ft_}"
     ./$file > output_user/$output_user_file
-    diff -U 100 output_ref/$output_ref_file output_user/$output_user_file > results/$result_file
+    diff -U 100 output_ref/$output_ref_file output_user/$output_user_file | cat -e > results/$result_file
     if [ ! -s results/$result_file ]; then
         echo "$GREEN  Diff OK$NC"
     else
