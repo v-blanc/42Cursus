@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_itoa_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 15:43:48 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/14 16:18:11 by vblanc           ###   ########.fr       */
+/*   Created: 2024/10/14 16:09:06 by vblanc            #+#    #+#             */
+/*   Updated: 2024/10/14 16:30:29 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-/* Checks for an alphabetic character;
-it is equivalent to	(islower(c) || isupper(c)). */
-int	ft_isalpha(int c)
+int	main(void)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
+	printf("%s\n", ft_itoa(42));
+	printf("%s\n", ft_itoa(0));
+	printf("%s\n", ft_itoa(-42));
+	printf("%s\n", ft_itoa(2147483647));
+	printf("%s\n", ft_itoa(-2147483648));
 }

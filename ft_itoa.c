@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 23:18:28 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/12 00:24:38 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/14 16:26:07 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,17 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 	int		i;
+	int		sign_flag;
 
 	if (n == -2147483648)
-	{
-		str = ft_strdup("-2147483648");
-		return (str);
-	}
+		return (ft_strdup("-2147483648"));
 	str = malloc(sizeof(char) * 12);
 	if (!str)
 		return (NULL);
 	i = 0;
 	if (n < 0)
 	{
-		str[i++] = '-';
+		sign_flag = 1;
 		n = -n;
 	}
 	while (n > 9)
@@ -40,6 +38,8 @@ char	*ft_itoa(int n)
 		n = n / 10;
 	}
 	str[i] = n + '0';
+	if (sign_flag == 1)
+		str[++i] = '-';
 	ft_strrev(str);
 	return (str);
 }
