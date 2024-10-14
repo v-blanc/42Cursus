@@ -6,12 +6,13 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:58:40 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 15:58:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/14 14:47:54 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/* Checks for any printable character including space. */
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)

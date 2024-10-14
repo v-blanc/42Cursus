@@ -6,12 +6,13 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:37:53 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/10 16:38:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/14 14:50:54 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/* Checks for a white-space characters. */
 int	ft_isspace(int c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
