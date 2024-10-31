@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:51:10 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/14 15:52:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/10/31 13:21:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	main(void)
 	while (i <= 255)
 	{
 		if (isprint(i))
-			printf("(%d)\t’%c’ %s\n", i, i,
+			printf("(%d)\t'%c' %s\n", i, i,
 				ft_isalpha(i) ? "is alpha" : "is not alpha");
 		else
-			printf("(%d)\t’.%x’ %s\n", i, i,
+			printf("(%d)\t'.%x' %s\n", i, i,
 				ft_isalpha(i) ? "is alpha" : "is not alpha");
 		i++;
 	}

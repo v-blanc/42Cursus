@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 16:47:10 by vblanc            #+#    #+#              #
-#    Updated: 2024/10/14 15:50:30 by vblanc           ###   ########.fr        #
+#    Updated: 2024/10/31 13:16:13 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,3 +45,5 @@ for file in bin/*; do
         echo "\n" >> results/summary.txt
     fi
 done
+
+echo "\n$PURPLE Summary here:$NC ./results/summary.txt"

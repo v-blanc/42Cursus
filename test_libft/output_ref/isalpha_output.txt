@@ -1,256 +1,256 @@
-(0)	’.0’ is not alpha
-(1)	’.1’ is not alpha
-(2)	’.2’ is not alpha
-(3)	’.3’ is not alpha
-(4)	’.4’ is not alpha
-(5)	’.5’ is not alpha
-(6)	’.6’ is not alpha
-(7)	’.7’ is not alpha
-(8)	’.8’ is not alpha
-(9)	’.9’ is not alpha
-(10)	’.a’ is not alpha
-(11)	’.b’ is not alpha
-(12)	’.c’ is not alpha
-(13)	’.d’ is not alpha
-(14)	’.e’ is not alpha
-(15)	’.f’ is not alpha
-(16)	’.10’ is not alpha
-(17)	’.11’ is not alpha
-(18)	’.12’ is not alpha
-(19)	’.13’ is not alpha
-(20)	’.14’ is not alpha
-(21)	’.15’ is not alpha
-(22)	’.16’ is not alpha
-(23)	’.17’ is not alpha
-(24)	’.18’ is not alpha
-(25)	’.19’ is not alpha
-(26)	’.1a’ is not alpha
-(27)	’.1b’ is not alpha
-(28)	’.1c’ is not alpha
-(29)	’.1d’ is not alpha
-(30)	’.1e’ is not alpha
-(31)	’.1f’ is not alpha
-(32)	’ ’ is not alpha
-(33)	’!’ is not alpha
-(34)	’"’ is not alpha
-(35)	’#’ is not alpha
-(36)	’$’ is not alpha
-(37)	’%’ is not alpha
-(38)	’&’ is not alpha
-(39)	’'’ is not alpha
-(40)	’(’ is not alpha
-(41)	’)’ is not alpha
-(42)	’*’ is not alpha
-(43)	’+’ is not alpha
-(44)	’,’ is not alpha
-(45)	’-’ is not alpha
-(46)	’.’ is not alpha
-(47)	’/’ is not alpha
-(48)	’0’ is not alpha
-(49)	’1’ is not alpha
-(50)	’2’ is not alpha
-(51)	’3’ is not alpha
-(52)	’4’ is not alpha
-(53)	’5’ is not alpha
-(54)	’6’ is not alpha
-(55)	’7’ is not alpha
-(56)	’8’ is not alpha
-(57)	’9’ is not alpha
-(58)	’:’ is not alpha
-(59)	’;’ is not alpha
-(60)	’<’ is not alpha
-(61)	’=’ is not alpha
-(62)	’>’ is not alpha
-(63)	’?’ is not alpha
-(64)	’@’ is not alpha
-(65)	’A’ is alpha
-(66)	’B’ is alpha
-(67)	’C’ is alpha
-(68)	’D’ is alpha
-(69)	’E’ is alpha
-(70)	’F’ is alpha
-(71)	’G’ is alpha
-(72)	’H’ is alpha
-(73)	’I’ is alpha
-(74)	’J’ is alpha
-(75)	’K’ is alpha
-(76)	’L’ is alpha
-(77)	’M’ is alpha
-(78)	’N’ is alpha
-(79)	’O’ is alpha
-(80)	’P’ is alpha
-(81)	’Q’ is alpha
-(82)	’R’ is alpha
-(83)	’S’ is alpha
-(84)	’T’ is alpha
-(85)	’U’ is alpha
-(86)	’V’ is alpha
-(87)	’W’ is alpha
-(88)	’X’ is alpha
-(89)	’Y’ is alpha
-(90)	’Z’ is alpha
-(91)	’[’ is not alpha
-(92)	’\’ is not alpha
-(93)	’]’ is not alpha
-(94)	’^’ is not alpha
-(95)	’_’ is not alpha
-(96)	’`’ is not alpha
-(97)	’a’ is alpha
-(98)	’b’ is alpha
-(99)	’c’ is alpha
-(100)	’d’ is alpha
-(101)	’e’ is alpha
-(102)	’f’ is alpha
-(103)	’g’ is alpha
-(104)	’h’ is alpha
-(105)	’i’ is alpha
-(106)	’j’ is alpha
-(107)	’k’ is alpha
-(108)	’l’ is alpha
-(109)	’m’ is alpha
-(110)	’n’ is alpha
-(111)	’o’ is alpha
-(112)	’p’ is alpha
-(113)	’q’ is alpha
-(114)	’r’ is alpha
-(115)	’s’ is alpha
-(116)	’t’ is alpha
-(117)	’u’ is alpha
-(118)	’v’ is alpha
-(119)	’w’ is alpha
-(120)	’x’ is alpha
-(121)	’y’ is alpha
-(122)	’z’ is alpha
-(123)	’{’ is not alpha
-(124)	’|’ is not alpha
-(125)	’}’ is not alpha
-(126)	’~’ is not alpha
-(127)	’.7f’ is not alpha
-(128)	’.80’ is not alpha
-(129)	’.81’ is not alpha
-(130)	’.82’ is not alpha
-(131)	’.83’ is not alpha
-(132)	’.84’ is not alpha
-(133)	’.85’ is not alpha
-(134)	’.86’ is not alpha
-(135)	’.87’ is not alpha
-(136)	’.88’ is not alpha
-(137)	’.89’ is not alpha
-(138)	’.8a’ is not alpha
-(139)	’.8b’ is not alpha
-(140)	’.8c’ is not alpha
-(141)	’.8d’ is not alpha
-(142)	’.8e’ is not alpha
-(143)	’.8f’ is not alpha
-(144)	’.90’ is not alpha
-(145)	’.91’ is not alpha
-(146)	’.92’ is not alpha
-(147)	’.93’ is not alpha
-(148)	’.94’ is not alpha
-(149)	’.95’ is not alpha
-(150)	’.96’ is not alpha
-(151)	’.97’ is not alpha
-(152)	’.98’ is not alpha
-(153)	’.99’ is not alpha
-(154)	’.9a’ is not alpha
-(155)	’.9b’ is not alpha
-(156)	’.9c’ is not alpha
-(157)	’.9d’ is not alpha
-(158)	’.9e’ is not alpha
-(159)	’.9f’ is not alpha
-(160)	’.a0’ is not alpha
-(161)	’.a1’ is not alpha
-(162)	’.a2’ is not alpha
-(163)	’.a3’ is not alpha
-(164)	’.a4’ is not alpha
-(165)	’.a5’ is not alpha
-(166)	’.a6’ is not alpha
-(167)	’.a7’ is not alpha
-(168)	’.a8’ is not alpha
-(169)	’.a9’ is not alpha
-(170)	’.aa’ is not alpha
-(171)	’.ab’ is not alpha
-(172)	’.ac’ is not alpha
-(173)	’.ad’ is not alpha
-(174)	’.ae’ is not alpha
-(175)	’.af’ is not alpha
-(176)	’.b0’ is not alpha
-(177)	’.b1’ is not alpha
-(178)	’.b2’ is not alpha
-(179)	’.b3’ is not alpha
-(180)	’.b4’ is not alpha
-(181)	’.b5’ is not alpha
-(182)	’.b6’ is not alpha
-(183)	’.b7’ is not alpha
-(184)	’.b8’ is not alpha
-(185)	’.b9’ is not alpha
-(186)	’.ba’ is not alpha
-(187)	’.bb’ is not alpha
-(188)	’.bc’ is not alpha
-(189)	’.bd’ is not alpha
-(190)	’.be’ is not alpha
-(191)	’.bf’ is not alpha
-(192)	’.c0’ is not alpha
-(193)	’.c1’ is not alpha
-(194)	’.c2’ is not alpha
-(195)	’.c3’ is not alpha
-(196)	’.c4’ is not alpha
-(197)	’.c5’ is not alpha
-(198)	’.c6’ is not alpha
-(199)	’.c7’ is not alpha
-(200)	’.c8’ is not alpha
-(201)	’.c9’ is not alpha
-(202)	’.ca’ is not alpha
-(203)	’.cb’ is not alpha
-(204)	’.cc’ is not alpha
-(205)	’.cd’ is not alpha
-(206)	’.ce’ is not alpha
-(207)	’.cf’ is not alpha
-(208)	’.d0’ is not alpha
-(209)	’.d1’ is not alpha
-(210)	’.d2’ is not alpha
-(211)	’.d3’ is not alpha
-(212)	’.d4’ is not alpha
-(213)	’.d5’ is not alpha
-(214)	’.d6’ is not alpha
-(215)	’.d7’ is not alpha
-(216)	’.d8’ is not alpha
-(217)	’.d9’ is not alpha
-(218)	’.da’ is not alpha
-(219)	’.db’ is not alpha
-(220)	’.dc’ is not alpha
-(221)	’.dd’ is not alpha
-(222)	’.de’ is not alpha
-(223)	’.df’ is not alpha
-(224)	’.e0’ is not alpha
-(225)	’.e1’ is not alpha
-(226)	’.e2’ is not alpha
-(227)	’.e3’ is not alpha
-(228)	’.e4’ is not alpha
-(229)	’.e5’ is not alpha
-(230)	’.e6’ is not alpha
-(231)	’.e7’ is not alpha
-(232)	’.e8’ is not alpha
-(233)	’.e9’ is not alpha
-(234)	’.ea’ is not alpha
-(235)	’.eb’ is not alpha
-(236)	’.ec’ is not alpha
-(237)	’.ed’ is not alpha
-(238)	’.ee’ is not alpha
-(239)	’.ef’ is not alpha
-(240)	’.f0’ is not alpha
-(241)	’.f1’ is not alpha
-(242)	’.f2’ is not alpha
-(243)	’.f3’ is not alpha
-(244)	’.f4’ is not alpha
-(245)	’.f5’ is not alpha
-(246)	’.f6’ is not alpha
-(247)	’.f7’ is not alpha
-(248)	’.f8’ is not alpha
-(249)	’.f9’ is not alpha
-(250)	’.fa’ is not alpha
-(251)	’.fb’ is not alpha
-(252)	’.fc’ is not alpha
-(253)	’.fd’ is not alpha
-(254)	’.fe’ is not alpha
-(255)	’.ff’ is not alpha
+(0)	'.0' is not alpha
+(1)	'.1' is not alpha
+(2)	'.2' is not alpha
+(3)	'.3' is not alpha
+(4)	'.4' is not alpha
+(5)	'.5' is not alpha
+(6)	'.6' is not alpha
+(7)	'.7' is not alpha
+(8)	'.8' is not alpha
+(9)	'.9' is not alpha
+(10)	'.a' is not alpha
+(11)	'.b' is not alpha
+(12)	'.c' is not alpha
+(13)	'.d' is not alpha
+(14)	'.e' is not alpha
+(15)	'.f' is not alpha
+(16)	'.10' is not alpha
+(17)	'.11' is not alpha
+(18)	'.12' is not alpha
+(19)	'.13' is not alpha
+(20)	'.14' is not alpha
+(21)	'.15' is not alpha
+(22)	'.16' is not alpha
+(23)	'.17' is not alpha
+(24)	'.18' is not alpha
+(25)	'.19' is not alpha
+(26)	'.1a' is not alpha
+(27)	'.1b' is not alpha
+(28)	'.1c' is not alpha
+(29)	'.1d' is not alpha
+(30)	'.1e' is not alpha
+(31)	'.1f' is not alpha
+(32)	' ' is not alpha
+(33)	'!' is not alpha
+(34)	'"' is not alpha
+(35)	'#' is not alpha
+(36)	'$' is not alpha
+(37)	'%' is not alpha
+(38)	'&' is not alpha
+(39)	''' is not alpha
+(40)	'(' is not alpha
+(41)	')' is not alpha
+(42)	'*' is not alpha
+(43)	'+' is not alpha
+(44)	',' is not alpha
+(45)	'-' is not alpha
+(46)	'.' is not alpha
+(47)	'/' is not alpha
+(48)	'0' is not alpha
+(49)	'1' is not alpha
+(50)	'2' is not alpha
+(51)	'3' is not alpha
+(52)	'4' is not alpha
+(53)	'5' is not alpha
+(54)	'6' is not alpha
+(55)	'7' is not alpha
+(56)	'8' is not alpha
+(57)	'9' is not alpha
+(58)	':' is not alpha
+(59)	';' is not alpha
+(60)	'<' is not alpha
+(61)	'=' is not alpha
+(62)	'>' is not alpha
+(63)	'?' is not alpha
+(64)	'@' is not alpha
+(65)	'A' is alpha
+(66)	'B' is alpha
+(67)	'C' is alpha
+(68)	'D' is alpha
+(69)	'E' is alpha
+(70)	'F' is alpha
+(71)	'G' is alpha
+(72)	'H' is alpha
+(73)	'I' is alpha
+(74)	'J' is alpha
+(75)	'K' is alpha
+(76)	'L' is alpha
+(77)	'M' is alpha
+(78)	'N' is alpha
+(79)	'O' is alpha
+(80)	'P' is alpha
+(81)	'Q' is alpha
+(82)	'R' is alpha
+(83)	'S' is alpha
+(84)	'T' is alpha
+(85)	'U' is alpha
+(86)	'V' is alpha
+(87)	'W' is alpha
+(88)	'X' is alpha
+(89)	'Y' is alpha
+(90)	'Z' is alpha
+(91)	'[' is not alpha
+(92)	'\' is not alpha
+(93)	']' is not alpha
+(94)	'^' is not alpha
+(95)	'_' is not alpha
+(96)	'`' is not alpha
+(97)	'a' is alpha
+(98)	'b' is alpha
+(99)	'c' is alpha
+(100)	'd' is alpha
+(101)	'e' is alpha
+(102)	'f' is alpha
+(103)	'g' is alpha
+(104)	'h' is alpha
+(105)	'i' is alpha
+(106)	'j' is alpha
+(107)	'k' is alpha
+(108)	'l' is alpha
+(109)	'm' is alpha
+(110)	'n' is alpha
+(111)	'o' is alpha
+(112)	'p' is alpha
+(113)	'q' is alpha
+(114)	'r' is alpha
+(115)	's' is alpha
+(116)	't' is alpha
+(117)	'u' is alpha
+(118)	'v' is alpha
+(119)	'w' is alpha
+(120)	'x' is alpha
+(121)	'y' is alpha
+(122)	'z' is alpha
+(123)	'{' is not alpha
+(124)	'|' is not alpha
+(125)	'}' is not alpha
+(126)	'~' is not alpha
+(127)	'.7f' is not alpha
+(128)	'.80' is not alpha
+(129)	'.81' is not alpha
+(130)	'.82' is not alpha
+(131)	'.83' is not alpha
+(132)	'.84' is not alpha
+(133)	'.85' is not alpha
+(134)	'.86' is not alpha
+(135)	'.87' is not alpha
+(136)	'.88' is not alpha
+(137)	'.89' is not alpha
+(138)	'.8a' is not alpha
+(139)	'.8b' is not alpha
+(140)	'.8c' is not alpha
+(141)	'.8d' is not alpha
+(142)	'.8e' is not alpha
+(143)	'.8f' is not alpha
+(144)	'.90' is not alpha
+(145)	'.91' is not alpha
+(146)	'.92' is not alpha
+(147)	'.93' is not alpha
+(148)	'.94' is not alpha
+(149)	'.95' is not alpha
+(150)	'.96' is not alpha
+(151)	'.97' is not alpha
+(152)	'.98' is not alpha
+(153)	'.99' is not alpha
+(154)	'.9a' is not alpha
+(155)	'.9b' is not alpha
+(156)	'.9c' is not alpha
+(157)	'.9d' is not alpha
+(158)	'.9e' is not alpha
+(159)	'.9f' is not alpha
+(160)	'.a0' is not alpha
+(161)	'.a1' is not alpha
+(162)	'.a2' is not alpha
+(163)	'.a3' is not alpha
+(164)	'.a4' is not alpha
+(165)	'.a5' is not alpha
+(166)	'.a6' is not alpha
+(167)	'.a7' is not alpha
+(168)	'.a8' is not alpha
+(169)	'.a9' is not alpha
+(170)	'.aa' is not alpha
+(171)	'.ab' is not alpha
+(172)	'.ac' is not alpha
+(173)	'.ad' is not alpha
+(174)	'.ae' is not alpha
+(175)	'.af' is not alpha
+(176)	'.b0' is not alpha
+(177)	'.b1' is not alpha
+(178)	'.b2' is not alpha
+(179)	'.b3' is not alpha
+(180)	'.b4' is not alpha
+(181)	'.b5' is not alpha
+(182)	'.b6' is not alpha
+(183)	'.b7' is not alpha
+(184)	'.b8' is not alpha
+(185)	'.b9' is not alpha
+(186)	'.ba' is not alpha
+(187)	'.bb' is not alpha
+(188)	'.bc' is not alpha
+(189)	'.bd' is not alpha
+(190)	'.be' is not alpha
+(191)	'.bf' is not alpha
+(192)	'.c0' is not alpha
+(193)	'.c1' is not alpha
+(194)	'.c2' is not alpha
+(195)	'.c3' is not alpha
+(196)	'.c4' is not alpha
+(197)	'.c5' is not alpha
+(198)	'.c6' is not alpha
+(199)	'.c7' is not alpha
+(200)	'.c8' is not alpha
+(201)	'.c9' is not alpha
+(202)	'.ca' is not alpha
+(203)	'.cb' is not alpha
+(204)	'.cc' is not alpha
+(205)	'.cd' is not alpha
+(206)	'.ce' is not alpha
+(207)	'.cf' is not alpha
+(208)	'.d0' is not alpha
+(209)	'.d1' is not alpha
+(210)	'.d2' is not alpha
+(211)	'.d3' is not alpha
+(212)	'.d4' is not alpha
+(213)	'.d5' is not alpha
+(214)	'.d6' is not alpha
+(215)	'.d7' is not alpha
+(216)	'.d8' is not alpha
+(217)	'.d9' is not alpha
+(218)	'.da' is not alpha
+(219)	'.db' is not alpha
+(220)	'.dc' is not alpha
+(221)	'.dd' is not alpha
+(222)	'.de' is not alpha
+(223)	'.df' is not alpha
+(224)	'.e0' is not alpha
+(225)	'.e1' is not alpha
+(226)	'.e2' is not alpha
+(227)	'.e3' is not alpha
+(228)	'.e4' is not alpha
+(229)	'.e5' is not alpha
+(230)	'.e6' is not alpha
+(231)	'.e7' is not alpha
+(232)	'.e8' is not alpha
+(233)	'.e9' is not alpha
+(234)	'.ea' is not alpha
+(235)	'.eb' is not alpha
+(236)	'.ec' is not alpha
+(237)	'.ed' is not alpha
+(238)	'.ee' is not alpha
+(239)	'.ef' is not alpha
+(240)	'.f0' is not alpha
+(241)	'.f1' is not alpha
+(242)	'.f2' is not alpha
+(243)	'.f3' is not alpha
+(244)	'.f4' is not alpha
+(245)	'.f5' is not alpha
+(246)	'.f6' is not alpha
+(247)	'.f7' is not alpha
+(248)	'.f8' is not alpha
+(249)	'.f9' is not alpha
+(250)	'.fa' is not alpha
+(251)	'.fb' is not alpha
+(252)	'.fc' is not alpha
+(253)	'.fd' is not alpha
+(254)	'.fe' is not alpha
+(255)	'.ff' is not alpha

@@ -1,256 +1,256 @@
-(0)	’.0’ is ascii
-(1)	’.1’ is ascii
-(2)	’.2’ is ascii
-(3)	’.3’ is ascii
-(4)	’.4’ is ascii
-(5)	’.5’ is ascii
-(6)	’.6’ is ascii
-(7)	’.7’ is ascii
-(8)	’.8’ is ascii
-(9)	’.9’ is ascii
-(10)	’.a’ is ascii
-(11)	’.b’ is ascii
-(12)	’.c’ is ascii
-(13)	’.d’ is ascii
-(14)	’.e’ is ascii
-(15)	’.f’ is ascii
-(16)	’.10’ is ascii
-(17)	’.11’ is ascii
-(18)	’.12’ is ascii
-(19)	’.13’ is ascii
-(20)	’.14’ is ascii
-(21)	’.15’ is ascii
-(22)	’.16’ is ascii
-(23)	’.17’ is ascii
-(24)	’.18’ is ascii
-(25)	’.19’ is ascii
-(26)	’.1a’ is ascii
-(27)	’.1b’ is ascii
-(28)	’.1c’ is ascii
-(29)	’.1d’ is ascii
-(30)	’.1e’ is ascii
-(31)	’.1f’ is ascii
-(32)	’ ’ is ascii
-(33)	’!’ is ascii
-(34)	’"’ is ascii
-(35)	’#’ is ascii
-(36)	’$’ is ascii
-(37)	’%’ is ascii
-(38)	’&’ is ascii
-(39)	’'’ is ascii
-(40)	’(’ is ascii
-(41)	’)’ is ascii
-(42)	’*’ is ascii
-(43)	’+’ is ascii
-(44)	’,’ is ascii
-(45)	’-’ is ascii
-(46)	’.’ is ascii
-(47)	’/’ is ascii
-(48)	’0’ is ascii
-(49)	’1’ is ascii
-(50)	’2’ is ascii
-(51)	’3’ is ascii
-(52)	’4’ is ascii
-(53)	’5’ is ascii
-(54)	’6’ is ascii
-(55)	’7’ is ascii
-(56)	’8’ is ascii
-(57)	’9’ is ascii
-(58)	’:’ is ascii
-(59)	’;’ is ascii
-(60)	’<’ is ascii
-(61)	’=’ is ascii
-(62)	’>’ is ascii
-(63)	’?’ is ascii
-(64)	’@’ is ascii
-(65)	’A’ is ascii
-(66)	’B’ is ascii
-(67)	’C’ is ascii
-(68)	’D’ is ascii
-(69)	’E’ is ascii
-(70)	’F’ is ascii
-(71)	’G’ is ascii
-(72)	’H’ is ascii
-(73)	’I’ is ascii
-(74)	’J’ is ascii
-(75)	’K’ is ascii
-(76)	’L’ is ascii
-(77)	’M’ is ascii
-(78)	’N’ is ascii
-(79)	’O’ is ascii
-(80)	’P’ is ascii
-(81)	’Q’ is ascii
-(82)	’R’ is ascii
-(83)	’S’ is ascii
-(84)	’T’ is ascii
-(85)	’U’ is ascii
-(86)	’V’ is ascii
-(87)	’W’ is ascii
-(88)	’X’ is ascii
-(89)	’Y’ is ascii
-(90)	’Z’ is ascii
-(91)	’[’ is ascii
-(92)	’\’ is ascii
-(93)	’]’ is ascii
-(94)	’^’ is ascii
-(95)	’_’ is ascii
-(96)	’`’ is ascii
-(97)	’a’ is ascii
-(98)	’b’ is ascii
-(99)	’c’ is ascii
-(100)	’d’ is ascii
-(101)	’e’ is ascii
-(102)	’f’ is ascii
-(103)	’g’ is ascii
-(104)	’h’ is ascii
-(105)	’i’ is ascii
-(106)	’j’ is ascii
-(107)	’k’ is ascii
-(108)	’l’ is ascii
-(109)	’m’ is ascii
-(110)	’n’ is ascii
-(111)	’o’ is ascii
-(112)	’p’ is ascii
-(113)	’q’ is ascii
-(114)	’r’ is ascii
-(115)	’s’ is ascii
-(116)	’t’ is ascii
-(117)	’u’ is ascii
-(118)	’v’ is ascii
-(119)	’w’ is ascii
-(120)	’x’ is ascii
-(121)	’y’ is ascii
-(122)	’z’ is ascii
-(123)	’{’ is ascii
-(124)	’|’ is ascii
-(125)	’}’ is ascii
-(126)	’~’ is ascii
-(127)	’.7f’ is ascii
-(128)	’.80’ is not ascii
-(129)	’.81’ is not ascii
-(130)	’.82’ is not ascii
-(131)	’.83’ is not ascii
-(132)	’.84’ is not ascii
-(133)	’.85’ is not ascii
-(134)	’.86’ is not ascii
-(135)	’.87’ is not ascii
-(136)	’.88’ is not ascii
-(137)	’.89’ is not ascii
-(138)	’.8a’ is not ascii
-(139)	’.8b’ is not ascii
-(140)	’.8c’ is not ascii
-(141)	’.8d’ is not ascii
-(142)	’.8e’ is not ascii
-(143)	’.8f’ is not ascii
-(144)	’.90’ is not ascii
-(145)	’.91’ is not ascii
-(146)	’.92’ is not ascii
-(147)	’.93’ is not ascii
-(148)	’.94’ is not ascii
-(149)	’.95’ is not ascii
-(150)	’.96’ is not ascii
-(151)	’.97’ is not ascii
-(152)	’.98’ is not ascii
-(153)	’.99’ is not ascii
-(154)	’.9a’ is not ascii
-(155)	’.9b’ is not ascii
-(156)	’.9c’ is not ascii
-(157)	’.9d’ is not ascii
-(158)	’.9e’ is not ascii
-(159)	’.9f’ is not ascii
-(160)	’.a0’ is not ascii
-(161)	’.a1’ is not ascii
-(162)	’.a2’ is not ascii
-(163)	’.a3’ is not ascii
-(164)	’.a4’ is not ascii
-(165)	’.a5’ is not ascii
-(166)	’.a6’ is not ascii
-(167)	’.a7’ is not ascii
-(168)	’.a8’ is not ascii
-(169)	’.a9’ is not ascii
-(170)	’.aa’ is not ascii
-(171)	’.ab’ is not ascii
-(172)	’.ac’ is not ascii
-(173)	’.ad’ is not ascii
-(174)	’.ae’ is not ascii
-(175)	’.af’ is not ascii
-(176)	’.b0’ is not ascii
-(177)	’.b1’ is not ascii
-(178)	’.b2’ is not ascii
-(179)	’.b3’ is not ascii
-(180)	’.b4’ is not ascii
-(181)	’.b5’ is not ascii
-(182)	’.b6’ is not ascii
-(183)	’.b7’ is not ascii
-(184)	’.b8’ is not ascii
-(185)	’.b9’ is not ascii
-(186)	’.ba’ is not ascii
-(187)	’.bb’ is not ascii
-(188)	’.bc’ is not ascii
-(189)	’.bd’ is not ascii
-(190)	’.be’ is not ascii
-(191)	’.bf’ is not ascii
-(192)	’.c0’ is not ascii
-(193)	’.c1’ is not ascii
-(194)	’.c2’ is not ascii
-(195)	’.c3’ is not ascii
-(196)	’.c4’ is not ascii
-(197)	’.c5’ is not ascii
-(198)	’.c6’ is not ascii
-(199)	’.c7’ is not ascii
-(200)	’.c8’ is not ascii
-(201)	’.c9’ is not ascii
-(202)	’.ca’ is not ascii
-(203)	’.cb’ is not ascii
-(204)	’.cc’ is not ascii
-(205)	’.cd’ is not ascii
-(206)	’.ce’ is not ascii
-(207)	’.cf’ is not ascii
-(208)	’.d0’ is not ascii
-(209)	’.d1’ is not ascii
-(210)	’.d2’ is not ascii
-(211)	’.d3’ is not ascii
-(212)	’.d4’ is not ascii
-(213)	’.d5’ is not ascii
-(214)	’.d6’ is not ascii
-(215)	’.d7’ is not ascii
-(216)	’.d8’ is not ascii
-(217)	’.d9’ is not ascii
-(218)	’.da’ is not ascii
-(219)	’.db’ is not ascii
-(220)	’.dc’ is not ascii
-(221)	’.dd’ is not ascii
-(222)	’.de’ is not ascii
-(223)	’.df’ is not ascii
-(224)	’.e0’ is not ascii
-(225)	’.e1’ is not ascii
-(226)	’.e2’ is not ascii
-(227)	’.e3’ is not ascii
-(228)	’.e4’ is not ascii
-(229)	’.e5’ is not ascii
-(230)	’.e6’ is not ascii
-(231)	’.e7’ is not ascii
-(232)	’.e8’ is not ascii
-(233)	’.e9’ is not ascii
-(234)	’.ea’ is not ascii
-(235)	’.eb’ is not ascii
-(236)	’.ec’ is not ascii
-(237)	’.ed’ is not ascii
-(238)	’.ee’ is not ascii
-(239)	’.ef’ is not ascii
-(240)	’.f0’ is not ascii
-(241)	’.f1’ is not ascii
-(242)	’.f2’ is not ascii
-(243)	’.f3’ is not ascii
-(244)	’.f4’ is not ascii
-(245)	’.f5’ is not ascii
-(246)	’.f6’ is not ascii
-(247)	’.f7’ is not ascii
-(248)	’.f8’ is not ascii
-(249)	’.f9’ is not ascii
-(250)	’.fa’ is not ascii
-(251)	’.fb’ is not ascii
-(252)	’.fc’ is not ascii
-(253)	’.fd’ is not ascii
-(254)	’.fe’ is not ascii
-(255)	’.ff’ is not ascii
+(0)	'.0' is ascii
+(1)	'.1' is ascii
+(2)	'.2' is ascii
+(3)	'.3' is ascii
+(4)	'.4' is ascii
+(5)	'.5' is ascii
+(6)	'.6' is ascii
+(7)	'.7' is ascii
+(8)	'.8' is ascii
+(9)	'.9' is ascii
+(10)	'.a' is ascii
+(11)	'.b' is ascii
+(12)	'.c' is ascii
+(13)	'.d' is ascii
+(14)	'.e' is ascii
+(15)	'.f' is ascii
+(16)	'.10' is ascii
+(17)	'.11' is ascii
+(18)	'.12' is ascii
+(19)	'.13' is ascii
+(20)	'.14' is ascii
+(21)	'.15' is ascii
+(22)	'.16' is ascii
+(23)	'.17' is ascii
+(24)	'.18' is ascii
+(25)	'.19' is ascii
+(26)	'.1a' is ascii
+(27)	'.1b' is ascii
+(28)	'.1c' is ascii
+(29)	'.1d' is ascii
+(30)	'.1e' is ascii
+(31)	'.1f' is ascii
+(32)	' ' is ascii
+(33)	'!' is ascii
+(34)	'"' is ascii
+(35)	'#' is ascii
+(36)	'$' is ascii
+(37)	'%' is ascii
+(38)	'&' is ascii
+(39)	''' is ascii
+(40)	'(' is ascii
+(41)	')' is ascii
+(42)	'*' is ascii
+(43)	'+' is ascii
+(44)	',' is ascii
+(45)	'-' is ascii
+(46)	'.' is ascii
+(47)	'/' is ascii
+(48)	'0' is ascii
+(49)	'1' is ascii
+(50)	'2' is ascii
+(51)	'3' is ascii
+(52)	'4' is ascii
+(53)	'5' is ascii
+(54)	'6' is ascii
+(55)	'7' is ascii
+(56)	'8' is ascii
+(57)	'9' is ascii
+(58)	':' is ascii
+(59)	';' is ascii
+(60)	'<' is ascii
+(61)	'=' is ascii
+(62)	'>' is ascii
+(63)	'?' is ascii
+(64)	'@' is ascii
+(65)	'A' is ascii
+(66)	'B' is ascii
+(67)	'C' is ascii
+(68)	'D' is ascii
+(69)	'E' is ascii
+(70)	'F' is ascii
+(71)	'G' is ascii
+(72)	'H' is ascii
+(73)	'I' is ascii
+(74)	'J' is ascii
+(75)	'K' is ascii
+(76)	'L' is ascii
+(77)	'M' is ascii
+(78)	'N' is ascii
+(79)	'O' is ascii
+(80)	'P' is ascii
+(81)	'Q' is ascii
+(82)	'R' is ascii
+(83)	'S' is ascii
+(84)	'T' is ascii
+(85)	'U' is ascii
+(86)	'V' is ascii
+(87)	'W' is ascii
+(88)	'X' is ascii
+(89)	'Y' is ascii
+(90)	'Z' is ascii
+(91)	'[' is ascii
+(92)	'\' is ascii
+(93)	']' is ascii
+(94)	'^' is ascii
+(95)	'_' is ascii
+(96)	'`' is ascii
+(97)	'a' is ascii
+(98)	'b' is ascii
+(99)	'c' is ascii
+(100)	'd' is ascii
+(101)	'e' is ascii
+(102)	'f' is ascii
+(103)	'g' is ascii
+(104)	'h' is ascii
+(105)	'i' is ascii
+(106)	'j' is ascii
+(107)	'k' is ascii
+(108)	'l' is ascii
+(109)	'm' is ascii
+(110)	'n' is ascii
+(111)	'o' is ascii
+(112)	'p' is ascii
+(113)	'q' is ascii
+(114)	'r' is ascii
+(115)	's' is ascii
+(116)	't' is ascii
+(117)	'u' is ascii
+(118)	'v' is ascii
+(119)	'w' is ascii
+(120)	'x' is ascii
+(121)	'y' is ascii
+(122)	'z' is ascii
+(123)	'{' is ascii
+(124)	'|' is ascii
+(125)	'}' is ascii
+(126)	'~' is ascii
+(127)	'.7f' is ascii
+(128)	'.80' is not ascii
+(129)	'.81' is not ascii
+(130)	'.82' is not ascii
+(131)	'.83' is not ascii
+(132)	'.84' is not ascii
+(133)	'.85' is not ascii
+(134)	'.86' is not ascii
+(135)	'.87' is not ascii
+(136)	'.88' is not ascii
+(137)	'.89' is not ascii
+(138)	'.8a' is not ascii
+(139)	'.8b' is not ascii
+(140)	'.8c' is not ascii
+(141)	'.8d' is not ascii
+(142)	'.8e' is not ascii
+(143)	'.8f' is not ascii
+(144)	'.90' is not ascii
+(145)	'.91' is not ascii
+(146)	'.92' is not ascii
+(147)	'.93' is not ascii
+(148)	'.94' is not ascii
+(149)	'.95' is not ascii
+(150)	'.96' is not ascii
+(151)	'.97' is not ascii
+(152)	'.98' is not ascii
+(153)	'.99' is not ascii
+(154)	'.9a' is not ascii
+(155)	'.9b' is not ascii
+(156)	'.9c' is not ascii
+(157)	'.9d' is not ascii
+(158)	'.9e' is not ascii
+(159)	'.9f' is not ascii
+(160)	'.a0' is not ascii
+(161)	'.a1' is not ascii
+(162)	'.a2' is not ascii
+(163)	'.a3' is not ascii
+(164)	'.a4' is not ascii
+(165)	'.a5' is not ascii
+(166)	'.a6' is not ascii
+(167)	'.a7' is not ascii
+(168)	'.a8' is not ascii
+(169)	'.a9' is not ascii
+(170)	'.aa' is not ascii
+(171)	'.ab' is not ascii
+(172)	'.ac' is not ascii
+(173)	'.ad' is not ascii
+(174)	'.ae' is not ascii
+(175)	'.af' is not ascii
+(176)	'.b0' is not ascii
+(177)	'.b1' is not ascii
+(178)	'.b2' is not ascii
+(179)	'.b3' is not ascii
+(180)	'.b4' is not ascii
+(181)	'.b5' is not ascii
+(182)	'.b6' is not ascii
+(183)	'.b7' is not ascii
+(184)	'.b8' is not ascii
+(185)	'.b9' is not ascii
+(186)	'.ba' is not ascii
+(187)	'.bb' is not ascii
+(188)	'.bc' is not ascii
+(189)	'.bd' is not ascii
+(190)	'.be' is not ascii
+(191)	'.bf' is not ascii
+(192)	'.c0' is not ascii
+(193)	'.c1' is not ascii
+(194)	'.c2' is not ascii
+(195)	'.c3' is not ascii
+(196)	'.c4' is not ascii
+(197)	'.c5' is not ascii
+(198)	'.c6' is not ascii
+(199)	'.c7' is not ascii
+(200)	'.c8' is not ascii
+(201)	'.c9' is not ascii
+(202)	'.ca' is not ascii
+(203)	'.cb' is not ascii
+(204)	'.cc' is not ascii
+(205)	'.cd' is not ascii
+(206)	'.ce' is not ascii
+(207)	'.cf' is not ascii
+(208)	'.d0' is not ascii
+(209)	'.d1' is not ascii
+(210)	'.d2' is not ascii
+(211)	'.d3' is not ascii
+(212)	'.d4' is not ascii
+(213)	'.d5' is not ascii
+(214)	'.d6' is not ascii
+(215)	'.d7' is not ascii
+(216)	'.d8' is not ascii
+(217)	'.d9' is not ascii
+(218)	'.da' is not ascii
+(219)	'.db' is not ascii
+(220)	'.dc' is not ascii
+(221)	'.dd' is not ascii
+(222)	'.de' is not ascii
+(223)	'.df' is not ascii
+(224)	'.e0' is not ascii
+(225)	'.e1' is not ascii
+(226)	'.e2' is not ascii
+(227)	'.e3' is not ascii
+(228)	'.e4' is not ascii
+(229)	'.e5' is not ascii
+(230)	'.e6' is not ascii
+(231)	'.e7' is not ascii
+(232)	'.e8' is not ascii
+(233)	'.e9' is not ascii
+(234)	'.ea' is not ascii
+(235)	'.eb' is not ascii
+(236)	'.ec' is not ascii
+(237)	'.ed' is not ascii
+(238)	'.ee' is not ascii
+(239)	'.ef' is not ascii
+(240)	'.f0' is not ascii
+(241)	'.f1' is not ascii
+(242)	'.f2' is not ascii
+(243)	'.f3' is not ascii
+(244)	'.f4' is not ascii
+(245)	'.f5' is not ascii
+(246)	'.f6' is not ascii
+(247)	'.f7' is not ascii
+(248)	'.f8' is not ascii
+(249)	'.f9' is not ascii
+(250)	'.fa' is not ascii
+(251)	'.fb' is not ascii
+(252)	'.fc' is not ascii
+(253)	'.fd' is not ascii
+(254)	'.fe' is not ascii
+(255)	'.ff' is not ascii

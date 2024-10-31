@@ -1,256 +1,256 @@
-(0)	’.0’ is not print
-(1)	’.1’ is not print
-(2)	’.2’ is not print
-(3)	’.3’ is not print
-(4)	’.4’ is not print
-(5)	’.5’ is not print
-(6)	’.6’ is not print
-(7)	’.7’ is not print
-(8)	’.8’ is not print
-(9)	’.9’ is not print
-(10)	’.a’ is not print
-(11)	’.b’ is not print
-(12)	’.c’ is not print
-(13)	’.d’ is not print
-(14)	’.e’ is not print
-(15)	’.f’ is not print
-(16)	’.10’ is not print
-(17)	’.11’ is not print
-(18)	’.12’ is not print
-(19)	’.13’ is not print
-(20)	’.14’ is not print
-(21)	’.15’ is not print
-(22)	’.16’ is not print
-(23)	’.17’ is not print
-(24)	’.18’ is not print
-(25)	’.19’ is not print
-(26)	’.1a’ is not print
-(27)	’.1b’ is not print
-(28)	’.1c’ is not print
-(29)	’.1d’ is not print
-(30)	’.1e’ is not print
-(31)	’.1f’ is not print
-(32)	’ ’ is print
-(33)	’!’ is print
-(34)	’"’ is print
-(35)	’#’ is print
-(36)	’$’ is print
-(37)	’%’ is print
-(38)	’&’ is print
-(39)	’'’ is print
-(40)	’(’ is print
-(41)	’)’ is print
-(42)	’*’ is print
-(43)	’+’ is print
-(44)	’,’ is print
-(45)	’-’ is print
-(46)	’.’ is print
-(47)	’/’ is print
-(48)	’0’ is print
-(49)	’1’ is print
-(50)	’2’ is print
-(51)	’3’ is print
-(52)	’4’ is print
-(53)	’5’ is print
-(54)	’6’ is print
-(55)	’7’ is print
-(56)	’8’ is print
-(57)	’9’ is print
-(58)	’:’ is print
-(59)	’;’ is print
-(60)	’<’ is print
-(61)	’=’ is print
-(62)	’>’ is print
-(63)	’?’ is print
-(64)	’@’ is print
-(65)	’A’ is print
-(66)	’B’ is print
-(67)	’C’ is print
-(68)	’D’ is print
-(69)	’E’ is print
-(70)	’F’ is print
-(71)	’G’ is print
-(72)	’H’ is print
-(73)	’I’ is print
-(74)	’J’ is print
-(75)	’K’ is print
-(76)	’L’ is print
-(77)	’M’ is print
-(78)	’N’ is print
-(79)	’O’ is print
-(80)	’P’ is print
-(81)	’Q’ is print
-(82)	’R’ is print
-(83)	’S’ is print
-(84)	’T’ is print
-(85)	’U’ is print
-(86)	’V’ is print
-(87)	’W’ is print
-(88)	’X’ is print
-(89)	’Y’ is print
-(90)	’Z’ is print
-(91)	’[’ is print
-(92)	’\’ is print
-(93)	’]’ is print
-(94)	’^’ is print
-(95)	’_’ is print
-(96)	’`’ is print
-(97)	’a’ is print
-(98)	’b’ is print
-(99)	’c’ is print
-(100)	’d’ is print
-(101)	’e’ is print
-(102)	’f’ is print
-(103)	’g’ is print
-(104)	’h’ is print
-(105)	’i’ is print
-(106)	’j’ is print
-(107)	’k’ is print
-(108)	’l’ is print
-(109)	’m’ is print
-(110)	’n’ is print
-(111)	’o’ is print
-(112)	’p’ is print
-(113)	’q’ is print
-(114)	’r’ is print
-(115)	’s’ is print
-(116)	’t’ is print
-(117)	’u’ is print
-(118)	’v’ is print
-(119)	’w’ is print
-(120)	’x’ is print
-(121)	’y’ is print
-(122)	’z’ is print
-(123)	’{’ is print
-(124)	’|’ is print
-(125)	’}’ is print
-(126)	’~’ is print
-(127)	’.7f’ is not print
-(128)	’.80’ is not print
-(129)	’.81’ is not print
-(130)	’.82’ is not print
-(131)	’.83’ is not print
-(132)	’.84’ is not print
-(133)	’.85’ is not print
-(134)	’.86’ is not print
-(135)	’.87’ is not print
-(136)	’.88’ is not print
-(137)	’.89’ is not print
-(138)	’.8a’ is not print
-(139)	’.8b’ is not print
-(140)	’.8c’ is not print
-(141)	’.8d’ is not print
-(142)	’.8e’ is not print
-(143)	’.8f’ is not print
-(144)	’.90’ is not print
-(145)	’.91’ is not print
-(146)	’.92’ is not print
-(147)	’.93’ is not print
-(148)	’.94’ is not print
-(149)	’.95’ is not print
-(150)	’.96’ is not print
-(151)	’.97’ is not print
-(152)	’.98’ is not print
-(153)	’.99’ is not print
-(154)	’.9a’ is not print
-(155)	’.9b’ is not print
-(156)	’.9c’ is not print
-(157)	’.9d’ is not print
-(158)	’.9e’ is not print
-(159)	’.9f’ is not print
-(160)	’.a0’ is not print
-(161)	’.a1’ is not print
-(162)	’.a2’ is not print
-(163)	’.a3’ is not print
-(164)	’.a4’ is not print
-(165)	’.a5’ is not print
-(166)	’.a6’ is not print
-(167)	’.a7’ is not print
-(168)	’.a8’ is not print
-(169)	’.a9’ is not print
-(170)	’.aa’ is not print
-(171)	’.ab’ is not print
-(172)	’.ac’ is not print
-(173)	’.ad’ is not print
-(174)	’.ae’ is not print
-(175)	’.af’ is not print
-(176)	’.b0’ is not print
-(177)	’.b1’ is not print
-(178)	’.b2’ is not print
-(179)	’.b3’ is not print
-(180)	’.b4’ is not print
-(181)	’.b5’ is not print
-(182)	’.b6’ is not print
-(183)	’.b7’ is not print
-(184)	’.b8’ is not print
-(185)	’.b9’ is not print
-(186)	’.ba’ is not print
-(187)	’.bb’ is not print
-(188)	’.bc’ is not print
-(189)	’.bd’ is not print
-(190)	’.be’ is not print
-(191)	’.bf’ is not print
-(192)	’.c0’ is not print
-(193)	’.c1’ is not print
-(194)	’.c2’ is not print
-(195)	’.c3’ is not print
-(196)	’.c4’ is not print
-(197)	’.c5’ is not print
-(198)	’.c6’ is not print
-(199)	’.c7’ is not print
-(200)	’.c8’ is not print
-(201)	’.c9’ is not print
-(202)	’.ca’ is not print
-(203)	’.cb’ is not print
-(204)	’.cc’ is not print
-(205)	’.cd’ is not print
-(206)	’.ce’ is not print
-(207)	’.cf’ is not print
-(208)	’.d0’ is not print
-(209)	’.d1’ is not print
-(210)	’.d2’ is not print
-(211)	’.d3’ is not print
-(212)	’.d4’ is not print
-(213)	’.d5’ is not print
-(214)	’.d6’ is not print
-(215)	’.d7’ is not print
-(216)	’.d8’ is not print
-(217)	’.d9’ is not print
-(218)	’.da’ is not print
-(219)	’.db’ is not print
-(220)	’.dc’ is not print
-(221)	’.dd’ is not print
-(222)	’.de’ is not print
-(223)	’.df’ is not print
-(224)	’.e0’ is not print
-(225)	’.e1’ is not print
-(226)	’.e2’ is not print
-(227)	’.e3’ is not print
-(228)	’.e4’ is not print
-(229)	’.e5’ is not print
-(230)	’.e6’ is not print
-(231)	’.e7’ is not print
-(232)	’.e8’ is not print
-(233)	’.e9’ is not print
-(234)	’.ea’ is not print
-(235)	’.eb’ is not print
-(236)	’.ec’ is not print
-(237)	’.ed’ is not print
-(238)	’.ee’ is not print
-(239)	’.ef’ is not print
-(240)	’.f0’ is not print
-(241)	’.f1’ is not print
-(242)	’.f2’ is not print
-(243)	’.f3’ is not print
-(244)	’.f4’ is not print
-(245)	’.f5’ is not print
-(246)	’.f6’ is not print
-(247)	’.f7’ is not print
-(248)	’.f8’ is not print
-(249)	’.f9’ is not print
-(250)	’.fa’ is not print
-(251)	’.fb’ is not print
-(252)	’.fc’ is not print
-(253)	’.fd’ is not print
-(254)	’.fe’ is not print
-(255)	’.ff’ is not print
+(0)	'.0' is not print
+(1)	'.1' is not print
+(2)	'.2' is not print
+(3)	'.3' is not print
+(4)	'.4' is not print
+(5)	'.5' is not print
+(6)	'.6' is not print
+(7)	'.7' is not print
+(8)	'.8' is not print
+(9)	'.9' is not print
+(10)	'.a' is not print
+(11)	'.b' is not print
+(12)	'.c' is not print
+(13)	'.d' is not print
+(14)	'.e' is not print
+(15)	'.f' is not print
+(16)	'.10' is not print
+(17)	'.11' is not print
+(18)	'.12' is not print
+(19)	'.13' is not print
+(20)	'.14' is not print
+(21)	'.15' is not print
+(22)	'.16' is not print
+(23)	'.17' is not print
+(24)	'.18' is not print
+(25)	'.19' is not print
+(26)	'.1a' is not print
+(27)	'.1b' is not print
+(28)	'.1c' is not print
+(29)	'.1d' is not print
+(30)	'.1e' is not print
+(31)	'.1f' is not print
+(32)	' ' is print
+(33)	'!' is print
+(34)	'"' is print
+(35)	'#' is print
+(36)	'$' is print
+(37)	'%' is print
+(38)	'&' is print
+(39)	''' is print
+(40)	'(' is print
+(41)	')' is print
+(42)	'*' is print
+(43)	'+' is print
+(44)	',' is print
+(45)	'-' is print
+(46)	'.' is print
+(47)	'/' is print
+(48)	'0' is print
+(49)	'1' is print
+(50)	'2' is print
+(51)	'3' is print
+(52)	'4' is print
+(53)	'5' is print
+(54)	'6' is print
+(55)	'7' is print
+(56)	'8' is print
+(57)	'9' is print
+(58)	':' is print
+(59)	';' is print
+(60)	'<' is print
+(61)	'=' is print
+(62)	'>' is print
+(63)	'?' is print
+(64)	'@' is print
+(65)	'A' is print
+(66)	'B' is print
+(67)	'C' is print
+(68)	'D' is print
+(69)	'E' is print
+(70)	'F' is print
+(71)	'G' is print
+(72)	'H' is print
+(73)	'I' is print
+(74)	'J' is print
+(75)	'K' is print
+(76)	'L' is print
+(77)	'M' is print
+(78)	'N' is print
+(79)	'O' is print
+(80)	'P' is print
+(81)	'Q' is print
+(82)	'R' is print
+(83)	'S' is print
+(84)	'T' is print
+(85)	'U' is print
+(86)	'V' is print
+(87)	'W' is print
+(88)	'X' is print
+(89)	'Y' is print
+(90)	'Z' is print
+(91)	'[' is print
+(92)	'\' is print
+(93)	']' is print
+(94)	'^' is print
+(95)	'_' is print
+(96)	'`' is print
+(97)	'a' is print
+(98)	'b' is print
+(99)	'c' is print
+(100)	'd' is print
+(101)	'e' is print
+(102)	'f' is print
+(103)	'g' is print
+(104)	'h' is print
+(105)	'i' is print
+(106)	'j' is print
+(107)	'k' is print
+(108)	'l' is print
+(109)	'm' is print
+(110)	'n' is print
+(111)	'o' is print
+(112)	'p' is print
+(113)	'q' is print
+(114)	'r' is print
+(115)	's' is print
+(116)	't' is print
+(117)	'u' is print
+(118)	'v' is print
+(119)	'w' is print
+(120)	'x' is print
+(121)	'y' is print
+(122)	'z' is print
+(123)	'{' is print
+(124)	'|' is print
+(125)	'}' is print
+(126)	'~' is print
+(127)	'.7f' is not print
+(128)	'.80' is not print
+(129)	'.81' is not print
+(130)	'.82' is not print
+(131)	'.83' is not print
+(132)	'.84' is not print
+(133)	'.85' is not print
+(134)	'.86' is not print
+(135)	'.87' is not print
+(136)	'.88' is not print
+(137)	'.89' is not print
+(138)	'.8a' is not print
+(139)	'.8b' is not print
+(140)	'.8c' is not print
+(141)	'.8d' is not print
+(142)	'.8e' is not print
+(143)	'.8f' is not print
+(144)	'.90' is not print
+(145)	'.91' is not print
+(146)	'.92' is not print
+(147)	'.93' is not print
+(148)	'.94' is not print
+(149)	'.95' is not print
+(150)	'.96' is not print
+(151)	'.97' is not print
+(152)	'.98' is not print
+(153)	'.99' is not print
+(154)	'.9a' is not print
+(155)	'.9b' is not print
+(156)	'.9c' is not print
+(157)	'.9d' is not print
+(158)	'.9e' is not print
+(159)	'.9f' is not print
+(160)	'.a0' is not print
+(161)	'.a1' is not print
+(162)	'.a2' is not print
+(163)	'.a3' is not print
+(164)	'.a4' is not print
+(165)	'.a5' is not print
+(166)	'.a6' is not print
+(167)	'.a7' is not print
+(168)	'.a8' is not print
+(169)	'.a9' is not print
+(170)	'.aa' is not print
+(171)	'.ab' is not print
+(172)	'.ac' is not print
+(173)	'.ad' is not print
+(174)	'.ae' is not print
+(175)	'.af' is not print
+(176)	'.b0' is not print
+(177)	'.b1' is not print
+(178)	'.b2' is not print
+(179)	'.b3' is not print
+(180)	'.b4' is not print
+(181)	'.b5' is not print
+(182)	'.b6' is not print
+(183)	'.b7' is not print
+(184)	'.b8' is not print
+(185)	'.b9' is not print
+(186)	'.ba' is not print
+(187)	'.bb' is not print
+(188)	'.bc' is not print
+(189)	'.bd' is not print
+(190)	'.be' is not print
+(191)	'.bf' is not print
+(192)	'.c0' is not print
+(193)	'.c1' is not print
+(194)	'.c2' is not print
+(195)	'.c3' is not print
+(196)	'.c4' is not print
+(197)	'.c5' is not print
+(198)	'.c6' is not print
+(199)	'.c7' is not print
+(200)	'.c8' is not print
+(201)	'.c9' is not print
+(202)	'.ca' is not print
+(203)	'.cb' is not print
+(204)	'.cc' is not print
+(205)	'.cd' is not print
+(206)	'.ce' is not print
+(207)	'.cf' is not print
+(208)	'.d0' is not print
+(209)	'.d1' is not print
+(210)	'.d2' is not print
+(211)	'.d3' is not print
+(212)	'.d4' is not print
+(213)	'.d5' is not print
+(214)	'.d6' is not print
+(215)	'.d7' is not print
+(216)	'.d8' is not print
+(217)	'.d9' is not print
+(218)	'.da' is not print
+(219)	'.db' is not print
+(220)	'.dc' is not print
+(221)	'.dd' is not print
+(222)	'.de' is not print
+(223)	'.df' is not print
+(224)	'.e0' is not print
+(225)	'.e1' is not print
+(226)	'.e2' is not print
+(227)	'.e3' is not print
+(228)	'.e4' is not print
+(229)	'.e5' is not print
+(230)	'.e6' is not print
+(231)	'.e7' is not print
+(232)	'.e8' is not print
+(233)	'.e9' is not print
+(234)	'.ea' is not print
+(235)	'.eb' is not print
+(236)	'.ec' is not print
+(237)	'.ed' is not print
+(238)	'.ee' is not print
+(239)	'.ef' is not print
+(240)	'.f0' is not print
+(241)	'.f1' is not print
+(242)	'.f2' is not print
+(243)	'.f3' is not print
+(244)	'.f4' is not print
+(245)	'.f5' is not print
+(246)	'.f6' is not print
+(247)	'.f7' is not print
+(248)	'.f8' is not print
+(249)	'.f9' is not print
+(250)	'.fa' is not print
+(251)	'.fb' is not print
+(252)	'.fc' is not print
+(253)	'.fd' is not print
+(254)	'.fe' is not print
+(255)	'.ff' is not print
