@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy_test.c                                  :+:      :+:    :+:   */
+/*   ft_memchr_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 17:49:18 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/31 13:39:00 by vblanc           ###   ########.fr       */
+/*   Created: 2024/10/31 13:32:15 by vblanc            #+#    #+#             */
+/*   Updated: 2024/10/31 13:43:39 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,25 @@
 
 void	print_result(char c, size_t n)
 {
-	const char	src[] = "1234567890";
-	char		dest[10];
+	const char	src[] = "0123456789";
 	char		*res;
 
-	bzero(dest, 10);
-	res = ft_memccpy(dest, src, c, n);
-	if (res != NULL)
-		res[0] = '\0';
+	res = ft_memchr(src, c, n);
 	if (res == NULL)
 		printf("'%c' not found in the first '%ld' bytes of '%s'\n", c, n, src);
 	else
 	{
 		printf("'%c' found in the first '%ld' bytes of '%s'", c, n, src);
-		printf(" | (address: %s) ", &res[0]
-			- &dest[strlen(dest)] ? "unexpected" : "expected");
-		printf("dest=%s\n", dest);
+		printf("at index %ld\n", &res[0] - &src[0]);
 	}
 }
 
 int	main(void)
 {
-	print_result('0', 10);
+	print_result('9', 10);
 	print_result('5', 10);
+	print_result('5', 6);
 	print_result('5', 5);
-	print_result('5', 4);
 	print_result('5', 0);
 	print_result('a', 10);
 }

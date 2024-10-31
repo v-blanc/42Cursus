@@ -1,0 +1,6 @@
+'9' found in the first '10' bytes of '0123456789'at index 9
+'5' found in the first '10' bytes of '0123456789'at index 5
+'5' found in the first '6' bytes of '0123456789'at index 5
+'5' not found in the first '5' bytes of '0123456789'
+'5' not found in the first '0' bytes of '0123456789'
+'a' not found in the first '10' bytes of '0123456789'
