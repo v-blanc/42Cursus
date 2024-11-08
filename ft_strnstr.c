@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:15:11 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/08 10:58:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 14:53:04 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Characters that appear after a ‘\0’ character are not searched. */
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
-	size_t len_little;
+	size_t	len_little;
 
 	if (!*little)
 		return ((char *)big);

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_test.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:54:26 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/04 14:20:01 by vblanc           ###   ########.fr       */
+/*   Created: 2024/11/08 14:49:11 by vblanc            #+#    #+#             */
+/*   Updated: 2024/11/08 15:10:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+/* Takes as a parameter a node and frees the memory of the node’s content
+using the function ’del’ given as a parameter and free the node.
+The memory of ’next’ must not be freed. */
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	printf("%d\n", ft_atoi("42"));
-	printf("%d\n", ft_atoi("  -42"));
-	printf("%d\n", ft_atoi("--42"));
-	printf("%d\n", ft_atoi("  - 42"));
-	printf("%d\n", ft_atoi(" 42  34"));
-	printf("%d\n", ft_atoi(" 42test32"));
-	printf("%d\n", ft_atoi("2147483647"));
-	printf("%d\n", ft_atoi("-2147483648"));
+	if (!lst)
+		return ;
+	if (del)
+		del(lst->content);
+	free(lst);
 }

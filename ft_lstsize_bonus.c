@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_test.c                                    :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:27:06 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/08 11:21:23 by vblanc           ###   ########.fr       */
+/*   Created: 2024/11/08 14:27:52 by vblanc            #+#    #+#             */
+/*   Updated: 2024/11/08 14:34:08 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-void	print_result(char *str, int c)
+/* Counts the number of nodes in a list. */
+int	ft_lstsize(t_list *lst)
 {
-	char	**tab;
-	int		i;
+	int	count;
 
-	tab = ft_split(str, c);
-	i = 0;
-	while (tab[i])
+	count = 0;
+	while (lst)
 	{
-		printf("%s\n", tab[i]);
-		i++;
+		count++;
+		lst = lst->next;
 	}
-    printf(">%d\n", i);
-    return ;
-}
-
-int	main(void)
-{
-	print_result("", '@');
-	print_result("@", '@');
-	print_result("@@@@@@", '@');
-	print_result("@@Hello@World@@@!@42@@", '@');
-	print_result("hello", 0);
+	return (count);
 }

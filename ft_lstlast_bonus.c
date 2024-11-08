@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd_test.c                                :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:27:06 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/05 15:47:24 by vblanc           ###   ########.fr       */
+/*   Created: 2024/11/08 14:34:31 by vblanc            #+#    #+#             */
+/*   Updated: 2024/11/08 14:52:54 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-int main(void)
+/* Returns the last node of the list. */
+t_list	*ft_lstlast(t_list *lst)
 {
-    int fd = 1;
+	t_list	*prev;
 
-    ft_putstr_fd("Hello", fd);
-    ft_putstr_fd(" World !", fd);
-    ft_putstr_fd("\n", fd);
-    ft_putstr_fd("42", fd);
-    ft_putstr_fd("\n", fd);
+	prev = NULL;
+	while (lst)
+	{
+		prev = lst;
+		lst = lst->next;
+	}
+	return (prev);
 }

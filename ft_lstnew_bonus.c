@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy_test.c                                   :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 13:32:15 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/05 14:16:22 by vblanc           ###   ########.fr       */
+/*   Created: 2024/11/08 14:09:08 by vblanc            #+#    #+#             */
+/*   Updated: 2024/11/08 14:19:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-int	main(void)
+/* Allocates (with malloc(3)) and returns a new node. The member variable
+’content’ is initialized with the value of the parameter ’content’.
+The variable ’next’ is initialized to NULL. */
+t_list	*ft_lstnew(void *content)
 {
-	char s1[] = "Hello";
-	char s2[] = "..........";
-	char s3[] = "World";
+	t_list	*new;
 
-	ft_memcpy(s1 + 5, s1, strlen(s1));
-	printf("%s\n", s1);
-	ft_memcpy(s2, s3, 5);
-	printf("%s\n", s2);
-	ft_memcpy(s2, s3, 10);
-	printf("%s\n", s2);
-	ft_memcpy(s2, s1, 1);
-	printf("%s\n", s2);
-	ft_memcpy(s2, s3, 0);
-	printf("%s\n", s2);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 11:17:30 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/08 14:53:00 by vblanc           ###   ########.fr       */
+/*   Created: 2024/11/08 15:10:59 by vblanc            #+#    #+#             */
+/*   Updated: 2024/11/08 15:43:35 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*Compares only the first (at most) ’n’ bytes of the two strings ’s1’ and ’s2’*/
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+/* Deletes and frees the given node and every successor of that node, using
+the function ’del’ and free(3).
+Finally, the pointer to the list must be set to NULL. */
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	size_t	i;
+	t_list	*next;
 
-	i = 0;
-	while (i < n)
+	if (!*lst)
+		return ;
+	next = NULL;
+	while ((*lst)->next)
 	{
-		if (s1[i] != s2[i] || s1[i] == '\0' || s2[i] == '\0')
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		next = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		(*lst) = next;
 	}
-	return (0);
+	ft_lstdelone(*lst, del);
+	(*lst) = NULL;
 }
