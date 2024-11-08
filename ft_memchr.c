@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 02:17:46 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/04 14:15:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 11:45:34 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	ptr = s;
 	while (n-- > 0)
 	{
-		if (*ptr == c)
+		if (*ptr == (unsigned char)c)
 			return ((void *)ptr);
 		ptr++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:27:06 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/06 12:28:05 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 11:21:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int	main(void)
 	print_result("@", '@');
 	print_result("@@@@@@", '@');
 	print_result("@@Hello@World@@@!@42@@", '@');
-	print_result("hello", '@');
+	print_result("hello", 0);
 }

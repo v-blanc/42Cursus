@@ -6,11 +6,12 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 23:18:28 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/07 16:19:03 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 12:08:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 /* Allocates (with malloc(3)) and returns a string
 representing the integer received as an argument.
@@ -40,5 +41,6 @@ char	*ft_itoa(int n)
 	if (sign_flag == 1)
 		str[++i] = '-';
 	ft_strrev(str);
+	str[i + 1] = '\0';
 	return (str);
 }

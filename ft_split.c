@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:54 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/07 16:41:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 11:37:12 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ char	**ft_split(char const *s, char c)
 			new_s++;
 		if (new_s - s > 0)
 			tab[i++] = ft_substr(s, 0, new_s - s);
+		if (!*new_s)
+			break ;
 		s = new_s + 1;
 	}
-	tab[i++] = NULL;
+	tab[i] = NULL;
 	return (tab);
 }

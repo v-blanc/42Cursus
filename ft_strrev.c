@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 23:23:40 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/04 14:15:53 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 12:04:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_strrev(char *s)
 	int		len_s;
 	char	temp;
 
-	len_s = ft_strlen(s);
+	len_s = ft_strlen(s) - 1;
 	i = 0;
 	while (i < len_s / 2)
 	{

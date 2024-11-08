@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 00:52:17 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/07 15:24:25 by vblanc           ###   ########.fr        #
+#    Updated: 2024/11/08 12:13:06 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS := ft_atoi.c ft_bzero.c ft_calloc.c ft_intlen.c ft_isalnum.c ft_isalpha.c\
 	ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c\
 	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strtrim.c\
 	ft_substr.c ft_tolower.c ft_toupper.c
-OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
+# OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
+OBJS := $(patsubst %.c,%.o,$(SRCS))
 
 # BONUS := ft_lstnew.c\
 # OBJSB := $(patsubst %.c,$(OBJDIR)/%.o,$(BONUS))
@@ -44,7 +45,9 @@ $(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJDIR)
+	$(RM) $(OBJS)
+	
+# $(RM) $(OBJDIR)
 
 fclean: clean
 	$(RM) $(NAME)
