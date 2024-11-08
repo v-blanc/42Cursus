@@ -1,4 +1,7 @@
 ..................................................
 
 
+calloc passed for INT_MAX
+calloc failed for INT_MAX + 1
 0001000002
+calloc failed

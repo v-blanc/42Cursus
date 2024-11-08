@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:32:15 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/31 13:43:39 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/07 15:10:03 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ int	main(void)
 	print_result('5', 5);
 	print_result('5', 0);
 	print_result('a', 10);
+	int tab[7] = {-49, 49, 1, -1, 0, -2, 2};
+	printf("%s", (char *)ft_memchr(tab, -1, 7));
 }

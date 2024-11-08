@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:56:01 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/14 14:49:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/04 14:15:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /* Checks for an alphanumeric character;
-it is equivalent to (isalpha(c) || isdigit(c)). */
+it is equivalent to	(isalpha(c) || isdigit(c)). */
 int	ft_isalnum(int c)
 {
 	if (ft_isalpha(c) || ft_isdigit(c))

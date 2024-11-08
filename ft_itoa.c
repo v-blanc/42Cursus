@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 23:18:28 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/21 22:25:08 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/07 16:19:03 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ char	*ft_itoa(int n)
 
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	str = malloc(sizeof(char) * 12);
+	str = malloc(sizeof(char) * ft_intlen(n) + 1);
 	if (!str)
 		return (NULL);
 	i = 0;
+	sign_flag = 0;
 	if (n < 0)
-	{
 		sign_flag = 1;
-		n = -n;
-	}
+	n = ((n > 0) - (n < 0)) * n;
 	while (n > 9)
 	{
 		str[i++] = (n % 10) + '0';

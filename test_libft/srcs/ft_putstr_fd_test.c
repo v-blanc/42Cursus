@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace_test.c                                  :+:      :+:    :+:   */
+/*   ft_putstr_fd_test.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 16:01:56 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/31 13:19:32 by vblanc           ###   ########.fr       */
+/*   Created: 2024/11/05 14:27:06 by vblanc            #+#    #+#             */
+/*   Updated: 2024/11/05 15:47:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
-#include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 
-int	main(void)
+int main(void)
 {
-	int	i;
+    int fd = 1;
 
-	i = 0;
-	while (i <= 255)
-	{
-		if (isprint(i))
-			printf("(%d)\t'%c' %s\n", i, i,
-				ft_isspace(i) ? "is space" : "is not space");
-		else
-			printf("(%d)\t'.%x' %s\n", i, i,
-				ft_isspace(i) ? "is space" : "is not space");
-		i++;
-	}
+    ft_putstr_fd("Hello", fd);
+    ft_putstr_fd(" World !", fd);
+    ft_putstr_fd("\n", fd);
+    ft_putstr_fd("42", fd);
+    ft_putstr_fd("\n", fd);
 }

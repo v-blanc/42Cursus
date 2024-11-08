@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:54:19 by vblanc            #+#    #+#             */
-/*   Updated: 2024/10/14 14:07:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/07 13:56:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 
+	if (size != 0 && nmemb > 2147483647 / size)
+		return (NULL);
 	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);
