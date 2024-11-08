@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:45:07 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/07 16:37:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 13:19:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
 
-	if (ft_strlen(s) < len)
-		len = ft_strlen(s);
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
 	if (start > ft_strlen(s))
 		return (ft_strdup(""));
-	sub = (char *)malloc(sizeof(char) * (len + 1));
+	sub = (char *)malloc(sizeof(char) * len + 1);
 	if (!sub)
 		return (NULL);
 	ft_memcpy(sub, s + start, len);

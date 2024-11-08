@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 03:14:00 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/07 16:23:49 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 13:35:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strchr(const char *s, int c)
 		if (*s++ == (unsigned char)c)
 			return ((char *)--s);
 	}
-	if (c == 0)
+	if (c % 256 == 0)
 		return ((char *)s);
 	return (NULL);
 }

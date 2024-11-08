@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 01:40:04 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/05 13:15:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/08 13:38:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	unsigned char		*d;
 	const unsigned char	*s;
 
+	if (!dest && !src)
+		return (NULL);
 	d = dest;
 	s = src;
 	if (s < d)
