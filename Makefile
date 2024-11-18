@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 15:48:03 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/18 16:52:05 by vblanc           ###   ########.fr        #
+#    Updated: 2024/11/18 16:54:20 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,7 @@ repository:
 	@mkdir -p $(OBJDIR)
 
 clean:
-	$(RM) $(OBJS)
-	$(RM) $(OBJSB)
+	$(RM) $(OBJDIR)
 
 fclean: clean
 	$(RM) $(NAME)
