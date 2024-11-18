@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:41:27 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/08 16:10:50 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:18:55 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ The ’del’ function is used to delete the content of a node if needed. */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_lst;
+	t_list	*new_node;
 
 	new_lst = NULL;
 	while (lst)
 	{
-		ft_lstadd_back(&new_lst, ft_lstnew(f(lst->content)));
-		if (!new_lst)
+		new_node = ft_lstnew(f(lst->content));
+		if (!new_node)
+		{
+			ft_lstclear(&new_lst, del);
 			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_node);
 		lst = lst->next;
 	}
-	ft_lstclear(&lst, del);
 	return (new_lst);
 }
