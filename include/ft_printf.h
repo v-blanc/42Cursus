@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:45:27 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/16 09:11:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:20:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_printf(const char *format, ...);
 /* ft_write_characters */
 int	ft_write_char(int c);
 int	ft_write_str(char *str);
-int	ft_write_ptr(size_t ptr);
+int	ft_write_ptr(void *ptr);
+
 /* ft_write_numbers */
 int	ft_write_decimal(int num);
 int	ft_write_unsigned(unsigned int num);

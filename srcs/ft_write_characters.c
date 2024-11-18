@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write_characters.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 08:58:53 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/16 09:08:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:32:17 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,28 @@ int	ft_write_str(char *str)
 	return ((int)len);
 }
 
-int	ft_write_ptr(size_t ptr)
+static int	ft_write_ull_hex(unsigned long long num, char *base)
+{
+	int	len;
+
+	len = 0;
+	if (num > 15)
+	{
+		len += ft_write_ull_hex(num / 16, base);
+		len += write(1, &base[num % 16], 1);
+	}
+	else
+		len += write(1, &base[num], 1);
+	return (len);
+}
+
+int	ft_write_ptr(void *ptr)
 {
 	size_t	len;
 
 	if (!ptr)
 		return (write(1, "(nil)", 5));
 	write(1, "0x", 2);
-	len = ft_write_hex(ptr, "0123456789abcdef");
+	len = ft_write_ull_hex((unsigned long long)ptr, "0123456789abcdef");
 	return (len + 2);
 }

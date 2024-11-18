@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 15:48:03 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/16 09:09:50 by vblanc           ###   ########.fr        #
+#    Updated: 2024/11/18 16:52:05 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ OBJDIR := ./objs
 SRCS := ft_printf.c ft_write_numbers.c ft_write_characters.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o, $(SRCS))
-# OBJS := $(patsubst %.c,%.o,$(SRCS))
 
 NAME := libftprintf.a
 RM := rm -rf
@@ -40,8 +39,7 @@ repository:
 
 clean:
 	$(RM) $(OBJS)
-	$(RM) $(OBJSB)	
-#$(RM) $(OBJDIR)
+	$(RM) $(OBJSB)
 
 fclean: clean
 	$(RM) $(NAME)

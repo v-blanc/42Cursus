@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:12:12 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/16 09:08:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:20:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_parse_format(char *str, va_list args)
 	else if (*str == 's')
 		return (ft_write_str(va_arg(args, char *)));
 	else if (*str == 'p')
-		return (ft_write_ptr(va_arg(args, size_t)));
+		return (ft_write_ptr(va_arg(args, void *)));
 	else if (*str == 'd' || *str == 'i')
 		return (ft_write_decimal(va_arg(args, int)));
 	else if (*str == 'u')
@@ -73,6 +73,7 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count_chars);
 }
+
 /*
 int	main(void)
 {
