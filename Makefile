@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 00:52:17 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/08 16:26:25 by vblanc           ###   ########.fr        #
+#    Updated: 2024/11/18 15:39:27 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ $(NAME): repository $(OBJS)
 bonus: repository $(OBJSB)
 	ar -rsc $(NAME) $(OBJSB)
 
-$(OBJDIR)/%.o: %.c
+# $(OBJDIR)/%.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 repository:
