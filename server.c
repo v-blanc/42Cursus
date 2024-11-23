@@ -6,58 +6,53 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:21:54 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/19 05:24:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/23 20:43:07 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-volatile sig_atomic_t	curr_char = 0;
-volatile sig_atomic_t	bit_pos = 0;
+t_data_server	g_data_serv;
 
-#define MAX_MESSAGE_LENGTH 256
-volatile char msg[MAX_MESSAGE_LENGTH];
-volatile sig_atomic_t msg_index = 0;
-
-void	sig_handler(int sig)
+void	sig_handler(int sig, siginfo_t *siginfo, void *context)
 {
+	(void)context;
 	if (sig == SIGUSR2)
 	{
-		curr_char |= (1 << bit_pos);
+		g_data_serv.curr_char |= (1 << g_data_serv.bit_pos);
 	}
-	bit_pos++;
-	if (bit_pos == 8)
+	g_data_serv.bit_pos++;
+	if (g_data_serv.bit_pos == 8)
 	{
-		if (curr_char == '\0')
+		if (g_data_serv.curr_char == '\0')
 		{
-			msg[msg_index] = '\0';
-			printf("Message received from PID: %s\n", msg);
-			msg_index = 0;
+			g_data_serv.msg[g_data_serv.msg_index] = '\0';
+			printf("Message received from PID %d:\n", siginfo->si_pid);
+			printf("  '%s'\n", g_data_serv.msg);
+			g_data_serv.msg_index = 0;
 		}
-		else if (msg_index < MAX_MESSAGE_LENGTH - 1)
-			msg[msg_index++] = curr_char;
-		curr_char = 0;
-		bit_pos = 0;
+		else if (g_data_serv.msg_index < MAX_MESSAGE_LENGTH - 1)
+		{
+			g_data_serv.msg[g_data_serv.msg_index++] = g_data_serv.curr_char;
+		}
+		g_data_serv.curr_char = 0;
+		g_data_serv.bit_pos = 0;
 	}
 }
 
-// void	sig_handler(int sig)
-// {
-//     if (sig == SIGUSR1)
-//         printf("Received SIGUSR1\n");
-//     else if (sig == SIGUSR2)
-//         printf("Received SIGUSR2\n");
-// }
-
 int	main(void)
 {
-	pid_t pid = getpid();
-    char *msg[MAX_MESSAGE_LENGTH];
-	printf("PID server: %d\n", pid);
+	pid_t				pid;
+	struct sigaction	sa;
 
-	struct sigaction sa;
-	sa.sa_handler = sig_handler;
-	sa.sa_flags = 0;
+	g_data_serv.bit_pos = 0;
+	g_data_serv.curr_char = 0;
+	g_data_serv.msg_index = 0;
+	memset(g_data_serv.msg, 0, sizeof(g_data_serv.msg));
+	pid = getpid();
+	printf("PID server: %d\n", pid);
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);

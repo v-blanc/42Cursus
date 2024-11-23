@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:28:13 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/19 05:21:43 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/23 20:45:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	test_pid_is_digit(char *argv, pid_t *pid_server)
 	(*pid_server) = atoi(argv);
 	if (kill(*pid_server, 0))
 	{
-		printf("PID error\n");
+		printf("Server PID error\n");
 		exit(1);
 	}
-	printf("PID valid\n");
+	printf("Server PID valid\n");
 }
 
 /* Send SIGUSR1 (= 0) if bit is 0 and SIGUSR2 (= 1) if bit is 1 */
@@ -33,16 +33,16 @@ void	send_bit(pid_t pid_server, int bit)
 	usleep(1000);
 }
 
-void send_char(pid_t pid_server, char c)
+void	send_char(pid_t pid_server, char c)
 {
-    int	i;
+	int	i;
 
-    i = 0;
-    while (i < 8)
-    {
-        send_bit(pid_server, (c >> i) & 1);
-        i++;
-    }
+	i = 0;
+	while (i < 8)
+	{
+		send_bit(pid_server, (c >> i) & 1);
+		i++;
+	}
 }
 
 void	send_msg(pid_t pid_server, char *message)
@@ -53,6 +53,7 @@ void	send_msg(pid_t pid_server, char *message)
 	while (message[i])
 		send_char(pid_server, message[i++]);
 	send_char(pid_server, '\0');
+	printf("Message sent!\n");
 }
 
 int	main(int argc, char **argv)
@@ -63,10 +64,11 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 	{
 		printf("Usage: ./client <PID> <message>\n");
-		printf("Handle error\n");
+		printf("!! Handle error !!\n");
 		return (1);
 	}
 	test_pid_is_digit(argv[1], &pid_server);
+	printf("Client PID: %d\n", getpid());
 	message = argv[2];
 	printf("Send message '%s' to PID: %d\n", message, pid_server);
 	send_msg(pid_server, message);
