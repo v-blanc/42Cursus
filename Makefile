@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 15:48:03 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/18 16:55:22 by vblanc           ###   ########.fr        #
+#    Updated: 2024/11/24 01:12:26 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,6 @@ all: $(NAME)
 
 $(NAME): repository $(OBJS)
 	ar -rsc $(NAME) $(OBJS)
-
-# bonus: repository $(OBJSB)
-# 	ar -rsc $(NAME) $(OBJSB)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:12:12 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/18 16:20:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/11/24 01:14:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,60 +73,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count_chars);
 }
-
-/*
-int	main(void)
-{
-	int		count;
-	char	*test_str;
-	int		test_number;
-	char	test_char;
-
-	test_char = 't';
-	test_str = "test";
-	test_number = 1234;
-	printf("------- Testing %%c -------\n");
-	count = ft_printf("%c|\n", test_char);
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%c|\n", test_char);
-	printf("expected count: %d\n", count);
-	printf("------- Testing %%s -------\n");
-	count = ft_printf("%s|\n", test_str);
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%s|\n", test_str);
-	printf("expected count: %d\n", count);
-	printf("------- Testing %%p -------\n");
-	count = ft_printf("%p|\n", test_str);
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%p|\n", test_str);
-	printf("expected count: %d\n", count);
-	printf("------- Testing %%d -------\n");
-	count = ft_printf("%d|\n", test_number);
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%d|\n", test_number);
-	printf("expected count: %d\n", count);
-	printf("------- Testing %%x -------\n");
-	count = ft_printf("%x|\n", test_number);
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%x|\n", test_number);
-	printf("expected count: %d\n", count);
-	printf("------- Testing %%X -------\n");
-	count = ft_printf("%X|\n", test_number);
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%X|\n", test_number);
-	printf("expected count: %d\n", count);
-	printf("------- Testing %%%% -------\n");
-	count = ft_printf("%%|\n");
-	printf("count: %d\n", count);
-	printf("expected: ");
-	count = printf("%%|\n");
-	printf("expected count: %d\n", count);
-	return (0);
-}
-*/
