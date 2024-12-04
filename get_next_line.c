@@ -6,66 +6,75 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 02:11:29 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/18 23:31:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:43:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <string.h>
 
-static char	*ft_read_file(int fd, char *buffer)
+static int	ft_sub_read_file(int fd, char **buffer, char *tmp)
 {
-	char	*tmp;
-	int		bytes_read;
+	int	bytes_read;
 
-	if (!buffer)
-		buffer = (char *)ft_calloc(1, 1);
-	tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!tmp)
-		return (NULL);
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, tmp, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{
-			free(buffer);
-			free(tmp);
-			return (NULL);
-		}
+			return (1);
 		tmp[bytes_read] = '\0';
-		buffer = ft_strjoin_custom(buffer, tmp);
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strjoin_custom(buffer, tmp))
+			return (1);
+		if (ft_strchr(*buffer, '\n'))
 			break ;
+	}
+	return (0);
+}
+
+static char	*ft_read_file(int fd, char *buffer)
+{
+	char	*tmp;
+
+	tmp = (char *)ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	if (!tmp)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	if (ft_sub_read_file(fd, &buffer, tmp))
+	{
+		free(tmp);
+		free(buffer);
+		return (NULL);
 	}
 	free(tmp);
 	return (buffer);
 }
 
-static char	*ft_get_line(char *buffer)
+static int	ft_get_line(char *buffer, char **line)
 {
-	char	*line;
 	size_t	i;
 
 	i = 0;
 	if (!buffer[i])
-		return (NULL);
+	{
+		*line = NULL;
+		return (0);
+	}
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = (char *)ft_calloc(i + 2, sizeof(char));
-	if (!line)
-		return (NULL);
+	(*line) = (char *)ft_calloc(i + 2, sizeof(char));
+	if (!(*line))
+		return (1);
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
-		line[i] = buffer[i];
+		(*line)[i] = buffer[i];
 		i++;
 	}
 	if (buffer[i] && buffer[i] == '\n')
-		line[i++] = '\n';
-	return (line);
+		(*line)[i++] = '\n';
+	return (0);
 }
 
 static char	*ft_new_buffer(char *buffer)
@@ -100,10 +109,20 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (!buffer)
+	{
+		buffer = (char *)ft_calloc(1, 1);
+		if (!buffer)
+			return (NULL);
+	}
 	buffer = ft_read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
-	line = ft_get_line(buffer);
+	if (ft_get_line(buffer, &line))
+	{
+		free(buffer);
+		return (NULL);
+	}
 	buffer = ft_new_buffer(buffer);
 	return (line);
 }

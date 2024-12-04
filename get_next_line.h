@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 02:11:33 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/18 23:24:03 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:44:13 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 #  define BUFFER_SIZE 42
 # endif
 
-/* get_next_line_utils */
+/* get_next_line_utils.c */
+
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin_custom(char *s1, char *s2);
+int		ft_strjoin_custom(char **s1, char *s2);
 
 char	*get_next_line(int fd);
 
