@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:24:05 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/23 20:39:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/04 17:31:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINITALK_H
 
 # include <signal.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
@@ -29,5 +28,11 @@ typedef struct s_data_server
 	char			msg[MAX_MESSAGE_LENGTH];
 	sig_atomic_t	msg_index;
 }					t_data_server;
+
+/* utils.c */
+
+size_t				ft_strlen(const char *s);
+int					ft_intlen(int n);
+char				*ft_itoa(int n);
 
 #endif

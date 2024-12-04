@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:21:54 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/23 20:43:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/04 17:47:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,55 @@
 
 t_data_server	g_data_serv;
 
+void	init_data_server(void)
+{
+	size_t	i;
+
+	g_data_serv.bit_pos = 0;
+	g_data_serv.curr_char = 0;
+	g_data_serv.msg_index = 0;
+	i = sizeof(g_data_serv.msg);
+	while (i-- > 0)
+		g_data_serv.msg[i] = 0;
+}
+
+void	print_msg_received(siginfo_t *siginfo)
+{
+	write(1, "Message received from PID ", 27);
+	write(1, ft_itoa(siginfo->si_pid), ft_intlen(siginfo->si_pid));
+	write(1, "\n  '", 4);
+	write(1, g_data_serv.msg, ft_strlen(g_data_serv.msg));
+	write(1, "'\n", 2);
+}
+
 void	sig_handler(int sig, siginfo_t *siginfo, void *context)
 {
 	(void)context;
 	if (sig == SIGUSR2)
-	{
 		g_data_serv.curr_char |= (1 << g_data_serv.bit_pos);
-	}
 	g_data_serv.bit_pos++;
 	if (g_data_serv.bit_pos == 8)
 	{
 		if (g_data_serv.curr_char == '\0')
 		{
 			g_data_serv.msg[g_data_serv.msg_index] = '\0';
-			printf("Message received from PID %d:\n", siginfo->si_pid);
-			printf("  '%s'\n", g_data_serv.msg);
+			print_msg_received(siginfo);
 			g_data_serv.msg_index = 0;
 		}
 		else if (g_data_serv.msg_index < MAX_MESSAGE_LENGTH - 1)
-		{
 			g_data_serv.msg[g_data_serv.msg_index++] = g_data_serv.curr_char;
-		}
 		g_data_serv.curr_char = 0;
 		g_data_serv.bit_pos = 0;
 	}
+}
+
+void	set_signal_handler(struct sigaction sa)
+{
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = sig_handler;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 }
 
 int	main(void)
@@ -45,18 +70,13 @@ int	main(void)
 	pid_t				pid;
 	struct sigaction	sa;
 
-	g_data_serv.bit_pos = 0;
-	g_data_serv.curr_char = 0;
-	g_data_serv.msg_index = 0;
-	memset(g_data_serv.msg, 0, sizeof(g_data_serv.msg));
+	init_data_server();
 	pid = getpid();
-	printf("PID server: %d\n", pid);
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = sig_handler;
-	sigemptyset(&sa.sa_mask);
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
-	printf("Waiting for signal from client...\n");
+	write(1, "PID server: ", 13);
+	write(1, ft_itoa(pid), ft_intlen(pid));
+	write(1, "\n", 1);
+	set_signal_handler(sa);
+	write(1, "Waiting for signal from client...\n", 34);
 	while (1)
 		pause();
 	return (0);

@@ -6,30 +6,37 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:28:13 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/23 20:45:06 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/04 17:31:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	test_pid_is_digit(char *argv, pid_t *pid_server)
+void	test_pid_validity(char *argv, pid_t *pid_server)
 {
 	(*pid_server) = atoi(argv);
 	if (kill(*pid_server, 0))
 	{
-		printf("Server PID error\n");
+		write(1, "Server PID: error\n", 18);
 		exit(1);
 	}
-	printf("Server PID valid\n");
+	write(1, "Server PID: valid\n", 18);
 }
 
 /* Send SIGUSR1 (= 0) if bit is 0 and SIGUSR2 (= 1) if bit is 1 */
 void	send_bit(pid_t pid_server, int bit)
 {
+	int	sig_to_send;
+
 	if (bit)
-		kill(pid_server, SIGUSR2);
+		sig_to_send = SIGUSR2;
 	else
-		kill(pid_server, SIGUSR1);
+		sig_to_send = SIGUSR1;
+	if (kill(pid_server, sig_to_send))
+	{
+		write(1, "Error sending message\n", 22);
+		exit(1);
+	}
 	usleep(1000);
 }
 
@@ -53,7 +60,7 @@ void	send_msg(pid_t pid_server, char *message)
 	while (message[i])
 		send_char(pid_server, message[i++]);
 	send_char(pid_server, '\0');
-	printf("Message sent!\n");
+	write(1, "Message sent!\n", 15);
 }
 
 int	main(int argc, char **argv)
@@ -63,14 +70,20 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Usage: ./client <PID> <message>\n");
-		printf("!! Handle error !!\n");
+		write(1, "Usage: ./client <PID> <message>\n", 33);
+		write(1, "!! Handle error !!\n", 19);
 		return (1);
 	}
-	test_pid_is_digit(argv[1], &pid_server);
-	printf("Client PID: %d\n", getpid());
+	test_pid_validity(argv[1], &pid_server);
+	write(1, "Client PID: ", 13);
+	write(1, ft_itoa(getpid()), ft_intlen(getpid()));
+	write(1, "\n", 1);
 	message = argv[2];
-	printf("Send message '%s' to PID: %d\n", message, pid_server);
+	write(1, "Send message '", 15);
+	write(1, message, ft_strlen(message));
+	write(1, "' to PID: ", 11);
+	write(1, ft_itoa(pid_server), ft_intlen(pid_server));
+	write(1, "\n", 1);
 	send_msg(pid_server, message);
 	return (0);
 }
