@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 02:11:29 by vblanc            #+#    #+#             */
-/*   Updated: 2024/12/04 16:43:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/12 15:54:02 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ static char	*ft_new_buffer(char *buffer)
 	}
 	cpy = (char *)ft_calloc((ft_strlen(buffer) - line_len + 1), sizeof(char));
 	if (!cpy)
+	{
+		free(buffer);
 		return (NULL);
+	}
 	i = 0;
 	while (buffer[++line_len])
 		cpy[i++] = buffer[line_len];
@@ -121,6 +124,7 @@ char	*get_next_line(int fd)
 	if (ft_get_line(buffer, &line))
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	buffer = ft_new_buffer(buffer);
