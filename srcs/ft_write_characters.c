@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 08:58:53 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/18 16:32:17 by vblanc           ###   ########.fr       */
+/*   Updated: 2024/12/13 12:07:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,23 @@ int	ft_write_char(int c)
 	return (1);
 }
 
+static size_t	ft_strlen(char *str)
+{
+	size_t	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
 int	ft_write_str(char *str)
 {
 	size_t	len;
 
 	if (!str)
 		return (write(1, "(null)", 6));
-	len = strlen(str);
+	len = ft_strlen(str);
 	write(1, str, len);
 	return ((int)len);
 }
