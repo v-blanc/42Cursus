@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 15:48:03 by vblanc            #+#    #+#              #
-#    Updated: 2024/12/13 12:13:01 by vblanc           ###   ########.fr        #
+#    Updated: 2024/12/13 12:30:17 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ RM := rm -rf
 
 all: $(NAME)
 
-$(NAME): repository $(OBJS)
+$(NAME): $(OBJS)
 	ar -rsc $(NAME) $(OBJS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c  | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-repository:
+$(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 clean:
