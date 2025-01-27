@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/22 00:10:14 by vblanc           ###   ########.fr        #
+#    Updated: 2025/01/27 13:03:02 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,19 +27,21 @@ RM := rm -rf
 
 all: $(NAME)
 
-$(NAME): repository $(OBJS)
+$(NAME): $(OBJS)
+	@make -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-repository:
-	@mkdir -p $(OBJDIR)
-
 clean:
+	@cd libft && make clean	&& cd ..
 	$(RM) $(OBJDIR)
 
-fclean: clean
+fclean:
+	@cd libft && make fclean && cd ..
+	$(RM) $(OBJDIR)
 	$(RM) $(NAME)
 
 re: fclean all

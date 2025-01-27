@@ -1,5 +1,3 @@
 .vscode/
 objs/
-push_swap_tester/
-Push-Swap-Tester/
-checker
+push_swap_visualizer/
