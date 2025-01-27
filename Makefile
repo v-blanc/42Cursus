@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/01/27 13:03:02 by vblanc           ###   ########.fr        #
+#    Updated: 2025/01/27 15:25:05 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ RM := rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+libft:
 	@make -C libft
+
+$(NAME): libft $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
@@ -36,14 +38,14 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@cd libft && make clean	&& cd ..
+	@make -C libft clean
 	$(RM) $(OBJDIR)
 
 fclean:
-	@cd libft && make fclean && cd ..
+	@make -C libft fclean
 	$(RM) $(OBJDIR)
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all libft clean fclean re
