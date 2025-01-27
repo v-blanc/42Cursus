@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 00:52:17 by vblanc            #+#    #+#              #
-#    Updated: 2024/11/18 15:39:27 by vblanc           ###   ########.fr        #
+#    Updated: 2025/01/27 13:05:14 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,12 @@ SRCS := ft_atoi.c ft_bzero.c ft_calloc.c ft_intlen.c ft_isalnum.c ft_isalpha.c\
 	ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c\
 	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strtrim.c\
 	ft_substr.c ft_tolower.c ft_toupper.c
-# OBJS := $(patsubst %.c,$(OBJDIR)/%.o, $(SRCS))
-OBJS := $(patsubst %.c,%.o,$(SRCS))
+OBJS := $(patsubst %.c,$(OBJDIR)/%.o, $(SRCS))
 
 BONUS := ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
 		ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-# OBJSB := $(patsubst %.c,$(OBJDIR)/%.o,$(BONUS))
-OBJSB := $(patsubst %.c,%.o,$(BONUS))
+OBJSB := $(patsubst %.c,$(OBJDIR)/%.o,$(BONUS))
 
 
 NAME := libft.a
@@ -37,23 +35,18 @@ RM := rm -rf
 
 all: $(NAME)
 
-$(NAME): repository $(OBJS)
+$(NAME): $(OBJS)
 	ar -rsc $(NAME) $(OBJS)
 
-bonus: repository $(OBJSB)
+bonus: $(OBJSB)
 	ar -rsc $(NAME) $(OBJSB)
 
-# $(OBJDIR)/%.o: %.c
-%.o: %.c
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-repository:
-	@mkdir -p $(OBJDIR)
-
 clean:
-	$(RM) $(OBJS)
-	$(RM) $(OBJSB)	
-#$(RM) $(OBJDIR)
+	$(RM) $(OBJDIR)
 
 fclean: clean
 	$(RM) $(NAME)
