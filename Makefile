@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/01/27 15:25:05 by vblanc           ###   ########.fr        #
+#    Updated: 2025/01/27 16:45:28 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ all: $(NAME)
 libft:
 	@make -C libft
 
-$(NAME): libft $(OBJS)
+$(NAME): $(OBJS)
+	@make -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
