@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:01:00 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/22 01:25:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/27 17:40:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,36 @@ t_stack	*init_stack(int capacity)
 	return (stack);
 }
 
-t_stack	*fill_stack(int capacity, char **data)
+// t_stack	*fill_stack(int capacity, char **data)
+// {
+// 	int		i;
+// 	int		data_converted;
+// 	t_stack	*stack;
+
+// 	stack = init_stack(capacity);
+// 	if (!stack)
+// 		return (NULL);
+// 	i = capacity - 1;
+// 	while (i >= 0)
+// 	{
+// 		data_converted = ft_atoi(data[i]);
+// 		if ((ft_intlen(data_converted) != (int)ft_strlen(data[i]))
+// 			|| (data_converted == 0 && ft_strncmp(data[i], "0",
+// 					ft_strlen(data[i]))))
+// 		{
+// 			free_stack(stack);
+// 			return (NULL);
+// 		}
+// 		stack->data[capacity - i - 1] = data_converted;
+// 		stack->top++;
+// 		i--;
+// 	}
+// 	return (stack);
+// }
+
+t_stack	*fill_stack(int capacity, int *data)
 {
 	int		i;
-	int		data_converted;
 	t_stack	*stack;
 
 	stack = init_stack(capacity);
@@ -39,15 +65,15 @@ t_stack	*fill_stack(int capacity, char **data)
 	i = capacity - 1;
 	while (i >= 0)
 	{
-		data_converted = ft_atoi(data[i]);
-		if ((ft_intlen(data_converted) != (int)ft_strlen(data[i]))
-			|| (data_converted == 0 && ft_strncmp(data[i], "0",
-					ft_strlen(data[i]))))
-		{
-			free_stack(stack);
-			return (NULL);
-		}
-		stack->data[capacity - i - 1] = data_converted;
+		// ------ Gestion erreur -------
+		// if ((ft_intlen(data[i]) != (int)ft_strlen(data[i]))
+		// 	|| (data[i] == 0 && ft_strncmp(data[i], "0",
+		// 			ft_strlen(data[i]))))
+		// {
+		// 	free_stack(stack);
+		// 	return (NULL);
+		// }
+		stack->data[capacity - i - 1] = data[i];
 		stack->top++;
 		i--;
 	}

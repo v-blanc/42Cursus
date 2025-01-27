@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:02:50 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/22 01:26:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:17:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_stack
 /* stack.c */
 
 t_stack	*init_stack(int capacity);
-t_stack	*fill_stack(int capacity, char **data);
+t_stack	*fill_stack(int capacity, int *data);
 void	free_stack(t_stack *stack);
 int		is_empty(t_stack *stack);
 
@@ -54,6 +54,7 @@ void	ft_rules(t_stack *stack_a, t_stack *stack_b, char *rule);
 
 /* sort.c */
 
+int		*ft_get_indexes(int number, char **input, int *indexes);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
