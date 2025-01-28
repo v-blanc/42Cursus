@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   rules_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:09:18 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/22 01:26:05 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 20:06:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_swap(t_stack *stack)
 	stack->data[stack->top - 1] = tmp;
 }
 
-void	ft_push(t_stack *first_stack, t_stack *second_stack)
+void	ft_push(t_stack *stack_a, t_stack *stack_b)
 {
-	if (second_stack->top == -1)
+	if (stack_b->top == -1)
 		return ;
-	first_stack->data[++first_stack->top] = second_stack->data[second_stack->top--];
+	stack_a->data[++stack_a->top] = stack_b->data[stack_b->top--];
 }
 
 void	ft_rotate(t_stack *stack)
@@ -64,26 +64,4 @@ void	ft_reverse_rotate(t_stack *stack)
 		i++;
 	}
 	stack->data[stack->top] = tmp;
-}
-
-int	check_stack_validity(t_stack *stack)
-{
-	int	i;
-	int	top;
-	int	value;
-
-	top = stack->top;
-	i = 0;
-	while (i <= top)
-	{
-		value = stack->data[i];
-		i++;
-		while (i <= top)
-		{
-			if (stack->data[i] == value)
-				return (0);
-			i++;
-		}
-	}
-	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:01:00 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 16:57:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 20:05:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack	*init_stack(int capacity)
 {
 	t_stack	*stack;
 
-	stack = ft_calloc(sizeof(t_stack), 1);
+	stack = ft_calloc(1, sizeof(t_stack));
 	if (!stack)
 		return (NULL);
 	stack->data = ft_calloc(capacity, sizeof(int));
@@ -26,33 +26,6 @@ t_stack	*init_stack(int capacity)
 	stack->top = -1;
 	return (stack);
 }
-
-// t_stack	*fill_stack(int capacity, char **data)
-// {
-// 	int		i;
-// 	int		data_converted;
-// 	t_stack	*stack;
-
-// 	stack = init_stack(capacity);
-// 	if (!stack)
-// 		return (NULL);
-// 	i = capacity - 1;
-// 	while (i >= 0)
-// 	{
-// 		data_converted = ft_atoi(data[i]);
-// 		if ((ft_intlen(data_converted) != (int)ft_strlen(data[i]))
-// 			|| (data_converted == 0 && ft_strncmp(data[i], "0",
-// 					ft_strlen(data[i]))))
-// 		{
-// 			free_stack(stack);
-// 			return (NULL);
-// 		}
-// 		stack->data[capacity - i - 1] = data_converted;
-// 		stack->top++;
-// 		i--;
-// 	}
-// 	return (stack);
-// }
 
 t_stack	*fill_stack(int capacity, int *data)
 {
@@ -70,6 +43,28 @@ t_stack	*fill_stack(int capacity, int *data)
 		i--;
 	}
 	return (stack);
+}
+
+int	check_stack_validity(t_stack *stack)
+{
+	int	i;
+	int	top;
+	int	value;
+
+	top = stack->top;
+	i = 0;
+	while (i <= top)
+	{
+		value = stack->data[i];
+		i++;
+		while (i <= top)
+		{
+			if (stack->data[i] == value)
+				return (0);
+			i++;
+		}
+	}
+	return (1);
 }
 
 void	free_stack(t_stack *stack)

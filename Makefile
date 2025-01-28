@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/01/27 16:45:28 by vblanc           ###   ########.fr        #
+#    Updated: 2025/01/28 19:12:50 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS := -Wall -Werror -Wextra
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c rules.c sort.c stack_utils.c stack.c
+SRCS := main.c rules_utils.c rules.c sort.c stack.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
