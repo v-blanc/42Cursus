@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:01:00 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/27 17:40:38 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 16:57:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_stack	*init_stack(int capacity)
 
 t_stack	*fill_stack(int capacity, int *data)
 {
-	int		i;
 	t_stack	*stack;
+	int		i;
 
 	stack = init_stack(capacity);
 	if (!stack)
@@ -65,14 +65,6 @@ t_stack	*fill_stack(int capacity, int *data)
 	i = capacity - 1;
 	while (i >= 0)
 	{
-		// ------ Gestion erreur -------
-		// if ((ft_intlen(data[i]) != (int)ft_strlen(data[i]))
-		// 	|| (data[i] == 0 && ft_strncmp(data[i], "0",
-		// 			ft_strlen(data[i]))))
-		// {
-		// 	free_stack(stack);
-		// 	return (NULL);
-		// }
 		stack->data[capacity - i - 1] = data[i];
 		stack->top++;
 		i--;

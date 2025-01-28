@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:17:12 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/27 18:34:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 17:35:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,27 +146,49 @@
 // 	}
 // }
 
-int	*ft_get_indexes(int number, char **input, int *indexes)
+int ft_input_len(char **input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+		i++;
+	return (i);
+}
+
+int	*ft_get_indexes(int *number, char **input)
 {
 	int	*values;
+	int	*indexes;
 	int	i;
 	int	j;
 
-	values = malloc(sizeof(int) * number);
+	if (*number == 2)
+	{
+		input = ft_split(input[0], ' ');
+		if (!input)
+			return (NULL);
+	}
+	values = ft_calloc(ft_input_len(input), sizeof(int));
 	if (!values)
 		return (NULL);
-	i = 0;
-	while (i < number)
-	{
+	i = -1;
+	while (input[++i])
 		values[i] = ft_atoi(input[i]);
-		i++;
+	indexes = malloc(sizeof(int) * i);
+	if (!indexes)
+	{
+		if (*number == 2)
+			free(input);
+		free(values);
+		return (0);
 	}
 	i = 0;
-	while (i < number)
+	while (input[i])
 	{
 		j = 0;
 		indexes[i] = 0;
-		while (j < number)
+		while (input[j])
 		{
 			if (values[i] > values[j])
 				indexes[i]++;
@@ -174,7 +196,10 @@ int	*ft_get_indexes(int number, char **input, int *indexes)
 		}
 		i++;
 	}
+	if (*number == 2)
+		free(input);
 	free(values);
+	*number = i + 1;
 	return (indexes);
 }
 
@@ -213,11 +238,12 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 		while (1)
 		{
 			// printf("i: %d\n", i);
-			// printf("stack_a->data[%d]: %d\n", stack_a->top, stack_a->data[stack_a->top]);
+			// printf("stack_a->data[%d]: %d\n", stack_a->top,
+			// stack_a->data[stack_a->top]);
 			// print_stacks(stack_a, stack_b);
 			// printf("\n------------------------------\n\n");
 			if (stack_a->data[stack_a->top] == i)
-				break;
+				break ;
 			ft_rules(stack_a, stack_b, "ra");
 		}
 		ft_rules(stack_a, stack_b, "pb");
