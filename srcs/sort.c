@@ -6,85 +6,46 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:17:12 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 20:04:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 22:06:20 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	ft_input_len(char **input)
+static int	ft_get_max(int number)
 {
-	int	i;
+	int	max;
 
-	i = 0;
-	while (input[i])
-		i++;
-	return (i);
-}
-
-int	*ft_get_indexes(int *number, char **input)
-{
-	int	*values;
-	int	*indexes;
-	int	i;
-	int	j;
-
-	if (*number == 2)
+	max = 0;
+	while (number > 0)
 	{
-		input = ft_split(input[0], ' ');
-		if (!input)
-			return (NULL);
+		max++;
+		number /= 2;
 	}
-	values = ft_calloc(ft_input_len(input), sizeof(int));
-	if (!values)
-		return (NULL);
-	i = -1;
-	while (input[++i])
-		values[i] = ft_atoi(input[i]);
-	indexes = malloc(sizeof(int) * i);
-	if (!indexes)
-	{
-		if (*number == 2)
-			free(input);
-		free(values);
-		return (0);
-	}
-	i = 0;
-	while (input[i])
-	{
-		j = 0;
-		indexes[i] = 0;
-		while (input[j])
-		{
-			if (values[i] > values[j])
-				indexes[i]++;
-			j++;
-		}
-		i++;
-	}
-	if (*number == 2)
-		free(input);
-	free(values);
-	*number = i + 1;
-	return (indexes);
+	return (max);
 }
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
+	int	bit;
+	int	max;
 	int	i;
 
-	i = 0;
-	while (!is_empty(stack_a))
+	max = ft_get_max(stack_a->top);
+	bit = 0;
+	while (bit < max)
 	{
-		while (1)
+		i = 0;
+		while (i < stack_a->capacity)
 		{
-			if (stack_a->data[stack_a->top] == i)
-				break ;
-			ft_rules(stack_a, stack_b, "ra");
+			if (stack_a->data[stack_a->top] >> bit & 1)
+				ft_rules(stack_a, stack_b, "ra");
+			else
+				ft_rules(stack_a, stack_b, "pb");
+			i++;
 		}
-		ft_rules(stack_a, stack_b, "pb");
-		i++;
+		while (!is_empty(stack_b))
+			ft_rules(stack_a, stack_b, "pa");
+		bit++;
 	}
-	while (!is_empty(stack_b))
-		ft_rules(stack_a, stack_b, "pa");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:02:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 17:28:53 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 22:37:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ t_stack	*fill_stack(int capacity, int *data);
 void	free_stack(t_stack *stack);
 int		is_empty(t_stack *stack);
 
-/* stack_utils.c */
+/* rules_utils.c */
 
 void	ft_swap(t_stack *stack);
 void	ft_push(t_stack *first_stack, t_stack *second_stack);
 void	ft_rotate(t_stack *stack);
 void	ft_reverse_rotate(t_stack *stack);
-int		check_stack_validity(t_stack *stack);
 
 /* rules.c */
 
@@ -52,11 +51,12 @@ void	ft_rules_rotate(t_stack *stack_a, t_stack *stack_b, char *rule);
 void	ft_rules_reverse_rotate(t_stack *stack_a, t_stack *stack_b, char *rule);
 void	ft_rules(t_stack *stack_a, t_stack *stack_b, char *rule);
 
+/* parse.c */
+
+void	ft_get_indexes(int *number, char **input, int **indexes);
+
 /* sort.c */
 
-int		*ft_get_indexes(int *number, char **input);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
-
-void	print_stacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif

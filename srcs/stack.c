@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:01:00 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 20:05:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 22:05:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,6 @@ t_stack	*fill_stack(int capacity, int *data)
 		i--;
 	}
 	return (stack);
-}
-
-int	check_stack_validity(t_stack *stack)
-{
-	int	i;
-	int	top;
-	int	value;
-
-	top = stack->top;
-	i = 0;
-	while (i <= top)
-	{
-		value = stack->data[i];
-		i++;
-		while (i <= top)
-		{
-			if (stack->data[i] == value)
-				return (0);
-			i++;
-		}
-	}
-	return (1);
 }
 
 void	free_stack(t_stack *stack)
