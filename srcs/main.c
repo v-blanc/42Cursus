@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:02:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/29 10:39:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/29 12:43:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	ft_init_stacks(&stack_a, &stack_b, argc, indexes);
 	// TODO: manual sort for 3,4,5 elements
-	ft_sort(stack_a, stack_b);
+	if (argc <= 5)
+		ft_manual_sort(stack_a, stack_b);
+	else
+		ft_sort(stack_a, stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
