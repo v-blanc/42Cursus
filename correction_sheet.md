@@ -99,6 +99,17 @@ $ sudo addgroup evaluating
 $ sudo adduser name_user evaluating
 ```
 
+#### Password policy
+
+```bash
+$ nano /etc/login.defs
+...
+PASS_MAX_DAYS 30
+PASS_MIN_DAYS 2
+...
+$ nano /etc/pam.d/common-password
+```
+
 #### Check hostname
 
 ```bash
