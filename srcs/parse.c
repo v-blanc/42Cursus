@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 22:16:22 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 22:39:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/28 22:41:47 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_check_doubles(char **input, int *values, int *number)
 				write(2, "Error\n", 6);
 				exit(1);
 			}
-            j++;
+			j++;
 		}
 		i++;
 	}

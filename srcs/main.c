@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:02:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 22:19:55 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/29 10:39:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,14 @@ static void	ft_init_stacks(t_stack **stack_a, t_stack **stack_b, int argc,
 	free(ind);
 }
 
-
-
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	int		*indexes;
 
-	// TODO: handle stdin (p. 9)
-	// if (argc < 2)
-	// {
-	// 	write(2, "Error\n", 6);
-	// 	return (1);
-	// }
+	if (argc < 2)
+		return (1);
 	ft_get_indexes(&argc, &argv[1], &indexes);
 	if (!indexes)
 	{
@@ -56,6 +50,7 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	ft_init_stacks(&stack_a, &stack_b, argc, indexes);
+	// TODO: manual sort for 3,4,5 elements
 	ft_sort(stack_a, stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
