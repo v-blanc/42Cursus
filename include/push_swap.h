@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:02:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/29 12:43:03 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/01/30 14:46:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_rules(t_stack *stack_a, t_stack *stack_b, char *rule);
 
 void	ft_get_indexes(int *number, char **input, int **indexes);
 
-/* sort.c */
+/* sort_manual.c and sort.c */
 
 void	ft_manual_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
