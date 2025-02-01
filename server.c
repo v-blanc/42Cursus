@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:21:54 by vblanc            #+#    #+#             */
-/*   Updated: 2024/12/04 17:47:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/01 17:49:35 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ void	init_data_server(void)
 
 void	print_msg_received(siginfo_t *siginfo)
 {
+	char	*msg;
+
+	msg = ft_itoa(siginfo->si_pid);
 	write(1, "Message received from PID ", 27);
-	write(1, ft_itoa(siginfo->si_pid), ft_intlen(siginfo->si_pid));
+	write(1, msg, ft_intlen(siginfo->si_pid));
 	write(1, "\n  '", 4);
 	write(1, g_data_serv.msg, ft_strlen(g_data_serv.msg));
 	write(1, "'\n", 2);
+	free(msg);
 }
 
 void	sig_handler(int sig, siginfo_t *siginfo, void *context)
@@ -69,14 +73,16 @@ int	main(void)
 {
 	pid_t				pid;
 	struct sigaction	sa;
+	char				*pid_str;
 
 	init_data_server();
 	pid = getpid();
+	pid_str = ft_itoa(pid);
 	write(1, "PID server: ", 13);
-	write(1, ft_itoa(pid), ft_intlen(pid));
+	write(1, pid_str, ft_intlen(pid));
 	write(1, "\n", 1);
+	free(pid_str);
 	set_signal_handler(sa);
-	write(1, "Waiting for signal from client...\n", 34);
 	while (1)
 		pause();
 	return (0);

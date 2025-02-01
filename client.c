@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:28:13 by vblanc            #+#    #+#             */
-/*   Updated: 2024/12/04 17:31:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/01 17:50:58 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void	test_pid_validity(char *argv, pid_t *pid_server)
 	(*pid_server) = atoi(argv);
 	if (kill(*pid_server, 0))
 	{
-		write(1, "Server PID: error\n", 18);
+		write(1, "Server PID: ", 13);
+		write(1, argv, ft_strlen(argv));
+		write(1, " (invalid)\n", 12);
 		exit(1);
 	}
-	write(1, "Server PID: valid\n", 18);
+	write(1, "Server PID: ", 13);
+	write(1, argv, ft_strlen(argv));
+	write(1, " (valid)\n", 10);
 }
 
 /* Send SIGUSR1 (= 0) if bit is 0 and SIGUSR2 (= 1) if bit is 1 */
@@ -66,6 +70,7 @@ void	send_msg(pid_t pid_server, char *message)
 int	main(int argc, char **argv)
 {
 	pid_t	pid_server;
+	char	*pid_str;
 	char	*message;
 
 	if (argc != 3)
@@ -75,15 +80,15 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	test_pid_validity(argv[1], &pid_server);
+	pid_str = ft_itoa(getpid());
 	write(1, "Client PID: ", 13);
-	write(1, ft_itoa(getpid()), ft_intlen(getpid()));
+	write(1, pid_str, ft_intlen(getpid()));
 	write(1, "\n", 1);
+	free(pid_str);
 	message = argv[2];
-	write(1, "Send message '", 15);
+	write(1, "Sending message '", 18);
 	write(1, message, ft_strlen(message));
-	write(1, "' to PID: ", 11);
-	write(1, ft_itoa(pid_server), ft_intlen(pid_server));
-	write(1, "\n", 1);
+	write(1, "'...\n", 5);
 	send_msg(pid_server, message);
 	return (0);
 }
