@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:12:33 by vblanc            #+#    #+#             */
-/*   Updated: 2024/11/29 12:23:57 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/01 18:04:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../includes/minitalk.h"
 
 size_t	ft_strlen(const char *s)
 {
