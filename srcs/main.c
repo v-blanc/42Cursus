@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 19:43:47 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 19:55:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,12 @@ int	main(void)
 	img.img = mlx_new_image(mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length,
 			&img.endian);
-	ft_printf_fractal(img);
+	// ft_printf_fractal(img);
+	for (int i = 0; i < 100; i++)
+	{
+		for (int j = 0; j < 100; j++)
+			my_mlx_pixel_put(&img, j, i, 0x00FF00);
+	}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
