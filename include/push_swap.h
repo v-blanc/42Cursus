@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:02:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 11:28:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:26:02 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,10 @@ void	ft_get_indexes(int *number, char **input, int **indexes);
 
 void	ft_manual_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
+
+/* utils.c */
+
+int		ft_input_len(char **input);
+void	ft_free_split(char **input);
 
 #endif

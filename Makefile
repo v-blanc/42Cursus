@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/01/30 14:45:44 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/04 13:28:20 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS := -Wall -Werror -Wextra
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c parse.c rules_utils.c rules.c sort_manual.c sort.c stack.c
+SRCS := main.c parse.c rules_utils.c rules.c sort_manual.c sort.c stack.c utils.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 

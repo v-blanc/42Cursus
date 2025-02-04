@@ -6,21 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 22:16:22 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 12:02:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:27:58 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-static int	ft_input_len(char **input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-		i++;
-	return (i);
-}
 
 static void	ft_check_doubles(char **input, int *values, int *number)
 {
@@ -38,7 +28,7 @@ static void	ft_check_doubles(char **input, int *values, int *number)
 			if (values[i] == values[j])
 			{
 				if (*number == 2)
-					free(input);
+					ft_free_split(input);
 				free(values);
 				write(2, "Error\n", 6);
 				exit(1);
@@ -64,7 +54,7 @@ static void	ft_check_input(char **input, int *values, int *number)
 				|| ft_intlen(values[i]) != (int)ft_strlen(input[i]))
 			{
 				if (*number == 2)
-					free(input);
+					ft_free_split(input);
 				free(values);
 				write(2, "Error\n", 6);
 				exit(1);
@@ -86,7 +76,7 @@ static void	sub_get_indexes(int **indexes, char **input, int *values,
 	if (!*indexes)
 	{
 		if (number == 2)
-			free(input);
+			ft_free_split(input);
 		free(values);
 		exit(1);
 	}
@@ -120,7 +110,7 @@ void	ft_get_indexes(int *number, char **input, int **indexes)
 	if (!values)
 	{
 		if (*number == 2)
-			free(input);
+			ft_free_split(input);
 		exit(1);
 	}
 	i = -1;
@@ -129,7 +119,7 @@ void	ft_get_indexes(int *number, char **input, int **indexes)
 	ft_check_input(input, values, number);
 	sub_get_indexes(indexes, input, values, *number);
 	if (*number == 2)
-		free(input);
+		ft_free_split(input);
 	free(values);
 	*number = i + 1;
 }

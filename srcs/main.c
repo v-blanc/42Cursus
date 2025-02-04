@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:02:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 12:19:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:38:57 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,34 @@ static int	ft_is_sorted(t_stack *stack)
 	return (1);
 }
 
-int	ft_check_one_arg(int argc, char **argv)
+#include <stdio.h>
+
+int	ft_check_arg(int argc, char **argv)
 {
 	char	*number;
+	char	**input;
+	int		flag;
 
-	if (argc != 2)
+	if (argc > 2)
 		return (0);
-	number = ft_itoa(ft_atoi(argv[1]));
-	if (ft_strncmp(argv[1], number, ft_strlen(number)) == 0)
-	{
-		free(number);
-		return (1);
-	}
-	else
+	input = ft_split(argv[1], ' ');
+	if (!input)
 	{
 		write(2, "Error\n", 6);
-		free(number);
 		exit(1);
 	}
+	if (ft_input_len(input) == 1)
+	{
+		number = ft_itoa(ft_atoi(argv[1]));
+		flag = ft_strncmp(input[0], number, ft_strlen(input[0]));
+		free(number);
+		if (!flag)
+		{
+			ft_free_split(input);
+			return (1);
+		}
+	}
+	ft_free_split(input);
 	return (0);
 }
 
@@ -74,7 +84,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 	int		*indexes;
 
-	if (argc < 2 || ft_check_one_arg(argc, argv))
+	if (argc < 2 || ft_check_arg(argc, argv))
 		return (0);
 	ft_get_indexes(&argc, &argv[1], &indexes);
 	if (!indexes)
