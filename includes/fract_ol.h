@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 19:54:55 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 00:06:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 /* Libraries */
 
-# include "../includes/complex.h"
 # include "../minilibx-linux/mlx.h"
 # include <errno.h>
 # include <fcntl.h>
@@ -27,8 +26,8 @@
 
 /* Macros */
 
-# define WINDOW_HEIGHT 1920
-# define WINDOW_WIDTH 1080
+# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 480
 
 /* .c */
 

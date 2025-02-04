@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/04 19:31:40 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/04 23:03:28 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MLX := ./minilibx-linux/libmlx.a
 NAME := fractol
 RM := rm -rf
 
-#TODO: handle minilibx compilation
+#TODO: handle minilibx compilation ?
 
 all: libft $(NAME)
 
@@ -40,7 +40,7 @@ mlx:
 	@make -C minilibx-linux
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(MLXFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR)
