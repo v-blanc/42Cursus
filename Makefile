@@ -3,33 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/01 17:19:50 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/04 19:31:40 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
-# MLXFLAGS := -lXext -lX11 -lm
-MLXFLAGS :=
+MLXFLAGS := -lXext -lX11 -lm
 
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c
+SRCS := complex.c main.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 INCLUDES := -I./includes -I./libft -I./minilibx-linux
 
 LIBFT := ./libft/libft.a
-# MLX := ./minilibx-linux/libmlx.a
-MLX :=
+MLX := ./minilibx-linux/libmlx.a
 
 NAME := fractol
 RM := rm -rf
+
+#TODO: handle minilibx compilation
 
 all: libft $(NAME)
 
