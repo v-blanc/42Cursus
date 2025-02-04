@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:02:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 13:38:57 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:42:08 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static int	ft_is_sorted(t_stack *stack)
 	}
 	return (1);
 }
-
-#include <stdio.h>
 
 int	ft_check_arg(int argc, char **argv)
 {
