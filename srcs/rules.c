@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:58:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/27 18:31:08 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 11:23:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	ft_rules_swap(t_stack *stack_a, t_stack *stack_b, char *rule)
 {
 	if (ft_strncmp(rule, "sa", 2) == 0)
 	{
-		printf("sa\n");
+		write(1, "sa\n", 3);
 		ft_swap(stack_a);
 	}
 	else if (ft_strncmp(rule, "sb", 2) == 0)
 	{
-		printf("sb\n");
+		write(1, "sb\n", 3);
 		ft_swap(stack_b);
 	}
 	else if (ft_strncmp(rule, "ss", 2) == 0)
 	{
-		printf("ss\n");
+		write(1, "ss\n", 3);
 		ft_swap(stack_a);
 		ft_swap(stack_b);
 	}
@@ -36,12 +36,12 @@ void	ft_rules_push(t_stack *stack_a, t_stack *stack_b, char *rule)
 {
 	if (ft_strncmp(rule, "pa", 2) == 0)
 	{
-		printf("pa\n");
+		write(1, "pa\n", 3);
 		ft_push(stack_a, stack_b);
 	}
 	else if (ft_strncmp(rule, "pb", 2) == 0)
 	{
-		printf("pb\n");
+		write(1, "sp\n", 3);
 		ft_push(stack_b, stack_a);
 	}
 }
@@ -50,17 +50,17 @@ void	ft_rules_rotate(t_stack *stack_a, t_stack *stack_b, char *rule)
 {
 	if (ft_strncmp(rule, "ra", 2) == 0)
 	{
-		printf("ra\n");
+		write(1, "ra\n", 3);
 		ft_rotate(stack_a);
 	}
 	else if (ft_strncmp(rule, "rb", 2) == 0)
 	{
-		printf("rb\n");
+		write(1, "ra\n", 3);
 		ft_rotate(stack_b);
 	}
 	else if (ft_strncmp(rule, "rr", 2) == 0)
 	{
-		printf("rr\n");
+		write(1, "rr\n", 3);
 		ft_rotate(stack_a);
 		ft_rotate(stack_b);
 	}
@@ -70,17 +70,17 @@ void	ft_rules_reverse_rotate(t_stack *stack_a, t_stack *stack_b, char *rule)
 {
 	if (ft_strncmp(rule, "rra", 3) == 0)
 	{
-		printf("rra\n");
+		write(1, "rra\n", 4);
 		ft_reverse_rotate(stack_a);
 	}
 	else if (ft_strncmp(rule, "rrb", 3) == 0)
 	{
-		printf("rrb\n");
+		write(1, "rrb\n", 4);
 		ft_reverse_rotate(stack_b);
 	}
 	else if (ft_strncmp(rule, "rrr", 3) == 0)
 	{
-		printf("rrr\n");
+		write(1, "rrr\n", 4);
 		ft_reverse_rotate(stack_a);
 		ft_reverse_rotate(stack_b);
 	}

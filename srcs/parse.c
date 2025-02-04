@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 22:16:22 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 22:41:47 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 12:02:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ static void	ft_check_doubles(char **input, int *values, int *number)
 {
 	int	i;
 	int	j;
+	int	len;
 
+	len = ft_input_len(input);
 	i = 0;
-	while (values[i])
+	while (i < len)
 	{
 		j = i + 1;
-		while (values[j])
+		while (j < len)
 		{
 			if (values[i] == values[j])
 			{
 				if (*number == 2)
-					free(values);
-				free(input);
+					free(input);
+				free(values);
 				write(2, "Error\n", 6);
 				exit(1);
 			}

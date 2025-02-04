@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:02:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/31 15:37:22 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/04 12:19:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_is_sorted(t_stack *stack)
 	int	i;
 
 	i = 0;
-	while (i < stack->capacity)
+	while (i < stack->capacity - 1)
 	{
 		if (stack->data[i] < stack->data[i + 1])
 			return (0);
@@ -47,14 +47,35 @@ static int	ft_is_sorted(t_stack *stack)
 	return (1);
 }
 
+int	ft_check_one_arg(int argc, char **argv)
+{
+	char	*number;
+
+	if (argc != 2)
+		return (0);
+	number = ft_itoa(ft_atoi(argv[1]));
+	if (ft_strncmp(argv[1], number, ft_strlen(number)) == 0)
+	{
+		free(number);
+		return (1);
+	}
+	else
+	{
+		write(2, "Error\n", 6);
+		free(number);
+		exit(1);
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	int		*indexes;
 
-	if (argc < 2)
-		return (1);
+	if (argc < 2 || ft_check_one_arg(argc, argv))
+		return (0);
 	ft_get_indexes(&argc, &argv[1], &indexes);
 	if (!indexes)
 	{
