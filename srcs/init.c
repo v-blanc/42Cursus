@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:12:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 08:23:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 13:58:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,21 @@ void	init_fractal_window(t_fractal *fractal)
 		fractal->zoom = 200;
 		fractal->offset_x = -2.35;
 		fractal->offset_y = -1.2;
-		fractal->max_iter = 100;
+		fractal->max_iter = 50;
 	}
 	else if (fractal->name == 'j')
 	{
 		fractal->zoom = 180;
 		fractal->offset_x = -1.95;
 		fractal->offset_y = -1.3;
-		fractal->max_iter = 100;
+		fractal->max_iter = 50;
 	}
 	else if (fractal->name == 't')
 	{
 		fractal->zoom = 150;
 		fractal->offset_x = -2.6;
 		fractal->offset_y = -1.6;
-		fractal->max_iter = 100;
+		fractal->max_iter = 50;
 	}
+	fractal->inv_zoom = 1.0 / fractal->zoom;
 }

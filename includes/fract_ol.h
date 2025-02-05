@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 08:28:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 14:23:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
 
 # include "../includes/libft/libft.h"
 # include "../includes/minilibx-linux/mlx.h"
-# include <time.h>   // TODO: remove
+# include <math.h>
+# include <stdio.h> // TODO: remove
+# include <time.h>  // TODO: remove
 # include <unistd.h>
 
 /* Macros */
 
-# define WINDOW_HEIGHT 720
-# define WINDOW_WIDTH 480
+# define WINDOW_HEIGHT 1920
+# define WINDOW_WIDTH 1080
+// # define WINDOW_HEIGHT 720
+// # define WINDOW_WIDTH 480
 
 # define ESC_MAC 53
 # define ESC_LINUX 65307
@@ -59,6 +63,7 @@ typedef struct s_fractal
 	double	cx;
 	double	cy;
 	double	zoom;
+	double	inv_zoom;
 	double	offset_x;
 	double	offset_y;
 	int		max_iter;

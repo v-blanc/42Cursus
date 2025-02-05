@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:23:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 08:22:50 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 14:17:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color)
 	int	*dst;
 
 	dst = fractal->addr;
-	dst[(y * fractal->line_length / 4) + x] = color;
+	dst[(y * fractal->line_length >> 2) + x] = color;
 }
 
 static void	init_fractal_values(t_fractal *fractal, int x, int y)
@@ -26,20 +26,20 @@ static void	init_fractal_values(t_fractal *fractal, int x, int y)
 	{
 		fractal->zx = 0.0;
 		fractal->zy = 0.0;
-		fractal->cx = (x / fractal->zoom) + fractal->offset_x;
-		fractal->cy = (y / fractal->zoom) + fractal->offset_y;
+		fractal->cx = (x * fractal->inv_zoom) + fractal->offset_x;
+		fractal->cy = (y * fractal->inv_zoom) + fractal->offset_y;
 	}
 	else if (fractal->name == 'j')
 	{
-		fractal->zx = (x / fractal->zoom) + fractal->offset_x;
-		fractal->zy = (y / fractal->zoom) + fractal->offset_y;
+		fractal->zx = (x * fractal->inv_zoom) + fractal->offset_x;
+		fractal->zy = (y * fractal->inv_zoom) + fractal->offset_y;
 	}
 	else if (fractal->name == 't')
 	{
 		fractal->zx = 0.0;
 		fractal->zy = 0.0;
-		fractal->cx = (x / fractal->zoom) + fractal->offset_x;
-		fractal->cy = (y / fractal->zoom) + fractal->offset_y;
+		fractal->cx = (x * fractal->inv_zoom) + fractal->offset_x;
+		fractal->cy = (y * fractal->inv_zoom) + fractal->offset_y;
 	}
 }
 
@@ -78,15 +78,18 @@ static void	sub_draw_fractal(t_fractal *fractal, int x, int y)
 	if (i == fractal->max_iter)
 		my_mlx_pixel_put(fractal, x, y, 0x000000);
 	else
-		my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * (i % 16));
+		my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * i);
+	// my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * (i % 16));
 }
 
 void	draw_fractal(t_fractal *fractal)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	clock_t	start;
+	clock_t	end;
 
-	// clock_t start = clock();
+	start = clock();
 	mlx_new_image(fractal->mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
 	x = 0;
 	while (x < WINDOW_HEIGHT)
@@ -100,6 +103,6 @@ void	draw_fractal(t_fractal *fractal)
 		x++;
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, fractal->img, 0, 0);
-	// clock_t end = clock();
-	// printf("Time: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
+	end = clock();
+	printf("Time: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
 }
