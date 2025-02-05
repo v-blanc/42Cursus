@@ -6,97 +6,53 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 00:06:57 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 07:51:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-typedef struct s_data
+static void	check_args(int argc, char **argv)
 {
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}			t_data;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	int	*dst;
-
-	dst = data->addr;
-	dst[(y * data->line_length / 4) + x] = color;
-}
-
-void	ft_temp(t_data img, int x, int y)
-{
-	int		max_iter;
-	int		i;
-	double	x_tmp;
-	double	zx;
-	double	zy;
-	double	cx;
-	double	cy;
-	double	zoom;
-	double	offset_x;
-	double	offset_y;
-
-	zoom = 200;
-	offset_x = -2.3;
-	offset_y = -1.2;
-	zx = 0.0;
-	zy = 0.0;
-	cx = (x / zoom) + offset_x;
-	cy = (y / zoom) + offset_y;
-	max_iter = 50;
-	i = 0;
-	while (i < max_iter)
+	if (argc < 2)
 	{
-		x_tmp = zx * zx - zy * zy + cx;
-		zy = 2 * zx * zy + cy;
-		zx = x_tmp;
-		if (zx * zx + zy * zy > __DBL_MAX__)
-			break ;
-		i++;
+		write(1, "Usage: ./fract-ol [mandelbrot/julia]\n", 38);
+		exit(1);
 	}
-	// printf("x: %d, y: %d, i: %d\n", x, y, i);
-	if (i == max_iter)
-		my_mlx_pixel_put(&img, x, y, 0x000000);
-	else
-		my_mlx_pixel_put(&img, x, y, 0xFCBE11 * i);
-}
-
-void	ft_printf_fractal(t_data img)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WINDOW_HEIGHT)
+	if (ft_strncmp(argv[1], "mandelbrot", ft_strlen(argv[1]))
+		&& (ft_strncmp(argv[1], "julia", ft_strlen(argv[1])) || (argc != 2
+				&& argc != 4)) && (ft_strncmp(argv[1], "tricorn",
+				ft_strlen(argv[1]))))
 	{
-		y = 0;
-		while (y < WINDOW_WIDTH)
-		{
-			ft_temp(img, x, y);
-			y++;
-		}
-		x++;
+		write(1, "Fractal name not valid\n", 23);
+		write(1, "Usage: ./fract-ol [mandelbrot/julia]\n", 38);
+		exit(1);
 	}
 }
 
-int	main(void)
+static void	init_all(t_fractal *fractal, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	init_mlx(fractal);
+	init_fractal_name(fractal, &argv[1]);
+	init_fractal_window(fractal);
+}
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WINDOW_HEIGHT, WINDOW_WIDTH, "fract-ol");
-	img.img = mlx_new_image(mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length,
-			&img.endian);
-	ft_printf_fractal(img);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+static void	set_mlx_hooks(t_fractal *fractal)
+{
+	mlx_key_hook(fractal->mlx_win, hooks_manager, fractal);
+	mlx_mouse_hook(fractal->mlx_win, zoom_manager, fractal);
+	mlx_hook(fractal->mlx_win, 17, 0, exit_manager, fractal);
+}
+
+int	main(int argc, char **argv)
+{
+	t_fractal	*fractal;
+
+	check_args(argc, argv);
+	fractal = malloc(sizeof(t_fractal));
+	init_all(fractal, argv);
+	set_mlx_hooks(fractal);
+	draw_fractal(fractal);
+	mlx_loop(fractal->mlx);
+	return (0);
 }

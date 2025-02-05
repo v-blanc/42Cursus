@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/04 23:03:28 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/05 07:59:28 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ MLXFLAGS := -lXext -lX11 -lm
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := complex.c main.c
+SRCS := draw.c hooks.c init.c main.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-INCLUDES := -I./includes -I./libft -I./minilibx-linux
+INCLUDES := -I./includes
 
-LIBFT := ./libft/libft.a
-MLX := ./minilibx-linux/libmlx.a
+LIBFT := ./includes/libft/libft.a
+MLX := ./includes/minilibx-linux/libmlx.a
 
 NAME := fractol
 RM := rm -rf
@@ -34,10 +34,10 @@ RM := rm -rf
 all: libft $(NAME)
 
 libft:
-	@make -C libft
+	@make -C includes/libft
 
 mlx:
-	@make -C minilibx-linux
+	@make -C includes/minilibx-linux
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
