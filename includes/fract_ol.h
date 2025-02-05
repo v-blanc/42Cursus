@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 07:59:47 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 08:28:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 
 # include "../includes/libft/libft.h"
 # include "../includes/minilibx-linux/mlx.h"
-# include <errno.h>
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h> // TODO: remove
-# include <stdlib.h>
-# include <string.h> // TODO: remove ?
 # include <time.h>   // TODO: remove
 # include <unistd.h>
 

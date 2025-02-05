@@ -6,13 +6,13 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 08:20:40 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 08:23:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-//TODO: change Usage
+// TODO: change Usage
 static void	check_args(int argc, char **argv)
 {
 	if (argc < 2)

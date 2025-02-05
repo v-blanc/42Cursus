@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/05 07:59:28 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/05 08:26:38 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ RM := rm -rf
 
 #TODO: handle minilibx compilation ?
 
-all: libft $(NAME)
+all: libft mlx $(NAME)
 
 libft:
 	@make -C includes/libft
@@ -47,11 +47,13 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@make -C libft clean
+	@make -C includes/libft clean
+	@make -C includes/minilibx-linux clean
 	$(RM) $(OBJDIR)
 
 fclean:
-	@make -C libft fclean
+	@make -C includes/libft fclean
+	@make -C includes/minilibx-linux clean
 	$(RM) $(OBJDIR)
 	$(RM) $(NAME)
 

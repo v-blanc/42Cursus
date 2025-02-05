@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:12:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 08:01:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 08:23:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_fractal_name(t_fractal *fractal, char **input)
 		fractal->name = 'j';
 		if (input[1])
 		{
-			//TODO : create ft_atof in libft
+			// TODO : create ft_atof in libft
 			fractal->cx = atof(input[1]);
 			fractal->cy = atof(input[2]);
 		}

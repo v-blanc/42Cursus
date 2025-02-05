@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:23:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 07:57:45 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 08:22:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static void	sub_draw_fractal(t_fractal *fractal, int x, int y)
 
 	init_fractal_values(fractal, x, y);
 	i = 0;
-	while (i < fractal->max_iter && fractal->zx * fractal->zx + fractal->zy * fractal->zy < 4)
+	while (i < fractal->max_iter && fractal->zx * fractal->zx + fractal->zy
+		* fractal->zy < 4)
 	{
 		calculate_sequence(fractal);
 		i++;
