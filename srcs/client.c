@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:28:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/01 18:03:56 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:59:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-void	test_pid_validity(char *argv, pid_t *pid_server)
+// OK
+static void	test_pid_validity(char *argv, pid_t *pid_server)
 {
 	(*pid_server) = atoi(argv);
 	if (kill(*pid_server, 0))
@@ -27,51 +28,47 @@ void	test_pid_validity(char *argv, pid_t *pid_server)
 	write(1, " (valid)\n", 10);
 }
 
-/* Send SIGUSR1 (= 0) if bit is 0 and SIGUSR2 (= 1) if bit is 1 */
-void	send_bit(pid_t pid_server, int bit)
+// OK
+static void	print_client_msg(char *msg)
 {
-	int	sig_to_send;
+	char	*pid_str;
 
-	if (bit)
-		sig_to_send = SIGUSR2;
-	else
-		sig_to_send = SIGUSR1;
-	if (kill(pid_server, sig_to_send))
-	{
-		write(1, "Error sending message\n", 22);
+	pid_str = ft_itoa(getpid());
+	if (!pid_str)
 		exit(1);
-	}
-	usleep(1000);
+	write(1, "Client PID: ", 13);
+	write(1, pid_str, ft_intlen(getpid()));
+	write(1, "\n", 1);
+	free(pid_str);
+	write(1, "Sending message '", 18);
+	write(1, msg, ft_strlen(msg));
+	write(1, "'...\n", 5);
 }
 
-void	send_char(pid_t pid_server, char c)
+static void	sig_handler(int sig, siginfo_t *siginfo, void *context)
 {
-	int	i;
-
-	i = 0;
-	while (i < 8)
+	(void)sig;
+	(void)context;
+	if (siginfo->si_pid == getpid())
 	{
-		send_bit(pid_server, (c >> i) & 1);
-		i++;
+		write(1, "Message sent!\n", 15);
+		exit(0);
 	}
 }
 
-void	send_msg(pid_t pid_server, char *message)
+static void	set_signal_handler(struct sigaction sa)
 {
-	int	i;
-
-	i = 0;
-	while (message[i])
-		send_char(pid_server, message[i++]);
-	send_char(pid_server, '\0');
-	write(1, "Message sent!\n", 15);
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = sig_handler;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 }
 
 int	main(int argc, char **argv)
 {
-	pid_t	pid_server;
-	char	*pid_str;
-	char	*message;
+	pid_t				pid_server;
+	struct sigaction	sa;
 
 	if (argc != 3)
 	{
@@ -80,15 +77,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	test_pid_validity(argv[1], &pid_server);
-	pid_str = ft_itoa(getpid());
-	write(1, "Client PID: ", 13);
-	write(1, pid_str, ft_intlen(getpid()));
-	write(1, "\n", 1);
-	free(pid_str);
-	message = argv[2];
-	write(1, "Sending message '", 18);
-	write(1, message, ft_strlen(message));
-	write(1, "'...\n", 5);
-	send_msg(pid_server, message);
+	print_client_msg(argv[2]);
+	send_msg(pid_server, argv[2]);
+	sa = (struct sigaction){0};
+	set_signal_handler(sa);
+	while (1)
+		pause();
 	return (0);
 }
