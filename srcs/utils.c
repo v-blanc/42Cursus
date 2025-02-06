@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_info_utils.c                                 :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 06:50:25 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 06:54:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 18:17:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ char	*ft_dtoa_2f(double f)
 	free(tmp_int);
 	free(tmp_float);
 	return (str);
+}
+
+int	blend_colors(int fg_hex, int bg_hex, double alpha)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ((fg_hex >> 16) & 0xFF) * alpha + ((bg_hex >> 16) & 0xFF) * (1 - alpha);
+	g = ((fg_hex >> 8) & 0xFF) * alpha + ((bg_hex >> 8) & 0xFF) * (1 - alpha);
+	b = (fg_hex & 0xFF) * alpha + (bg_hex & 0xFF) * (1 - alpha);
+	return ((r << 16) | (g << 8) | b);
 }

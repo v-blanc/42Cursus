@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:23:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 17:51:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 18:16:58 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	sub_draw_fractal(t_fractal *fractal, int x, int y)
 		my_mlx_pixel_put(fractal, x, y, 0x000000);
 	else
 		my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * (i % 16));
-		
 }
 
 void	draw_fractal(t_fractal *fractal)

@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/06 18:15:01 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/06 18:29:39 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ MLX := ./includes/minilibx-linux/libmlx.a
 NAME := fractol
 RM := rm -rf
 
-# TODO: handle submodule (git submodule init && git submodule update)
 
 all: $(NAME)
 
@@ -40,15 +39,15 @@ mlx:
 	@make -C includes/minilibx-linux;
 
 $(NAME): $(OBJS)
-	if [ expr $(ls includes/libft | wc -l)\
-		|| expr $(ls includes/minilibx-linux | wc -l) ]; then\
-		@git submodule init && git submodule update;\
-	fi
 	@make -C includes/libft;
 	@make -C includes/minilibx-linux;
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@if [ expr $(ls includes/libft | wc -l) ]\
+		|| [ expr $(ls includes/minilibx-linux | wc -l) ]; then\
+		git submodule init && git submodule update;\
+	fi
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
