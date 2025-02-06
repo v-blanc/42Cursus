@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/06 18:29:39 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/06 18:36:42 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,4 +64,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all libft clean fclean re
+.PHONY: all libft mlx clean fclean re
