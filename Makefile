@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/06 08:09:53 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/06 09:41:32 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLXFLAGS := -lXext -lX11 -lm -lpthread
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := draw.c hooks.c init.c main.c print_info.c print_info_utils.c
+SRCS := draw.c hooks.c init.c main.c put_image.c utils.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 

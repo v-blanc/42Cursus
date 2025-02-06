@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 09:18:48 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:30:35 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 static void	print_usage(void)
 {
-	write(1, "Usage: ./fract-ol [mandelbrot/julia/lotus]\n", 38);
+	write(1, "Usage: ./fract-ol [mandelbrot/lotus/julia [cx cy]]\n", 52);
+	write(1, "\nSome julia parameters examples:\n", 34);
+	write(1, "\t./fractol julia 0.75 0\n\t)",27);
 }
 
 static void	check_args(int argc, char **argv)

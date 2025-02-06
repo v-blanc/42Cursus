@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 09:07:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:41:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,12 @@ void				init_mlx(t_fractal *fractal);
 void				init_fractal_name(t_fractal *fractal, char **input);
 void				init_fractal_window(t_fractal *fractal);
 
-/* print_info.c */
+/* put_image.c */
+
+void				put_image(t_fractal *fractal);
+
+/* utils.c */
 
 char				*ft_dtoa_2f(double f);
-void				put_image(t_fractal *fractal);
 
 #endif
