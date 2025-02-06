@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 18:17:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 20:52:31 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@
 
 # include "../includes/libft/libft.h"
 # include "../includes/minilibx-linux/mlx.h"
-# include <math.h>
-# include <pthread.h> // TODO: ?
-# include <stdio.h>   // TODO: remove
-# include <unistd.h>
+# include <pthread.h>
 
 /* Macros */
-
-# define THREADS 8
 
 # define WINDOW_HEIGHT 1920
 # define WINDOW_WIDTH 1080
 // # define WINDOW_HEIGHT 720
 // # define WINDOW_WIDTH 480
+# define THREADS 8
+# define COLOR_NUMBER 5
 
 # define ESC_MAC 53
 # define ESC_LINUX 65307
@@ -53,6 +50,8 @@
 # define W_LINUX 119
 # define R_MAC 15
 # define R_LINUX 114
+# define C_MAC 8
+# define C_LINUX 99
 
 /* Structures */
 
@@ -75,6 +74,8 @@ typedef struct s_fractal
 	double		offset_x;
 	double		offset_y;
 	int			max_iter;
+	int			*colors;
+	int			color_index;
 	int			mthreads_flag;
 }				t_fractal;
 
@@ -108,6 +109,7 @@ int				hooks_manager(int keycode, t_fractal *fractal);
 void			init_mlx(t_fractal *fractal);
 void			init_fractal_name(t_fractal *fractal, char **input);
 void			init_fractal_window(t_fractal *fractal);
+void			init_fractal_colors(t_fractal *fractal);
 
 /* put_image.c */
 
@@ -115,6 +117,7 @@ void			put_image(t_fractal *fractal);
 
 /* utils.c */
 
+double			ft_atof(const char *str);
 char			*ft_dtoa_2f(double f);
 int				blend_colors(int fg_hex, int bg_hex, double alpha);
 

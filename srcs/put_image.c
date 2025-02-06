@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:27:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 18:17:38 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 20:41:13 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void	print_double_info(t_fractal *fractal, char *str, double value,
 	else
 		tmp = ft_dtoa_2f(value);
 	mlx_string_put(fractal->mlx, fractal->mlx_win, 100, pos, 0x000000, str);
-	mlx_string_put(fractal->mlx, fractal->mlx_win, 190, pos, 0x000000, tmp);
+	if (tmp)
+		mlx_string_put(fractal->mlx, fractal->mlx_win, 190, pos, 0x000000, tmp);
 	free(tmp);
 }
 

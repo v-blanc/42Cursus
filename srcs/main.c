@@ -6,14 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 17:53:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 20:41:54 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
-
-// TODO: change Usage
-// TODO: change color
 
 static void	print_usage(void)
 {
@@ -66,6 +63,7 @@ static void	init_all(t_fractal *fractal, char **argv)
 	init_mlx(fractal);
 	init_fractal_name(fractal, &argv[1]);
 	init_fractal_window(fractal);
+	init_fractal_colors(fractal);
 }
 
 static void	set_mlx_hooks(t_fractal *fractal)
@@ -82,7 +80,9 @@ int	main(int argc, char **argv)
 
 	argv_cpy = argv;
 	check_args(argc, argv_cpy);
-	fractal = malloc(sizeof(t_fractal));
+	fractal = ft_calloc(sizeof(t_fractal), 1);
+	if (!fractal)
+		return (1);
 	init_all(fractal, argv);
 	set_mlx_hooks(fractal);
 	draw_fractal(fractal);

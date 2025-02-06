@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:56:36 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 17:34:44 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 19:44:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,35 @@ int	exit_manager(t_fractal *fractal)
 	mlx_destroy_image(fractal->mlx, fractal->img);
 	mlx_destroy_window(fractal->mlx, fractal->mlx_win);
 	mlx_destroy_display(fractal->mlx);
+	free(fractal->mlx);
+	free(fractal->colors);
 	free(fractal);
 	exit(0);
 	return (0);
+}
+
+void	keycode_manager(t_fractal *fractal, int keycode)
+{
+	if (keycode == LEFT_MAC || keycode == LEFT_LINUX)
+		fractal->offset_x -= 50 / fractal->zoom;
+	else if (keycode == RIGHT_MAC || keycode == RIGHT_LINUX)
+		fractal->offset_x += 50 / fractal->zoom;
+	else if (keycode == DOWN_MAC || keycode == DOWN_LINUX)
+		fractal->offset_y += 50 / fractal->zoom;
+	else if (keycode == UP_MAC || keycode == UP_LINUX)
+		fractal->offset_y -= 50 / fractal->zoom;
+	else if (keycode == Q_MAC || keycode == Q_LINUX)
+		fractal->max_iter += 10;
+	else if (keycode == W_MAC || keycode == W_LINUX)
+		fractal->max_iter -= 10;
+	else if (keycode == C_MAC || keycode == C_LINUX)
+	{
+		fractal->color_index++;
+		if (fractal->color_index == COLOR_NUMBER)
+			fractal->color_index = 0;
+	}
+	else if (keycode == R_MAC || keycode == R_LINUX)
+		init_fractal_window(fractal);
 }
 
 int	hooks_manager(int keycode, t_fractal *fractal)
@@ -56,20 +82,7 @@ int	hooks_manager(int keycode, t_fractal *fractal)
 		zoom_manager(DOWN_MOUSE, WINDOW_HEIGHT / 2, WINDOW_WIDTH / 2, fractal);
 	else
 	{
-		if (keycode == LEFT_MAC || keycode == LEFT_LINUX)
-			fractal->offset_x -= 50 / fractal->zoom;
-		else if (keycode == RIGHT_MAC || keycode == RIGHT_LINUX)
-			fractal->offset_x += 50 / fractal->zoom;
-		else if (keycode == DOWN_MAC || keycode == DOWN_LINUX)
-			fractal->offset_y += 50 / fractal->zoom;
-		else if (keycode == UP_MAC || keycode == UP_LINUX)
-			fractal->offset_y -= 50 / fractal->zoom;
-		else if (keycode == Q_MAC || keycode == Q_LINUX)
-			fractal->max_iter += 10;
-		else if (keycode == W_MAC || keycode == W_LINUX)
-			fractal->max_iter -= 10;
-		else if (keycode == R_MAC || keycode == R_LINUX)
-			init_fractal_window(fractal);
+		keycode_manager(fractal, keycode);
 		draw_fractal(fractal);
 	}
 	return (0);

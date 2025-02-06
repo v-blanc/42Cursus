@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:23:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 18:16:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 19:48:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	sub_draw_fractal(t_fractal *fractal, int x, int y)
 	if (i == fractal->max_iter)
 		my_mlx_pixel_put(fractal, x, y, 0x000000);
 	else
-		my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * (i % 16));
+		my_mlx_pixel_put(fractal, x, y, fractal->colors[fractal->color_index]
+			* (i % 16));
 }
 
 void	draw_fractal(t_fractal *fractal)
@@ -71,9 +72,6 @@ void	draw_fractal(t_fractal *fractal)
 	int	x;
 	int	y;
 
-	fractal->img = mlx_new_image(fractal->mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
-	fractal->addr = (int *)mlx_get_data_addr(fractal->img, &fractal->bpp,
-			&fractal->line_length, &fractal->endian);
 	if (fractal->mthreads_flag == 1)
 	{
 		draw_fractal_threads(fractal);
