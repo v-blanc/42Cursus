@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/06 09:41:32 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/06 18:15:01 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLXFLAGS := -lXext -lX11 -lm -lpthread
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := draw.c hooks.c init.c main.c put_image.c utils.c
+SRCS := draw.c draw_multithreads.c hooks.c init.c main.c put_image.c utils.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
@@ -29,17 +29,23 @@ MLX := ./includes/minilibx-linux/libmlx.a
 NAME := fractol
 RM := rm -rf
 
-#TODO: handle minilibx compilation ?
+# TODO: handle submodule (git submodule init && git submodule update)
 
-all: libft mlx $(NAME)
+all: $(NAME)
 
 libft:
-	@make -C includes/libft
+	@make -C includes/libft;
 
 mlx:
-	@make -C includes/minilibx-linux
+	@make -C includes/minilibx-linux;
 
 $(NAME): $(OBJS)
+	if [ expr $(ls includes/libft | wc -l)\
+		|| expr $(ls includes/minilibx-linux | wc -l) ]; then\
+		@git submodule init && git submodule update;\
+	fi
+	@make -C includes/libft;
+	@make -C includes/minilibx-linux;
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

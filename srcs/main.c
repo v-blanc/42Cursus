@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 10:16:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:53:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	print_usage(void)
 {
-	write(1, "Usage: ./fract-ol [mandelbrot/lotus/julia [cx cy]]\n", 52);
+	write(1, "Usage: ./fract-ol [-mt/mandelbrot/lotus/julia [cx cy]/-h]\n", 59);
 	write(1, "________________________________________________________\n", 58);
 	write(1, "\nKeyborad controls:\n", 20);
 	write(1, "\tESC: exit\n\tDirectional arrow: move\n\tMouse: zoom\n", 50);
@@ -37,6 +37,11 @@ static void	check_args(int argc, char **argv)
 		print_usage();
 		exit(1);
 	}
+	if (!ft_strncmp(argv[1], "-mt", ft_strlen(argv[1])))
+	{
+		argv = &argv[1];
+		argc = argc - 1;
+	}
 	if (!ft_strncmp(argv[1], "mandelbrot", ft_strlen(argv[1])))
 		return ;
 	else if (!ft_strncmp(argv[1], "julia", ft_strlen(argv[1])) && (argc == 2
@@ -53,6 +58,11 @@ static void	check_args(int argc, char **argv)
 
 static void	init_all(t_fractal *fractal, char **argv)
 {
+	if (!ft_strncmp(argv[1], "-mt", ft_strlen(argv[1])))
+	{
+		fractal->mthreads_flag = 1;
+		argv = &argv[1];
+	}
 	init_mlx(fractal);
 	init_fractal_name(fractal, &argv[1]);
 	init_fractal_window(fractal);
@@ -67,9 +77,11 @@ static void	set_mlx_hooks(t_fractal *fractal)
 
 int	main(int argc, char **argv)
 {
+	char		**argv_cpy;
 	t_fractal	*fractal;
 
-	check_args(argc, argv);
+	argv_cpy = argv;
+	check_args(argc, argv_cpy);
 	fractal = malloc(sizeof(t_fractal));
 	init_all(fractal, argv);
 	set_mlx_hooks(fractal);

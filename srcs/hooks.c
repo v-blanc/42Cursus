@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:56:36 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 05:42:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:34:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	hooks_manager(int keycode, t_fractal *fractal)
 	else
 	{
 		if (keycode == LEFT_MAC || keycode == LEFT_LINUX)
-			fractal->offset_x -= 20 / fractal->zoom;
+			fractal->offset_x -= 50 / fractal->zoom;
 		else if (keycode == RIGHT_MAC || keycode == RIGHT_LINUX)
-			fractal->offset_x += 20 / fractal->zoom;
+			fractal->offset_x += 50 / fractal->zoom;
 		else if (keycode == DOWN_MAC || keycode == DOWN_LINUX)
-			fractal->offset_y += 20 / fractal->zoom;
+			fractal->offset_y += 50 / fractal->zoom;
 		else if (keycode == UP_MAC || keycode == UP_LINUX)
-			fractal->offset_y -= 20 / fractal->zoom;
+			fractal->offset_y -= 50 / fractal->zoom;
 		else if (keycode == Q_MAC || keycode == Q_LINUX)
 			fractal->max_iter += 10;
 		else if (keycode == W_MAC || keycode == W_LINUX)

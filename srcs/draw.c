@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:23:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 09:56:45 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:51:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-static void	my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color)
+void	my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color)
 {
 	fractal->addr[(y * fractal->line_length >> 2) + x] = color;
 }
 
-static void	init_fractal_values(t_fractal *fractal, int x, int y)
+void	init_fractal_values(t_fractal *fractal, int x, int y)
 {
 	if (fractal->name == 'm')
 	{
@@ -40,7 +40,7 @@ static void	init_fractal_values(t_fractal *fractal, int x, int y)
 	}
 }
 
-static void	sub_draw_fractal(t_fractal *fractal, int x, int y)
+void	sub_draw_fractal(t_fractal *fractal, int x, int y)
 {
 	double	zx_2;
 	double	zy_2;
@@ -63,7 +63,8 @@ static void	sub_draw_fractal(t_fractal *fractal, int x, int y)
 	if (i == fractal->max_iter)
 		my_mlx_pixel_put(fractal, x, y, 0x000000);
 	else
-		my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * i);
+		my_mlx_pixel_put(fractal, x, y, 0xE0E1DD * (i % 16));
+		
 }
 
 void	draw_fractal(t_fractal *fractal)
@@ -74,6 +75,11 @@ void	draw_fractal(t_fractal *fractal)
 	fractal->img = mlx_new_image(fractal->mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
 	fractal->addr = (int *)mlx_get_data_addr(fractal->img, &fractal->bpp,
 			&fractal->line_length, &fractal->endian);
+	if (fractal->mthreads_flag == 1)
+	{
+		draw_fractal_threads(fractal);
+		return ;
+	}
 	x = 0;
 	while (x < WINDOW_HEIGHT)
 	{

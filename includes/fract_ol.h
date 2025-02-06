@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 09:41:53 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 16:47:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,27 @@ typedef struct s_fractal
 	double			offset_x;
 	double			offset_y;
 	int				max_iter;
+	int				mthreads_flag;
 }					t_fractal;
 
-typedef struct s_render_control
+typedef struct s_thread_data
 {
-	pthread_t		render_thread;
-	volatile int	cancel;
-	t_fractal		*fractal;
-}					t_render_control;
+	t_fractal	*fractal;
+	int			start_line;
+	int			end_line;
+}				t_thread_data;
 
 /* draw.c */
 
+void				my_mlx_pixel_put(t_fractal *fractal, int x, int y,
+						int color);
+void				init_fractal_values(t_fractal *fractal, int x, int y);
+void				sub_draw_fractal(t_fractal *fractal, int x, int y);
 void				draw_fractal(t_fractal *fractal);
+
+/* draw_multithreads.c */
+
+void				draw_fractal_threads(t_fractal *fractal);
 
 /* hooks.c */
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_info.c                                       :+:      :+:    :+:   */
+/*   put_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:27:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 09:07:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:45:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	print_border(t_fractal *fractal)
 	while (i < 300)
 	{
 		j = 30;
-		while (j < 180)
+		while (j < 210)
 		{
 			crd = (j * fractal->line_length >> 2) + i;
 			if (j == 30 || j == 60 || j == 90 || j == 120 || j == 150
-				|| j == 179 || i == 80 || i == 299)
+				|| j == 180 || j == 209 || i == 80 || i == 299)
 				fractal->addr[crd] = 0x000000;
 			j++;
 		}
@@ -56,11 +56,11 @@ void	print_rectangle(t_fractal *fractal)
 	while (i < 300)
 	{
 		j = 30;
-		while (j < 180)
+		while (j < 210)
 		{
 			crd = (j * fractal->line_length >> 2) + i;
-			fractal->addr[crd] = blend_colors(0x5f5f5f, fractal->addr[crd],
-					0.6);
+			fractal->addr[crd] = blend_colors(0x7f7f7f, fractal->addr[crd],
+					0.9);
 			j++;
 		}
 		i++;
@@ -84,6 +84,18 @@ static void	print_double_info(t_fractal *fractal, char *str, double value,
 	free(tmp);
 }
 
+static void	print_threads_info(t_fractal *fractal)
+{
+	mlx_string_put(fractal->mlx, fractal->mlx_win, 100, 200, 0x000000,
+		"Multithreading:");
+	if (fractal->mthreads_flag == 0)
+		mlx_string_put(fractal->mlx, fractal->mlx_win, 240, 200, 0x000000,
+			"no");
+	else
+		mlx_string_put(fractal->mlx, fractal->mlx_win, 240, 200, 0x000000,
+			"yes");
+}
+
 void	put_image(t_fractal *fractal)
 {
 	print_rectangle(fractal);
@@ -96,11 +108,12 @@ void	put_image(t_fractal *fractal)
 	else if (fractal->name == 'j')
 		mlx_string_put(fractal->mlx, fractal->mlx_win, 190, 50, 0x000000,
 			"julia");
-	else if (fractal->name == 't')
+	else if (fractal->name == 'l')
 		mlx_string_put(fractal->mlx, fractal->mlx_win, 190, 50, 0x000000,
-			"tricorn");
+			"lotus");
 	print_double_info(fractal, "Max iter:", fractal->max_iter, 80);
 	print_double_info(fractal, "Zoom:", fractal->zoom, 110);
 	print_double_info(fractal, "x offset:", fractal->offset_x, 140);
 	print_double_info(fractal, "y offset:", fractal->offset_y, 170);
+	print_threads_info(fractal);
 }
