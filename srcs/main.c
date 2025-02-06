@@ -6,29 +6,38 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 08:23:24 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:18:48 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
 // TODO: change Usage
+
+static void	print_usage(void)
+{
+	write(1, "Usage: ./fract-ol [mandelbrot/julia/lotus]\n", 38);
+}
+
 static void	check_args(int argc, char **argv)
 {
 	if (argc < 2)
 	{
-		write(1, "Usage: ./fract-ol [mandelbrot/julia]\n", 38);
+		print_usage();
 		exit(1);
 	}
-	if (ft_strncmp(argv[1], "mandelbrot", ft_strlen(argv[1]))
-		&& (ft_strncmp(argv[1], "julia", ft_strlen(argv[1])) || (argc != 2
-				&& argc != 4)) && (ft_strncmp(argv[1], "tricorn",
-				ft_strlen(argv[1]))))
-	{
+	if (!ft_strncmp(argv[1], "mandelbrot", ft_strlen(argv[1])))
+		return ;
+	else if (!ft_strncmp(argv[1], "julia", ft_strlen(argv[1])) && (argc == 2
+			|| argc == 4))
+		return ;
+	else if (!ft_strncmp(argv[1], "lotus", ft_strlen(argv[1])))
+		return ;
+	else if ((ft_strncmp(argv[1], "-h", ft_strlen(argv[1]))
+			&& ft_strncmp(argv[1], "--help", ft_strlen(argv[1]))) || argc != 2)
 		write(1, "Fractal name not valid\n", 23);
-		write(1, "Usage: ./fract-ol [mandelbrot/julia]\n", 38);
-		exit(1);
-	}
+	print_usage();
+	exit(1);
 }
 
 static void	init_all(t_fractal *fractal, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:12:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 13:58:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:05:05 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_mlx(t_fractal *fractal)
 	fractal->mlx_win = mlx_new_window(fractal->mlx, WINDOW_HEIGHT, WINDOW_WIDTH,
 			"fract-ol");
 	fractal->img = mlx_new_image(fractal->mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
-	fractal->addr = mlx_get_data_addr(fractal->img, &fractal->bpp,
+	fractal->addr = (int *)mlx_get_data_addr(fractal->img, &fractal->bpp,
 			&fractal->line_length, &fractal->endian);
 }
 
@@ -41,31 +41,31 @@ void	init_fractal_name(t_fractal *fractal, char **input)
 			fractal->cy = 0.156;
 		}
 	}
-	else if (!ft_strncmp(input[0], "tricorn", ft_strlen(input[0])))
-		fractal->name = 't';
+	else if (!ft_strncmp(input[0], "lotus", ft_strlen(input[0])))
+		fractal->name = 'l';
 }
 
 void	init_fractal_window(t_fractal *fractal)
 {
 	if (fractal->name == 'm')
 	{
-		fractal->zoom = 200;
-		fractal->offset_x = -2.35;
+		fractal->zoom = 430;
+		fractal->offset_x = -2.80;
 		fractal->offset_y = -1.2;
 		fractal->max_iter = 50;
 	}
 	else if (fractal->name == 'j')
 	{
-		fractal->zoom = 180;
-		fractal->offset_x = -1.95;
-		fractal->offset_y = -1.3;
+		fractal->zoom = 560;
+		fractal->offset_x = -1.7;
+		fractal->offset_y = -0.9;
 		fractal->max_iter = 50;
 	}
-	else if (fractal->name == 't')
+	else if (fractal->name == 'l')
 	{
-		fractal->zoom = 150;
-		fractal->offset_x = -2.6;
-		fractal->offset_y = -1.6;
+		fractal->zoom = 370;
+		fractal->offset_x = -2.55;
+		fractal->offset_y = -1.35;
 		fractal->max_iter = 50;
 	}
 	fractal->inv_zoom = 1.0 / fractal->zoom;

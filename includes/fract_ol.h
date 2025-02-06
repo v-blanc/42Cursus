@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 14:23:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:07:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include "../includes/libft/libft.h"
 # include "../includes/minilibx-linux/mlx.h"
 # include <math.h>
-# include <stdio.h> // TODO: remove
-# include <time.h>  // TODO: remove
+# include <pthread.h> // TODO: ?
+# include <stdio.h>   // TODO: remove
 # include <unistd.h>
 
 /* Macros */
+
+# define THREADS 8
 
 # define WINDOW_HEIGHT 1920
 # define WINDOW_WIDTH 1080
@@ -45,45 +47,63 @@
 # define P_LINUX 112
 # define M_MAC 46
 # define M_LINUX 109
+# define Q_MAC 24
+# define Q_LINUX 113
+# define W_MAC 25
+# define W_LINUX 119
+# define R_MAC 15
+# define R_LINUX 114
 
 /* Structures */
 
 typedef struct s_fractal
 {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-	char	name;
-	double	zx;
-	double	zy;
-	double	cx;
-	double	cy;
-	double	zoom;
-	double	inv_zoom;
-	double	offset_x;
-	double	offset_y;
-	int		max_iter;
-}			t_fractal;
+	void			*mlx;
+	void			*mlx_win;
+	void			*img;
+	int				*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	char			name;
+	double			zx;
+	double			zy;
+	double			cx;
+	double			cy;
+	double			zoom;
+	double			inv_zoom;
+	double			offset_x;
+	double			offset_y;
+	int				max_iter;
+}					t_fractal;
+
+typedef struct s_render_control
+{
+	pthread_t		render_thread;
+	volatile int	cancel;
+	t_fractal		*fractal;
+}					t_render_control;
 
 /* draw.c */
 
-void		draw_fractal(t_fractal *fractal);
+void				draw_fractal(t_fractal *fractal);
 
 /* hooks.c */
 
-int			zoom_manager(int keycode, int x_mouse, int y_mouse,
-				t_fractal *fractal);
-int			exit_manager(t_fractal *fractal);
-int			hooks_manager(int keycode, t_fractal *fractal);
+int					zoom_manager(int keycode, int x_mouse, int y_mouse,
+						t_fractal *fractal);
+int					exit_manager(t_fractal *fractal);
+int					hooks_manager(int keycode, t_fractal *fractal);
 
 /* init.c */
 
-void		init_mlx(t_fractal *fractal);
-void		init_fractal_name(t_fractal *fractal, char **input);
-void		init_fractal_window(t_fractal *fractal);
+void				init_mlx(t_fractal *fractal);
+void				init_fractal_name(t_fractal *fractal, char **input);
+void				init_fractal_window(t_fractal *fractal);
+
+/* print_info.c */
+
+char				*ft_dtoa_2f(double f);
+void				put_image(t_fractal *fractal);
 
 #endif
