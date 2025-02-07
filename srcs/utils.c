@@ -6,13 +6,13 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:12:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 12:26:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 15:25:39 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-char	*ft_addloc(char *str, int n)
+char	*ft_addlloc(char *str, int n)
 {
 	char	*addstr;
 

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:24:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 12:27:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 15:25:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_data_server
 
 /* utils.c */
 
-char				*ft_addloc(char *str, int n);
+char				*ft_addlloc(char *str, int n);
 void				send_bit(pid_t pid_dest, int bit);
 void				send_msg(pid_t pid_dest, char *message);
 

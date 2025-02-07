@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:21:54 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/05 12:46:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:56:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	sig_handler(int sig, siginfo_t *siginfo, void *context)
 	{
 		if (g_data_serv.msg_index == BUFFER_SIZE - 1)
 		{
-			g_data_serv.msg = ft_addloc(g_data_serv.msg, BUFFER_SIZE);
+			g_data_serv.msg = ft_addlloc(g_data_serv.msg, BUFFER_SIZE);
 			if (!g_data_serv.msg)
 				exit(1);
 		}
@@ -58,7 +58,8 @@ static void	sig_handler(int sig, siginfo_t *siginfo, void *context)
 			print_msg_received(siginfo);
 			init_data_server();
 			usleep(50);
-			send_bit(siginfo->si_pid, 0);
+			// send_bit(siginfo->si_pid, 0);
+			kill(siginfo->si_pid, SIGUSR1);
 		}
 		g_data_serv.curr_char = 0;
 		g_data_serv.bit_pos = 0;

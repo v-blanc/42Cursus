@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 17:58:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/05 11:40:29 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/07 15:23:01 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,9 @@ $(NAME_CLIENT): $(OBJS_CLIENT) $(OBJS_UTILS)
 	$(CC) $(CFLAGS) $^ $(LIBFT) -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
+	@if [ expr $(ls includes/libft | wc -l) ]; then\
+		git submodule init && git submodule update;\
+	fi
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
