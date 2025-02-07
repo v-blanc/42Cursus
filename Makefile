@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/07 16:14:47 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/07 16:30:14 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make -C libft clean
+	@make -C includes/libft clean
 	$(RM) $(OBJDIR)
 
 fclean:
