@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:58:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 12:57:14 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:11:52 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../includes/push_swap.h"
 
 void	ft_rules_swap(t_stack *stack_a, t_stack *stack_b, char *rule)
 {

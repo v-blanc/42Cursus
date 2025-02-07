@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:02:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 13:42:08 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:11:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	ft_init_stacks(t_stack **stack_a, t_stack **stack_b, int argc,
 		int *ind)

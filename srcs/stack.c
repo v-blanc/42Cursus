@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:01:00 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 22:05:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:12:02 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../includes/push_swap.h"
 
 t_stack	*init_stack(int capacity)
 {

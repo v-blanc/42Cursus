@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:09:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/28 20:06:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:11:48 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../includes/push_swap.h"
 
 void	ft_swap(t_stack *stack)
 {

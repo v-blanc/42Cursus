@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort_manual.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:35:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/01/31 15:35:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:11:57 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../includes/push_swap.h"
 
 int	ft_get_min(t_stack *stack)
 {

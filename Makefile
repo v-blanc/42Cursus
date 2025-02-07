@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/21 23:54:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/04 13:28:20 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/07 16:14:47 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS := main.c parse.c rules_utils.c rules.c sort_manual.c sort.c stack.c utils.
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-LIBFT := ./libft/libft.a
+LIBFT := ./includes/libft/libft.a
 
 NAME := push_swap
 RM := rm -rf
@@ -28,13 +28,16 @@ RM := rm -rf
 all: $(NAME)
 
 libft:
-	@make -C libft
+	@make -C includes/libft
 
 $(NAME): $(OBJS)
-	@make -C libft
+	@make -C includes/libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@if [ expr $(ls includes/libft | wc -l) ]; then\
+		git submodule init && git submodule update;\
+	fi
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -43,7 +46,7 @@ clean:
 	$(RM) $(OBJDIR)
 
 fclean:
-	@make -C libft fclean
+	@make -C includes/libft fclean
 	$(RM) $(OBJDIR)
 	$(RM) $(NAME)
 

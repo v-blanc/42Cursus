@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 22:16:22 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 13:27:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:11:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	ft_check_doubles(char **input, int *values, int *number)
 {

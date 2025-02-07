@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:02:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/04 13:26:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:13:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* Libraries */
 
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 
