@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:12:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 20:52:57 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 17:49:19 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_mlx(t_fractal *fractal)
 	fractal->img = mlx_new_image(fractal->mlx, WINDOW_HEIGHT, WINDOW_WIDTH);
 	fractal->addr = (int *)mlx_get_data_addr(fractal->img, &fractal->bpp,
 			&fractal->line_length, &fractal->endian);
-	mlx_do_key_autorepeaton(fractal->mlx);
 }
 
 void	init_fractal_name(t_fractal *fractal, char **input)

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 20:41:54 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/07 17:49:13 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_usage(void)
 {
-	write(1, "Usage: ./fract-ol [-mt/mandelbrot/lotus/julia [cx cy]/-h]\n", 59);
+	write(1, "Usage: ./fract-ol [-mt/-h/mandelbrot/lotus/julia [cx cy]]\n", 59);
 	write(1, "________________________________________________________\n", 58);
 	write(1, "\nKeyborad controls:\n", 20);
 	write(1, "\tESC: exit\n\tDirectional arrow: move\n\tMouse: zoom\n", 50);
