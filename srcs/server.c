@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:21:54 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/07 16:56:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/18 18:15:13 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,26 @@ static void	init_data_server(void)
 	g_data_serv.bit_pos = 0;
 	g_data_serv.curr_char = 0;
 	g_data_serv.msg_index = 0;
+	g_data_serv.msg_len = 0;
 	if (g_data_serv.msg)
 		free(g_data_serv.msg);
-	g_data_serv.msg = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	g_data_serv.msg = NULL;
 }
 
-void	print_msg_received(siginfo_t *siginfo)
+void	resize(t_data_server *data)
 {
-	char	*msg;
+	char	*new_msg;
 
-	msg = ft_itoa(siginfo->si_pid);
-	write(1, "Message received from PID ", 27);
-	write(1, msg, ft_intlen(siginfo->si_pid));
-	write(1, "\n  '", 4);
-	write(1, g_data_serv.msg, ft_strlen(g_data_serv.msg));
-	write(1, "'\n", 2);
-	free(msg);
+	new_msg = ft_calloc(data->msg_len + BUFFER_SIZE, sizeof(char));
+	if (!new_msg)
+	{
+		free(data->msg);
+		exit(1);
+	}
+	ft_memcpy(new_msg, data->msg, data->msg_len);
+	free(data->msg);
+	data->msg = new_msg;
+	data->msg_len += BUFFER_SIZE;
 }
 
 static void	sig_handler(int sig, siginfo_t *siginfo, void *context)
@@ -46,28 +50,29 @@ static void	sig_handler(int sig, siginfo_t *siginfo, void *context)
 	g_data_serv.bit_pos++;
 	if (g_data_serv.bit_pos == 8)
 	{
-		if (g_data_serv.msg_index == BUFFER_SIZE - 1)
-		{
-			g_data_serv.msg = ft_addlloc(g_data_serv.msg, BUFFER_SIZE);
-			if (!g_data_serv.msg)
-				exit(1);
-		}
+		if (g_data_serv.msg_index + 1 >= g_data_serv.msg_len)
+			resize(&g_data_serv);
 		g_data_serv.msg[g_data_serv.msg_index++] = g_data_serv.curr_char;
 		if (g_data_serv.curr_char == '\0')
 		{
-			print_msg_received(siginfo);
+			ft_printf("Message received from PID %d\n", siginfo->si_pid);
+			ft_printf("  '%s'\n", g_data_serv.msg);
 			init_data_server();
-			usleep(50);
-			// send_bit(siginfo->si_pid, 0);
-			kill(siginfo->si_pid, SIGUSR1);
+			if (siginfo->si_pid > 0)
+			{
+				kill(siginfo->si_pid, SIGUSR1);
+			}
 		}
 		g_data_serv.curr_char = 0;
 		g_data_serv.bit_pos = 0;
 	}
 }
 
-static void	set_signal_handler(struct sigaction sa)
+static void	set_signal_handler(void)
 {
+	struct sigaction	sa;
+
+	sa = (struct sigaction){0};
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = sig_handler;
 	sigemptyset(&sa.sa_mask);
@@ -77,19 +82,9 @@ static void	set_signal_handler(struct sigaction sa)
 
 int	main(void)
 {
-	pid_t				pid;
-	struct sigaction	sa;
-	char				*pid_str;
-
+	ft_printf("PID server: %d\n", getpid());
 	init_data_server();
-	pid = getpid();
-	pid_str = ft_itoa(pid);
-	write(1, "PID server: ", 13);
-	write(1, pid_str, ft_intlen(pid));
-	write(1, "\n", 1);
-	free(pid_str);
-	sa = (struct sigaction){0};
-	set_signal_handler(sa);
+	set_signal_handler();
 	while (1)
 		pause();
 	return (0);

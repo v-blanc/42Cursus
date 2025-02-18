@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 17:58:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/07 15:23:01 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/10 15:10:50 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS_SERVER := $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS_SERVER:.c=.o)))
 OBJS_CLIENT := $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS_CLIENT:.c=.o)))
 OBJS_UTILS := $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS_UTILS:.c=.o)))
 
-LIBFT := ./includes/libft/libft.a
+INCLUDES := includes/libft/libft.a includes/ft_printf/libftprintf.a
 
 NAME := minitalk
 NAME_SERVER := server
@@ -35,18 +35,24 @@ all: $(NAME)
 libft:
 	@make -C includes/libft
 
+ft_printf:
+	@make -C includes/ft_printf
+
 $(NAME): $(NAME_SERVER) $(NAME_CLIENT)
 
 $(NAME_SERVER): $(OBJS_SERVER) $(OBJS_UTILS)
 	@make libft
-	$(CC) $(CFLAGS) $^ $(LIBFT) -o $@
+	@make ft_printf
+	$(CC) $(CFLAGS) $^ $(INCLUDES) -o $@
 
 $(NAME_CLIENT): $(OBJS_CLIENT) $(OBJS_UTILS)
 	@make libft
-	$(CC) $(CFLAGS) $^ $(LIBFT) -o $@
+	@make ft_printf
+	$(CC) $(CFLAGS) $^ $(INCLUDES) -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@if [ expr $(ls includes/libft | wc -l) ]; then\
+	@if [ expr $(ls includes/libft | wc -l) ]\
+		|| [ expr $(ls includes/ft_printf | wc -l) ]; then\
 		git submodule init && git submodule update;\
 	fi
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -56,10 +62,12 @@ $(OBJS_DIR):
 
 clean:
 	@make -C includes/libft clean
+	@make -C includes/ft_printf clean
 	$(RM) $(OBJS_DIR)
 
 fclean:
 	@make -C includes/libft fclean
+	@make -C includes/ft_printf fclean
 	$(RM) $(OBJS_DIR)
 	$(RM) $(NAME_SERVER) $(NAME_CLIENT)
 

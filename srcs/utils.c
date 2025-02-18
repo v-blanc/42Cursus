@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:12:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/07 15:25:39 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/18 18:32:01 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-char	*ft_addlloc(char *str, int n)
-{
-	char	*addstr;
-
-	addstr = malloc(sizeof(char) * (n + 1));
-	if (!addstr)
-		return (NULL);
-	return (ft_strjoin(str, addstr));
-}
-
-/* Send SIGUSR1 (= 0) if bit is 0 and SIGUSR2 (= 1) if bit is 1 */
 void	send_bit(pid_t pid_dest, int bit)
 {
 	int	sig_to_send;
@@ -36,7 +25,7 @@ void	send_bit(pid_t pid_dest, int bit)
 		write(1, "Error sending message\n", 22);
 		exit(1);
 	}
-	usleep(50);
+	usleep(500);
 }
 
 void	send_msg(pid_t pid_dest, char *message)
@@ -61,5 +50,4 @@ void	send_msg(pid_t pid_dest, char *message)
 		send_bit(pid_dest, 0);
 		j++;
 	}
-	write(1, "Message sent!\n", 15);
 }
