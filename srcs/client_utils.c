@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   client_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:12:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/18 18:32:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:25:39 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	send_bit(pid_t pid_dest, int bit)
 		sig_to_send = SIGUSR1;
 	if (kill(pid_dest, sig_to_send))
 	{
-		write(1, "Error sending message\n", 22);
+		ft_printf("Error sending message\n");
 		exit(1);
 	}
-	usleep(500);
+	pause();
 }
 
 void	send_msg(pid_t pid_dest, char *message)

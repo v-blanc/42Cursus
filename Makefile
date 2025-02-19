@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 17:58:55 by vblanc            #+#    #+#              #
-#    Updated: 2025/02/10 15:10:50 by vblanc           ###   ########.fr        #
+#    Updated: 2025/02/18 19:05:31 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS := -Wall -Werror -Wextra
 SRCS_DIR := ./srcs
 SRCS_SERVER := $(SRCS_DIR)/server.c
 SRCS_CLIENT := $(SRCS_DIR)/client.c
-SRCS_UTILS := $(SRCS_DIR)/utils.c
+SRCS_UTILS := $(SRCS_DIR)/client_utils.c
 
 OBJS_DIR := ./objs
 OBJS_SERVER := $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS_SERVER:.c=.o)))
