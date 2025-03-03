@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol.h                                         :+:      :+:    :+:   */
+/*   fract_ol_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 14:20:13 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 16:56:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACT_OL_H
-# define FRACT_OL_H
+#ifndef FRACT_OL_BONUS_H
+# define FRACT_OL_BONUS_H
 
 /* Libraries */
 
@@ -30,8 +30,28 @@
 
 # define ESC_MAC 53
 # define ESC_LINUX 65307
+# define LEFT_MAC 123
+# define LEFT_LINUX 65361
+# define RIGHT_MAC 124
+# define RIGHT_LINUX 65363
+# define DOWN_MAC 125
+# define DOWN_LINUX 65364
+# define UP_MAC 126
+# define UP_LINUX 65362
 # define UP_MOUSE 4
 # define DOWN_MOUSE 5
+# define P_MAC 35
+# define P_LINUX 112
+# define M_MAC 46
+# define M_LINUX 109
+# define Q_MAC 24
+# define Q_LINUX 113
+# define W_MAC 25
+# define W_LINUX 119
+# define R_MAC 15
+# define R_LINUX 114
+# define C_MAC 8
+# define C_LINUX 99
 
 /* Structures */
 
@@ -59,12 +79,23 @@ typedef struct s_fractal
 	int			mthreads_flag;
 }				t_fractal;
 
+typedef struct s_thread_data
+{
+	t_fractal	*fractal;
+	int			start_line;
+	int			end_line;
+}				t_thread_data;
+
 /* draw.c */
 
 void			my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color);
 void			init_fractal_values(t_fractal *fractal, int x, int y);
 void			sub_draw_fractal(t_fractal *fractal, int x, int y);
 void			draw_fractal(t_fractal *fractal);
+
+/* draw_multithreads.c */
+
+void			draw_fractal_threads(t_fractal *fractal);
 
 /* hooks.c */
 

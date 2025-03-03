@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:12:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 14:29:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:33:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "../includes/fract_ol_bonus.h"
 
 void	init_mlx(t_fractal *fractal)
 {
@@ -42,6 +42,8 @@ void	init_fractal_name(t_fractal *fractal, char **input)
 			fractal->cy = 0.156;
 		}
 	}
+	else if (!ft_strncmp(input[0], "lotus", ft_strlen(input[0])))
+		fractal->name = 'l';
 }
 
 void	init_fractal_window(t_fractal *fractal)
@@ -58,6 +60,13 @@ void	init_fractal_window(t_fractal *fractal)
 		fractal->zoom = 560;
 		fractal->offset_x = -1.7;
 		fractal->offset_y = -0.9;
+		fractal->max_iter = 50;
+	}
+	else if (fractal->name == 'l')
+	{
+		fractal->zoom = 370;
+		fractal->offset_x = -2.55;
+		fractal->offset_y = -1.35;
 		fractal->max_iter = 50;
 	}
 	fractal->inv_zoom = 1.0 / fractal->zoom;

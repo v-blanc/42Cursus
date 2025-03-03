@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_multithreads.c                                :+:      :+:    :+:   */
+/*   draw_multithreads_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:37:49 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/06 17:39:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:33:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "../includes/fract_ol_bonus.h"
 
 static void	*draw_fractal_thread(void *arg)
 {
