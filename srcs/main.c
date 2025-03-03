@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/07 17:49:13 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:57:49 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	print_usage(void)
 	write(1, "\tW: decrease max_iter\n\tC: change color\n\tR: reset\n", 50);
 	write(1, "________________________________________________________\n", 58);
 	write(1, "\nSome julia examples:\n", 23);
-	write(1, "\t./fractol julia 0.75 0\n\t./fractol julia -0.39 -0.59\n", 54);
+	write(1, "\t./fractol julia -0.75 0\n\t./fractol julia -0.39 -0.59\n", 55);
 	write(1, "\t./fractol julia 0.285 0.01\n\t./fractol julia 0 -1\n", 51);
 	write(1, "\t./fractol julia -0.12 0.75\n", 29);
 }
