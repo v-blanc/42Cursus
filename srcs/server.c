@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:21:54 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/19 15:51:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 16:53:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int	main(void)
 	init_data_server(0);
 	set_signal_handler();
 	while (1)
-		pause();
+		continue ;
 	return (0);
 }

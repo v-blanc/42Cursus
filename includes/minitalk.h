@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:24:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/19 16:13:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 16:52:57 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 # include "./ft_printf/include/ft_printf.h"
 # include "./libft/libft.h"
 # include <signal.h>
-// # include <stdlib.h>
-// # include <string.h>
 # include <sys/types.h>
-// # include <unistd.h>
 
 # define BUFFER_SIZE 256
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:28:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/02/19 16:25:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/03 16:53:04 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ sig_atomic_t	g_sever_ready;
 static void	test_pid_validity(char *argv, pid_t *pid_server)
 {
 	(*pid_server) = atoi(argv);
-	if (kill(*pid_server, 0))
+	if (kill(*pid_server, 0) || *pid_server < 1)
 	{
 		ft_printf("ℹ️  Server PID: %d (invalid ❌)\n", *pid_server);
 		exit(1);
@@ -62,6 +62,6 @@ int	main(int argc, char **argv)
 	set_signal_handler();
 	send_msg(pid_server, argv[2]);
 	while (!g_sever_ready)
-		pause();
+		continue ;
 	return (0);
 }
