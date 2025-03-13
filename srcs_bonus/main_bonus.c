@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/13 10:36:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:44:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ static void	check_args(int argc, char **argv)
 		return ;
 	else if (!ft_strncmp(argv[1], "lotus", ft_strlen(argv[1]) + 1) && argc == 2)
 		return ;
-	else if ((ft_strncmp(argv[1], "-h", ft_strlen(argv[1]) + 1)
-			&& ft_strncmp(argv[1], "--help", ft_strlen(argv[1]) + 1)
-			&& argc == 2) || argc != 2)
-		print_usage();
+	print_usage();
 	exit(1);
 }
 

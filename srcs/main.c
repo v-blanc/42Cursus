@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 17:56:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:44:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ static void	check_args(int argc, char **argv)
 	else if (!ft_strncmp(argv[1], "julia", ft_strlen(argv[1]) + 1)
 		&& check_julia_args(argc, argv) == 0 && (argc == 2 || argc == 4))
 		return ;
-	else if ((ft_strncmp(argv[1], "-h", ft_strlen(argv[1]) + 1)
-			&& ft_strncmp(argv[1], "--help", ft_strlen(argv[1])) + 1)
-		|| argc != 2)
-		print_usage();
+	print_usage();
 	exit(1);
 }
 
