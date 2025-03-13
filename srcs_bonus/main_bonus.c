@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 17:55:24 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:36:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static void	check_args(int argc, char **argv)
 		print_usage();
 		exit(1);
 	}
-	if (!ft_strncmp(argv[1], "-mt", ft_strlen(argv[1]) + 1) && argc == 3)
+	if (!ft_strncmp(argv[1], "-mt", ft_strlen(argv[1]) + 1) && (argc == 3
+			|| (ft_strncmp(argv[1], "julia", ft_strlen(argv[1]) + 1)
+				&& (argc == 3 || argc == 5))))
 	{
 		argv = &argv[1];
 		argc = argc - 1;
