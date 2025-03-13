@@ -15,7 +15,19 @@
 
 /* Structures */
 
-/* Functions */
+//....
+
+/* echo.c */
+
+int	echo(char *to_print, bool n_option_flag);
+
+/* env.c */
+
+int env(void);
+
+/* exit.c */
+
+int	ft_exit(int status);
 
 /* pwd.c */
 
