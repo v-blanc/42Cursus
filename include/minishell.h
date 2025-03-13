@@ -4,8 +4,21 @@
 
 /* Libraries */
 
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+/* Variables */
+
+# define PATH_MAX 4096 - 1
+
 /* Structures */
 
-/* .c */
+/* Functions */
+
+/* pwd.c */
+
+int	pwd(void);
 
 #endif
