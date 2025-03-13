@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:23:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 14:28:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/13 10:23:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	draw_fractal(t_fractal *fractal)
 		}
 		x++;
 	}
-	put_image(fractal);
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, fractal->img, 0, 0);
 }

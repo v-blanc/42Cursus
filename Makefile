@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/03/03 15:32:36 by vblanc           ###   ########.fr        #
+#    Updated: 2025/03/13 10:22:24 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCDIR_BONUS := ./srcs_bonus
 OBJDIR := ./objs
 OBJDIR_BONUS := ./objs_bonus
 
-SRCS := draw.c hooks.c init.c main.c put_image.c utils.c
+SRCS := draw.c hooks.c init.c main.c utils.c
 SRCS_BONUS := draw_bonus.c draw_multithreads_bonus.c hooks_bonus.c init_bonus.c\
 			main_bonus.c put_image_bonus.c utils_bonus.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
