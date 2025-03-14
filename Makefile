@@ -4,7 +4,7 @@ CFLAGS := -Wall -Werror -Wextra
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c
+SRCS := main.c utils_env.c builtins/cd.c builtins/env.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
@@ -22,7 +22,7 @@ $(NAME): libft $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
