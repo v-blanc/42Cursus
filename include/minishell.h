@@ -5,6 +5,7 @@
 /* Libraries */
 
 # include "../libft/libft.h"
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
@@ -20,20 +21,16 @@
 
 //....
 
-/* echo.c */
+/* buildins */
 
+int	cd(char *path);
 int	echo(char *to_print, bool n_option_flag);
-
-/* env.c */
-
 int	env(void);
-
-/* exit.c */
-
 int	ft_exit(int status);
-
-/* pwd.c */
-
 int	pwd(void);
+
+/* utils_env.c */
+
+int	ft_setenv(char *name, char *value);
 
 #endif
