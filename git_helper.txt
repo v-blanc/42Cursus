@@ -1,0 +1,18 @@
+Mini guide git
+
+Pour changer de branches:
+    - git checkout main (attention pas origin/main)
+    - git checkout valentin
+    - git checkout yazid
+
+Pour ajouter une feature sur le main:
+    -> git checkout main
+    -> git merge nom_de_la_branche (valentin ou yazid)
+    Puis renommé le fichier avec le nom du commit (par ex: "add ... in ...")
+    Puis penser à revenir sur sa branche
+
+Si jamais la branche n'existe plus:
+    -> git checkout -b nom_de_la_branche
+
+Pour visualiser toutes les branches/commits:
+    -> git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
