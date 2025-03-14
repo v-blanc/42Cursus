@@ -1,4 +1,5 @@
 .vscode
 minishell
 objs
+srcs/a.out
 srcs/execution/a.out
