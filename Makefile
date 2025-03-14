@@ -4,11 +4,11 @@ CFLAGS := -Wall -Werror -Wextra
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c
+SRCS := main.c utils_env.c builtins/cd.c builtins/env.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-LIBFT := ./includes/libft/libft.a
+LIBFT := ./libft/libft.a
 
 NAME := minishell
 RM := rm -rf
@@ -16,21 +16,21 @@ RM := rm -rf
 all: $(NAME)
 
 libft:
-	@make -C includes/libft
+	@make -C libft
 
 $(NAME): libft $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make -C includes/libft clean
+	@make -C libft clean
 	$(RM) $(OBJDIR)
 
 fclean:
-	@make -C includes/libft fclean
+	@make -C libft fclean
 	$(RM) $(OBJDIR)
 	$(RM) $(NAME)
 

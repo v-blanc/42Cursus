@@ -1,4 +1,7 @@
 .vscode
 minishell
 objs
+libft/objs
+libft/libft.a
+srcs/a.out
 srcs/execution/a.out

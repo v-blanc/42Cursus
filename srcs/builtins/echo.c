@@ -1,6 +1,5 @@
 #include "../../include/minishell.h"
 
-
 int	echo(char *to_print, bool n_option_flag)
 {
 	printf("%s", to_print);
