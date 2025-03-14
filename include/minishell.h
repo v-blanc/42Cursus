@@ -4,6 +4,9 @@
 
 /* Libraries */
 
+# include "../libft/libft.h"
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -23,7 +26,7 @@ int	echo(char *to_print, bool n_option_flag);
 
 /* env.c */
 
-int env(void);
+int	env(void);
 
 /* exit.c */
 

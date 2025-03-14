@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -lreadline
 
 SRCDIR := ./srcs
 OBJDIR := ./objs
