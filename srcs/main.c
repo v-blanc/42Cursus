@@ -4,8 +4,8 @@ char	*set_readline_prompt(void)
 {
 	char	*readline_prompt;
 	char	*final_readline_prompt;
-
 	char	*pwd;
+
 	readline_prompt = "minishell:";
 	pwd = getenv("PWD");
 	if (pwd)
@@ -39,7 +39,8 @@ void	set_input(void)
 			exit(0);
 		}
 		add_history(input);
-		cd(input); // TESTING CD
+		// cd(input); // TESTING CD
+		echo(input, false);
 		// env(); // TESTING ENV
 		// pwd(); // TESTING PWD
 		free(input);
