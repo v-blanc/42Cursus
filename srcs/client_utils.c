@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:12:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 16:53:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/03/17 16:23:12 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	send_bit(pid_t pid_dest, int bit)
 		ft_printf("Error sending message\n");
 		exit(1);
 	}
-	sleep(1);
+	usleep(100);
 }
 
 void	send_msg(pid_t pid_dest, char *message)
