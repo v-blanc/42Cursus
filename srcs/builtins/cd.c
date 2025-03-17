@@ -2,9 +2,11 @@
 
 extern char	**environ;
 
+// TODO: handle errors (errno) ?
 int	cd(char *path)
 {
 	extern char	**environ;
+	char		new_path[PATH_MAX];
 
 	printf("cd %s\n", path == NULL ? "" : path); // DEGUB
 	if (path == NULL || !ft_strcmp(path, "~"))
@@ -22,22 +24,8 @@ int	cd(char *path)
 		return (1);
 	}
 	ft_setenv("OLDPWD", getenv("PWD"));
-	ft_setenv("PWD", getcwd(NULL, 0));
+	if (getcwd(new_path, PATH_MAX) == NULL)
+		return (1);
+	ft_setenv("PWD", new_path);
 	return (0);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	printf(">> %s\n", getenv("OLDPWD"));
-// 	pwd();
-// 	cd("../../include");
-// 	pwd();
-// 	if (argc == 2)
-// 		cd(argv[1]);
-// 	else if (argc == 1)
-// 		cd(NULL);
-// 	else
-// 		printf("cd: too many arguments\n");
-// 	pwd();
-// 	return (0);
-// }
