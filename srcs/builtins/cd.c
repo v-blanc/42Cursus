@@ -1,18 +1,37 @@
 #include "../../include/minishell.h"
 
+static char	*path_handler(char *path)
+{
+	char	*new_path;
+
+	new_path = NULL;
+	if (path == NULL)
+		ft_strlcpy(new_path, getenv("HOME"), PATH_MAX);
+	else if (!ft_strcmp(path, "-"))
+	{
+		new_path = getenv("OLDPWD");
+		printf("%s\n", new_path);
+	}
+	else
+		new_path = path;
+	return (new_path);
+}
+
 extern char	**environ;
 
 // TODO: handle errors (errno) ?
 int	cd(char *path)
 {
-	extern char	**environ;
-	char		new_path[PATH_MAX];
+	char	new_path[PATH_MAX];
 
-	printf("cd %s\n", path == NULL ? "" : path); // DEGUB
-	if (path == NULL || !ft_strcmp(path, "~"))
-		path = getenv("HOME");
-	else if (!ft_strcmp(path, "-"))
-		path = getenv("OLDPWD");
+	path = path_handler(path);
+	if (path[0] == '~')
+	{
+		ft_strlcpy(new_path, getenv("HOME"), PATH_MAX);
+		ft_strlcat(new_path, path + 1, PATH_MAX);
+		path = new_path;
+	}
+	printf("cd %s\n", path); // DEGUB
 	if (chdir(path) == -1)
 	{
 		if (access(path, F_OK) == -1)
