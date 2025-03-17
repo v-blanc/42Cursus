@@ -4,15 +4,19 @@ char	*set_readline_prompt(void)
 {
 	char	*readline_prompt;
 	char	*final_readline_prompt;
-	char	*pwd;
+	char	pwd[PATH_MAX];
+	char	*pwd_home;
 
-	readline_prompt = "minishell:";
-	pwd = getenv("PWD");
-	if (pwd)
-		readline_prompt = ft_strjoin("minishell:", pwd);
-	final_readline_prompt = ft_strjoin(readline_prompt, "$ ");
-	if (pwd)
-		free(readline_prompt);
+	ft_strlcpy(pwd, getenv("PWD"), PATH_MAX);
+	pwd_home = getenv("HOME");
+	if (!ft_strncmp(pwd, pwd_home, ft_strlen(pwd_home)))
+	{
+		ft_strlcpy(pwd, pwd + ft_strlen(pwd_home) - 1, PATH_MAX);
+		pwd[0] = '~';
+	}
+	readline_prompt = ft_strjoin("\033[1;32mminishell\033[0m:\033[1;34m", pwd);
+	final_readline_prompt = ft_strjoin(readline_prompt, "\033[0m$\033[0m ");
+	free(readline_prompt);
 	return (final_readline_prompt);
 }
 
@@ -39,8 +43,8 @@ void	set_input(void)
 			exit(0);
 		}
 		add_history(input);
-		// cd(input); // TESTING CD
-		echo(input, false);
+		cd(input); // TESTING CD
+		// echo(input, false); // TESTING ECHO
 		// env(); // TESTING ENV
 		// pwd(); // TESTING PWD
 		free(input);
