@@ -3,14 +3,17 @@
 char	*set_readline_prompt(void)
 {
 	char	*readline_prompt;
-	char	*pwd;
+	char	*final_readline_prompt;
 
+	char	*pwd;
 	readline_prompt = "minishell:";
-	pwd = getcwd(NULL, 0);
+	pwd = getenv("PWD");
 	if (pwd)
-		readline_prompt = ft_strjoin(readline_prompt, pwd);
-	readline_prompt = ft_strjoin(readline_prompt, "$ ");
-	return (readline_prompt);
+		readline_prompt = ft_strjoin("minishell:", pwd);
+	final_readline_prompt = ft_strjoin(readline_prompt, "$ ");
+	if (pwd)
+		free(readline_prompt);
+	return (final_readline_prompt);
 }
 
 void	set_input(void)
@@ -31,9 +34,14 @@ void	set_input(void)
 		}
 		// TODO: remove when exit is implemented
 		if (ft_strcmp(input, "exit") == 0)
+		{
+			free(input);
 			exit(0);
+		}
 		add_history(input);
 		cd(input); // TESTING CD
+		// env(); // TESTING ENV
+		// pwd(); // TESTING PWD
 		free(input);
 	}
 }
