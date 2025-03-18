@@ -1,10 +1,12 @@
 CC := cc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -g
 
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c utils_env.c builtins/cd.c builtins/env.c
+SRCS := main.c utils_env.c\
+		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c\
+		builtins/pwd.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 

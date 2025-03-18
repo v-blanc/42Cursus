@@ -14,9 +14,3 @@ int	pwd(void)
 		printf("%s\n", path);
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	pwd();
-// 	return (0);
-// }

@@ -11,9 +11,3 @@ int	env(void)
 		printf("%s\n", environ[i++]);
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	env();
-// 	return (0);
-// }
