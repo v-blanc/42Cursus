@@ -44,7 +44,7 @@ int	cd(char *path)
 	}
 	ft_setenv("OLDPWD", getenv("PWD"));
 	if (getcwd(new_path, PATH_MAX) == NULL)
-		return (1);
+		return (printf("getcwd error\n"), 1);
 	ft_setenv("PWD", new_path);
 	return (0);
 }

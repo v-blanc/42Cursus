@@ -27,6 +27,7 @@ int	cd(char *path);
 int	echo(char *to_print, bool n_option_flag);
 int	env(void);
 int	ft_exit(int status);
+int	export(char *name);
 int	pwd(void);
 
 /* utils_env.c */
