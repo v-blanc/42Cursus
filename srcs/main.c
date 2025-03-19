@@ -34,11 +34,8 @@ void	set_input(void)
 	{
 		readline_prompt = set_readline_prompt();
 		input = readline(readline_prompt);
-		if (!input)
-		{
-			printf("error\n");
-			return ;
-		}
+		if (!input) // EOF ie CTRL-D
+			return (free(readline_prompt), free(input), exit(0));
 		if (readline_prompt != NULL)
 			free(readline_prompt);
 		// TODO: remove when exit is implemented
