@@ -31,7 +31,7 @@ int	cd(char *path)
 		ft_strlcat(new_path, path + 1, PATH_MAX);
 		path = new_path;
 	}
-	printf("cd %s\n", path); // DEGUB
+	printf("cd %s\n", path); // TODO: DEGUB: remove when done
 	if (chdir(path) == -1)
 	{
 		if (access(path, F_OK) == -1)
