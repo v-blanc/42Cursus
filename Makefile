@@ -5,6 +5,7 @@ SRCDIR := ./srcs
 OBJDIR := ./objs
 
 SRCS := main.c utils_env.c\
+		sig/sig.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c\
 		builtins/pwd.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
