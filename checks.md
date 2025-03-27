@@ -1,5 +1,19 @@
 # Minishell - Checks
 
+## Notes, To Do and Ideas
+
+- **Notes**:
+    - To debug leaks **without** leaking functions, run:
+```
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp ./minishell
+```
+- **To Do**: 
+    - Check every exit code of the builtins
+    - Handle cd command when current path/folder is deleted (zsh: permission denied: *path*)
+
+- **Ideas**:
+    - none :(
+
 ## Mandatory check
 
 - ✅ | Display a prompt when waiting for a new command.
@@ -23,16 +37,16 @@ connected to the input of the next command via a pipe.
 should expand to their values.
 - ❌ | Handle $? which should expand to the exit status of the most recently executed
 foreground pipeline.
-- ❌ | Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
-- ❌ | In interactive mode:
-    - ❌ | ctrl-C displays a new prompt on a new line.
-    - ❌ | ctrl-D exits the shell.
-    - ❌ | ctrl-\ does nothing.
+- ✅ | Handle ctrl-C✅, ctrl-D✅ and ctrl-\✅ which should behave like in bash.
+- ✅ | In interactive mode:
+    - ✅ | ctrl-C displays a new prompt on a new line.
+    - ✅ | ctrl-D exits the shell.
+    - ✅ | ctrl-\ does nothing.
 - ❌ | Your shell must implement the following builtins:
     - ✅ | echo with option -n
     - ✅ | cd with only a relative✅ or absolute✅ path
     - ✅ | pwd with no options
-    - ❌ | export with no options
+    - ❌ | export with no options (export✅, export VAR_NAME❌, export VAR_NAME=value❌)
     - ❌ | unset with no options
     - ✅ | env with no options or arguments
     - ✅ | exit with no options
@@ -41,8 +55,6 @@ foreground pipeline.
 
 - ❌ | && and || with parenthesis for priorities.
 - ❌ | Wildcards * should work for the current working directory.
-
-## Content checks
 
 ### srcs/
 

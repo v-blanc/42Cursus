@@ -31,14 +31,13 @@ int	cd(char *path)
 		ft_strlcat(new_path, path + 1, PATH_MAX);
 		path = new_path;
 	}
-	printf("cd %s\n", path); // DEGUB
+	printf("cd %s\n", path); // TODO: DEGUB: remove when done
 	if (chdir(path) == -1)
 	{
 		if (access(path, F_OK) == -1)
-		{
-			printf("cd: no such file or directory: %s\n", path);
-			return (1);
-		}
+			return (printf("cd: no such file or directory: %s\n", path), 1);
+		if (access(path, X_OK) == -1)
+			return (printf("cd: permission denied: %s\n", path), 1);
 		printf("cd: not a directory: %s\n", path);
 		return (1);
 	}
