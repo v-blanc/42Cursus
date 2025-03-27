@@ -5,7 +5,18 @@ void	*gc_malloc(size_t size, t_garbage_collector **head)
 	t_garbage_collector	*new;
 
 	new = malloc(sizeof(t_garbage_collector));
+	if (!new)
+	{
+		printf("malloc error\n");
+		return (NULL);
+	}
 	new->mem = malloc(size);
+	if (!new->mem)
+	{
+		printf("malloc error\n");
+		free(new);
+		return (NULL);
+	}
 	new->next = *head;
 	*head = new;
 	return (new->mem);
@@ -16,6 +27,8 @@ void	**gc_malloc_array(size_t size, t_garbage_collector **head)
 	void	**array;
 
 	array = gc_malloc((size + 1) * sizeof(void *), head);
+	if (!array)
+		return (NULL);
 	array[size] = NULL;
 	return (array);
 }
