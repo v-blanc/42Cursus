@@ -28,6 +28,7 @@ void	set_input(t_garbage_collector **head)
 {
 	char	*input;
 	char	*rl_prompt;
+	char	**to_unset;
 
 	while (1)
 	{
@@ -49,8 +50,14 @@ void	set_input(t_garbage_collector **head)
 		// cd(input, head); // TESTING CD
 		// echo(input, true); // TESTING ECHO
 		// gc_setenv("TEST", "test", head);
-		export("TEST", input, head); // TESTING EXPORT
-		env();                       // TESTING ENV
+		export("TEST", input, head);      // TESTING EXPORT
+		env();                            // TESTING ENV
+		to_unset = ft_split("TEST", ' '); // tmp can leak
+		unset(to_unset, head);            // TESTING UNSET
+		for (int i = 0; to_unset[i]; i++) // tmp can leak
+			free(to_unset[i]);
+		free(to_unset); // tmp can leak
+		env();          // TESTING ENV
 		// export(NULL, NULL, head);    // TESTING EXPORT
 		// pwd(); // TESTING PWD
 		free(input);

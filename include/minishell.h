@@ -34,6 +34,8 @@ int								ft_exit(int status);
 int								export(char *name, char *value,
 									t_garbage_collector **head);
 int								pwd(void);
+int								unset(char **to_unset,
+									t_garbage_collector **head);
 
 /* sig.c */
 
