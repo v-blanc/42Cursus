@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	*gc_malloc(size_t size, t_garbage_collector **head)
 {
@@ -68,22 +68,3 @@ void	gc_free_all(t_garbage_collector *head)
 	free(head->mem);
 	free(head);
 }
-
-// int	main(void)
-// {
-// 	t_garbage_collector	*head;
-// 	char				**str;
-// 	int					*test;
-// 	char				*blabla;
-// 	int					i;
-
-// 	head = NULL;
-// 	blabla = gc_malloc(sizeof(char) * 10, &head);
-// 	str = (char **)gc_malloc_array(sizeof(char) * 10, &head);
-// 	for (i = 0; i < 10; i++)
-// 		str[i] = gc_malloc(20, &head);
-// 	gc_free_array(str, &head);
-// 	test = gc_malloc(10, &head);
-// 	gc_free_all(head);
-// 	return (0);
-// }
