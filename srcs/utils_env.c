@@ -6,7 +6,7 @@ static int	update_environ(char **to_update, char *name, char *value,
 		t_garbage_collector **head)
 {
 	(*to_update) = gc_malloc(ft_strlen(name) + ft_strlen(value) + 2, head);
-	if (!to_update)
+	if (!(*to_update))
 		return (1);
 	ft_strlcpy((*to_update), name, ft_strlen(name) + 1);
 	ft_strlcat((*to_update), "=", ft_strlen((*to_update)) + 2);
