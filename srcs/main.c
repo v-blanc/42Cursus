@@ -9,7 +9,7 @@ char	*set_readline_prompt(t_garbage_collector **head)
 
 	ft_strlcpy(pwd, getenv("PWD"), PATH_MAX);
 	pwd_home = getenv("HOME");
-	if (!ft_strncmp(pwd, pwd_home, ft_strlen(pwd_home)))
+	if (pwd_home != NULL && !ft_strncmp(pwd, pwd_home, ft_strlen(pwd_home)))
 	{
 		ft_strlcpy(pwd, pwd + ft_strlen(pwd_home) - 1, PATH_MAX);
 		pwd[0] = '~';
@@ -49,9 +49,9 @@ void	set_input(t_garbage_collector **head)
 		// cd(input, head); // TESTING CD
 		// echo(input, true); // TESTING ECHO
 		// gc_setenv("TEST", "test", head);
-		// env(); // TESTING ENV
-		export(input, NULL, head); // TESTING EXPORT
-		export(NULL, NULL, head);  // TESTING EXPORT
+		export("TEST", input, head); // TESTING EXPORT
+		env();                       // TESTING ENV
+		// export(NULL, NULL, head);    // TESTING EXPORT
 		// pwd(); // TESTING PWD
 		free(input);
 	}
@@ -60,12 +60,30 @@ void	set_input(t_garbage_collector **head)
 
 extern char	**environ;
 
+int	init_environ(t_garbage_collector **head)
+{
+	if (environ == NULL || environ[0] == NULL)
+	{
+		environ = (char **)gc_malloc_array(3, head);
+		environ[0] = gc_strjoin("PWD=", getcwd(NULL, 0), head);
+		environ[1] = gc_strjoin("SHLVL=1", "", head);
+		// TODO: change to use `which env` ?
+		environ[2] = gc_strjoin("_=/usr/bin/env", "", head);
+		environ[3] = NULL;
+		if (!environ[0] || !environ[1] || !environ[2])
+			return (1);
+	}
+	return (0);
+}
+
 int	main(void)
 {
 	t_garbage_collector	*head;
 
 	head = NULL;
 	init_sig();
+	if (init_environ(&head))
+		return (1);
 	set_input(&head);
 	return (0);
 }
