@@ -19,8 +19,7 @@ static char	*path_handler(char *path)
 
 extern char	**environ;
 
-// TODO: handle errors (errno) ?
-int	cd(char *path)
+int	cd(char *path, t_garbage_collector **head)
 {
 	char	new_path[PATH_MAX];
 
@@ -32,18 +31,18 @@ int	cd(char *path)
 		path = new_path;
 	}
 	printf("cd %s\n", path); // TODO: DEGUB: remove when done
-	if (chdir(path) == -1)
+	if (chdir(path) < 0)
 	{
-		if (access(path, F_OK) == -1)
-			return (printf("cd: no such file or directory: %s\n", path), 1);
-		if (access(path, X_OK) == -1)
-			return (printf("cd: permission denied: %s\n", path), 1);
-		printf("cd: not a directory: %s\n", path);
+		printf("cd: %s: %s\n", strerror(errno), path);
 		return (1);
 	}
-	ft_setenv("OLDPWD", getenv("PWD"));
 	if (getcwd(new_path, PATH_MAX) == NULL)
-		return (printf("getcwd error\n"), 1);
-	ft_setenv("PWD", new_path);
+	{
+		printf("getcwd: %s\n", strerror(errno));
+		return (1);
+	}
+	if (gc_setenv("OLDPWD", getenv("PWD"), head) || gc_setenv("PWD", new_path,
+			head))
+		return (1);
 	return (0);
 }

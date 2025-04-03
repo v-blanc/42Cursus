@@ -2,29 +2,60 @@
 
 extern char	**environ;
 
-int	ft_setenv(char *name, char *value)
+static int	update_environ(char **to_update, char *name, char *value,
+		t_garbage_collector **head)
 {
-	int	i;
-	int	j;
-	int	len_name;
-	int	len_value;
-
-	if (name == NULL || value == NULL)
+	(*to_update) = gc_malloc(ft_strlen(name) + ft_strlen(value) + 2, head);
+	if (!(*to_update))
 		return (1);
-	len_name = ft_strlen(name);
-	len_value = ft_strlen(value);
+	ft_strlcpy((*to_update), name, ft_strlen(name) + 1);
+	ft_strlcat((*to_update), "=", ft_strlen((*to_update)) + 2);
+	ft_strlcat((*to_update), value, ft_strlen((*to_update)) + ft_strlen(value)
+		+ 1);
+	return (0);
+}
+
+static int	add_to_environ(int i, char *name, char *value,
+		t_garbage_collector **head)
+{
+	char	**env_cpy;
+
+	env_cpy = (char **)gc_malloc_array(i + 1, head);
+	if (!env_cpy)
+		return (1);
 	i = 0;
 	while (environ[i])
 	{
-		if (!ft_strncmp(environ[i], name, len_name))
+		env_cpy[i] = gc_malloc(ft_strlen(environ[i]) + 1, head);
+		if (!env_cpy[i])
+			return (1);
+		ft_strlcpy(env_cpy[i], environ[i], ft_strlen(environ[i]) + 1);
+		i++;
+	}
+	if (update_environ(&env_cpy[i], name, value, head))
+		return (1);
+	environ = env_cpy;
+	return (0);
+}
+
+int	gc_setenv(char *name, char *value, t_garbage_collector **head)
+{
+	int	i;
+
+	if (name == NULL || value == NULL)
+		return (1);
+	i = 0;
+	while (environ[i])
+	{
+		if (!ft_strncmp(environ[i], name, ft_strlen(name)))
 		{
-			j = -1;
-			while (++j < len_value)
-				environ[i][j + len_name + 1] = value[j];
-			environ[i][len_name + len_value + 1] = '\0';
+			if (update_environ(&environ[i], name, value, head))
+				return (1);
 			return (0);
 		}
 		i++;
 	}
-	return (1);
+	if (add_to_environ(i, name, value, head))
+		return (1);
+	return (0);
 }
