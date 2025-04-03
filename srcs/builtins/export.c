@@ -2,16 +2,6 @@
 
 extern char	**environ;
 
-static int	ft_strlen_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}
-
 static void	sort_environ_indexes(int *environ_indexes)
 {
 	int	i;
@@ -37,13 +27,15 @@ static void	sort_environ_indexes(int *environ_indexes)
 	}
 }
 
-static int	get_environ_sorted_indexes(int **environ_indexes)
+static int	get_environ_sorted_indexes(int **environ_indexes,
+		t_garbage_collector **head)
 {
 	int	i;
 
-	(*environ_indexes) = (int *)malloc(sizeof(int) * ft_strlen_array(environ));
+	(*environ_indexes) = (int *)gc_malloc(sizeof(int)
+			* ft_strlen_array(environ), head);
 	if (!(*environ_indexes))
-		return (printf("malloc error\n"), 1);
+		return (1);
 	i = -1;
 	while (environ[++i])
 		(*environ_indexes)[i] = i;
@@ -51,7 +43,7 @@ static int	get_environ_sorted_indexes(int **environ_indexes)
 	return (0);
 }
 
-int	export(char *name)
+int	export(char *name, char *value, t_garbage_collector **head)
 {
 	int	*environ_indexes;
 	int	i;
@@ -59,7 +51,7 @@ int	export(char *name)
 	if (name == NULL || name[0] == '\0')
 	{
 		environ_indexes = NULL;
-		if (get_environ_sorted_indexes(&environ_indexes))
+		if (get_environ_sorted_indexes(&environ_indexes, head))
 			return (1);
 		i = 0;
 		while (environ[i])
@@ -68,8 +60,13 @@ int	export(char *name)
 				printf("declare -x %s\n", environ[environ_indexes[i]]);
 			i++;
 		}
-		free(environ_indexes);
+		gc_free(environ_indexes, head);
 	}
-    //TODO: implement `export var_name`
+	else
+	{
+		if (value == NULL)
+			value = "";
+		gc_setenv(name, value, head);
+	}
 	return (0);
 }

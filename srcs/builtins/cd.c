@@ -20,7 +20,7 @@ static char	*path_handler(char *path)
 extern char	**environ;
 
 // TODO: handle errors (errno) ?
-int	cd(char *path)
+int	cd(char *path, t_garbage_collector **head)
 {
 	char	new_path[PATH_MAX];
 
@@ -41,9 +41,11 @@ int	cd(char *path)
 		printf("cd: not a directory: %s\n", path);
 		return (1);
 	}
-	ft_setenv("OLDPWD", getenv("PWD"));
+	if (gc_setenv("OLDPWD", getenv("PWD"), head))
+		return (1);
 	if (getcwd(new_path, PATH_MAX) == NULL)
 		return (printf("getcwd error\n"), 1);
-	ft_setenv("PWD", new_path);
+	if (gc_setenv("PWD", new_path, head))
+		return (1);
 	return (0);
 }
