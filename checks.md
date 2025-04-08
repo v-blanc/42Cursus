@@ -9,7 +9,6 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp ./
 ```
 - **To Do**: 
     - Check every exit code of the builtins
-    - Handle cd command when current path/folder is deleted (zsh: permission denied: *path*)
 
 - **Ideas**:
     - none :(
@@ -75,7 +74,7 @@ foreground pipeline.
 | exit.c | ✅ | ❓ | ✅ |
 | export.c | ✅ | ❓ | ✅ |
 | pwd.c | ✅ | ❓ | ✅ |
-| unset.c | ❓ | ❓ | |
+| unset.c | ✅ | ❓ | ✅ |
 
 
 ---
