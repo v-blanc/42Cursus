@@ -55,6 +55,8 @@ void							gc_free_array(char **array,
 void							gc_free_all(t_garbage_collector *head);
 char							*gc_strjoin(char *s1, char *s2,
 									t_garbage_collector **head);
+char							*gc_strdup(const char *s,
+									t_garbage_collector **head);
 
 /* utils_env.c */
 
