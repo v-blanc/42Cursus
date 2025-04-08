@@ -67,15 +67,15 @@ foreground pipeline.
 
 ### srcs/builtins/
 
-| File name | No leaks | Code errors |
-|-----------|-----------|-----------|
-| cd.c | ✅ | ❓ |
-| echo.c | ❓ | ❓ |
-| env.c | ✅ | ❓ |
-| exit.c | ✅ | ❓ |
-| export.c | ❓ | ❓ |
-| pwd.c | ✅ | ❓ |
-| unset.c | ❓ | ❓ |
+| File name | No leaks / NULL-check | Code errors | Norminette (wihtout header and comments) |
+|-----------|-----------|-----------|-----------|
+| cd.c | ✅ | ❓ | ✅ |
+| echo.c | ✅ | ❓ | ✅ |
+| env.c | ✅ | ❓ | ✅ |
+| exit.c | ✅ | ❓ | ✅ |
+| export.c | ✅ | ❓ | ✅ |
+| pwd.c | ✅ | ❓ | ✅ |
+| unset.c | ❓ | ❓ | |
 
 
 ---

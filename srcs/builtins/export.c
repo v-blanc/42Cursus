@@ -31,9 +31,10 @@ static int	get_environ_sorted_indexes(int **environ_indexes,
 		t_garbage_collector **head)
 {
 	int	i;
+	int	len_environ;
 
-	(*environ_indexes) = (int *)gc_malloc(sizeof(int)
-			* ft_strlen_array(environ), head);
+	len_environ = ft_strlen_array(environ);
+	(*environ_indexes) = (int *)gc_malloc(sizeof(int) * len_environ, head);
 	if (!(*environ_indexes))
 		return (1);
 	i = -1;
@@ -57,7 +58,8 @@ int	export(char *name, char *value, t_garbage_collector **head)
 		while (environ[i])
 		{
 			if (ft_strncmp(environ[environ_indexes[i]], "_=", 2) != 0)
-				printf("declare -x %s\n", environ[environ_indexes[i]]);
+				// Can add "declare -x" before
+				printf("%s\n", environ[environ_indexes[i]]);
 			i++;
 		}
 		gc_free(environ_indexes, head);
@@ -66,7 +68,8 @@ int	export(char *name, char *value, t_garbage_collector **head)
 	{
 		if (value == NULL)
 			value = "";
-		gc_setenv(name, value, head);
+		if (gc_setenv(name, value, head))
+			return (1);
 	}
 	return (0);
 }
