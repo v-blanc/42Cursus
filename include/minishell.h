@@ -57,10 +57,21 @@ char							*gc_strjoin(char *s1, char *s2,
 									t_garbage_collector **head);
 char							*gc_strdup(const char *s,
 									t_garbage_collector **head);
+char							*gc_substr(char const *s, unsigned int start,
+									size_t len, t_garbage_collector **head);
+char							**gc_split(char const *s, char c,
+									t_garbage_collector **head);
 
 /* utils_env.c */
 
 int								gc_setenv(char *name, char *value,
+									t_garbage_collector **head);
+
+/* parse.c */
+
+int								get_env_value(char ***input, char *input_str,
+									t_garbage_collector **head);
+int								testing_parsing(char *input_str,
 									t_garbage_collector **head);
 
 #endif
