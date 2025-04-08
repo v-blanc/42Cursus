@@ -84,7 +84,8 @@ int								gc_setenv(char *name, char *value,
 
 /* parse.c */
 
-int								get_env_value(char ***input, char *input_str,
+int								get_env_value(char **input_with_env,
+									char *input_str,
 									t_garbage_collector **head);
 int								testing_parsing(char *input_str,
 									t_garbage_collector **head);
