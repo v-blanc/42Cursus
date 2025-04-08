@@ -6,10 +6,16 @@ static char	*path_handler(char *path)
 
 	new_path = NULL;
 	if (path == NULL)
-		ft_strlcpy(new_path, getenv("HOME"), PATH_MAX);
+	{
+		new_path = getenv("HOME");
+		if (new_path == NULL)
+			return (NULL);
+	}
 	else if (!ft_strcmp(path, "-"))
 	{
 		new_path = getenv("OLDPWD");
+		if (new_path == NULL)
+			return (NULL);
 		printf("%s\n", new_path);
 	}
 	else
@@ -17,20 +23,10 @@ static char	*path_handler(char *path)
 	return (new_path);
 }
 
-extern char	**environ;
-
-int	cd(char *path, t_garbage_collector **head)
+static int	cd_exec(char *path, char *new_path, t_garbage_collector **head)
 {
-	char	new_path[PATH_MAX];
+	char	*pwd_path;
 
-	path = path_handler(path);
-	if (path[0] == '~')
-	{
-		ft_strlcpy(new_path, getenv("HOME"), PATH_MAX);
-		ft_strlcat(new_path, path + 1, PATH_MAX);
-		path = new_path;
-	}
-	printf("cd %s\n", path); // TODO: DEGUB: remove when done
 	if (chdir(path) < 0)
 	{
 		printf("cd: %s: %s\n", strerror(errno), path);
@@ -41,8 +37,32 @@ int	cd(char *path, t_garbage_collector **head)
 		printf("getcwd: %s\n", strerror(errno));
 		return (1);
 	}
-	if (gc_setenv("OLDPWD", getenv("PWD"), head) || gc_setenv("PWD", new_path,
-			head))
+	pwd_path = getenv("PWD");
+	if (!pwd_path)
+		return (1);
+	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
+		return (1);
+	return (0);
+}
+
+int	cd(char *path, t_garbage_collector **head)
+{
+	char	new_path[PATH_MAX];
+	char	*path_home;
+
+	path = path_handler(path);
+	if (path == NULL)
+		return (1);
+	if (path[0] == '~')
+	{
+		path_home = getenv("HOME");
+		if (path_home == NULL)
+			return (1);
+		ft_strlcpy(new_path, path_home, PATH_MAX);
+		ft_strlcat(new_path, path + 1, PATH_MAX);
+		path = new_path;
+	}
+	if (cd_exec(path, new_path, head))
 		return (1);
 	return (0);
 }

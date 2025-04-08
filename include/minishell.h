@@ -18,6 +18,7 @@
 /* Variables */
 
 # define PATH_MAX 4096
+# define QUOTES_MAX 1024
 
 /* Structures */
 
@@ -26,6 +27,20 @@ typedef struct s_garbage_collector
 	void						*mem;
 	struct s_garbage_collector	*next;
 }								t_garbage_collector;
+
+typedef struct s_stack
+{
+	char						data[QUOTES_MAX];
+	int							top;
+}								t_stack;
+
+/* stack.c */
+
+void							init_stack(t_stack *stack);
+int								is_stack_empty(t_stack *stack);
+int								push_stack(t_stack *stack, char c);
+char							pop_stack(t_stack *stack);
+char							top_stack(t_stack *stack);
 
 /* buildins */
 
@@ -55,10 +70,23 @@ void							gc_free_array(char **array,
 void							gc_free_all(t_garbage_collector *head);
 char							*gc_strjoin(char *s1, char *s2,
 									t_garbage_collector **head);
+char							*gc_strdup(const char *s,
+									t_garbage_collector **head);
+char							*gc_substr(char const *s, unsigned int start,
+									size_t len, t_garbage_collector **head);
+char							**gc_split(char const *s, char c,
+									t_garbage_collector **head);
 
 /* utils_env.c */
 
 int								gc_setenv(char *name, char *value,
+									t_garbage_collector **head);
+
+/* parse.c */
+
+int								get_env_value(char ***input, char *input_str,
+									t_garbage_collector **head);
+int								testing_parsing(char *input_str,
 									t_garbage_collector **head);
 
 #endif

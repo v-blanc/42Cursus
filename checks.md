@@ -9,7 +9,6 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp ./
 ```
 - **To Do**: 
     - Check every exit code of the builtins
-    - Handle cd command when current path/folder is deleted (zsh: permission denied: *path*)
 
 - **Ideas**:
     - none :(
@@ -67,15 +66,15 @@ foreground pipeline.
 
 ### srcs/builtins/
 
-| File name | No leaks | Code errors |
-|-----------|-----------|-----------|
-| cd.c | ✅ | ❓ |
-| echo.c | ❓ | ❓ |
-| env.c | ✅ | ❓ |
-| exit.c | ✅ | ❓ |
-| export.c | ❓ | ❓ |
-| pwd.c | ✅ | ❓ |
-| unset.c | ❓ | ❓ |
+| File name | No leaks / NULL-check | Code errors | Norminette (wihtout header and comments) |
+|-----------|-----------|-----------|-----------|
+| cd.c | ✅ | ❓ | ✅ |
+| echo.c | ✅ | ❓ | ✅ |
+| env.c | ✅ | ❓ | ✅ |
+| exit.c | ✅ | ❓ | ✅ |
+| export.c | ✅ | ❓ | ✅ |
+| pwd.c | ✅ | ❓ | ✅ |
+| unset.c | ✅ | ❓ | ✅ |
 
 
 ---
