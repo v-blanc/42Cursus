@@ -7,8 +7,9 @@ OBJDIR := ./objs
 SRCS := main.c utils_env.c\
 		gc_functions/garbage_collector.c gc_functions/gc_strjoin.c gc_functions/gc_strdup.c\
 		gc_functions/gc_substr.c gc_functions/gc_split.c\
+		stack/stack.c\
 		sig/sig.c\
-		parsing/get_env_value.c\
+		parsing/get_env_value.c parsing/quotes_parse.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))

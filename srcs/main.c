@@ -47,21 +47,26 @@ void	set_input(t_garbage_collector **head)
 			exit(0);
 		}
 		add_history(input);
-		if (cd(input, head))
-			break ; // TESTING CD
+		// if (cd(input, head))
+		// 	break ; // TESTING CD
 		// echo(input, true); // TESTING ECHO
 		// gc_setenv("TEST", "test", head);
-		// export("TEST", input, head);      // TESTING EXPORT
+		// export(NULL, "test", head); // TESTING EXPORT
 		// env();                            // TESTING ENV
 		// to_unset = ft_split("TEST", ' '); // tmp can leak
 		// unset(to_unset, head);            // TESTING UNSET
 		// for (int i = 0; to_unset[i]; i++) // tmp can leak
 		// 	free(to_unset[i]);
 		// free(to_unset); // tmp can leak
-		// env();          // TESTING ENV
-		// export(NULL, NULL, head);    // TESTING EXPORT
+		// env(); // TESTING ENV
+		// export(NULL, NULL, head); // TESTING EXPORT
 		// pwd(); // TESTING PWD
 		// printf(">> %s\n", getenv(input));
+		// printf("*****************************\n");
+		// printf(">>> %d\n", cd(input, head));
+		// printf("*****************************\n");
+		if (testing_parsing(input, head))
+			break ;
 		free(input);
 	}
 	free(input);
@@ -79,7 +84,7 @@ int	init_environ(t_garbage_collector **head)
 		environ = (char **)gc_malloc_array(3, head);
 		environ[0] = gc_strjoin("PWD=", getcwd(NULL, 0), head);
 		environ[1] = gc_strjoin("SHLVL=1", "", head);
-		// TODO: change to use `which env` ?
+		// TODO: change to use `which env` ou autre ?
 		environ[2] = gc_strjoin("_=/usr/bin/env", "", head);
 		environ[3] = NULL;
 		if (!environ[0] || !environ[1] || !environ[2])

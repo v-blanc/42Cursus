@@ -18,6 +18,7 @@
 /* Variables */
 
 # define PATH_MAX 4096
+# define QUOTES_MAX 1024
 
 /* Structures */
 
@@ -26,6 +27,20 @@ typedef struct s_garbage_collector
 	void						*mem;
 	struct s_garbage_collector	*next;
 }								t_garbage_collector;
+
+typedef struct s_stack
+{
+	char						data[QUOTES_MAX];
+	int							top;
+}								t_stack;
+
+/* stack.c */
+
+void							init_stack(t_stack *stack);
+int								is_stack_empty(t_stack *stack);
+int								push_stack(t_stack *stack, char c);
+char							pop_stack(t_stack *stack);
+char							top_stack(t_stack *stack);
 
 /* buildins */
 
