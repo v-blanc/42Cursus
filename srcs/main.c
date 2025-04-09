@@ -24,6 +24,42 @@ char	*set_readline_prompt(t_garbage_collector **head)
 	return (final_rl_prompt);
 }
 
+int	testing(char *input, t_garbage_collector **head)
+{
+	char	**split_input;
+	char	*new_input;
+
+	if (!input)
+		return (1);
+	if (test_quotes_validity(input))
+		return (1);
+	new_input = NULL;
+	parse_quotes(input, &new_input, head);
+	split_input = ft_split(new_input, ' ');
+	if (!split_input)
+		return (1);
+	if (!ft_strcmp(split_input[0], "exit"))
+		return (1);
+	else if (!ft_strcmp(split_input[0], "cd"))
+		cd(new_input + ft_strlen(split_input[0]) + 1, head);
+	else if (!ft_strcmp(split_input[0], "echo"))
+		echo(new_input + ft_strlen(split_input[0]) + 1, false);
+	else if (!ft_strcmp(split_input[0], "env"))
+		env();
+	else if (!ft_strcmp(split_input[0], "export"))
+		export(NULL, new_input + ft_strlen(split_input[0]) + 1, head);
+	else if (!ft_strcmp(split_input[0], "pwd"))
+		pwd();
+	else if (!ft_strcmp(split_input[0], "unset"))
+		unset(split_input + 1, head);
+	else
+		printf("minishell: Command not found\n");
+	for (int i = 0; split_input[i]; i++)
+		free(split_input[i]);
+	free(split_input);
+	return (0);
+}
+
 void	set_input(t_garbage_collector **head)
 {
 	char	*input;
@@ -47,26 +83,7 @@ void	set_input(t_garbage_collector **head)
 			exit(0);
 		}
 		add_history(input);
-		// if (cd(input, head))
-		// 	break ; // TESTING CD
-		// echo(input, true); // TESTING ECHO
-		// gc_setenv("TEST", "test", head);
-		// export(NULL, "test", head); // TESTING EXPORT
-		// env();                            // TESTING ENV
-		// to_unset = ft_split("TEST", ' '); // tmp can leak
-		// unset(to_unset, head);            // TESTING UNSET
-		// for (int i = 0; to_unset[i]; i++) // tmp can leak
-		// 	free(to_unset[i]);
-		// free(to_unset); // tmp can leak
-		// env(); // TESTING ENV
-		// export(NULL, NULL, head); // TESTING EXPORT
-		// pwd(); // TESTING PWD
-		// printf(">> %s\n", getenv(input));
-		// printf("*****************************\n");
-		// printf(">>> %d\n", cd(input, head));
-		// printf("*****************************\n");
-		if (testing_parsing(input, head))
-			break ;
+		testing(input, head);
 		free(input);
 	}
 	free(input);
