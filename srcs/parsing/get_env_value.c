@@ -14,6 +14,7 @@ static int	found_value(char **input_with_env, char *input_str, int *ind,
 		value = "9999999"; // TODO: get exit status
 	else
 	{
+		// TODO: create gc_substr function or use another way
 		(void)head;
 		name = ft_substr(input_str, ind[0] + 1, ind[1] - ind[0] - 1);
 		if (!name)
