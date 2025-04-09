@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	found_value(char **input_with_env, char *input_str, int *ind,
+static int	found_value(char **input_with_env, char *input_str, int *ind,
 		t_garbage_collector **head)
 {
 	char	*value;
@@ -29,7 +29,7 @@ int	found_value(char **input_with_env, char *input_str, int *ind,
 	return (0);
 }
 
-void	detect_var(char **input_with_env, char *input_str, int *ind, int *i)
+static void	detect_var(char **input_with_env, char *input_str, int *ind, int *i)
 {
 	while (input_str[ind[0]] && ft_strncmp(&input_str[ind[0]], "$", 1))
 		(*input_with_env)[(*i)++] = input_str[ind[0]++];
@@ -71,13 +71,13 @@ int	get_env_value(char **input_with_env, char *input_str,
 	return (0);
 }
 
-int	testing_parsing(char *input_str, t_garbage_collector **head)
-{
-	char	*input_with_env;
+// int	testing_parsing(char *input_str, t_garbage_collector **head)
+// {
+// 	char	*input_with_env;
 
-	input_with_env = NULL;
-	if (get_env_value(&input_with_env, input_str, head))
-		return (1);
-	printf("\n>>>> %s\n\n", input_with_env);
-	return (0);
-}
+// 	input_with_env = NULL;
+// 	if (get_env_value(&input_with_env, input_str, head))
+// 		return (1);
+// 	printf("\n>>>> %s\n\n", input_with_env);
+// 	return (0);
+// }
