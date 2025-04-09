@@ -87,6 +87,8 @@ int								gc_setenv(char *name, char *value,
 int								get_env_value(char **input_with_env,
 									char *input_str,
 									t_garbage_collector **head);
+int								test_quotes_validity(char *input_str,
+									char *last_quote);
 int								testing_parsing(char *input_str,
 									t_garbage_collector **head);
 
