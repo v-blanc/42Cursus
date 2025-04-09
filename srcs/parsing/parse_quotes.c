@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	test_quotes_validity(char *input_str, char *last_quote)
+int	test_quotes_validity(char *input_str)
 {
 	t_stack	stack;
 	int		i;
@@ -13,7 +13,6 @@ int	test_quotes_validity(char *input_str, char *last_quote)
 		{
 			if (!is_stack_empty(&stack) && top_stack(&stack) == input_str[i])
 			{
-				*last_quote = input_str[i];
 				if (pop_stack(&stack) != input_str[i])
 					return (1);
 			}
@@ -71,6 +70,9 @@ int	parse_quotes(char *input, char **new_input, t_garbage_collector **head)
 			if (sub_parse_quotes(input, new_input, ind, head))
 				return (1);
 		}
+		// else if (input[ind[0]] == '$')
+		// {
+		// }
 		else if (ind[2] == 0)
 			(*new_input)[ind[1]++] = input[ind[0]];
 		ind[0]++;
@@ -81,12 +83,10 @@ int	parse_quotes(char *input, char **new_input, t_garbage_collector **head)
 int	testing_parsing(char *input_str, t_garbage_collector **head)
 {
 	char	*new_input;
-	char	last_quote;
 
-	(void)head;
-	last_quote = '\0';
-	printf("\nquotes validity: \n>>>%s<<<\n", test_quotes_validity(input_str,
-			&last_quote) == 0 ? "VALID" : "INVALID");
+	// (void)head;
+	printf("\nquotes validity: \n>>>%s<<<\n",
+		test_quotes_validity(input_str) == 0 ? "VALID" : "INVALID");
 	new_input = NULL;
 	parse_quotes(input_str, &new_input, head);
 	printf("\ninput with env: \n>>>%s<<<\n\n", new_input);
