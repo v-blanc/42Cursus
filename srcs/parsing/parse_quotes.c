@@ -80,10 +80,11 @@ int	parse_quotes(char *input, char **new_input, t_garbage_collector **head)
 
 int	testing_parsing(char *input_str, t_garbage_collector **head)
 {
-	char *new_input;
+	char	*new_input;
+	char	last_quote;
 
 	(void)head;
-	char last_quote = '\0';
+	last_quote = '\0';
 	printf("\nquotes validity: \n>>>%s<<<\n", test_quotes_validity(input_str,
 			&last_quote) == 0 ? "VALID" : "INVALID");
 	new_input = NULL;

@@ -58,7 +58,6 @@ int	export(char *name, char *value, t_garbage_collector **head)
 		while (environ[i])
 		{
 			if (ft_strncmp(environ[environ_indexes[i]], "_=", 2) != 0)
-				// Can add "declare -x" before
 				printf("%s\n", environ[environ_indexes[i]]);
 			i++;
 		}
