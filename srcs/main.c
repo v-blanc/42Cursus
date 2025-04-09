@@ -14,10 +14,10 @@ char	*set_readline_prompt(t_garbage_collector **head)
 		ft_strlcpy(pwd, pwd + ft_strlen(pwd_home) - 1, PATH_MAX);
 		pwd[0] = '~';
 	}
-	rl_prompt = gc_strjoin("\033[1;32mminishell\033[0m:\033[1;34m", pwd, head);
+	rl_prompt = gc_strjoin("minishell:", pwd, head);
 	if (!rl_prompt)
 		return (NULL);
-	final_rl_prompt = gc_strjoin(rl_prompt, "\033[0m$\033[0m ", head);
+	final_rl_prompt = gc_strjoin(rl_prompt, "$ ", head);
 	if (!final_rl_prompt)
 		return (NULL);
 	gc_free(rl_prompt, head);
