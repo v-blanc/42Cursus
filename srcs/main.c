@@ -31,6 +31,11 @@ int	testing(char *input, t_garbage_collector **head)
 
 	if (!input)
 		return (1);
+	if (!input[0])
+	{
+		// TODO: set exit status to 130
+		return (1);
+	}
 	if (test_quotes_validity(input))
 		return (1);
 	new_input = NULL;
@@ -41,13 +46,28 @@ int	testing(char *input, t_garbage_collector **head)
 	if (!ft_strcmp(split_input[0], "exit"))
 		return (1);
 	else if (!ft_strcmp(split_input[0], "cd"))
-		cd(new_input + ft_strlen(split_input[0]) + 1, head);
+		cd(split_input[1], head);
 	else if (!ft_strcmp(split_input[0], "echo"))
-		echo(new_input + ft_strlen(split_input[0]) + 1, false);
+	{
+		printf("Caution: echo have to be reworked\n");
+		echo(split_input[1], false);
+	}
 	else if (!ft_strcmp(split_input[0], "env"))
 		env();
+	else if (ft_strcmp(input, "exit") == 0)
+	{
+		free(input);
+		gc_free_all(*head);
+		rl_clear_history();
+		exit(0);
+	}
 	else if (!ft_strcmp(split_input[0], "export"))
-		export(NULL, new_input + ft_strlen(split_input[0]) + 1, head);
+	{
+		if (!split_input[2])
+			export(split_input[1], "", head);
+		else
+			export(split_input[1], split_input[2], head);
+	}
 	else if (!ft_strcmp(split_input[0], "pwd"))
 		pwd();
 	else if (!ft_strcmp(split_input[0], "unset"))
@@ -65,7 +85,6 @@ void	set_input(t_garbage_collector **head)
 	char	*input;
 	char	*rl_prompt;
 
-	// char	**to_unset;
 	while (1)
 	{
 		rl_prompt = set_readline_prompt(head);
@@ -74,7 +93,6 @@ void	set_input(t_garbage_collector **head)
 			gc_free(rl_prompt, head);
 		if (!input) // EOF ie CTRL-D
 			return (free(input), printf("exit\n"), exit(0));
-		// TODO: remove when exit is implemented
 		if (ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
@@ -82,8 +100,9 @@ void	set_input(t_garbage_collector **head)
 			rl_clear_history();
 			exit(0);
 		}
+		// testing(input, head);
+		testing_input(input, head);
 		add_history(input);
-		testing(input, head);
 		free(input);
 	}
 	free(input);
