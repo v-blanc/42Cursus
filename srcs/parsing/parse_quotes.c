@@ -37,12 +37,12 @@ static int	sub_parse_quotes(char *input, char **new_input, int *ind,
 	}
 	else
 	{
-		// TODO: create gc_substr function or use another way
-		sub_input = ft_substr(input, ind[3], ind[0] - ind[3] + 1);
+		sub_input = gc_substr(input, ind[3], ind[0] - ind[3] + 1, head);
 		if (sub_input == NULL)
 			return (1);
 		if (get_env_value(&tmp, sub_input, head))
 			return (1);
+		gc_free(sub_input, head);
 		ft_strlcat((*new_input), tmp, ft_strlen((*new_input)) + ft_strlen(tmp)
 			+ 1);
 		ind[2] = 0;
@@ -77,6 +77,7 @@ int	parse_quotes(char *input, char **new_input, t_garbage_collector **head)
 			(*new_input)[ind[1]++] = input[ind[0]];
 		ind[0]++;
 	}
+	(*new_input)[ind[1]] = '\0';
 	return (0);
 }
 
@@ -84,7 +85,6 @@ int	testing_parsing(char *input_str, t_garbage_collector **head)
 {
 	char	*new_input;
 
-	// (void)head;
 	printf("\nquotes validity: \n>>>%s<<<\n",
 		test_quotes_validity(input_str) == 0 ? "VALID" : "INVALID");
 	new_input = NULL;
