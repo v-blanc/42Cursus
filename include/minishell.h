@@ -90,7 +90,7 @@ int								get_env_value(char **input_with_env,
 int								test_quotes_validity(char *input_str);
 int								parse_quotes(char *input, char **new_input,
 									t_garbage_collector **head);
-int								testing_parsing(char *input_str,
+int								testing_input(char *input,
 									t_garbage_collector **head);
 
 #endif
