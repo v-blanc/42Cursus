@@ -10,7 +10,7 @@ void	*gc_malloc(size_t size, t_garbage_collector **head)
 		printf("malloc error\n");
 		return (NULL);
 	}
-	new->mem = malloc(size);
+	new->mem = ft_calloc(1, size);
 	if (!new->mem)
 	{
 		printf("malloc error\n");
