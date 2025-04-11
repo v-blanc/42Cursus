@@ -1,7 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-/* Libraries */
+/* --------------------- Libraries --------------------- */
 
 # include "../libft/libft.h"
 # include <errno.h>
@@ -15,70 +15,133 @@
 # include <string.h>
 # include <unistd.h>
 
-/* Variables */
+/* --------------------- Variables --------------------- */
 
 # define PATH_MAX 4096
 # define QUOTES_MAX 1024
 
-/* Structures */
+/* --------------------------- Token types --------------------------- */
+
+typedef enum e_token_type
+{
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
+	PAREN_OPEN,
+	PAREN_CLOSE,
+	AND,
+	OR,
+	END
+}								t_token_type;
+
+typedef struct s_token
+{
+	t_token_type				type;
+	char						*value;
+}								t_token;
+
+/* --------------------------- AST --------------------------- */
+
+typedef enum e_node_type
+{
+	NODE_COMMAND,
+	NODE_PIPELINE,
+	NODE_BINARY_OP,
+	NODE_REDIRECTION
+}								t_node_type;
+
+typedef struct s_ast_node
+{
+	t_node_type					type;
+	union						u_data
+	{
+		struct					s_cmd
+		{
+			char				**argv;
+			int					redir_count;
+			struct s_ast_node	**redirs;
+		};
+		struct					s_pipe
+		{
+			int					cmd_count;
+			struct s_ast_node	**commands;
+		};
+		struct					s_op
+		{
+			char				*op;
+			struct s_ast_node	*left;
+			struct s_ast_node	*right;
+		};
+		struct					s_red
+		{
+			int					fd_source;
+			char				*op;
+			char				*target;
+		};
+	};
+}								t_ast_node;
+
+/* --------------------- Garbage Collector --------------------- */
 
 typedef struct s_gc
 {
-	void		*mem;
-	struct s_gc	*next;
-}				t_gc;
+	void						*mem;
+	struct s_gc					*next;
+}								t_gc;
+
+void							*gc_malloc(size_t size, t_gc **head);
+void							**gc_malloc_array(size_t size, t_gc **head);
+void							gc_free(void *mem, t_gc **head);
+void							gc_free_array(char **array, t_gc **head);
+void							gc_free_all(t_gc *head);
+char							*gc_strjoin(char *s1, char *s2, t_gc **head);
+char							*gc_strdup(const char *s, t_gc **head);
+char							*gc_substr(char const *s, unsigned int start,
+									size_t len, t_gc **head);
+char							**gc_split(char const *s, char c, t_gc **head);
+
+/* --------------------- Parsing --------------------- */
+
+int								get_env_value(char **input_with_env,
+									char *input_str, t_gc **head);
+int								test_quotes_validity(char *input_str);
+int								parse_quotes(char *input, char **new_input,
+									t_gc **head);
+int								testing_input(char *input, t_gc **head);
+
+/* --------------------- Stack --------------------- */
 
 typedef struct s_stack
 {
-	char		data[QUOTES_MAX];
-	int			top;
-}				t_stack;
+	char						data[QUOTES_MAX];
+	int							top;
+}								t_stack;
 
-/* stack.c */
+void							init_stack(t_stack *stack);
+int								is_stack_empty(t_stack *stack);
+int								push_stack(t_stack *stack, char c);
+char							pop_stack(t_stack *stack);
+char							top_stack(t_stack *stack);
 
-void			init_stack(t_stack *stack);
-int				is_stack_empty(t_stack *stack);
-int				push_stack(t_stack *stack, char c);
-char			pop_stack(t_stack *stack);
-char			top_stack(t_stack *stack);
+/* --------------------- Buildins --------------------- */
 
-/* buildins */
+int								cd(char *path, t_gc **head);
+int								echo(char *to_print, bool n_option_flag);
+int								env(void);
+int								ft_exit(int status);
+int								export(char *name, char *value, t_gc **head);
+int								pwd(void);
+int								unset(char **to_unset, t_gc **head);
 
-int				cd(char *path, t_gc **head);
-int				echo(char *to_print, bool n_option_flag);
-int				env(void);
-int				ft_exit(int status);
-int				export(char *name, char *value, t_gc **head);
-int				pwd(void);
-int				unset(char **to_unset, t_gc **head);
+/* --------------------- Signals --------------------- */
 
-/* sig.c */
+void							init_sig(void);
 
-void			init_sig(void);
+/* --------------------- Utils --------------------- */
 
-/* garbage_collector.c */
-
-void			*gc_malloc(size_t size, t_gc **head);
-void			**gc_malloc_array(size_t size, t_gc **head);
-void			gc_free(void *mem, t_gc **head);
-void			gc_free_array(char **array, t_gc **head);
-void			gc_free_all(t_gc *head);
-char			*gc_strjoin(char *s1, char *s2, t_gc **head);
-char			*gc_strdup(const char *s, t_gc **head);
-char			*gc_substr(char const *s, unsigned int start, size_t len,
-					t_gc **head);
-char			**gc_split(char const *s, char c, t_gc **head);
-
-/* utils_env.c */
-
-int				gc_setenv(char *name, char *value, t_gc **head);
-
-/* parse.c */
-
-int				get_env_value(char **input_with_env, char *input_str,
-					t_gc **head);
-int				test_quotes_validity(char *input_str);
-int				parse_quotes(char *input, char **new_input, t_gc **head);
-int				testing_input(char *input, t_gc **head);
+int								gc_setenv(char *name, char *value, t_gc **head);
 
 #endif
