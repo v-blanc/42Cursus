@@ -9,7 +9,7 @@ SRCS := main.c utils_env.c\
 		gc_functions/gc_substr.c gc_functions/gc_split.c\
 		stack/stack.c\
 		sig/sig.c\
-		parsing/tokenize.c parsing/tokenize_utils.c\
+		parsing/tokenizer.c parsing/tokenizer_utils.c parsing/tmp_filename.c\
 		parsing/get_env_value.c parsing/parse_quotes.c parsing/parse_input.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))

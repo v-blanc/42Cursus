@@ -79,6 +79,8 @@ t_token							*new_token(t_token_type type, char quote_type,
 void							token_add_back(t_token **tokens, t_token *new);
 int								tokenizer(t_token **tokens, const char *s,
 									t_gc **head);
+int								merge_word_tokens(t_token **tokens,
+									t_gc **head);
 
 /* --------------------------- AST --------------------------- */
 
