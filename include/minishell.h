@@ -20,70 +20,6 @@
 # define PATH_MAX 4096
 # define QUOTES_MAX 1024
 
-/* --------------------------- Token types --------------------------- */
-
-typedef enum e_token_type
-{
-	WORD,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
-	PAREN_OPEN,
-	PAREN_CLOSE,
-	AND,
-	OR,
-	END
-}								t_token_type;
-
-typedef struct s_token
-{
-	t_token_type				type;
-	char						*value;
-}								t_token;
-
-/* --------------------------- AST --------------------------- */
-
-typedef enum e_node_type
-{
-	NODE_COMMAND,
-	NODE_PIPELINE,
-	NODE_BINARY_OP,
-	NODE_REDIRECTION
-}								t_node_type;
-
-typedef struct s_ast_node
-{
-	t_node_type					type;
-	union						u_data
-	{
-		struct					s_cmd
-		{
-			char				**argv;
-			int					redir_count;
-			struct s_ast_node	**redirs;
-		};
-		struct					s_pipe
-		{
-			int					cmd_count;
-			struct s_ast_node	**commands;
-		};
-		struct					s_op
-		{
-			char				*op;
-			struct s_ast_node	*left;
-			struct s_ast_node	*right;
-		};
-		struct					s_red
-		{
-			int					fd_source;
-			char				*op;
-			char				*target;
-		};
-	};
-}								t_ast_node;
-
 /* --------------------- Garbage Collector --------------------- */
 
 typedef struct s_gc
@@ -102,6 +38,87 @@ char							*gc_strdup(const char *s, t_gc **head);
 char							*gc_substr(char const *s, unsigned int start,
 									size_t len, t_gc **head);
 char							**gc_split(char const *s, char c, t_gc **head);
+
+/* --------------------------- Token types --------------------------- */
+
+typedef enum e_token_type
+{
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
+	PAREN_OPEN,
+	PAREN_CLOSE,
+	AND,
+	OR,
+	END
+}								t_token_type;
+
+typedef enum e_quote_type
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+}								t_quote_type;
+
+typedef struct s_token
+{
+	t_token_type				type;
+	t_quote_type				quote;
+	char						*value;
+	struct s_token				*next;
+}								t_token;
+
+int								is_operator_char(char c);
+t_token_type					get_op_type(const char *s, int *len);
+t_token							*new_token(t_token_type type, char quote_type,
+									const char *value, t_gc **head);
+void							token_add_back(t_token **tokens, t_token *new);
+int								tokenizer(t_token **tokens, const char *s,
+									t_gc **head);
+
+/* --------------------------- AST --------------------------- */
+
+typedef enum e_node_type
+{
+	NODE_COMMAND,
+	NODE_PIPELINE,
+	NODE_BINARY_OP,
+	NODE_REDIRECTION
+}								t_node_type;
+
+typedef struct s_ast_node
+{
+	t_node_type					type;
+	union
+	{
+		struct
+		{
+			char				**argv;
+			int					redir_count;
+			struct s_ast_node	**redirs;
+		} s_cmd;
+		struct
+		{
+			int					cmd_count;
+			struct s_ast_node	**commands;
+		} s_pipe;
+		struct
+		{
+			char				*op;
+			struct s_ast_node	*left;
+			struct s_ast_node	*right;
+		} s_op;
+		struct
+		{
+			int					fd_source;
+			char				*op;
+			char				*target;
+		} s_red;
+	} u_data;
+}								t_ast_node;
 
 /* --------------------- Parsing --------------------- */
 
