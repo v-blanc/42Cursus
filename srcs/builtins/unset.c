@@ -24,7 +24,7 @@ static int	to_unset_found(char **to_unset)
 	return (found);
 }
 
-static int	unset_env(char ***new_env, char *name, t_garbage_collector **head)
+static int	unset_env(char ***new_env, char *name, t_gc **head)
 {
 	int	i;
 	int	j;
@@ -47,7 +47,7 @@ static int	unset_env(char ***new_env, char *name, t_garbage_collector **head)
 	return (1);
 }
 
-int	unset(char **to_unset, t_garbage_collector **head)
+int	unset(char **to_unset, t_gc **head)
 {
 	char	**new_env;
 	int		new_env_size;

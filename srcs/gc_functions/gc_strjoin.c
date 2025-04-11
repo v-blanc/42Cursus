@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-char	*gc_strjoin(char *s1, char *s2, t_garbage_collector **head)
+char	*gc_strjoin(char *s1, char *s2, t_gc **head)
 {
 	char	*res;
 	size_t	s1_len;

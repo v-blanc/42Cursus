@@ -1,7 +1,6 @@
 #include "../../include/minishell.h"
 
-char	*gc_substr(char const *s, unsigned int start, size_t len,
-		t_garbage_collector **head)
+char	*gc_substr(char const *s, unsigned int start, size_t len, t_gc **head)
 {
 	char	*sub;
 	size_t	len_s;

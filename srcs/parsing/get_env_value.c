@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
 static int	found_value(char **input_with_env, char *input_str, int *ind,
-		t_garbage_collector **head)
+		t_gc **head)
 {
 	char	*value;
 	char	*name;
@@ -43,8 +43,7 @@ static void	detect_var(char **input_with_env, char *input_str, int *ind, int *i)
 		(*input_with_env)[(*i)++] = '$';
 }
 
-int	get_env_value(char **input_with_env, char *input_str,
-		t_garbage_collector **head)
+int	get_env_value(char **input_with_env, char *input_str, t_gc **head)
 {
 	int	i;
 	int	ind[2];
@@ -71,7 +70,7 @@ int	get_env_value(char **input_with_env, char *input_str,
 	return (0);
 }
 
-// int	testing_parsing(char *input_str, t_garbage_collector **head)
+// int	testing_parsing(char *input_str, t_gc **head)
 // {
 // 	char	*input_with_env;
 

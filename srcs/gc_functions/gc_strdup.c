@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-char	*gc_strdup(const char *s, t_garbage_collector **head)
+char	*gc_strdup(const char *s, t_gc **head)
 {
 	char	*d;
 	size_t	len;

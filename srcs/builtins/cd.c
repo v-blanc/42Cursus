@@ -23,7 +23,7 @@ static char	*path_handler(char *path)
 	return (new_path);
 }
 
-static int	cd_exec(char *path, char *new_path, t_garbage_collector **head)
+static int	cd_exec(char *path, char *new_path, t_gc **head)
 {
 	char	*pwd_path;
 
@@ -45,7 +45,7 @@ static int	cd_exec(char *path, char *new_path, t_garbage_collector **head)
 	return (0);
 }
 
-int	cd(char *path, t_garbage_collector **head)
+int	cd(char *path, t_gc **head)
 {
 	char	new_path[PATH_MAX];
 	char	*path_home;

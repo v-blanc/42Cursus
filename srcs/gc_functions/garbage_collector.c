@@ -1,10 +1,10 @@
 #include "../../include/minishell.h"
 
-void	*gc_malloc(size_t size, t_garbage_collector **head)
+void	*gc_malloc(size_t size, t_gc **head)
 {
-	t_garbage_collector	*new;
+	t_gc	*new;
 
-	new = malloc(sizeof(t_garbage_collector));
+	new = malloc(sizeof(t_gc));
 	if (!new)
 	{
 		printf("malloc error\n");
@@ -22,7 +22,7 @@ void	*gc_malloc(size_t size, t_garbage_collector **head)
 	return (new->mem);
 }
 
-void	**gc_malloc_array(size_t size, t_garbage_collector **head)
+void	**gc_malloc_array(size_t size, t_gc **head)
 {
 	void	**array;
 
@@ -33,9 +33,9 @@ void	**gc_malloc_array(size_t size, t_garbage_collector **head)
 	return (array);
 }
 
-void	gc_free(void *mem, t_garbage_collector **head)
+void	gc_free(void *mem, t_gc **head)
 {
-	t_garbage_collector	*tmp;
+	t_gc	*tmp;
 
 	if ((*head)->mem == mem)
 	{
@@ -61,7 +61,7 @@ void	gc_free(void *mem, t_garbage_collector **head)
 	}
 }
 
-void	gc_free_array(char **array, t_garbage_collector **head)
+void	gc_free_array(char **array, t_gc **head)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ void	gc_free_array(char **array, t_garbage_collector **head)
 	gc_free(array, head);
 }
 
-void	gc_free_all(t_garbage_collector *head)
+void	gc_free_all(t_gc *head)
 {
 	if (head == NULL)
 		return ;

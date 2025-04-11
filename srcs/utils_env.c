@@ -3,7 +3,7 @@
 extern char	**environ;
 
 static int	update_environ(char **to_update, char *name, char *value,
-		t_garbage_collector **head)
+		t_gc **head)
 {
 	(*to_update) = gc_malloc(ft_strlen(name) + ft_strlen(value) + 2, head);
 	if (!(*to_update))
@@ -15,8 +15,7 @@ static int	update_environ(char **to_update, char *name, char *value,
 	return (0);
 }
 
-static int	add_to_environ(int i, char *name, char *value,
-		t_garbage_collector **head)
+static int	add_to_environ(int i, char *name, char *value, t_gc **head)
 {
 	char	**env_cpy;
 
@@ -38,7 +37,7 @@ static int	add_to_environ(int i, char *name, char *value,
 	return (0);
 }
 
-int	gc_setenv(char *name, char *value, t_garbage_collector **head)
+int	gc_setenv(char *name, char *value, t_gc **head)
 {
 	int	i;
 

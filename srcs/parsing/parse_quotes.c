@@ -25,7 +25,7 @@ int	test_quotes_validity(char *input_str)
 }
 
 static int	sub_parse_quotes(char *input, char **new_input, int *ind,
-		t_garbage_collector **head)
+		t_gc **head)
 {
 	char	*tmp;
 	char	*sub_input;
@@ -51,7 +51,7 @@ static int	sub_parse_quotes(char *input, char **new_input, int *ind,
 	return (0);
 }
 
-int	parse_quotes(char *input, char **new_input, t_garbage_collector **head)
+int	parse_quotes(char *input, char **new_input, t_gc **head)
 {
 	int	ind[4];
 
@@ -81,7 +81,7 @@ int	parse_quotes(char *input, char **new_input, t_garbage_collector **head)
 	return (0);
 }
 
-int	testing_parsing(char *input_str, t_garbage_collector **head)
+int	testing_parsing(char *input_str, t_gc **head)
 {
 	char	*new_input;
 

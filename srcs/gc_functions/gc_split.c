@@ -19,8 +19,7 @@ static int	ft_count_words(char const *s, char c)
 	return (count);
 }
 
-static int	gc_sub_split(char const *s, char c, char **tab,
-		t_garbage_collector **head)
+static int	gc_sub_split(char const *s, char c, char **tab, t_gc **head)
 {
 	char	*new_s;
 	int		i;
@@ -48,7 +47,7 @@ static int	gc_sub_split(char const *s, char c, char **tab,
 /* Allocates (with malloc(3)) and returns an array of strings obtained
 by splitting ’s’ using the character ’c’ as a delimiter.
 The array is NULL-terminated. */
-char	**gc_split(char const *s, char c, t_garbage_collector **head)
+char	**gc_split(char const *s, char c, t_gc **head)
 {
 	char	**tab;
 

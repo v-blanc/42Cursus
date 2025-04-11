@@ -27,8 +27,7 @@ static void	sort_environ_indexes(int *environ_indexes)
 	}
 }
 
-static int	get_environ_sorted_indexes(int **environ_indexes,
-		t_garbage_collector **head)
+static int	get_environ_sorted_indexes(int **environ_indexes, t_gc **head)
 {
 	int	i;
 	int	len_environ;
@@ -44,7 +43,7 @@ static int	get_environ_sorted_indexes(int **environ_indexes,
 	return (0);
 }
 
-int	export(char *name, char *value, t_garbage_collector **head)
+int	export(char *name, char *value, t_gc **head)
 {
 	int	*environ_indexes;
 	int	i;

@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
 static int	sub_parse_input(char *input, char ***cmd_args, int i,
-		int *quote_flag, t_garbage_collector **head)
+		int *quote_flag, t_gc **head)
 {
 	int	len_input;
 
@@ -26,7 +26,7 @@ static int	sub_parse_input(char *input, char ***cmd_args, int i,
 	return (0);
 }
 
-int	parse_input(char *input, char ***cmd_args, t_garbage_collector **head)
+int	parse_input(char *input, char ***cmd_args, t_gc **head)
 {
 	int	i;
 	int	ret_val;
@@ -56,7 +56,7 @@ int	parse_input(char *input, char ***cmd_args, t_garbage_collector **head)
 	return (0);
 }
 
-int	testing_input(char *input, t_garbage_collector **head)
+int	testing_input(char *input, t_gc **head)
 {
 	char	**cmd_args;
 

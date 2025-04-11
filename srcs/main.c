@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-char	*set_readline_prompt(t_garbage_collector **head)
+char	*set_readline_prompt(t_gc **head)
 {
 	char	*rl_prompt;
 	char	*final_rl_prompt;
@@ -24,7 +24,7 @@ char	*set_readline_prompt(t_garbage_collector **head)
 	return (final_rl_prompt);
 }
 
-int	testing(char *input, t_garbage_collector **head)
+int	testing(char *input, t_gc **head)
 {
 	char	**split_input;
 	char	*new_input;
@@ -80,7 +80,7 @@ int	testing(char *input, t_garbage_collector **head)
 	return (0);
 }
 
-void	set_input(t_garbage_collector **head)
+void	set_input(t_gc **head)
 {
 	char	*input;
 	char	*rl_prompt;
@@ -113,7 +113,7 @@ void	set_input(t_garbage_collector **head)
 
 extern char	**environ;
 
-int	init_environ(t_garbage_collector **head)
+int	init_environ(t_gc **head)
 {
 	if (environ == NULL || environ[0] == NULL)
 	{
@@ -131,7 +131,7 @@ int	init_environ(t_garbage_collector **head)
 
 int	main(void)
 {
-	t_garbage_collector	*head;
+	t_gc	*head;
 
 	head = NULL;
 	init_sig();
