@@ -70,6 +70,7 @@ t_token	*new_token(t_token_type type, char quote_type, const char *value,
 			return (NULL);
 		}
 	}
+	token->joined_next = 0;
 	token->next = NULL;
 	return (token);
 }

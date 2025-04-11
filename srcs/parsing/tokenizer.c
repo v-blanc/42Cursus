@@ -64,6 +64,8 @@ static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 		return (1);
 	(*tok) = new_token(WORD, s[*i - 1], val, head);
 	free(val); // TODO: update for gc (linked to strndup)
+	if (s[*i] && !isspace((unsigned char)s[*i]) && !is_operator_char(s[*i]))
+		(*tok)->joined_next = 1;
 	return (0);
 }
 
@@ -108,8 +110,8 @@ int	tokenizer(t_token **tokens, const char *s, t_gc **head)
 // 		return (1);
 // 	while (tokens)
 // 	{
-// 		printf("Token: type=%d, quote=%d, value=`%s`\n", tokens->type,
-// 			tokens->quote, tokens->value);
+// 		printf("Token: type=%d, quote=%d, joined_next=%d, value=`%s`\n",
+// 			tokens->type, tokens->quote, tokens->joined_next, tokens->value);
 // 		tokens = tokens->next;
 // 	}
 // 	gc_free_all(head);
