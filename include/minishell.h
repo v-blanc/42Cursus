@@ -39,6 +39,16 @@ char							*gc_substr(char const *s, unsigned int start,
 									size_t len, t_gc **head);
 char							**gc_split(char const *s, char c, t_gc **head);
 
+/* --------------------- Context --------------------- */
+
+typedef struct s_context
+{
+	int							argc;
+	char						**argv;
+	int							last_exit_status;
+	t_gc						**head;
+}								t_context;
+
 /* --------------------------- Token types --------------------------- */
 
 typedef enum e_token_type
@@ -77,7 +87,10 @@ t_token_type					get_op_type(const char *s, int *len);
 t_token							*new_token(t_token_type type, char quote_type,
 									const char *value, t_gc **head);
 void							token_add_back(t_token **tokens, t_token *new);
+
 int								tokenizer(t_token **tokens, const char *s,
+									t_gc **head);
+int								expand_one_token(char **w, t_context *context,
 									t_gc **head);
 int								merge_word_tokens(t_token **tokens,
 									t_gc **head);

@@ -1,0 +1,103 @@
+#include "../../include/minishell.h"
+
+static int	is_valid_var_char(char c, int pos)
+{
+	if (pos == 0)
+		return (isalpha(c) || c == '_');
+	return (isalnum(c) || c == '_');
+}
+
+static int	special_case(const char *word, char *result, int *ind,
+		t_context *context)
+{
+	char	*val;
+	int		i;
+
+	if (word[ind[0]] == '?')
+		val = ft_itoa(context->last_exit_status); // TODO: gc_itoa
+	else if (word[ind[0]] == '$')
+		val = ft_itoa(getpid()); // TODO: gc_itoa
+	if (!val)
+		return (1);
+	i = 0;
+	while (val[i])
+		result[ind[1]++] = val[i++];
+	free(val);
+	// gc_free(val, head);
+	ind[0]++;
+	return (0);
+}
+
+static int	sub_expand_one_var(const char *word, char *result, int *ind,
+		t_context *context)
+{
+	int		start;
+	int		len;
+	char	*var_name;
+	char	*val;
+
+	start = ++ind[0];
+	if (word[ind[0]] && (word[ind[0]] == '$' || word[ind[0]] == '?'))
+		return (special_case(word, result, ind, context));
+	len = 0;
+	while (is_valid_var_char(word[ind[0]], len))
+	{
+		ind[0]++;
+		len++;
+	}
+	var_name = strndup(&word[start], len); // TODO: add gc_strndup
+	if (!var_name)
+		return (1);
+	val = getenv(var_name);
+	free(var_name); // TODO: update for gc
+	if (!val)
+		return (0);
+	while (*val)
+		result[ind[1]++] = *val++;
+	return (0);
+}
+
+static void	positional_var(const char *word, t_context *context, char *result,
+		int *ind)
+{
+	int	i;
+	int	nb;
+
+	nb = ft_atoi(&word[ind[0]]);
+	if (context->argc <= nb)
+		return ;
+	i = 0;
+	while (context->argv[nb][i])
+		result[ind[1]++] = context->argv[nb][i++];
+	ind[0]++;
+	return ;
+}
+
+int	expand_one_token(char **w, t_context *context, t_gc **head)
+{
+	char	*result;
+	int		ind[2];
+
+	result = gc_malloc(ft_strlen(*w) * 10 + 1, head); // TODO: calculate size
+	if (!result)
+		return (1);
+	ind[0] = 0;
+	ind[1] = 0;
+	while ((*w)[ind[0]])
+	{
+		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && isdigit((*w)[ind[0]
+				+ 1]))
+			positional_var((*w), context, result, ind);
+		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && (*w)[ind[0] + 1] != ' ')
+		{
+			if (sub_expand_one_var((*w), result, ind, context))
+				return (1);
+		}
+		else
+			result[ind[1]++] = (*w)[ind[0]++];
+	}
+	result[ind[1]] = '\0';
+	gc_free(w, head);
+	(*w) = result;
+	return (0);
+}
