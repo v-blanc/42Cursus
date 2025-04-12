@@ -113,7 +113,8 @@ typedef struct s_ast
 	{
 		struct
 		{
-			char			**argv;
+			int				args_count;
+			char			**args;
 			int				redir_count;
 			struct s_ast	**redirs;
 		} s_cmd;
@@ -124,30 +125,34 @@ typedef struct s_ast
 		} s_pipe;
 		struct
 		{
-			char			*op;
+			int				op;
 			struct s_ast	*left;
 			struct s_ast	*right;
 		} s_op;
 		struct
 		{
+			int				op;
 			int				fd_source;
-			char			*op;
 			char			*target;
 		} s_red;
 	} u_data;
 }							t_ast;
 
-t_ast						*parse_tokens(t_token **tokens, t_gc **head);
+t_ast						*parse_command(t_token **tok, t_gc **head);
+t_ast						*parser(t_token **tokens, t_gc **head);
+
 void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
 
-int							get_env_value(char **input_with_env,
-								char *input_str, t_gc **head);
-int							test_quotes_validity(char *input_str);
-int							parse_quotes(char *input, char **new_input,
+int							parsing(char *input, t_token **tokens,
+								t_context *context, t_gc **head);
+int							testing_parser(char *input, t_context *context,
 								t_gc **head);
-// int							testing_input(char *input, t_gc **head);
+
+/* --------------------- (Old) Parsing --------------------- */
+
+int							test_quotes_validity(char *input_str);
 
 /* --------------------- Stack --------------------- */
 
@@ -180,10 +185,5 @@ void						init_sig(void);
 /* --------------------- Utils --------------------- */
 
 int							gc_setenv(char *name, char *value, t_gc **head);
-
-/* --------------------- Testing --------------------- */
-
-int							testing_parser(char *input, t_context *context,
-								t_gc **head);
 
 #endif
