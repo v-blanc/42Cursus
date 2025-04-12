@@ -125,7 +125,7 @@ typedef struct s_ast
 		} s_pipe;
 		struct
 		{
-			char			*op;
+			int				op;
 			struct s_ast	*left;
 			struct s_ast	*right;
 		} s_op;
@@ -138,7 +138,9 @@ typedef struct s_ast
 	} u_data;
 }							t_ast;
 
-t_ast						*parse_tokens(t_token *tokens, t_gc **head);
+t_ast						*parse_command(t_token **tok, t_gc **head);
+t_ast						*parse_expr(t_token **tokens, t_gc **head);
+
 void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
