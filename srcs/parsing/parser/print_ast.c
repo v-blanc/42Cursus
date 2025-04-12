@@ -1,5 +1,4 @@
-#include "../../include/minishell.h"
-#include <stdio.h>
+#include "../../../include/minishell.h"
 
 void	print_indent(int depth)
 {

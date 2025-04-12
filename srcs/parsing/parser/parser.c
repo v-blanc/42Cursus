@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static t_ast	*parse_primary(t_token **tokens, t_gc **head)
 {

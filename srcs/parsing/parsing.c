@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	parse_master(char *input, t_token **tokens, t_context *context, t_gc **head)
+int	parsing(char *input, t_token **tokens, t_context *context, t_gc **head)
 {
 	if (tokenizer(tokens, input, head))
 		return (1);
@@ -19,7 +19,7 @@ int	testing_parser(char *input, t_context *context, t_gc **head)
 
 	tokens = NULL;
 	printf("\ninput: %s\n\n", input);
-	if (parse_master(input, &tokens, context, head))
+	if (parsing(input, &tokens, context, head))
 		return (1);
 	tokens_head = tokens;
 	while (tokens)

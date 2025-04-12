@@ -145,12 +145,14 @@ void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
 
-int							get_env_value(char **input_with_env,
-								char *input_str, t_gc **head);
-int							test_quotes_validity(char *input_str);
-int							parse_quotes(char *input, char **new_input,
+int							parsing(char *input, t_token **tokens,
+								t_context *context, t_gc **head);
+int							testing_parser(char *input, t_context *context,
 								t_gc **head);
-// int							testing_input(char *input, t_gc **head);
+
+/* --------------------- (Old) Parsing --------------------- */
+
+int							test_quotes_validity(char *input_str);
 
 /* --------------------- Stack --------------------- */
 
@@ -183,10 +185,5 @@ void						init_sig(void);
 /* --------------------- Utils --------------------- */
 
 int							gc_setenv(char *name, char *value, t_gc **head);
-
-/* --------------------- Testing --------------------- */
-
-int							testing_parser(char *input, t_context *context,
-								t_gc **head);
 
 #endif

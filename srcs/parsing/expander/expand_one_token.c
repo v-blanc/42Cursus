@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static int	is_valid_var_char(char c, int pos)
 {

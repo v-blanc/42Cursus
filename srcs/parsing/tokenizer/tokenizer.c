@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static char	*parse_quoted_word(const char *s, int *i, t_gc **head)
 {

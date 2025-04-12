@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static int	sub_merge_tokens(t_token *curr, t_token *next, t_gc **head)
 {
