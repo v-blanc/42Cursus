@@ -80,7 +80,7 @@ int	testing(char *input, t_gc **head)
 	return (0);
 }
 
-void	set_input(t_gc **head)
+void	set_input(t_context *context, t_gc **head)
 {
 	char	*input;
 	char	*rl_prompt;
@@ -101,7 +101,8 @@ void	set_input(t_gc **head)
 			exit(0);
 		}
 		// testing(input, head);
-		testing_input(input, head);
+		// testing_input(input, head);
+		testing_parser(input, context, head);
 		add_history(input);
 		free(input);
 	}
@@ -129,14 +130,31 @@ int	init_environ(t_gc **head)
 	return (0);
 }
 
-int	main(void)
+int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 {
-	t_gc	*head;
+	(*context) = gc_malloc(sizeof(t_context), head);
+	if (!(*context))
+		return (1);
+	(*context)->argc = argc;
+	(*context)->argv = argv;
+	(*context)->last_exit_status = 22222;
+	(*context)->head = head;
+	return (0);
+}
 
+int	main(int argc, char **argv)
+{
+	t_gc		*head;
+	t_context	*context;
+
+	if (argc > 2) // TODO: rework to allow multiple arguments
+		return (1);
 	head = NULL;
+	context = NULL;
+	init_context(&context, argc, argv, &head);
 	init_sig();
 	if (init_environ(&head))
 		return (1);
-	set_input(&head);
+	set_input(context, &head);
 	return (0);
 }

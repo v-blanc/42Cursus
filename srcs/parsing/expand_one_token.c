@@ -69,7 +69,7 @@ static void	positional_var(const char *word, t_context *context, char *result,
 	i = 0;
 	while (context->argv[nb][i])
 		result[ind[1]++] = context->argv[nb][i++];
-	ind[0]++;
+	ind[0] += 2;
 	return ;
 }
 

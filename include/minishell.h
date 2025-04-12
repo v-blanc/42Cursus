@@ -92,8 +92,9 @@ int								tokenizer(t_token **tokens, const char *s,
 									t_gc **head);
 int								expand_one_token(char **w, t_context *context,
 									t_gc **head);
-int								merge_word_tokens(t_token **tokens,
+int								expander(t_token **tokens, t_context *context,
 									t_gc **head);
+int								merge_tokens(t_token **tokens, t_gc **head);
 
 /* --------------------------- AST --------------------------- */
 
@@ -176,5 +177,10 @@ void							init_sig(void);
 /* --------------------- Utils --------------------- */
 
 int								gc_setenv(char *name, char *value, t_gc **head);
+
+/* --------------------- Testing --------------------- */
+
+int								testing_parser(char *input, t_context *context,
+									t_gc **head);
 
 #endif
