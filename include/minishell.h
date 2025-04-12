@@ -139,7 +139,7 @@ typedef struct s_ast
 }							t_ast;
 
 t_ast						*parse_command(t_token **tok, t_gc **head);
-t_ast						*parse_expr(t_token **tokens, t_gc **head);
+t_ast						*parser(t_token **tokens, t_gc **head);
 
 void						print_ast(t_ast *node, int depth);
 

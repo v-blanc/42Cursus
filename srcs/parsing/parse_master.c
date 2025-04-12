@@ -30,7 +30,7 @@ int	testing_parser(char *input, t_context *context, t_gc **head)
 	printf("\n");
 	// tokens = tokens_head;
 	printf("Parser:\n");
-	ast = parse_expr(&tokens_head, head);
+	ast = parser(&tokens_head, head);
 	if (ast)
 		print_ast(ast, 0);
 	printf("\n");

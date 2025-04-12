@@ -7,7 +7,7 @@ static t_ast	*parse_primary(t_token **tokens, t_gc **head)
 	if (*tokens && (*tokens)->type == PAREN_OPEN)
 	{
 		*tokens = (*tokens)->next;
-		node = parse_expr(tokens, head);
+		node = parser(tokens, head);
 		if (!node)
 			return (NULL);
 		if (!*tokens || (*tokens)->type != PAREN_CLOSE)
@@ -48,7 +48,7 @@ static t_ast	*parse_pipeline(t_token **tokens, t_gc **head)
 	return (left);
 }
 
-t_ast	*parse_expr(t_token **tokens, t_gc **head)
+t_ast	*parser(t_token **tokens, t_gc **head)
 {
 	t_ast			*left;
 	t_ast			*right;
