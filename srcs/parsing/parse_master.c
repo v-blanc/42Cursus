@@ -14,7 +14,7 @@ int	parse_master(char *input, t_token **tokens, t_context *context, t_gc **head)
 int	testing_parser(char *input, t_context *context, t_gc **head)
 {
 	t_token	*tokens;
-	t_ast	*ast;
+	// t_ast	*ast;
 
 	tokens = NULL;
 	printf("\ninput: %s\n", input);
@@ -26,10 +26,10 @@ int	testing_parser(char *input, t_context *context, t_gc **head)
 		tokens = tokens->next;
 	}
 	printf("\n");
-	printf("Parser:\n");
-	ast = parse_tokens(&tokens, head);
-	if (ast)
-		print_ast(ast, 0);
-	printf("\n");
+	// printf("Parser:\n");
+	// ast = parse_tokens(&tokens, head);
+	// if (ast)
+	// 	print_ast(ast, 0);
+	// printf("\n");
 	return (0);
 }
