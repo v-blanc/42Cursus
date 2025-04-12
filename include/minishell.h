@@ -113,7 +113,8 @@ typedef struct s_ast
 	{
 		struct
 		{
-			char			**argv;
+			int				args_count;
+			char			**args;
 			int				redir_count;
 			struct s_ast	**redirs;
 		} s_cmd;
@@ -130,14 +131,14 @@ typedef struct s_ast
 		} s_op;
 		struct
 		{
+			int				op;
 			int				fd_source;
-			char			*op;
 			char			*target;
 		} s_red;
 	} u_data;
 }							t_ast;
 
-t_ast						*parse_tokens(t_token **tokens, t_gc **head);
+t_ast						*parse_tokens(t_token *tokens, t_gc **head);
 void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
