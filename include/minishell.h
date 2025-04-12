@@ -24,30 +24,30 @@
 
 typedef struct s_gc
 {
-	void						*mem;
-	struct s_gc					*next;
-}								t_gc;
+	void					*mem;
+	struct s_gc				*next;
+}							t_gc;
 
-void							*gc_malloc(size_t size, t_gc **head);
-void							**gc_malloc_array(size_t size, t_gc **head);
-void							gc_free(void *mem, t_gc **head);
-void							gc_free_array(char **array, t_gc **head);
-void							gc_free_all(t_gc *head);
-char							*gc_strjoin(char *s1, char *s2, t_gc **head);
-char							*gc_strdup(const char *s, t_gc **head);
-char							*gc_substr(char const *s, unsigned int start,
-									size_t len, t_gc **head);
-char							**gc_split(char const *s, char c, t_gc **head);
+void						*gc_malloc(size_t size, t_gc **head);
+void						**gc_malloc_array(size_t size, t_gc **head);
+void						gc_free(void *mem, t_gc **head);
+void						gc_free_array(char **array, t_gc **head);
+void						gc_free_all(t_gc *head);
+char						*gc_strjoin(char *s1, char *s2, t_gc **head);
+char						*gc_strdup(const char *s, t_gc **head);
+char						*gc_substr(char const *s, unsigned int start,
+								size_t len, t_gc **head);
+char						**gc_split(char const *s, char c, t_gc **head);
 
 /* --------------------- Context --------------------- */
 
 typedef struct s_context
 {
-	int							argc;
-	char						**argv;
-	int							last_exit_status;
-	t_gc						**head;
-}								t_context;
+	int						argc;
+	char					**argv;
+	int						last_exit_status;
+	t_gc					**head;
+}							t_context;
 
 /* --------------------------- Token types --------------------------- */
 
@@ -64,123 +64,126 @@ typedef enum e_token_type
 	AND,
 	OR,
 	END
-}								t_token_type;
+}							t_token_type;
 
 typedef enum e_quote_type
 {
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
-}								t_quote_type;
+}							t_quote_type;
 
 typedef struct s_token
 {
-	t_token_type				type;
-	t_quote_type				quote;
-	char						*value;
-	int							joined_next;
-	struct s_token				*next;
-}								t_token;
+	t_token_type			type;
+	t_quote_type			quote;
+	char					*value;
+	int						joined_next;
+	struct s_token			*next;
+}							t_token;
 
-int								is_operator_char(char c);
-t_token_type					get_op_type(const char *s, int *len);
-t_token							*new_token(t_token_type type, char quote_type,
-									const char *value, t_gc **head);
-void							token_add_back(t_token **tokens, t_token *new);
+int							is_operator_char(char c);
+t_token_type				get_op_type(const char *s, int *len);
+t_token						*new_token(t_token_type type, char quote_type,
+								const char *value, t_gc **head);
+void						token_add_back(t_token **tokens, t_token *new);
 
-int								tokenizer(t_token **tokens, const char *s,
-									t_gc **head);
-int								expand_one_token(char **w, t_context *context,
-									t_gc **head);
-int								expander(t_token **tokens, t_context *context,
-									t_gc **head);
-int								merge_tokens(t_token **tokens, t_gc **head);
+int							tokenizer(t_token **tokens, const char *s,
+								t_gc **head);
+int							expand_one_token(char **w, t_context *context,
+								t_gc **head);
+int							expander(t_token **tokens, t_context *context,
+								t_gc **head);
+int							merge_tokens(t_token **tokens, t_gc **head);
 
 /* --------------------------- AST --------------------------- */
 
 typedef enum e_node_type
 {
-	NODE_COMMAND,
-	NODE_PIPELINE,
-	NODE_BINARY_OP,
-	NODE_REDIRECTION
-}								t_node_type;
+	NODE_CMD,
+	NODE_REDIR,
+	NODE_PIPE,
+	NODE_BINARY_OP
+}							t_node_type;
 
-typedef struct s_ast_node
+typedef struct s_ast
 {
-	t_node_type					type;
+	t_node_type				type;
 	union
 	{
 		struct
 		{
-			char				**argv;
-			int					redir_count;
-			struct s_ast_node	**redirs;
+			char			**argv;
+			int				redir_count;
+			struct s_ast	**redirs;
 		} s_cmd;
 		struct
 		{
-			int					cmd_count;
-			struct s_ast_node	**commands;
+			int				cmd_count;
+			struct s_ast	**commands;
 		} s_pipe;
 		struct
 		{
-			char				*op;
-			struct s_ast_node	*left;
-			struct s_ast_node	*right;
+			char			*op;
+			struct s_ast	*left;
+			struct s_ast	*right;
 		} s_op;
 		struct
 		{
-			int					fd_source;
-			char				*op;
-			char				*target;
+			int				fd_source;
+			char			*op;
+			char			*target;
 		} s_red;
 	} u_data;
-}								t_ast_node;
+}							t_ast;
+
+t_ast						*parse_tokens(t_token **tokens, t_gc **head);
+void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
 
-int								get_env_value(char **input_with_env,
-									char *input_str, t_gc **head);
-int								test_quotes_validity(char *input_str);
-int								parse_quotes(char *input, char **new_input,
-									t_gc **head);
-int								testing_input(char *input, t_gc **head);
+int							get_env_value(char **input_with_env,
+								char *input_str, t_gc **head);
+int							test_quotes_validity(char *input_str);
+int							parse_quotes(char *input, char **new_input,
+								t_gc **head);
+// int							testing_input(char *input, t_gc **head);
 
 /* --------------------- Stack --------------------- */
 
 typedef struct s_stack
 {
-	char						data[QUOTES_MAX];
-	int							top;
-}								t_stack;
+	char					data[QUOTES_MAX];
+	int						top;
+}							t_stack;
 
-void							init_stack(t_stack *stack);
-int								is_stack_empty(t_stack *stack);
-int								push_stack(t_stack *stack, char c);
-char							pop_stack(t_stack *stack);
-char							top_stack(t_stack *stack);
+void						init_stack(t_stack *stack);
+int							is_stack_empty(t_stack *stack);
+int							push_stack(t_stack *stack, char c);
+char						pop_stack(t_stack *stack);
+char						top_stack(t_stack *stack);
 
 /* --------------------- Buildins --------------------- */
 
-int								cd(char *path, t_gc **head);
-int								echo(char *to_print, bool n_option_flag);
-int								env(void);
-int								ft_exit(int status);
-int								export(char *name, char *value, t_gc **head);
-int								pwd(void);
-int								unset(char **to_unset, t_gc **head);
+int							cd(char *path, t_gc **head);
+int							echo(char *to_print, bool n_option_flag);
+int							env(void);
+int							ft_exit(int status);
+int							export(char *name, char *value, t_gc **head);
+int							pwd(void);
+int							unset(char **to_unset, t_gc **head);
 
 /* --------------------- Signals --------------------- */
 
-void							init_sig(void);
+void						init_sig(void);
 
 /* --------------------- Utils --------------------- */
 
-int								gc_setenv(char *name, char *value, t_gc **head);
+int							gc_setenv(char *name, char *value, t_gc **head);
 
 /* --------------------- Testing --------------------- */
 
-int								testing_parser(char *input, t_context *context,
-									t_gc **head);
+int							testing_parser(char *input, t_context *context,
+								t_gc **head);
 
 #endif
