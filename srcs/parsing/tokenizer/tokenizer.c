@@ -25,7 +25,7 @@ static char	*parse_quoted_word(const char *s, int *i, t_gc **head)
 	if (s[*i] == quote)
 		(*i)++;
 	buf[j] = '\0';
-	return (strndup(buf, j)); // TODO: add gc_strndup
+	return (gc_strndup(buf, j, head));
 }
 
 static char	*parse_word(const char *s, int *i, t_gc **head)
@@ -49,7 +49,7 @@ static char	*parse_word(const char *s, int *i, t_gc **head)
 			buf[j++] = s[(*i)++];
 	}
 	buf[j] = '\0';
-	return (strndup(buf, j)); // TODO: add gc_strndup
+	return (gc_strndup(buf, j, head));
 }
 
 static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
@@ -68,7 +68,6 @@ static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	if (!val)
 		return (1);
 	(*tok) = new_token(WORD, quote_type, val, head);
-	free(val); // TODO: update for gc (linked to strndup)
 	if (s[*i] && !isspace((unsigned char)s[*i]) && !is_operator_char(s[*i]))
 		(*tok)->joined_next = 1;
 	return (0);

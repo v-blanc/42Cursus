@@ -44,11 +44,11 @@ static int	sub_expand_one_var(const char *word, char *result, int *ind,
 		ind[0]++;
 		len++;
 	}
-	var_name = strndup(&word[start], len); // TODO: add gc_strndup
+	var_name = gc_strndup(&word[start], len, context->head);
 	if (!var_name)
 		return (1);
 	val = getenv(var_name);
-	free(var_name); // TODO: update for gc
+	gc_free(var_name, context->head);
 	if (!val)
 		return (0);
 	while (*val)

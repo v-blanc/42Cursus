@@ -39,6 +39,7 @@ char						*gc_substr(char const *s, unsigned int start,
 								size_t len, t_gc **head);
 char						**gc_split(char const *s, char c, t_gc **head);
 char						*gc_itoa(int n, t_gc **head);
+char						*gc_strndup(const char *s, size_t n, t_gc **head);
 
 /* --------------------- Context --------------------- */
 
