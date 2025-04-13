@@ -24,15 +24,19 @@
 
 typedef struct s_gc
 {
+	int						perm;
 	void					*mem;
 	struct s_gc				*next;
 }							t_gc;
 
 void						*gc_malloc(size_t size, t_gc **head);
 void						**gc_malloc_array(size_t size, t_gc **head);
+void						*gc_malloc_perm(size_t size, t_gc **head);
+void						**gc_malloc_array_perm(size_t size, t_gc **head);
 void						gc_free(void *mem, t_gc **head);
 void						gc_free_array(char **array, t_gc **head);
 void						gc_free_all(t_gc *head);
+void						gc_free_all_perm(t_gc *head);
 char						*gc_strjoin(char *s1, char *s2, t_gc **head);
 char						*gc_strdup(const char *s, t_gc **head);
 char						*gc_substr(char const *s, unsigned int start,
