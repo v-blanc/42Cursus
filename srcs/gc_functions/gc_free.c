@@ -40,15 +40,29 @@ void	gc_free_array(char **array, t_gc **head)
 	gc_free(array, head);
 }
 
-void	gc_free_all(t_gc *head)
+void	gc_free_all(t_gc **head)
 {
-	if (head == NULL)
-		return ;
-	gc_free_all(head->next);
-	if (head->perm == 0)
+	t_gc	*curr;
+	t_gc	*prev;
+	t_gc	*next;
+
+	curr = *head;
+	prev = NULL;
+	while (curr)
 	{
-		free(head->mem);
-		free(head);
+		next = curr->next;
+		if (curr->perm == 0)
+		{
+			if (prev)
+				prev->next = next;
+			else
+				*head = next;
+			free(curr->mem);
+			free(curr);
+		}
+		else
+			prev = curr;
+		curr = next;
 	}
 }
 

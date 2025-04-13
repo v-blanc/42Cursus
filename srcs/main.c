@@ -96,18 +96,17 @@ void	set_input(t_context *context, t_gc **head)
 		if (ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
-			gc_free_all(*head);
+			gc_free_all_perm(*head);
 			rl_clear_history();
 			exit(0);
 		}
-		// testing(input, head);
-		// testing_input(input, head);
 		testing_parser(input, context, head);
 		add_history(input);
 		free(input);
+		gc_free_all(head);
 	}
 	free(input);
-	gc_free_all(*head);
+	gc_free_all_perm(*head);
 	rl_clear_history();
 	exit(0);
 }
@@ -118,11 +117,11 @@ int	init_environ(t_gc **head)
 {
 	if (environ == NULL || environ[0] == NULL)
 	{
-		environ = (char **)gc_malloc_array(3, head);
-		environ[0] = gc_strjoin("PWD=", getcwd(NULL, 0), head);
-		environ[1] = gc_strjoin("SHLVL=1", "", head);
+		environ = (char **)gc_malloc_array_perm(3, head);
+		environ[0] = gc_strjoin_perm("PWD=", getcwd(NULL, 0), head);
+		environ[1] = gc_strjoin_perm("SHLVL=1", "", head);
 		// TODO: change to use `which env` ou autre ?
-		environ[2] = gc_strjoin("_=/usr/bin/env", "", head);
+		environ[2] = gc_strjoin_perm("_=/usr/bin/env", "", head);
 		environ[3] = NULL;
 		if (!environ[0] || !environ[1] || !environ[2])
 			return (1);
@@ -132,7 +131,7 @@ int	init_environ(t_gc **head)
 
 int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 {
-	(*context) = gc_malloc(sizeof(t_context), head);
+	(*context) = gc_malloc_perm(sizeof(t_context), head);
 	if (!(*context))
 		return (1);
 	(*context)->argc = argc;
@@ -151,7 +150,8 @@ int	main(int argc, char **argv)
 		return (1);
 	head = NULL;
 	context = NULL;
-	init_context(&context, argc, argv, &head);
+	if (init_context(&context, argc, argv, &head))
+		return (1);
 	init_sig();
 	if (init_environ(&head))
 		return (1);
