@@ -14,16 +14,15 @@ static int	special_case(const char *word, char *result, int *ind,
 	int		i;
 
 	if (word[ind[0]] == '?')
-		val = ft_itoa(context->last_exit_status); // TODO: gc_itoa
+		val = gc_itoa(context->last_exit_status, context->head);
 	else if (word[ind[0]] == '$')
-		val = ft_itoa(getpid()); // TODO: gc_itoa
+		val = gc_itoa(getpid(), context->head);
 	if (!val)
 		return (1);
 	i = 0;
 	while (val[i])
 		result[ind[1]++] = val[i++];
-	free(val);
-	// gc_free(val, head);
+	gc_free(val, context->head);
 	ind[0]++;
 	return (0);
 }
