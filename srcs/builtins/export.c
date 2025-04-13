@@ -33,6 +33,7 @@ static int	get_environ_sorted_indexes(int **environ_indexes, t_gc **head)
 	int	len_environ;
 
 	len_environ = ft_strlen_array(environ);
+	// TODO: use gc_malloc_perm() and delete old environ
 	(*environ_indexes) = (int *)gc_malloc(sizeof(int) * len_environ, head);
 	if (!(*environ_indexes))
 		return (1);

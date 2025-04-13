@@ -37,6 +37,7 @@ static int	unset_env(char ***new_env, char *name, t_gc **head)
 			i++;
 		if (!environ[i])
 			return (0);
+		// TODO: use gc_malloc_perm() and delete old environ
 		(*new_env)[j] = gc_malloc(ft_strlen(environ[i]) + 1, head);
 		if (!(*new_env)[j])
 			return (1);
@@ -59,6 +60,7 @@ int	unset(char **to_unset, t_gc **head)
 		return (1);
 	}
 	new_env_size = ft_strlen_array(environ) - to_unset_found(to_unset);
+	// TODO: use gc_malloc_perm() and delete old environ
 	new_env = (char **)gc_malloc_array(new_env_size, head);
 	if (!new_env)
 		return (1);

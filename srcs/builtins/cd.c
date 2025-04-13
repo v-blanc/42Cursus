@@ -45,6 +45,7 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	return (0);
 }
 
+// TODO: rework cd to use export and/or unset (and then use gc_malloc_perm())
 int	cd(char *path, t_gc **head)
 {
 	char	new_path[PATH_MAX];
