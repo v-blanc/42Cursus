@@ -168,7 +168,7 @@ void						exec_manager(t_ast *ast, t_context **context);
 /* --------------------- Buildins --------------------- */
 
 int							cd(int args_count, char **args, t_gc **head);
-int							echo(char *to_print, bool n_option_flag);
+int							echo(char **arguments);
 int							env(int args_count);
 int							exit_(int args_count, char **args,
 								t_context **context);

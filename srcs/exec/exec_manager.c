@@ -11,7 +11,7 @@ void	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "cd", 3))
 		return_value = cd(args_count, args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "echo", 5))
-		return ; // TODO: use echo
+		return_value = echo(args + 1);
 	if (!ft_strncmp(args[0], "env", 4))
 		return_value = env(args_count);
 	if (!ft_strncmp(args[0], "exit", 5))

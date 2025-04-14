@@ -1,9 +1,44 @@
 #include "../../include/minishell.h"
 
-int	echo(char *to_print, bool n_option_flag)
+static bool	is_flag_n(char *argument)
 {
-	printf("%s", to_print);
-	if (n_option_flag == 0)
-		printf("\n");
-	return (0);
+	size_t	i;
+
+	if (!argument || !argument[0])
+		return (false);
+	i = -1;
+	while (argument[++i])
+	{
+		if (argument[0] != '-')
+			return (false);
+		if (i != 0 && argument[i] != 'n')
+			return (false);
+	}
+	return (true);
+}
+
+int	echo(char **arguments)
+{
+	bool	new_line_to_print;
+	size_t	i;
+
+	if (!arguments)
+		return (EXIT_FAILURE);
+	new_line_to_print = true;
+	i = 0;
+	while (is_flag_n(arguments[i]))
+	{
+		new_line_to_print = false;
+		i++;
+	}
+	while (arguments[i])
+	{
+		write(1, arguments[i], ft_strlen(arguments[i]));
+		if (arguments[i + 1])
+			write(1, " ", 1);
+		i++;
+	}
+	if (new_line_to_print)
+		write(1, "\n", 1);
+	return (EXIT_SUCCESS);
 }
