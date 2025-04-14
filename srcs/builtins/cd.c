@@ -51,11 +51,17 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	return (0);
 }
 
-int	cd(char *path, t_gc **head)
+int	cd(int args_count, char **args, t_gc **head)
 {
 	char	*new_path;
-	char	*path_home;
+	char	*path;
 
+	if (args_count > 2)
+	{
+		printf("cd: too many arguments\n");
+		return (0);
+	}
+	path = args[0];
 	new_path = gc_malloc(PATH_MAX, head);
 	if (!new_path)
 		return (1);
