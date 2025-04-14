@@ -13,9 +13,10 @@ SRCS := main.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/counters.c\
 		parsing/parser/print_ast.c\
 		parsing/parsing.c\
-		exec/is_builtin.c\
+		exec/is_builtin.c exec/exec_manager.c\
 		sig/sig.c\
-		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c builtins/pwd.c builtins/unset.c
+		builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c\
+		builtins/export.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 

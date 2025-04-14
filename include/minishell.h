@@ -157,19 +157,21 @@ void						print_ast(t_ast *node, int depth);
 
 int							parsing(char *input, t_token **tokens,
 								t_context *context, t_gc **head);
-int							testing_parser(char *input, t_context *context,
+int							testing_parser(char *input, t_context **context,
 								t_gc **head);
 
 /* --------------------- Execution --------------------- */
 
 int							is_builtin(char *command);
+void						exec_manager(t_ast *ast, t_context **context);
 
 /* --------------------- Buildins --------------------- */
 
-int							cd(char *path, t_gc **head);
+int							cd(int args_count, char **args, t_gc **head);
 int							echo(char *to_print, bool n_option_flag);
-int							env(void);
-int							ft_exit(int status);
+int							env(int args_count);
+int							exit_(int args_count, char **args,
+								t_context **context);
 int							export(char *name, char *value, t_gc **head);
 int							pwd(void);
 int							unset(char **to_unset, t_gc **head);

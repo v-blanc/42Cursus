@@ -63,7 +63,7 @@ int	parsing(char *input, t_token **tokens, t_context *context, t_gc **head)
 	return (0);
 }
 
-int	testing_parser(char *input, t_context *context, t_gc **head)
+int	testing_parser(char *input, t_context **context, t_gc **head)
 {
 	t_token	*tokens_head;
 	t_token	*tokens;
@@ -71,13 +71,12 @@ int	testing_parser(char *input, t_context *context, t_gc **head)
 
 	tokens = NULL;
 	printf("\ninput: %s\n\n", input);
-	if (parsing(input, &tokens, context, head))
+	if (parsing(input, &tokens, *context, head))
 		return (1);
 	tokens_head = tokens;
 	while (tokens)
 	{
-		printf("Expanded: type=%d, value=`%s`\t", tokens->type, tokens->value);
-		printf("Is builtin ?: %s\n", is_builtin(tokens->value) ? "yes" : "no");
+		printf("Expanded: type=%d, value=`%s`\n", tokens->type, tokens->value);
 		tokens = tokens->next;
 	}
 	printf("\n");
@@ -86,6 +85,9 @@ int	testing_parser(char *input, t_context *context, t_gc **head)
 	ast = parser(&tokens_head, head);
 	if (ast)
 		print_ast(ast, 0);
-	printf("\n");
+	printf("\nExecution:\n\n```\n");
+	if (ast->type == NODE_CMD)
+		exec_manager(ast, context);
+	printf("```\n\n");
 	return (0);
 }
