@@ -5,20 +5,14 @@ extern char	**environ;
 static int	to_unset_found(char **to_unset)
 {
 	int	i;
-	int	j;
 	int	found;
 
 	found = 0;
 	i = 0;
 	while (to_unset[i])
 	{
-		j = 0;
-		while (environ[j])
-		{
-			if (!ft_strncmp(environ[j], to_unset[i], ft_strlen(to_unset[i])))
-				found++;
-			j++;
-		}
+		if (getenv(to_unset[i]))
+			found++;
 		i++;
 	}
 	return (found);
@@ -28,24 +22,26 @@ static int	unset_env(char ***new_env, char *name, t_gc **head)
 {
 	int	i;
 	int	j;
+	int	len_name;
 
 	i = 0;
 	j = 0;
+	name = gc_strjoin(name, "=", head);
+	if (!name)
+		return (1);
+	len_name = ft_strlen(name);
 	while (environ[i])
 	{
-		if (!ft_strncmp(environ[i], name, ft_strlen(name)))
+		if (!ft_strncmp(environ[i], name, len_name))
 			i++;
-		if (!environ[i])
-			return (0);
-		// TODO: use gc_malloc_perm() and delete old environ
-		(*new_env)[j] = gc_malloc(ft_strlen(environ[i]) + 1, head);
-		if (!(*new_env)[j])
-			return (1);
-		ft_strlcpy((*new_env)[j], environ[i], ft_strlen(environ[i]) + 1);
-		i++;
-		j++;
+		else
+		{
+			(*new_env)[j] = environ[i];
+			i++;
+			j++;
+		}
 	}
-	return (1);
+	return (0);
 }
 
 int	unset(char **to_unset, t_gc **head)
@@ -55,13 +51,11 @@ int	unset(char **to_unset, t_gc **head)
 	int		i;
 
 	if (to_unset == NULL || to_unset[0] == NULL)
-	{
-		printf("unset: not enough arguments\n");
-		return (1);
-	}
+		return (0);
+	if (to_unset_found(to_unset) == 0)
+		return (0);
 	new_env_size = ft_strlen_array(environ) - to_unset_found(to_unset);
-	// TODO: use gc_malloc_perm() and delete old environ
-	new_env = (char **)gc_malloc_array(new_env_size, head);
+	new_env = (char **)gc_malloc_array_perm(new_env_size, head);
 	if (!new_env)
 		return (1);
 	i = 0;

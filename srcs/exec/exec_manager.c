@@ -21,7 +21,7 @@ void	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "pwd", 4))
 		return_value = pwd();
 	if (!ft_strncmp(args[0], "unset", 6))
-		return ;
+		return_value = unset(args + 1, (*context)->head);
 	if (return_value)
 	{
 		printf(">>> BUILTINS ERROR\n");
