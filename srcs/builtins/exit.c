@@ -28,8 +28,8 @@ int	exit_(int args_count, char **args, t_context **context)
 			printf("exit: %s: numeric argument required", args[0]);
 			(*context)->last_exit_status = 2;
 		}
-		exit_status = ft_atoi(args[0]);
-		exit_status %= 255; // TODO: check if it works well
+		exit_status = ft_atoi(args[0]); // TODO: check if its an atoi / limits
+		exit_status %= 256;
 	}
 	else if (args_count > 2)
 	{

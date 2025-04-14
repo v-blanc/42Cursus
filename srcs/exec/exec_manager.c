@@ -15,9 +15,9 @@ void	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "env", 4))
 		return_value = env(args_count);
 	if (!ft_strncmp(args[0], "exit", 5))
-		return_value = exit_(args_count, args, context);
+		return_value = exit_(args_count, args + 1, context);
 	if (!ft_strncmp(args[0], "export", 8))
-		return ;
+		return_value = export(args_count, args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "pwd", 4))
 		return_value = pwd();
 	if (!ft_strncmp(args[0], "unset", 6))

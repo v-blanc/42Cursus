@@ -172,7 +172,7 @@ int							echo(char *to_print, bool n_option_flag);
 int							env(int args_count);
 int							exit_(int args_count, char **args,
 								t_context **context);
-int							export(char *name, char *value, t_gc **head);
+int							export(int args_count, char **args, t_gc **head);
 int							pwd(void);
 int							unset(char **to_unset, t_gc **head);
 

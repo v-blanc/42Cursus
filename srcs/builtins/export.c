@@ -44,31 +44,63 @@ static int	get_environ_sorted_indexes(int **environ_indexes, t_gc **head)
 	return (0);
 }
 
-int	export(char *name, char *value, t_gc **head)
+static int	print_export(t_gc **head)
 {
-	int	*environ_indexes;
+	int	*env_ind;
 	int	i;
 
-	if (name == NULL || name[0] == '\0')
+	env_ind = NULL;
+	if (get_environ_sorted_indexes(&env_ind, head))
+		return (1);
+	i = 0;
+	while (environ[i])
 	{
-		environ_indexes = NULL;
-		if (get_environ_sorted_indexes(&environ_indexes, head))
+		if (ft_strncmp(environ[env_ind[i]], "_=", 2) != 0)
+			printf("%s\n", environ[env_ind[i]]);
+		i++;
+	}
+	gc_free(env_ind, head);
+	return (0);
+}
+
+static int	export_one_var(char *arg, t_gc **head)
+{
+	char	*name;
+	char	*value;
+	int		i;
+
+	name = NULL;
+	value = "";
+	i = 0;
+	while (arg[i] && arg[i] != '=')
+		i++;
+	name = gc_strndup(arg, i, head);
+	if (arg[i] && arg[i + 1])
+		value = gc_strdup(&arg[i + 1], head);
+	printf(">> name: `%s` value: `%s`\n", name, value);
+	if (gc_setenv(name, value, head))
+		return (1);
+	return (0);
+}
+
+int	export(int args_count, char **args, t_gc **head)
+{
+	int	i;
+
+	if (args_count == 1)
+	{
+		if (print_export(head))
 			return (1);
-		i = 0;
-		while (environ[i])
-		{
-			if (ft_strncmp(environ[environ_indexes[i]], "_=", 2) != 0)
-				printf("%s\n", environ[environ_indexes[i]]);
-			i++;
-		}
-		gc_free(environ_indexes, head);
 	}
 	else
 	{
-		if (value == NULL)
-			value = "";
-		if (gc_setenv(name, value, head))
-			return (1);
+		i = 0;
+		while (args[i])
+		{
+			if (export_one_var(args[i], head))
+				return (1);
+			i++;
+		}
 	}
 	return (0);
 }
