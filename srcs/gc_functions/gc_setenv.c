@@ -5,7 +5,7 @@ extern char	**environ;
 static int	update_environ(char **to_update, char *name, char *value,
 		t_gc **head)
 {
-	(*to_update) = gc_malloc(ft_strlen(name) + ft_strlen(value) + 2, head);
+	(*to_update) = gc_malloc_perm(ft_strlen(name) + ft_strlen(value) + 2, head);
 	if (!(*to_update))
 		return (1);
 	ft_strlcpy((*to_update), name, ft_strlen(name) + 1);
@@ -19,13 +19,13 @@ static int	add_to_environ(int i, char *name, char *value, t_gc **head)
 {
 	char	**env_cpy;
 
-	env_cpy = (char **)gc_malloc_array(i + 1, head);
+	env_cpy = (char **)gc_malloc_array_perm(i + 1, head);
 	if (!env_cpy)
 		return (1);
 	i = 0;
 	while (environ[i])
 	{
-		env_cpy[i] = gc_malloc(ft_strlen(environ[i]) + 1, head);
+		env_cpy[i] = gc_malloc_perm(ft_strlen(environ[i]) + 1, head);
 		if (!env_cpy[i])
 			return (1);
 		ft_strlcpy(env_cpy[i], environ[i], ft_strlen(environ[i]) + 1);
