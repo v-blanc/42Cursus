@@ -13,17 +13,17 @@ static int	special_case(const char *word, char *result, int *ind,
 	char	*val;
 	int		i;
 
+	val = NULL;
 	if (word[ind[0]] == '?')
-		val = ft_itoa(context->last_exit_status); // TODO: gc_itoa
+		val = gc_itoa(context->last_exit_status, context->head);
 	else if (word[ind[0]] == '$')
-		val = ft_itoa(getpid()); // TODO: gc_itoa
+		val = gc_itoa(getpid(), context->head);
 	if (!val)
 		return (1);
 	i = 0;
 	while (val[i])
 		result[ind[1]++] = val[i++];
-	free(val);
-	// gc_free(val, head);
+	gc_free(val, context->head);
 	ind[0]++;
 	return (0);
 }
@@ -45,11 +45,11 @@ static int	sub_expand_one_var(const char *word, char *result, int *ind,
 		ind[0]++;
 		len++;
 	}
-	var_name = strndup(&word[start], len); // TODO: add gc_strndup
+	var_name = gc_strndup(&word[start], len, context->head);
 	if (!var_name)
 		return (1);
 	val = getenv(var_name);
-	free(var_name); // TODO: update for gc
+	gc_free(var_name, context->head);
 	if (!val)
 		return (0);
 	while (*val)
@@ -63,13 +63,17 @@ static void	positional_var(const char *word, t_context *context, char *result,
 	int	i;
 	int	nb;
 
+	ind[0]++;
 	nb = ft_atoi(&word[ind[0]]);
-	if (context->argc <= nb)
+	if (nb > context->argc - 1)
+	{
+		ind[0]++;
 		return ;
+	}
 	i = 0;
 	while (context->argv[nb][i])
 		result[ind[1]++] = context->argv[nb][i++];
-	ind[0] += 2;
+	ind[0]++;
 	return ;
 }
 
@@ -78,19 +82,18 @@ int	expand_one_token(char **w, t_context *context, t_gc **head)
 	char	*result;
 	int		ind[2];
 
-	result = gc_malloc(ft_strlen(*w) * 10 + 1, head); // TODO: calculate size
+	result = gc_malloc(1000, head); // TODO: calculate size
 	if (!result)
 		return (1);
 	ind[0] = 0;
 	ind[1] = 0;
 	while ((*w)[ind[0]])
 	{
-		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && isdigit((*w)[ind[0]
-				+ 1]))
-			positional_var((*w), context, result, ind);
-		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && (*w)[ind[0] + 1] != ' ')
+		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1])
 		{
-			if (sub_expand_one_var((*w), result, ind, context))
+			if (isdigit((*w)[ind[0] + 1]))
+				positional_var((*w), context, result, ind);
+			else if (sub_expand_one_var((*w), result, ind, context))
 				return (1);
 		}
 		else

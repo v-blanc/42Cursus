@@ -24,20 +24,28 @@
 
 typedef struct s_gc
 {
+	int						perm;
 	void					*mem;
 	struct s_gc				*next;
 }							t_gc;
 
 void						*gc_malloc(size_t size, t_gc **head);
 void						**gc_malloc_array(size_t size, t_gc **head);
+void						*gc_malloc_perm(size_t size, t_gc **head);
+void						**gc_malloc_array_perm(size_t size, t_gc **head);
 void						gc_free(void *mem, t_gc **head);
 void						gc_free_array(char **array, t_gc **head);
-void						gc_free_all(t_gc *head);
+void						gc_free_all(t_gc **head);
+void						gc_free_all_perm(t_gc *head);
 char						*gc_strjoin(char *s1, char *s2, t_gc **head);
+char						*gc_strjoin_perm(char *s1, char *s2, t_gc **head);
 char						*gc_strdup(const char *s, t_gc **head);
 char						*gc_substr(char const *s, unsigned int start,
 								size_t len, t_gc **head);
 char						**gc_split(char const *s, char c, t_gc **head);
+char						*gc_itoa(int n, t_gc **head);
+char						*gc_strndup(const char *s, size_t n, t_gc **head);
+int							gc_setenv(char *name, char *value, t_gc **head);
 
 /* --------------------- Context --------------------- */
 
@@ -150,24 +158,6 @@ int							parsing(char *input, t_token **tokens,
 int							testing_parser(char *input, t_context *context,
 								t_gc **head);
 
-/* --------------------- (Old) Parsing --------------------- */
-
-int							test_quotes_validity(char *input_str);
-
-/* --------------------- Stack --------------------- */
-
-typedef struct s_stack
-{
-	char					data[QUOTES_MAX];
-	int						top;
-}							t_stack;
-
-void						init_stack(t_stack *stack);
-int							is_stack_empty(t_stack *stack);
-int							push_stack(t_stack *stack, char c);
-char						pop_stack(t_stack *stack);
-char						top_stack(t_stack *stack);
-
 /* --------------------- Buildins --------------------- */
 
 int							cd(char *path, t_gc **head);
@@ -181,9 +171,5 @@ int							unset(char **to_unset, t_gc **head);
 /* --------------------- Signals --------------------- */
 
 void						init_sig(void);
-
-/* --------------------- Utils --------------------- */
-
-int							gc_setenv(char *name, char *value, t_gc **head);
 
 #endif

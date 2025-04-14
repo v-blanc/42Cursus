@@ -1,38 +1,5 @@
 #include "../../include/minishell.h"
 
-void	*gc_malloc(size_t size, t_gc **head)
-{
-	t_gc	*new;
-
-	new = malloc(sizeof(t_gc));
-	if (!new)
-	{
-		printf("malloc error\n");
-		return (NULL);
-	}
-	new->mem = ft_calloc(1, size);
-	if (!new->mem)
-	{
-		printf("malloc error\n");
-		free(new);
-		return (NULL);
-	}
-	new->next = *head;
-	*head = new;
-	return (new->mem);
-}
-
-void	**gc_malloc_array(size_t size, t_gc **head)
-{
-	void	**array;
-
-	array = gc_malloc((size + 1) * sizeof(void *), head);
-	if (!array)
-		return (NULL);
-	array[size] = NULL;
-	return (array);
-}
-
 void	gc_free(void *mem, t_gc **head)
 {
 	t_gc	*tmp;
@@ -73,11 +40,37 @@ void	gc_free_array(char **array, t_gc **head)
 	gc_free(array, head);
 }
 
-void	gc_free_all(t_gc *head)
+void	gc_free_all(t_gc **head)
+{
+	t_gc	*curr;
+	t_gc	*prev;
+	t_gc	*next;
+
+	curr = *head;
+	prev = NULL;
+	while (curr)
+	{
+		next = curr->next;
+		if (curr->perm == 0)
+		{
+			if (prev)
+				prev->next = next;
+			else
+				*head = next;
+			free(curr->mem);
+			free(curr);
+		}
+		else
+			prev = curr;
+		curr = next;
+	}
+}
+
+void	gc_free_all_perm(t_gc *head)
 {
 	if (head == NULL)
 		return ;
-	gc_free_all(head->next);
+	gc_free_all_perm(head->next);
 	free(head->mem);
 	free(head);
 }

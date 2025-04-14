@@ -5,13 +5,13 @@ SRCDIR := ./srcs
 OBJDIR := ./objs
 
 SRCS := main.c\
-		gc_functions/garbage_collector.c gc_functions/gc_setenv.c gc_functions/gc_strjoin.c\
-		gc_functions/gc_strdup.c gc_functions/gc_substr.c gc_functions/gc_split.c\
+		gc_functions/gc_alloc.c gc_functions/gc_free.c gc_functions/gc_setenv.c\
+		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
+		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\
 		parsing/tokenizer/tokenizer.c parsing/tokenizer/tokenizer_utils.c\
 		parsing/expander/expander.c parsing/expander/expand_one_token.c parsing/expander/merge_tokens.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/print_ast.c\
-		parsing/parsing.c parsing/parse_quotes.c\
-		stack/stack.c\
+		parsing/parsing.c\
 		sig/sig.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
