@@ -160,6 +160,10 @@ int							parsing(char *input, t_token **tokens,
 int							testing_parser(char *input, t_context *context,
 								t_gc **head);
 
+/* --------------------- Execution --------------------- */
+
+int							is_builtin(char *command);
+
 /* --------------------- Buildins --------------------- */
 
 int							cd(char *path, t_gc **head);

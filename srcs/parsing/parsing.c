@@ -76,7 +76,8 @@ int	testing_parser(char *input, t_context *context, t_gc **head)
 	tokens_head = tokens;
 	while (tokens)
 	{
-		printf("Expanded: type=%d, value=`%s`\n", tokens->type, tokens->value);
+		printf("Expanded: type=%d, value=`%s`\t", tokens->type, tokens->value);
+		printf("Is builtin ?: %s\n", is_builtin(tokens->value) ? "yes" : "no");
 		tokens = tokens->next;
 	}
 	printf("\n");

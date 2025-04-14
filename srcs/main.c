@@ -146,7 +146,7 @@ int	main(int argc, char **argv)
 	t_gc		*head;
 	t_context	*context;
 
-	if (argc > 2) // TODO: rework to allow multiple arguments 
+	if (argc > 2) // TODO: rework to allow multiple arguments
 		return (1);
 	head = NULL;
 	context = NULL;

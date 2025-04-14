@@ -13,6 +13,7 @@ SRCS := main.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/counters.c\
 		parsing/parser/print_ast.c\
 		parsing/parsing.c\
+		exec/is_builtin.c\
 		sig/sig.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
