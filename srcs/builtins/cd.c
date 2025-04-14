@@ -5,17 +5,23 @@ static char	*path_handler(char *path)
 	char	*new_path;
 
 	new_path = NULL;
-	if (path == NULL)
+	if (path == NULL || ft_strlen(path) == 0)
 	{
 		new_path = getenv("HOME");
 		if (new_path == NULL)
+		{
+			printf("cd: HOME not set\n");
 			return (NULL);
+		}
 	}
-	else if (!ft_strcmp(path, "-"))
+	else if (!ft_strncmp(path, "-", 2))
 	{
 		new_path = getenv("OLDPWD");
 		if (new_path == NULL)
+		{
+			printf("cd: OLDPWD not set\n");
 			return (NULL);
+		}
 		printf("%s\n", new_path);
 	}
 	else
@@ -30,39 +36,32 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	if (chdir(path) < 0)
 	{
 		printf("cd: %s: %s\n", strerror(errno), path);
-		return (1);
+		return (0);
 	}
 	if (getcwd(new_path, PATH_MAX) == NULL)
 	{
 		printf("getcwd: %s\n", strerror(errno));
-		return (1);
+		return (0);
 	}
 	pwd_path = getenv("PWD");
 	if (!pwd_path)
-		return (1);
+		return (0);
 	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
 		return (1);
 	return (0);
 }
 
-// TODO: rework cd to use export and/or unset (and then use gc_malloc_perm())
 int	cd(char *path, t_gc **head)
 {
-	char	new_path[PATH_MAX];
+	char	*new_path;
 	char	*path_home;
 
+	new_path = gc_malloc(PATH_MAX, head);
+	if (!new_path)
+		return (1);
 	path = path_handler(path);
 	if (path == NULL)
-		return (1);
-	if (path[0] == '~')
-	{
-		path_home = getenv("HOME");
-		if (path_home == NULL)
-			return (1);
-		ft_strlcpy(new_path, path_home, PATH_MAX);
-		ft_strlcat(new_path, path + 1, PATH_MAX);
-		path = new_path;
-	}
+		return (0);
 	if (cd_exec(path, new_path, head))
 		return (1);
 	return (0);
