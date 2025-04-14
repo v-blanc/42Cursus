@@ -17,7 +17,7 @@ static bool	is_flag_n(char *argument)
 	return (true);
 }
 
-int	echo(char **arguments)
+int	echo(int fd, char **arguments)
 {
 	bool	new_line_to_print;
 	size_t	i;
@@ -33,12 +33,12 @@ int	echo(char **arguments)
 	}
 	while (arguments[i])
 	{
-		write(1, arguments[i], ft_strlen(arguments[i]));
+		print(fd, "%s", arguments[i]);
 		if (arguments[i + 1])
-			write(1, " ", 1);
+			print(fd, " ");
 		i++;
 	}
 	if (new_line_to_print)
-		write(1, "\n", 1);
+		print(fd, "\n");
 	return (EXIT_SUCCESS);
 }

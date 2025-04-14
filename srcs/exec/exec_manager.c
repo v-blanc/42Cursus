@@ -5,21 +5,23 @@ void	builtins_manager(t_ast *ast, t_context **context)
 	int		args_count;
 	char	**args;
 	int		return_value;
+	int		fd;
 
+	fd = 1;
 	args_count = ast->u_data.s_cmd.args_count;
 	args = ast->u_data.s_cmd.args;
 	if (!ft_strncmp(args[0], "cd", 3))
-		return_value = cd(args_count, args + 1, (*context)->head);
+		return_value = cd(fd, args_count, args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "echo", 5))
-		return_value = echo(args + 1);
+		return_value = echo(fd, args + 1);
 	if (!ft_strncmp(args[0], "env", 4))
-		return_value = env(args_count);
+		return_value = env(fd, args_count);
 	if (!ft_strncmp(args[0], "exit", 5))
 		return_value = exit_(args_count, args + 1, context);
 	if (!ft_strncmp(args[0], "export", 8))
-		return_value = export(args_count, args + 1, (*context)->head);
+		return_value = export(fd, args_count, args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "pwd", 4))
-		return_value = pwd();
+		return_value = pwd(fd);
 	if (!ft_strncmp(args[0], "unset", 6))
 		return_value = unset(args + 1, (*context)->head);
 	if (return_value)

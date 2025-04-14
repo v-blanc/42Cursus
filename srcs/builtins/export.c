@@ -33,7 +33,6 @@ static int	get_environ_sorted_indexes(int **environ_indexes, t_gc **head)
 	int	len_environ;
 
 	len_environ = ft_strlen_array(environ);
-	// TODO: use gc_malloc_perm() and delete old environ
 	(*environ_indexes) = (int *)gc_malloc(sizeof(int) * len_environ, head);
 	if (!(*environ_indexes))
 		return (1);
@@ -44,7 +43,7 @@ static int	get_environ_sorted_indexes(int **environ_indexes, t_gc **head)
 	return (0);
 }
 
-static int	print_export(t_gc **head)
+static int	print_export(int fd, t_gc **head)
 {
 	int	*env_ind;
 	int	i;
@@ -56,7 +55,7 @@ static int	print_export(t_gc **head)
 	while (environ[i])
 	{
 		if (ft_strncmp(environ[env_ind[i]], "_=", 2) != 0)
-			printf("%s\n", environ[env_ind[i]]);
+			print(fd, "%s\n", environ[env_ind[i]]);
 		i++;
 	}
 	gc_free(env_ind, head);
@@ -77,19 +76,19 @@ static int	export_one_var(char *arg, t_gc **head)
 	name = gc_strndup(arg, i, head);
 	if (arg[i] && arg[i + 1])
 		value = gc_strdup(&arg[i + 1], head);
-	printf(">> name: `%s` value: `%s`\n", name, value);
 	if (gc_setenv(name, value, head))
 		return (1);
 	return (0);
 }
 
-int	export(int args_count, char **args, t_gc **head)
+// TODO: check `=....` error > print(2, ...)
+int	export(int fd, int args_count, char **args, t_gc **head)
 {
 	int	i;
 
 	if (args_count == 1)
 	{
-		if (print_export(head))
+		if (print_export(fd, head))
 			return (1);
 	}
 	else

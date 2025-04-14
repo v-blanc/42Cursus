@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-static char	*path_handler(char *path)
+static char	*path_handler(int fd, char *path)
 {
 	char	*new_path;
 
@@ -10,7 +10,7 @@ static char	*path_handler(char *path)
 		new_path = getenv("HOME");
 		if (new_path == NULL)
 		{
-			printf("cd: HOME not set\n");
+			print(2, "cd: HOME not set\n");
 			return (NULL);
 		}
 	}
@@ -19,10 +19,10 @@ static char	*path_handler(char *path)
 		new_path = getenv("OLDPWD");
 		if (new_path == NULL)
 		{
-			printf("cd: OLDPWD not set\n");
+			print(2, "cd: OLDPWD not set\n");
 			return (NULL);
 		}
-		printf("%s\n", new_path);
+		print(fd, "%s\n", new_path);
 	}
 	else
 		new_path = path;
@@ -35,12 +35,12 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 
 	if (chdir(path) < 0)
 	{
-		printf("cd: %s: %s\n", strerror(errno), path);
+		print(2, "cd: %s: %s\n", strerror(errno), path);
 		return (0);
 	}
 	if (getcwd(new_path, PATH_MAX) == NULL)
 	{
-		printf("getcwd: %s\n", strerror(errno));
+		print(2, "getcwd: %s\n", strerror(errno));
 		return (0);
 	}
 	pwd_path = getenv("PWD");
@@ -51,21 +51,21 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	return (0);
 }
 
-int	cd(int args_count, char **args, t_gc **head)
+int	cd(int fd, int args_count, char **args, t_gc **head)
 {
 	char	*new_path;
 	char	*path;
 
 	if (args_count > 2)
 	{
-		printf("cd: too many arguments\n");
+		print(2, "cd: too many arguments\n");
 		return (0);
 	}
 	path = args[0];
 	new_path = gc_malloc(PATH_MAX, head);
 	if (!new_path)
 		return (1);
-	path = path_handler(path);
+	path = path_handler(fd, path);
 	if (path == NULL)
 		return (0);
 	if (cd_exec(path, new_path, head))

@@ -180,13 +180,15 @@ void						close_pipes(int (*pipes)[2], int pipes_nb);
 
 /* --------------------- Buildins --------------------- */
 
-int							cd(int args_count, char **args, t_gc **head);
-int							echo(char **arguments);
-int							env(int args_count);
+int							cd(int fd, int args_count, char **args,
+								t_gc **head);
+int							echo(int fd, char **arguments);
+int							env(int fd, int args_count);
 int							exit_(int args_count, char **args,
 								t_context **context);
-int							export(int args_count, char **args, t_gc **head);
-int							pwd(void);
+int							export(int fd, int args_count, char **args,
+								t_gc **head);
+int							pwd(int fd);
 int							unset(char **to_unset, t_gc **head);
 
 /* --------------------- Signals --------------------- */

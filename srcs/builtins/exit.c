@@ -20,12 +20,12 @@ int	exit_(int args_count, char **args, t_context **context)
 	int	exit_status;
 
 	exit_status = 0;
-	printf("exit\n");
+	print(1, "exit\n");
 	if (args_count == 2)
 	{
 		if (!is_valid_arg(args[0]))
 		{
-			printf("exit: %s: numeric argument required", args[0]);
+			print(2, "exit: %s: numeric argument required", args[0]);
 			(*context)->last_exit_status = 2;
 		}
 		exit_status = ft_atoi(args[0]); // TODO: check if its an atoi / limits
@@ -33,7 +33,7 @@ int	exit_(int args_count, char **args, t_context **context)
 	}
 	else if (args_count > 2)
 	{
-		printf("exit: too many arguments\n");
+		print(2, "exit: too many arguments\n");
 		(*context)->last_exit_status = 1;
 		return (0);
 	}
