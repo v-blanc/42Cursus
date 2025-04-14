@@ -11,8 +11,7 @@ SRCS := main.c\
 		parsing/tokenizer/tokenizer.c parsing/tokenizer/tokenizer_utils.c\
 		parsing/expander/expander.c parsing/expander/expand_one_token.c parsing/expander/merge_tokens.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/print_ast.c\
-		parsing/parsing.c parsing/parse_quotes.c\
-		stack/stack.c\
+		parsing/parsing.c\
 		sig/sig.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))

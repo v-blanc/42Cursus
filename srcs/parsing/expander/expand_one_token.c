@@ -13,6 +13,7 @@ static int	special_case(const char *word, char *result, int *ind,
 	char	*val;
 	int		i;
 
+	val = NULL;
 	if (word[ind[0]] == '?')
 		val = gc_itoa(context->last_exit_status, context->head);
 	else if (word[ind[0]] == '$')
