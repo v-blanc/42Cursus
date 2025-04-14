@@ -146,6 +146,8 @@ typedef struct s_ast
 	} u_data;
 }							t_ast;
 
+int							count_cmd_args(t_token *tok);
+int							count_cmd_redir(t_token *tok);
 t_ast						*parse_command(t_token **tok, t_gc **head);
 t_ast						*parser(t_token **tokens, t_gc **head);
 

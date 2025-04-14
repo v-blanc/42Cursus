@@ -31,7 +31,7 @@ void	print_ast(t_ast *node, int depth)
 		{
 			print_indent(depth + 1);
 			printf("redirections:\n");
-			for (int i = 0; node->u_data.s_cmd.redirs[i]->u_data.s_red.op; i++)
+			for (int i = 0; node->u_data.s_cmd.redirs[i]; i++)
 			{
 				print_ast(node->u_data.s_cmd.redirs[i], depth + 2);
 			}

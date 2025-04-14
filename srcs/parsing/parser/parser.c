@@ -37,8 +37,8 @@ static t_ast	*parse_pipeline(t_token **tokens, t_gc **head)
 			return (NULL);
 		pipe_node->type = NODE_PIPE;
 		pipe_node->u_data.s_pipe.cmd_count = 2;
-		pipe_node->u_data.s_pipe.commands = (t_ast **)gc_malloc_array(sizeof(t_ast *)
-				* 2, head);
+		// pipe_node->u_data.s_pipe.commands = (t_ast **)gc_malloc_array(sizeof(t_ast *)
+		// 		* 2, head);
 		if (!pipe_node->u_data.s_pipe.commands)
 			return (NULL);
 		pipe_node->u_data.s_pipe.commands[0] = left;

@@ -46,11 +46,15 @@ t_ast	*parse_command(t_token **tok, t_gc **head)
 	t_ast	*ast;
 	int		i;
 	int		fd_source;
+	int		args_count;
+	int		redir_count;
 
 	ast = gc_malloc(sizeof(t_ast), head);
 	if (!ast)
 		return (NULL);
-	if (init_cmd_node(&ast, 20, 5, head)) // TODO: determine sizes
+	args_count = count_cmd_args(*tok);
+	redir_count = count_cmd_redir(*tok);
+	if (init_cmd_node(&ast, args_count, redir_count, head))
 		return (NULL);
 	i = 0;
 	while ((*tok) && (*tok)->type == WORD)
