@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	builtins_manager(t_ast *ast, t_context **context)
+int	builtins_manager(t_ast *ast, t_context **context)
 {
 	int		args_count;
 	char	**args;
@@ -28,7 +28,7 @@ void	builtins_manager(t_ast *ast, t_context **context)
 	{
 		printf(">>> BUILTINS ERROR\n");
 	}
-	return ;
+	return (return_value);
 }
 
 void	exec_manager(t_ast *ast, t_context **context)

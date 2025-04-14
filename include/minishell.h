@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+#include <sys/wait.h>
 
 /* --------------------- Variables --------------------- */
 
@@ -167,6 +168,7 @@ int							testing_parser(char *input, t_context **context,
 
 /* --------------------- Execution --------------------- */
 
+int	builtins_manager(t_ast *ast, t_context **context);
 int							is_builtin(char *command);
 void						exec_manager(t_ast *ast, t_context **context);
 
