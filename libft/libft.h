@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 20:58:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/03 14:13:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/14 20:48:20 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void				ft_strrev(char *s);
 int					ft_intlen(int n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strlen_array(char **array);
+unsigned int		ft_abs(int n);
 
 #endif
