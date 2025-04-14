@@ -9,6 +9,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdarg.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -19,6 +20,10 @@
 
 # define PATH_MAX 4096
 # define QUOTES_MAX 1024
+# define FD_MAX 1024
+# define BUFFER_SIZE 42
+# define IN_FD 0
+# define OUT_FD 1
 
 /* --------------------- Garbage Collector --------------------- */
 
@@ -165,6 +170,14 @@ int							testing_parser(char *input, t_context **context,
 int							is_builtin(char *command);
 void						exec_manager(t_ast *ast, t_context **context);
 
+// TODO: yazid
+int							execute_ast(t_ast *node, t_context *ctx);
+int							handle_pipes(t_ast *pipe_node, t_context *ctx);
+void						handle_heredoc(const char *delimiter, t_gc **head);
+// bool						is_builtin(char *query);
+// int						execute_builtin(t_ast *command, t_context *ctx);
+void						close_pipes(int (*pipes)[2], int pipes_nb);
+
 /* --------------------- Buildins --------------------- */
 
 int							cd(int args_count, char **args, t_gc **head);
@@ -179,5 +192,17 @@ int							unset(char **to_unset, t_gc **head);
 /* --------------------- Signals --------------------- */
 
 void						init_sig(void);
+
+/* --------------------- Utils --------------------- */
+
+int							print(int fd, const char *format, ...);
+
+// TODO: yazid GNL
+char						*get_next_line(int fd);
+size_t						string_length(const char *s);
+char						*duplicate_(char *buffer);
+char						*concatenate_(char *line, char *buffer);
+void						shift_(char *buffer);
+bool						string_contains_newline(char *buffer);
 
 #endif

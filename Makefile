@@ -5,6 +5,7 @@ SRCDIR := ./srcs
 OBJDIR := ./objs
 
 SRCS := main.c\
+		utils/print.c\
 		gc_functions/gc_alloc.c gc_functions/gc_free.c gc_functions/gc_setenv.c\
 		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
 		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\
