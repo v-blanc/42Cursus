@@ -29,7 +29,7 @@ int	count_cmd_redir(t_token *tok)
 	while (tok && is_redirection(tok->type))
 	{
 		if (!tok->next || tok->next->type != WORD)
-			break ; // malformed, mais à toi de gérer cette erreur proprement
+			break ; // TODO: determine error management
 		count++;
 		tok = tok->next->next;
 	}

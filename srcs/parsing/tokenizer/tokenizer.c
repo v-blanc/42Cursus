@@ -8,7 +8,7 @@ static char	*parse_quoted_word(const char *s, int *i, t_gc **head)
 
 	quote = s[*i];
 	(*i)++;
-	buf = gc_malloc(strlen(&s[*i]) + 1, head);
+	buf = gc_malloc(ft_strlen(&s[*i]) + 1, head);
 	if (!buf)
 		return (NULL);
 	j = 0;
@@ -33,7 +33,7 @@ static char	*parse_word(const char *s, int *i, t_gc **head)
 	char	*buf;
 	int		j;
 
-	buf = gc_malloc(strlen(&s[*i]) + 1, head);
+	buf = gc_malloc(ft_strlen(&s[*i]) + 1, head);
 	if (!buf)
 		return (NULL);
 	j = 0;

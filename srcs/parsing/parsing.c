@@ -17,7 +17,7 @@ static int	sub_is_valid_input(const char **line, char *quote, int *paren)
 		{
 			if ((*paren) == 0)
 			{
-				printf("Missing opening parenthesis\n");
+				print(2, "Missing opening parenthesis\n");
 				return (1);
 			}
 			(*paren)--;
@@ -42,9 +42,9 @@ static int	is_valid_input(const char *line)
 	if (quote || paren)
 	{
 		if (paren)
-			printf("Missing closing parenthesis\n");
+			print(2, "Missing closing parenthesis\n");
 		if (quote)
-			printf("Missing closing quote `%c`\n", quote);
+			print(2, "Missing closing quote `%c`\n", quote);
 		return (1);
 	}
 	return (0);

@@ -7,14 +7,14 @@ void	*gc_malloc(size_t size, t_gc **head)
 	new = malloc(sizeof(t_gc));
 	if (!new)
 	{
-		printf("malloc error\n");
+		print(2, "malloc error\n");
 		return (NULL);
 	}
 	new->perm = 0;
 	new->mem = ft_calloc(1, size);
 	if (!new->mem)
 	{
-		printf("malloc error\n");
+		print(2, "malloc error\n");
 		free(new);
 		return (NULL);
 	}
@@ -41,14 +41,14 @@ void	*gc_malloc_perm(size_t size, t_gc **head)
 	new = malloc(sizeof(t_gc));
 	if (!new)
 	{
-		printf("malloc error\n");
+		print(2, "malloc error\n");
 		return (NULL);
 	}
 	new->perm = 1;
 	new->mem = ft_calloc(1, size);
 	if (!new->mem)
 	{
-		printf("malloc error\n");
+		print(2, "malloc error\n");
 		free(new);
 		return (NULL);
 	}
