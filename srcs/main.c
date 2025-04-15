@@ -39,11 +39,17 @@ void	set_input(t_context **context, t_gc **head)
 		if (!input)
 			exit_eof(context);
 		parsing(input, &ast, context, head);
+		if (!ast)
+			break ;
+		printf("\n******************************************\n");
+		print_ast(ast, 0);
+		printf("\n******************************************\n\n");
 		execute_ast(ast, *context);
 		add_history(input);
 		free(input);
 		gc_free_all(head);
 	}
+	exit_eof(context); // TODO: add exit status
 }
 
 extern char	**environ;
