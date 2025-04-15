@@ -19,47 +19,44 @@ static t_ast	*parse_primary(t_token **tokens, t_gc **head)
 		return (parse_command(tokens, head));
 }
 
-static int	sub_parse_pipeline(t_token **tokens, t_ast **left, t_gc **head)
-{
-	t_ast	*right;
-	t_ast	*pipe_node;
-	t_ast	**commands;
-
-	*tokens = (*tokens)->next;
-	if (*tokens && (*tokens)->type != WORD)
-	{
-		print(2, "syntax error\n");
-		return (1);
-	}
-	right = parse_primary(tokens, head);
-	pipe_node = gc_malloc(sizeof(t_ast), head);
-	if (!right || !pipe_node)
-		return (1);
-	pipe_node->type = NODE_PIPE;
-	pipe_node->u_data.s_pipe.cmd_count = 2;
-	commands = (t_ast **)gc_malloc_array(sizeof(t_ast *) * 2, head);
-	pipe_node->u_data.s_pipe.commands = commands;
-	if (!pipe_node->u_data.s_pipe.commands)
-		return (1);
-	pipe_node->u_data.s_pipe.commands[0] = *left;
-	pipe_node->u_data.s_pipe.commands[1] = right;
-	*left = pipe_node;
-	return (0);
-}
-
 static t_ast	*parse_pipeline(t_token **tokens, t_gc **head)
 {
+	t_ast	*pipe_node;
+	t_ast	**commands;
 	t_ast	*left;
+	t_ast	*right;
+	int		i;
 
+	pipe_node = gc_malloc(sizeof(t_ast), head);
+	if (!pipe_node)
+		return (NULL);
+	pipe_node->type = NODE_PIPE;
+	pipe_node->u_data.s_pipe.cmd_count = 1;
+	commands = (t_ast **)gc_malloc_array(sizeof(t_ast *) * 4, head);
+	if (!commands)
+		return (NULL);
+	pipe_node->u_data.s_pipe.commands = commands;
+	//
 	left = parse_primary(tokens, head);
 	if (!left)
 		return (NULL);
+	i = 0;
+	commands[i++] = left;
 	while (*tokens && (*tokens)->type == PIPE)
 	{
-		if (sub_parse_pipeline(tokens, &left, head))
+		*tokens = (*tokens)->next;
+		if (*tokens && (*tokens)->type != WORD)
+		{
+			print(2, "syntax error\n");
 			return (NULL);
+		}
+		right = parse_primary(tokens, head);
+		if (!right)
+			return (NULL);
+		commands[i++] = right;
+		pipe_node->u_data.s_pipe.cmd_count++;
 	}
-	return (left);
+	return (pipe_node);
 }
 
 static int	sub_parser(t_token **tokens, t_ast **left, t_gc **head)
