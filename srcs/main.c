@@ -81,7 +81,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 		return (1);
 	(*context)->argc = argc;
 	(*context)->argv = argv;
-	(*context)->last_exit_status = 22222;
+	(*context)->last_exit_status = 0;
 	(*context)->head = head;
 	return (0);
 }
@@ -91,7 +91,7 @@ int	main(int argc, char **argv)
 	t_gc		*head;
 	t_context	*context;
 
-	if (argc > 2) // TODO: rework to allow multiple arguments
+	if (argc > 2) // TODO: rework to allow multiple arguments ?
 		return (1);
 	head = NULL;
 	context = NULL;
