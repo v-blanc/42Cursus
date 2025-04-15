@@ -162,9 +162,7 @@ void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
 
-int							parsing(char *input, t_token **tokens,
-								t_context *context, t_gc **head);
-int							testing_parser(char *input, t_context **context,
+int							parsing(char *input, t_context **context,
 								t_gc **head);
 
 /* --------------------- Execution --------------------- */

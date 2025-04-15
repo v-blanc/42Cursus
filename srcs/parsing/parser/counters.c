@@ -29,7 +29,13 @@ int	count_cmd_redir(t_token *tok)
 	while (tok && is_redirection(tok->type))
 	{
 		if (!tok->next || tok->next->type != WORD)
-			break ; // TODO: determine error management
+		{
+			if (tok->type != REDIR_HEREDOC)
+			{
+				print(2, "syntax error\n");
+				return (-1);
+			}
+		}
 		count++;
 		tok = tok->next->next;
 	}

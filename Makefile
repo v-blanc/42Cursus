@@ -34,7 +34,7 @@ libft:
 	@make -C libft
 
 $(NAME): $(OBJS)
-	libft
+	@make -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

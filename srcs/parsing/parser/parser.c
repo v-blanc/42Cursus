@@ -31,6 +31,11 @@ static t_ast	*parse_pipeline(t_token **tokens, t_gc **head)
 	while (*tokens && (*tokens)->type == PIPE)
 	{
 		*tokens = (*tokens)->next;
+		if (*tokens && (*tokens)->type != WORD)
+		{
+			print(2, "syntax error\n");
+			return (NULL);
+		}
 		right = parse_primary(tokens, head);
 		pipe_node = gc_malloc(sizeof(t_ast), head);
 		if (!right || !pipe_node)
@@ -55,6 +60,11 @@ t_ast	*parser(t_token **tokens, t_gc **head)
 	t_ast			*op_node;
 	t_token_type	op_type;
 
+	if (tokens && (*tokens)->type != WORD)
+	{
+		print(2, "syntax error\n");
+		return (NULL);
+	}
 	left = parse_pipeline(tokens, head);
 	if (!left)
 		return (NULL);
@@ -62,6 +72,11 @@ t_ast	*parser(t_token **tokens, t_gc **head)
 	{
 		op_type = (*tokens)->type;
 		*tokens = (*tokens)->next;
+		if (*tokens && (*tokens)->type != WORD)
+		{
+			print(2, "syntax error\n");
+			return (NULL);
+		}
 		right = parse_pipeline(tokens, head);
 		if (!right)
 			return (NULL);

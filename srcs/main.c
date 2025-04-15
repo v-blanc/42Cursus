@@ -37,7 +37,7 @@ void	set_input(t_context **context, t_gc **head)
 			gc_free(rl_prompt, head);
 		if (!input) // EOF ie CTRL-D
 			return (free(input), printf("exit\n"), exit(0));
-		testing_parser(input, context, head);
+		parsing(input, context, head);
 		add_history(input);
 		free(input);
 		gc_free_all(head);

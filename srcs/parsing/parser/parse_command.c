@@ -54,6 +54,8 @@ t_ast	*parse_command(t_token **tok, t_gc **head)
 		return (NULL);
 	args_count = count_cmd_args(*tok);
 	redir_count = count_cmd_redir(*tok);
+	if (args_count == -1 || redir_count == -1)
+		return (NULL);
 	if (init_cmd_node(&ast, args_count, redir_count, head))
 		return (NULL);
 	i = 0;
@@ -73,7 +75,10 @@ t_ast	*parse_command(t_token **tok, t_gc **head)
 		ast->u_data.s_cmd.redirs[i]->u_data.s_red.fd_source = fd_source;
 		(*tok) = (*tok)->next;
 		if (!(*tok) || (*tok)->type != WORD)
-			return (NULL); // TODO: determine error management
+		{
+			print(2, "syntax error\n");
+			return (NULL);
+		}
 		ast->u_data.s_cmd.redirs[i]->u_data.s_red.target = (*tok)->value;
 		(*tok) = (*tok)->next;
 		i++;
