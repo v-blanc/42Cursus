@@ -21,7 +21,7 @@ char	*duplicate_(char *buffer)
 	length = string_length(buffer);
 	if (!length)
 		return (NULL);
-	duplicated_line = gc_malloc(length + 1, NULL);
+	duplicated_line = malloc(sizeof(char) * (length + 1));
 	if (!duplicated_line)
 		return (NULL);
 	i = -1;
@@ -36,22 +36,31 @@ char	*concatenate_(char *line, char *buffer)
 	char			*concatened_line;
 	const size_t	total_length = string_length(line) + string_length(buffer);
 	size_t			i;
+	size_t			j;
 
-	concatened_line = gc_malloc(total_length + 1, NULL);
+	concatened_line = malloc(sizeof(char) * (total_length + 1));
 	if (!concatened_line)
 	{
-		gc_free(line, NULL);
+		free(line);
 		return (NULL);
 	}
-	i = -1;
-	while (line && line[++i])
-		concatened_line[i] = line[i];
-	while (*buffer && *buffer != '\n')
-		concatened_line[i++] = *buffer++;
-	if (*buffer == '\n')
+	i = 0;
+	j = 0;
+	if (line)
+	{
+		while (line[j])
+			concatened_line[i++] = line[j++];
+	}
+	j = 0;
+	while (buffer[j] && buffer[j] != '\n')
+		concatened_line[i++] = buffer[j++];
+	if (buffer[j] == '\n' && i < total_length)
+	{
 		concatened_line[i++] = '\n';
+		j++;
+	}
 	concatened_line[i] = '\0';
-	gc_free(line, NULL);
+	free(line);
 	return (concatened_line);
 }
 

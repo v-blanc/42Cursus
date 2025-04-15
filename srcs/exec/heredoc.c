@@ -13,13 +13,15 @@ void	handle_heredoc(const char *delimiter, t_gc **head)
 	char			*line;
 	const size_t	delimiter_length = ft_strlen(delimiter);
 
+	(void)head;
 	if (pipe(pipe_fd) < 0)
 		exit(EXIT_FAILURE);
 	count = 1;
 	while (true)
 	{
+		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
-		if (!line || (ft_strcmp(line, delimiter) == 0
+		if (!line || (ft_strncmp(line, delimiter, delimiter_length - 1) == 0
 				&& line[delimiter_length] == '\n'))
 		{
 			if (!line)
@@ -27,6 +29,7 @@ void	handle_heredoc(const char *delimiter, t_gc **head)
 			gc_free(line, head);
 			break ;
 		}
+		count++;
 	}
 	close(pipe_fd[OUT_FD]);
 	dup2(pipe_fd[IN_FD], STDIN_FILENO);

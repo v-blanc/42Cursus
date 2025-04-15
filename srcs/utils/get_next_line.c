@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	shift_(buffer[fd]);
 	if (!line || !*line)
 	{
-		gc_free(line, NULL);
+		free(line);
 		return (NULL);
 	}
 	return (line);
