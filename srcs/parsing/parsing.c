@@ -103,7 +103,7 @@ int	parsing(char *input, t_context **context, t_gc **head)
 	t_token	*tokens;
 	t_ast	*ast;
 
-	testing_parser_debug(input, context, head); // TODO: remove
+	testing_parser_debug(input, context, head); // TODO: remove this for release
 	if (!input || (input && (input[0] == '\0' || input[0] == '\n')))
 		return (0);
 	tokens = NULL;
