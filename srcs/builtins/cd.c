@@ -70,5 +70,5 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 		return (0);
 	if (cd_exec(path, new_path, head))
 		return (1);
-	return (0);
+	return (1);
 }

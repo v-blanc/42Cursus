@@ -7,17 +7,37 @@ static char	*track_paths(char *command, t_gc **head);
 
 extern char	**environ;
 
+int	handle_operators(t_ast *node, t_context *ctx)
+{
+	int	status;
+	int	type;
+
+	type = node->u_data.s_op.op;
+	status = execute_ast(node->u_data.s_op.left, ctx);
+	if (type == AND && status == 0)
+		return (execute_ast(node->u_data.s_op.right, ctx));
+	else if (type == OR && status == 1)
+		return (execute_ast(node->u_data.s_op.right, ctx));
+	return (type == AND);
+}
+
 int	execute_ast(t_ast *node, t_context *ctx)
 {
+	int	status;
+
+	status = 0;
 	if (!node)
 		return (0);
 	if (node->type == NODE_PIPE)
-		return (handle_pipes(node, ctx));
+		status = handle_pipes(node, ctx);
 	else if (node->type == NODE_REDIR)
-		return (handle_redirections(node, ctx->head));
+		status = handle_redirections(node, ctx->head);
 	else if (node->type == NODE_CMD)
-		return (execute_command(node, ctx));
-	return (0);
+		status = execute_command(node, ctx);
+	else if (node->type == NODE_BINARY_OP)
+		status = handle_operators(node, ctx);
+	printf("status: %d\n", status);
+	return (status);
 }
 
 void	close_pipes(int (*pipes)[2], int pipes_nb)
