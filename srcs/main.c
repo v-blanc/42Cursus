@@ -35,17 +35,13 @@ void	set_input(t_context **context, t_gc **head)
 		input = readline(rl_prompt);
 		if (rl_prompt != NULL)
 			gc_free(rl_prompt, head);
-		if (!input) // EOF ie CTRL-D
+		if (!input)
 			exit_eof(context);
 		parsing(input, context, head);
 		add_history(input);
 		free(input);
 		gc_free_all(head);
 	}
-	free(input);
-	gc_free_all_perm(*head);
-	rl_clear_history();
-	exit(0);
 }
 
 extern char	**environ;
