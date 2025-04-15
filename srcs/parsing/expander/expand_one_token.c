@@ -77,12 +77,12 @@ static void	positional_var(const char *word, t_context *context, char *result,
 	return ;
 }
 
-int	expand_one_token(char **w, t_context *context, t_gc **head)
+int	expand_one_token(char **w, int len_w, t_context *context, t_gc **head)
 {
 	char	*result;
 	int		ind[2];
 
-	result = gc_malloc(1000, head); // TODO: calculate size
+	result = gc_malloc(len_w, head);
 	if (!result)
 		return (1);
 	ind[0] = 0;

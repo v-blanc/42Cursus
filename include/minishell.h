@@ -104,8 +104,9 @@ void						token_add_back(t_token **tokens, t_token *new);
 
 int							tokenizer(t_token **tokens, const char *s,
 								t_gc **head);
-int							expand_one_token(char **w, t_context *context,
-								t_gc **head);
+
+int							expand_one_token(char **w, int len_w,
+								t_context *context, t_gc **head);
 int							expander(t_token **tokens, t_context *context,
 								t_gc **head);
 int							merge_tokens(t_token **tokens, t_gc **head);

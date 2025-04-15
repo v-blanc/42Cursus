@@ -1,5 +1,67 @@
 #include "../../../include/minishell.h"
 
+static int	is_valid_var_char(char c, int pos)
+{
+	if (pos == 0)
+		return (isalpha(c) || c == '_');
+	return (isalnum(c) || c == '_');
+}
+
+static int	sub_get_expand_len(char *word, int *i, int *len, t_context *context)
+{
+	int		start;
+	char	*var_name;
+	char	*val;
+
+	(*i)++;
+	start = (*i);
+	while (is_valid_var_char(word[(*i)], (*i)))
+		(*i)++;
+	var_name = gc_strndup(&word[start], (*i) - start, context->head);
+	if (!var_name)
+		return (1);
+	if (*i == start && word[(*i)] == '?')
+		(*len) += ft_intlen(context->last_exit_status);
+	else if (*i == start && word[(*i)] == '$')
+		(*len) += ft_intlen(getpid());
+	else
+	{
+		val = getenv(var_name);
+		if (val)
+			(*len) += ft_strlen(val);
+	}
+	gc_free(var_name, context->head);
+	return (0);
+}
+
+static int	get_expand_len(char *word, t_context *context)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 1;
+	while (word[i])
+	{
+		if (word[i] == '$' && word[i + 1])
+		{
+			if (isdigit(word[i + 1]))
+			{
+				i += 2;
+				len += ft_strlen(getenv(&word[i]));
+			}
+			else if (sub_get_expand_len(word, &i, &len, context))
+				return (-1);
+		}
+		else
+		{
+			len++;
+			i++;
+		}
+	}
+	return (len);
+}
+
 static int	expand_tilde(char **word, t_gc **head)
 {
 	char	*home;
@@ -29,6 +91,7 @@ static int	expand_tilde(char **word, t_gc **head)
 int	expander(t_token **tokens, t_context *context, t_gc **head)
 {
 	t_token	*cur;
+	int		len_value_expanded;
 
 	cur = *tokens;
 	while (cur)
@@ -37,7 +100,11 @@ int	expander(t_token **tokens, t_context *context, t_gc **head)
 		{
 			if (expand_tilde(&cur->value, head))
 				return (1);
-			if (expand_one_token(&cur->value, context, head))
+			len_value_expanded = get_expand_len(cur->value, context);
+			if (len_value_expanded < 0)
+				return (1);
+			if (expand_one_token(&cur->value, len_value_expanded, context,
+					head))
 				return (1);
 		}
 		cur = cur->next;
