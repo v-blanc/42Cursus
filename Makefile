@@ -33,7 +33,8 @@ all: $(NAME)
 libft:
 	@make -C libft
 
-$(NAME): libft $(OBJS)
+$(NAME): $(OBJS)
+	libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
