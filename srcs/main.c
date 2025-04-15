@@ -41,9 +41,9 @@ void	set_input(t_context **context, t_gc **head)
 		parsing(input, &ast, context, head);
 		if (!ast)
 			break ;
-		printf("\n******************************************\n");
-		print_ast(ast, 0);
-		printf("\n******************************************\n\n");
+		// printf("\n******************************************\n");
+		// print_ast(ast, 0);
+		// printf("\n******************************************\n\n");
 		execute_ast(ast, *context);
 		add_history(input);
 		free(input);
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 	t_gc		*head;
 	t_context	*context;
 
-	if (argc > 2) // TODO: rework to allow multiple arguments ?
+	if (argc > 1) // TODO: rework to allow multiple arguments ?
 		return (1);
 	head = NULL;
 	context = NULL;
