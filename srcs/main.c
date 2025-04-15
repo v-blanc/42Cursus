@@ -41,9 +41,9 @@ void	set_input(t_context **context, t_gc **head)
 		parsing(input, &ast, context, head);
 		if (!ast)
 			break ;
-		// printf("\n******************************************\n");
-		// print_ast(ast, 0);
-		// printf("\n******************************************\n\n");
+		printf("\n******************************************\n");
+		print_ast(ast, 0);
+		printf("\n******************************************\n\n");
 		execute_ast(ast, *context);
 		add_history(input);
 		free(input);
