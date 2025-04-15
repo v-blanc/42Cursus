@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 extern char	**environ;
 
 static void	sort_environ_indexes(int *environ_indexes)

@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 static bool	is_flag_n(char *argument)
 {
 	size_t	i;

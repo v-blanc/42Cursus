@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 int	pwd(int fd)
 {
 	char	path[PATH_MAX];

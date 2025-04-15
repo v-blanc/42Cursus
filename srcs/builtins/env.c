@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 extern char	**environ;
 
 int	env(int fd, int args_count)

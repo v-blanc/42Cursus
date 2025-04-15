@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 extern char	**environ;
 
 static int	to_unset_found(char **to_unset)
