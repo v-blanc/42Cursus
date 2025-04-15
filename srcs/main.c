@@ -54,6 +54,7 @@ int	init_environ(t_gc **head)
 {
 	char	*env_pwd;
 
+	env_pwd = NULL;
 	if (environ == NULL || environ[0] == NULL)
 	{
 		environ = (char **)gc_malloc_array_perm(3, head);
