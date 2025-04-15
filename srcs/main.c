@@ -26,6 +26,7 @@ char	*set_readline_prompt(t_gc **head)
 
 void	set_input(t_context **context, t_gc **head)
 {
+	t_ast	*ast;
 	char	*input;
 	char	*rl_prompt;
 
@@ -37,7 +38,8 @@ void	set_input(t_context **context, t_gc **head)
 			gc_free(rl_prompt, head);
 		if (!input)
 			exit_eof(context);
-		parsing(input, context, head);
+		parsing(input, &ast, context, head);
+		execute_ast(ast, *context);
 		add_history(input);
 		free(input);
 		gc_free_all(head);

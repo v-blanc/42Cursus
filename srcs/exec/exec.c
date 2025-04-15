@@ -2,6 +2,7 @@
 
 int			execute_ast(t_ast *node, t_context *ctx);
 static int	execute_command(t_ast *command, t_context *ctx);
+static int	handle_redirections(t_ast *c, t_gc **head);
 static char	*track_paths(char *command, t_gc **head);
 
 extern char	**environ;
@@ -11,7 +12,9 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	if (!node)
 		return (0);
 	if (node->type == NODE_PIPE)
-		return (0);
+		return (handle_pipes(node, ctx));
+	else if (node->type == NODE_REDIR)
+		return (handle_redirections(node, ctx->head));
 	else if (node->type == NODE_CMD)
 		return (execute_command(node, ctx));
 	return (0);
@@ -128,17 +131,16 @@ static char	*track_paths(char *command, t_gc **head)
 	char		*whole_path;
 	short		i;
 
-	(void)head;
 	if (ft_strchr(command, '/') || !path)
-		return (ft_strdup(command));
-	directories = ft_split(path, ':');
+		return (gc_strdup(command, head));
+	directories = gc_split(path, ':', head);
 	if (!directories)
 		return (NULL);
 	i = -1;
 	while (directories[++i])
 	{
-		whole_path = ft_strjoin(directories[i], "/");
-		whole_path = ft_strjoin(whole_path, command);
+		whole_path = gc_strjoin(directories[i], "/", head);
+		whole_path = gc_strjoin(whole_path, command, head);
 		if (access(whole_path, X_OK) == 0)
 			return (whole_path);
 	}

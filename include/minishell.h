@@ -162,8 +162,8 @@ void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Parsing --------------------- */
 
-int							parsing(char *input, t_context **context,
-								t_gc **head);
+int							parsing(char *input, t_ast **ast,
+								t_context **context, t_gc **head);
 
 /* --------------------- Execution --------------------- */
 

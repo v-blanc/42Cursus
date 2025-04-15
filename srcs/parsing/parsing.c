@@ -74,33 +74,32 @@ static int	testing_parser_debug(char *input, t_context **context, t_gc **head)
 	if (!input || (input && (input[0] == '\0' || input[0] == '\n')))
 		return (0);
 	tokens = NULL;
-	printf("\ninput: %s\n\n", input);
+	// printf("\ninput: %s\n\n", input);
 	if (full_tokenize(input, &tokens, *context, head))
 		return (1);
 	tokens_head = tokens;
-	while (tokens)
-	{
-		printf("Expanded: type=%d, value=`%s`\n", tokens->type, tokens->value);
-		tokens = tokens->next;
-	}
-	printf("\n");
-	printf("Parser:\n");
+	// while (tokens)
+	// {
+	// 	printf("Expanded: type=%d, value=`%s`\n", tokens->type, tokens->value);
+	// 	tokens = tokens->next;
+	// }
+	// printf("\n");
+	printf("\n******************************************\n");
 	ast = parser(&tokens_head, head);
 	if (!ast)
 		return (1);
 	print_ast(ast, 0);
-	printf("\nExecution:\n\n```\n");
-	if (ast->type == NODE_CMD)
-		exec_manager(ast, context);
-	printf("```\n\n");
+	// printf("\nExecution:\n\n```\n");
+	// if (ast->type == NODE_CMD)
+	// 	exec_manager(ast, context);
+	printf("\n******************************************\n\n");
 	return (0);
 }
 
-int	parsing(char *input, t_context **context, t_gc **head)
+int	parsing(char *input, t_ast **ast, t_context **context, t_gc **head)
 {
 	t_token	*tokens_head;
 	t_token	*tokens;
-	t_ast	*ast;
 
 	// TODO: remove this for release
 	testing_parser_debug(input, context, head);
@@ -110,10 +109,8 @@ int	parsing(char *input, t_context **context, t_gc **head)
 	if (full_tokenize(input, &tokens, *context, head))
 		return (1);
 	tokens_head = tokens;
-	ast = parser(&tokens_head, head);
-	if (!ast)
+	*ast = parser(&tokens_head, head);
+	if (!(*ast))
 		return (1);
-	if (ast->type == NODE_CMD)
-		exec_manager(ast, context);
 	return (0);
 }
