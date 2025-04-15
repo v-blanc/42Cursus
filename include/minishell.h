@@ -158,12 +158,11 @@ int							count_cmd_redir(t_token *tok);
 t_ast						*parse_command(t_token **tok, t_gc **head);
 t_ast						*parser(t_token **tokens, t_gc **head);
 
-void						print_ast(t_ast *node, int depth);
-
-/* --------------------- Parsing --------------------- */
-
+t_ast						*parse_pipeline(t_token **tokens, t_gc **head);
 int							parsing(char *input, t_ast **ast,
 								t_context **context, t_gc **head);
+
+void						print_ast(t_ast *node, int depth);
 
 /* --------------------- Execution --------------------- */
 
