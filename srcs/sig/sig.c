@@ -12,7 +12,6 @@ void	sig_handler(int sig)
 	// else if (sig == SIGQUIT)
 	// {
 	// 	printf("^\\");
-	// 	//TODO: cleanup everything
 	// 	printf("temp: ctrl+\\ have been pressed\n");
 	// }
 }

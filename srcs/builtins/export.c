@@ -73,15 +73,23 @@ static int	export_one_var(char *arg, t_gc **head)
 	i = 0;
 	while (arg[i] && arg[i] != '=')
 		i++;
+	if (arg[i] && i == 0)
+	{
+		print(2, "export: %s: not a valid identifier\n", arg);
+		return (0);
+	}
 	name = gc_strndup(arg, i, head);
+	if (!name)
+		return (1);
 	if (arg[i] && arg[i + 1])
 		value = gc_strdup(&arg[i + 1], head);
+	if (!value)
+		return (1);
 	if (gc_setenv(name, value, head))
 		return (1);
 	return (0);
 }
 
-// TODO: check `=....` error > print(2, ...)
 int	export(int fd, int args_count, char **args, t_gc **head)
 {
 	int	i;
