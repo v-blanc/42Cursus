@@ -14,8 +14,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/wait.h>
 # include <unistd.h>
-#include <sys/wait.h>
 
 /* --------------------- Variables --------------------- */
 
@@ -168,11 +168,10 @@ int							testing_parser(char *input, t_context **context,
 
 /* --------------------- Execution --------------------- */
 
-int	builtins_manager(t_ast *ast, t_context **context);
+int							builtins_manager(t_ast *ast, t_context **context);
 int							is_builtin(char *command);
 void						exec_manager(t_ast *ast, t_context **context);
 
-// TODO: yazid
 int							execute_ast(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
 void						handle_heredoc(const char *delimiter, t_gc **head);
@@ -199,14 +198,13 @@ void						init_sig(void);
 
 /* --------------------- Utils --------------------- */
 
-int							print(int fd, const char *format, ...);
-
-// TODO: yazid GNL
 char						*get_next_line(int fd);
 size_t						string_length(const char *s);
 char						*duplicate_(char *buffer);
 char						*concatenate_(char *line, char *buffer);
 void						shift_(char *buffer);
 bool						string_contains_newline(char *buffer);
+
+int							print(int fd, const char *format, ...);
 
 #endif

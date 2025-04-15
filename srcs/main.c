@@ -52,10 +52,17 @@ extern char	**environ;
 
 int	init_environ(t_gc **head)
 {
+	char	*env_pwd;
+
 	if (environ == NULL || environ[0] == NULL)
 	{
 		environ = (char **)gc_malloc_array_perm(3, head);
-		environ[0] = gc_strjoin_perm("PWD=", getcwd(NULL, 0), head);
+		if (getcwd(env_pwd, PATH_MAX) == NULL)
+		{
+			print(2, "getcwd: %s\n", strerror(errno));
+			return (1);
+		}
+		environ[0] = gc_strjoin_perm("PWD=", env_pwd, head);
 		environ[1] = gc_strjoin_perm("SHLVL=1", "", head);
 		// TODO: change to use `which env` ou autre ?
 		environ[2] = gc_strjoin_perm("_=/usr/bin/env", "", head);

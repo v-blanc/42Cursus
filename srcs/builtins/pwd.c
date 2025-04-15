@@ -1,13 +1,12 @@
 #include "../../include/minishell.h"
 
-// TODO: handle errors (errno) from getcwd ?
 int	pwd(int fd)
 {
 	char	path[PATH_MAX];
 
 	if (getcwd(path, PATH_MAX) == NULL)
 	{
-		print(2, "getcwd error\n");
+		print(2, "getcwd: %s\n", strerror(errno));
 		return (1);
 	}
 	else

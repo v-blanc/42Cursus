@@ -33,12 +33,12 @@ void	close_pipes(int (*pipes)[2], int pipes_nb)
 int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 {
 	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
-	int			(*pipes)[2];
 	pid_t		*pids;
 	int			i;
 	int			status;
 
-	pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
+	int(*pipes)[2];
+	pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	i = -1;
 	while (++i < cmds_nb - 1)
@@ -76,14 +76,17 @@ static int	handle_redirections(t_ast *c, t_gc **head)
 	{
 		redir = c->u_data.s_cmd.redirs[i];
 		if (redir->u_data.s_red.op == REDIR_OUT)
-			fd = open(redir->u_data.s_red.target, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			fd = open(redir->u_data.s_red.target, O_WRONLY | O_CREAT | O_TRUNC,
+					0644);
 		else if (redir->u_data.s_red.op == REDIR_APPEND)
-			fd = open(redir->u_data.s_red.target, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			fd = open(redir->u_data.s_red.target, O_WRONLY | O_CREAT | O_APPEND,
+					0644);
 		else if (redir->u_data.s_red.op == REDIR_IN)
 			fd = open(redir->u_data.s_red.target, O_RDONLY);
-		else if (redir->u_data.s_red.op== REDIR_HEREDOC)
+		else if (redir->u_data.s_red.op == REDIR_HEREDOC)
 			handle_heredoc(redir->u_data.s_red.target, head);
-		if (redir->u_data.s_red.op == REDIR_OUT || redir->u_data.s_red.op == REDIR_APPEND)
+		if (redir->u_data.s_red.op == REDIR_OUT
+			|| redir->u_data.s_red.op == REDIR_APPEND)
 			dup2(fd, STDOUT_FILENO);
 		else
 			dup2(fd, STDIN_FILENO);
