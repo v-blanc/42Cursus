@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	builtins_manager(t_ast *ast, t_context **context)
 {

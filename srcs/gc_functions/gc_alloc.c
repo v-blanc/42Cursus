@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	*gc_malloc(size_t size, t_gc **head)
 {

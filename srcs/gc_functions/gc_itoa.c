@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 char	*gc_itoa(int n, t_gc **head)
 {

@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 static int	sub_is_valid_input(const char **line, char *quote, int *paren)
 {

@@ -1,4 +1,4 @@
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 static int	is_redirection(t_token_type type)
 {

@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 char	*gc_strdup(const char *s, t_gc **head)
 {

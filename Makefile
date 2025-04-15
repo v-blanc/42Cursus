@@ -1,6 +1,8 @@
 CC := cc
 CFLAGS := -Wall -Werror -Wextra -g
 
+INCDIR := ./include
+
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
@@ -36,7 +38,7 @@ $(NAME): libft $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
 
 clean:
 	@make -C libft clean

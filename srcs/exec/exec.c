@@ -1,5 +1,4 @@
-
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int			execute_ast(t_ast *node, t_context *ctx);
 static int	execute_command(t_ast *command, t_context *ctx);

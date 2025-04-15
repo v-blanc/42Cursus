@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 char	*gc_strjoin(char *s1, char *s2, t_gc **head)
 {

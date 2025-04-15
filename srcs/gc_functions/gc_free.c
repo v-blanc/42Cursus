@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	gc_free(void *mem, t_gc **head)
 {

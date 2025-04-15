@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "minishell.h"
 
 char	*set_readline_prompt(t_gc **head)
 {

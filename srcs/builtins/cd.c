@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 static char	*path_handler(int fd, char *path)
 {

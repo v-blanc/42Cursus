@@ -1,4 +1,4 @@
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 static int	init_cmd_node(t_ast **ast, int args_count, int redir_count,
 		t_gc **head)

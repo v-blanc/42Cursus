@@ -1,4 +1,5 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
+
 
 static bool	is_flag_n(char *argument)
 {

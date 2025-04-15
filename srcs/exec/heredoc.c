@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 static void	print_warning_eof(int count, const char *delimiter)
 {
