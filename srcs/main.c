@@ -36,7 +36,7 @@ void	set_input(t_context **context, t_gc **head)
 		if (rl_prompt != NULL)
 			gc_free(rl_prompt, head);
 		if (!input) // EOF ie CTRL-D
-			return (free(input), printf("exit\n"), exit(0));
+			exit_eof(context);
 		parsing(input, context, head);
 		add_history(input);
 		free(input);

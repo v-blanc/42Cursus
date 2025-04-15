@@ -206,4 +206,6 @@ bool						string_contains_newline(char *buffer);
 
 int							print(int fd, const char *format, ...);
 
+int							exit_eof(t_context **context);
+
 #endif

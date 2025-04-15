@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 static int	is_valid_arg(char *arg)
 {
 	char	*long_max;
