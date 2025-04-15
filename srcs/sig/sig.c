@@ -9,11 +9,6 @@ void	sig_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	// else if (sig == SIGQUIT)
-	// {
-	// 	printf("^\\");
-	// 	printf("temp: ctrl+\\ have been pressed\n");
-	// }
 }
 
 void	init_sig(void)

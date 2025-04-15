@@ -41,29 +41,38 @@ static int	get_fd_source(t_token_type type)
 	return (0);
 }
 
+static int	sub_parse_command(t_token **tok, t_ast **ast, t_gc **head)
+{
+	int	args_count;
+	int	redir_count;
+	int	i;
+
+	*ast = gc_malloc(sizeof(t_ast), head);
+	if (!(*ast))
+		return (1);
+	args_count = count_cmd_args(*tok);
+	redir_count = count_cmd_redir(*tok);
+	if (args_count == -1 || redir_count == -1)
+		return (1);
+	if (init_cmd_node(ast, args_count, redir_count, head))
+		return (1);
+	i = 0;
+	while ((*tok) && (*tok)->type == WORD)
+	{
+		(*ast)->u_data.s_cmd.args[i++] = (*tok)->value;
+		(*tok) = (*tok)->next;
+	}
+	return (0);
+}
+
 t_ast	*parse_command(t_token **tok, t_gc **head)
 {
 	t_ast	*ast;
 	int		i;
 	int		fd_source;
-	int		args_count;
-	int		redir_count;
 
-	ast = gc_malloc(sizeof(t_ast), head);
-	if (!ast)
+	if (sub_parse_command(tok, &ast, head))
 		return (NULL);
-	args_count = count_cmd_args(*tok);
-	redir_count = count_cmd_redir(*tok);
-	if (args_count == -1 || redir_count == -1)
-		return (NULL);
-	if (init_cmd_node(&ast, args_count, redir_count, head))
-		return (NULL);
-	i = 0;
-	while ((*tok) && (*tok)->type == WORD)
-	{
-		ast->u_data.s_cmd.args[i++] = (*tok)->value;
-		(*tok) = (*tok)->next;
-	}
 	if (!(*tok))
 		return (ast);
 	i = 0;
@@ -79,9 +88,8 @@ t_ast	*parse_command(t_token **tok, t_gc **head)
 			print(2, "syntax error\n");
 			return (NULL);
 		}
-		ast->u_data.s_cmd.redirs[i]->u_data.s_red.target = (*tok)->value;
+		ast->u_data.s_cmd.redirs[i++]->u_data.s_red.target = (*tok)->value;
 		(*tok) = (*tok)->next;
-		i++;
 	}
 	return (ast);
 }

@@ -70,15 +70,14 @@ static int	testing_parser_debug(char *input, t_context **context, t_gc **head)
 	t_token	*tokens;
 	t_ast	*ast;
 
-	return (0);
+	// return (0); // TODO: remove this for debug
 	if (!input || (input && (input[0] == '\0' || input[0] == '\n')))
 		return (0);
-	testing_parser_debug(input, context, head);
 	tokens = NULL;
-	tokens_head = tokens;
 	printf("\ninput: %s\n\n", input);
 	if (full_tokenize(input, &tokens, *context, head))
 		return (1);
+	tokens_head = tokens;
 	while (tokens)
 	{
 		printf("Expanded: type=%d, value=`%s`\n", tokens->type, tokens->value);
@@ -103,7 +102,8 @@ int	parsing(char *input, t_context **context, t_gc **head)
 	t_token	*tokens;
 	t_ast	*ast;
 
-	testing_parser_debug(input, context, head); // TODO: remove this for release
+	// TODO: remove this for release
+	testing_parser_debug(input, context, head);
 	if (!input || (input && (input[0] == '\0' || input[0] == '\n')))
 		return (0);
 	tokens = NULL;
