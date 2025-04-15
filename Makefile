@@ -13,7 +13,7 @@ SRCS := main.c\
 		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\
 		parsing/tokenizer/tokenizer.c parsing/tokenizer/tokenizer_utils.c\
 		parsing/expander/expander.c parsing/expander/expand_one_token.c parsing/expander/merge_tokens.c\
-		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/counters.c\
+		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/parse_pipeline.c parsing/parser/counters.c\
 		parsing/parser/print_ast.c\
 		parsing/parsing.c\
 		exec/exec.c exec/heredoc.c exec/is_builtin.c exec/exec_manager.c\
