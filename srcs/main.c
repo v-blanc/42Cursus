@@ -23,7 +23,7 @@ char	*set_readline_prompt(t_gc **head)
 	gc_free(rl_prompt, head);
 	return (final_rl_prompt);
 }
-
+// test
 void	set_input(t_context **context, t_gc **head)
 {
 	t_ast	*ast;
