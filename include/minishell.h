@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/04/16 10:47:50 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -172,7 +184,7 @@ void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
-void						handle_heredoc(const char *delimiter, t_gc **head);
+int							handle_heredoc(const char *delimiter);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
 void						close_pipes(int (*pipes)[2], int pipes_nb);

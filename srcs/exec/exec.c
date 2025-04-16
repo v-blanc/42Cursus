@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/04/16 10:57:47 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int			execute_ast(t_ast *node, t_context *ctx);
@@ -58,9 +70,9 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	pid_t		*pids;
 	int			i;
 	int			status;
+	int			(*pipes)[2];
 
-	int(*pipes)[2];
-	pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
+	pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	i = -1;
 	while (++i < cmds_nb - 1)
@@ -93,6 +105,7 @@ static int	handle_redirections(t_ast *c, t_gc **head)
 	int		fd;
 	t_ast	*redir;
 
+	(void)head;
 	i = -1;
 	while (++i < c->u_data.s_cmd.redir_count)
 	{
@@ -106,7 +119,7 @@ static int	handle_redirections(t_ast *c, t_gc **head)
 		else if (redir->u_data.s_red.op == REDIR_IN)
 			fd = open(redir->u_data.s_red.target, O_RDONLY);
 		else if (redir->u_data.s_red.op == REDIR_HEREDOC)
-			handle_heredoc(redir->u_data.s_red.target, head);
+			fd = handle_heredoc(redir->u_data.s_red.target);
 		if (redir->u_data.s_red.op == REDIR_OUT
 			|| redir->u_data.s_red.op == REDIR_APPEND)
 			dup2(fd, STDOUT_FILENO);

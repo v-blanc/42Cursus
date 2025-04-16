@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/04/16 10:50:55 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	print_warning_eof(int count, const char *delimiter)
@@ -6,16 +18,16 @@ static void	print_warning_eof(int count, const char *delimiter)
 	print(2, "delimited by end-of-file (wanted `%s')\n", delimiter);
 }
 
-void	handle_heredoc(const char *delimiter, t_gc **head)
+int	handle_heredoc(const char *delimiter)
+
 {
 	int				pipe_fd[2];
 	int				count;
 	char			*line;
 	const size_t	delimiter_length = ft_strlen(delimiter);
 
-	(void)head;
 	if (pipe(pipe_fd) < 0)
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	count = 1;
 	while (true)
 	{
@@ -26,12 +38,13 @@ void	handle_heredoc(const char *delimiter, t_gc **head)
 		{
 			if (!line)
 				print_warning_eof(count, delimiter);
-			gc_free(line, head);
 			break ;
 		}
+		free(line);
 		count++;
 	}
+	free(line);
 	close(pipe_fd[OUT_FD]);
 	dup2(pipe_fd[IN_FD], STDIN_FILENO);
-	close(pipe_fd[IN_FD]);
+	return (pipe_fd[IN_FD]);
 }
