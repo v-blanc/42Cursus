@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:57:47 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:27:41 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 
 static int	handle_redirections(t_ast *c, t_gc **head)
 {
-	int		i;
-	int		fd;
-	t_ast	*redir;
+	int			i;
+	int			fd;
+	t_ast		*redir;
 
 	(void)head;
 	i = -1;
@@ -164,6 +164,8 @@ static char	*track_paths(char *command, t_gc **head)
 	char		*whole_path;
 	short		i;
 
+	if (!command)
+		return (NULL);
 	if (ft_strchr(command, '/') || !path)
 		return (gc_strdup(command, head));
 	directories = gc_split(path, ':', head);

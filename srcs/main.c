@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/04/16 18:28:38 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*set_readline_prompt(t_gc **head)
@@ -26,31 +38,34 @@ char	*set_readline_prompt(t_gc **head)
 // test
 void	set_input(t_context **context, t_gc **head)
 {
+	const int	temp_stdin = dup(STDIN_FILENO);
+	const int	temp_stdout = dup(STDOUT_FILENO);
 	t_ast	*ast;
 	char	*input;
 	char	*rl_prompt;
 
 	while (1)
 	{
+		dup2(temp_stdin, STDIN_FILENO);
+		dup2(temp_stdout, STDOUT_FILENO);
 		rl_prompt = set_readline_prompt(head);
 		if (rl_prompt == NULL)
 		{
 			gc_free_all(head);
-			continue ;
+			//continue ;
 		}
 		input = readline(rl_prompt);
 		if (!input)
 		{
 			print(2, "readline: %s\n", strerror(errno));
 			gc_free_all(head);
-			continue ;
 		}
 		ast = NULL;
 		if (parsing(input, &ast, context, head))
 		{
 			free(input);
 			gc_free_all(head);
-			continue ;
+			//continue ;
 		}
 		printf("\n******************************************\n");
 		print_ast(ast, 0);

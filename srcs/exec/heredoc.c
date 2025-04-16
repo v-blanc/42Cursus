@@ -6,11 +6,12 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:50:55 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:44:04 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <termios.h>
 
 static void	print_warning_eof(int count, const char *delimiter)
 {
@@ -33,18 +34,18 @@ int	handle_heredoc(const char *delimiter)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
-		if (!line || (ft_strncmp(line, delimiter, delimiter_length - 1) == 0
+		if (!line || (ft_strncmp(line, delimiter, delimiter_length) == 0
 				&& line[delimiter_length] == '\n'))
 		{
 			if (!line)
 				print_warning_eof(count, delimiter);
 			break ;
 		}
+		write(pipe_fd[OUT_FD], line, ft_strlen(line));
 		free(line);
 		count++;
 	}
 	free(line);
 	close(pipe_fd[OUT_FD]);
-	dup2(pipe_fd[IN_FD], STDIN_FILENO);
 	return (pipe_fd[IN_FD]);
 }
