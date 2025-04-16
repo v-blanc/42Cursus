@@ -88,7 +88,10 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 			if (i < cmds_nb - 1)
 				dup2(pipes[i][OUT_FD], STDOUT_FILENO);
 			close_pipes(pipes, cmds_nb - 1);
-			exit(execute_command(pipe_node->u_data.s_pipe.commands[i], ctx));
+			status = execute_command(pipe_node->u_data.s_pipe.commands[i], ctx);
+			gc_free_all(ctx->head);
+			free(ctx);
+			exit(status);
 		}
 	}
 	close_pipes(pipes, cmds_nb - 1);
@@ -148,10 +151,7 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	}
 	pid = fork();
 	if (pid == 0)
-	{
 		execve(path, c->u_data.s_cmd.args, environ);
-		exit(126);
-	}
 	waitpid(pid, &status, 0);
 	ctx->last_exit_status = WEXITSTATUS(status);
 	return (ctx->last_exit_status);
