@@ -12,12 +12,18 @@ static int	special_case(const char *word, char *result, int *ind,
 {
 	char	*val;
 	int		i;
+	int		pid;
 
 	val = NULL;
 	if (word[ind[0]] == '?')
 		val = gc_itoa(context->last_exit_status, context->head);
 	else if (word[ind[0]] == '$')
-		val = gc_itoa(getpid(), context->head);
+	{
+		pid = getpid();
+		if (pid < 0)
+			return (1);
+		val = gc_itoa(pid, context->head);
+	}
 	if (!val)
 		return (1);
 	i = 0;

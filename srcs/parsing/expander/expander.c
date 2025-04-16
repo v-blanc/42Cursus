@@ -75,7 +75,10 @@ static int	expand_tilde(char **word, t_gc **head)
 		return (0);
 	home = getenv("HOME");
 	if (!home)
-		return (0);
+	{
+		print(2, "getenv: HOME not set\n");
+		return (1);
+	}
 	len_home = ft_strlen(home);
 	len_result = len_home + ft_strlen(&(*word)[1]);
 	result = gc_malloc(len_result + 1, head);

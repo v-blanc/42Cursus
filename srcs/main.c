@@ -38,9 +38,14 @@ void	set_input(t_context **context, t_gc **head)
 			gc_free(rl_prompt, head);
 		if (!input)
 			exit_eof(context);
+		ast = NULL;
 		parsing(input, &ast, context, head);
 		if (!ast)
-			break ;
+		{
+			free(input);
+			gc_free_all(head);
+			continue ;
+		}
 		printf("\n******************************************\n");
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
