@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 14:54:04 by vblanc            #+#    #+#              #
-#    Updated: 2025/04/15 14:54:51 by vblanc           ###   ########.fr        #
+#    Updated: 2025/04/16 13:24:24 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ INCDIR := ./include
 SRCDIR := ./srcs
 OBJDIR := ./objs
 
-SRCS := main.c
+SRCS := main.c\
+		utils/libft/ft_strlen.c utils/libft/ft_atoi.c\
+		utils/is_valid_input.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 

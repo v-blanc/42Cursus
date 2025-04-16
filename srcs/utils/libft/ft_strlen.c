@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 14:55:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/16 13:23:28 by vblanc           ###   ########.fr       */
+/*   Created: 2025/04/16 13:18:42 by vblanc            #+#    #+#             */
+/*   Updated: 2025/04/16 13:18:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	if (!is_valid_input(argc, argv))
-		return (1);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (s[i++])
+		;
+	return (--i);
 }
