@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
+/*   is_valid_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:18:35 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/16 13:22:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/16 16:51:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	is_valid_args(int argc, char **argv)
 			return (0);
 		if (ft_strlen(argv[i]) > 10)
 			return (0);
-		if (ft_atoi(argv[i]) <= 0)
+		if (ft_atoi(argv[i]) < 0)
 			return (0);
 		i++;
 	}
