@@ -33,23 +33,38 @@ void	set_input(t_context **context, t_gc **head)
 	while (1)
 	{
 		rl_prompt = set_readline_prompt(head);
+		if (rl_prompt == NULL)
+		{
+			gc_free_all(head);
+			continue ;
+		}
 		input = readline(rl_prompt);
-		if (rl_prompt != NULL)
-			gc_free(rl_prompt, head);
 		if (!input)
-			exit_eof(context);
-		parsing(input, &ast, context, head);
-		if (!ast)
-			break ;
+		{
+			print(2, "readline: %s\n", strerror(errno));
+			gc_free_all(head);
+			continue ;
+		}
+		ast = NULL;
+		if (parsing(input, &ast, context, head))
+		{
+			free(input);
+			gc_free_all(head);
+			continue ;
+		}
 		printf("\n******************************************\n");
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
-		execute_ast(ast, *context);
+		if (execute_ast(ast, *context))
+		{
+			free(input);
+			gc_free_all(head);
+			continue ;
+		}
 		add_history(input);
 		free(input);
 		gc_free_all(head);
 	}
-	exit_eof(context); // TODO: add exit status
 }
 
 extern char	**environ;
@@ -62,9 +77,16 @@ int	init_environ(t_gc **head)
 	if (environ == NULL || environ[0] == NULL)
 	{
 		environ = (char **)gc_malloc_array_perm(3, head);
+		if (!environ)
+			return (1);
 		if (getcwd(env_pwd, PATH_MAX) == NULL)
 		{
 			print(2, "getcwd: %s\n", strerror(errno));
+			return (1);
+		}
+		if (!env_pwd)
+		{
+			print(2, "env error\n"); // TODO: update
 			return (1);
 		}
 		environ[0] = gc_strjoin_perm("PWD=", env_pwd, head);

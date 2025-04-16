@@ -82,6 +82,7 @@ int	tokenizer(t_token **tokens, const char *s, t_gc **head)
 	int		len;
 
 	i = 0;
+	len = 0;
 	while (s[i])
 	{
 		while (s[i] && isspace((unsigned char)s[i]))

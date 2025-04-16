@@ -45,7 +45,10 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	}
 	pwd_path = getenv("PWD");
 	if (!pwd_path)
+	{
+		print(2, "cd: PWD not set\n");
 		return (0);
+	}
 	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
 		return (1);
 	return (0);
@@ -70,5 +73,5 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 		return (0);
 	if (cd_exec(path, new_path, head))
 		return (1);
-	return (1);
+	return (0);
 }
