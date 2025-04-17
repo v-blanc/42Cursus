@@ -2,31 +2,29 @@
 
 extern char	**environ;
 
-static int	print_error(char *argument, int error, int status)
+/*static int	print_error(char *argument, int error, int status)
 
 {
 	print(2, "env: ‘%s’: %s", argument, strerror(error));
 	return (status);
-}
+}*/
 
-int	env(int fd, char **arguments)
+int	env(t_ast *ast, t_context **context)
 {
-	struct stat	buffer;
+	//struct stat	buffer;
 	size_t		i;
+	//char 		**arguments = ast->u_data.s_cmd.args;
 
 	i = 0;
-	while (arguments[i] && ft_strcmp(arguments[i], "env") == 0)
-		i++;
-	while (arguments[i])
+	while (*ast->u_data.s_cmd.args && ft_strcmp(*ast->u_data.s_cmd.args, "env") == 0)
+		ast->u_data.s_cmd.args++;
+	if (*ast->u_data.s_cmd.args)
+		return (execute_ast(ast, *context));
+	else
 	{
-		if (stat(arguments[i], &buffer) < 0)
-			return (print_error(arguments[i], errno, 127));
-		if (!(buffer.st_mode & S_IEXEC))
-			return (print_error(arguments[i], EACCES, 126));
-		i++;
+		i = -1;
+		while (environ[++i])
+			print(1, "%s\n", environ[i]);
+		return (EXIT_SUCCESS);
 	}
-	i = -1;
-	while (environ[++i])
-		print(fd, "%s\n", environ[i]);
-	return (0);
 }

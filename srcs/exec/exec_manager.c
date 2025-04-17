@@ -27,7 +27,7 @@ int	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "echo", 5))
 		return_value = echo(fd, args + 1);
 	if (!ft_strncmp(args[0], "env", 4))
-		return_value = env(fd, args);
+		return_value = env(ast, context);
 	if (!ft_strncmp(args[0], "exit", 5))
 		return_value = exit_(args_count, args + 1, context);
 	if (!ft_strncmp(args[0], "export", 8))
@@ -36,9 +36,8 @@ int	builtins_manager(t_ast *ast, t_context **context)
 		return_value = pwd(fd);
 	if (!ft_strncmp(args[0], "unset", 6))
 		return_value = unset(args + 1, (*context)->head);
-	if (return_value)
-		print(2, ">>> BUILTINS ERROR\n");
-	return (return_value);
+	gc_free_all_perm(*(*context)->head);
+	exit(return_value);
 }
 
 void	exec_manager(t_ast *ast, t_context **context)

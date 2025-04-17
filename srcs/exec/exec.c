@@ -142,17 +142,23 @@ static int	execute_command(t_ast *c, t_context *ctx)
 
 	if (handle_redirections(c, ctx->head))
 		return (1);
-	if (is_builtin(c->u_data.s_cmd.args[0]))
-		return (builtins_manager(c, &ctx));
+
 	path = track_paths(c->u_data.s_cmd.args[0], ctx->head);
-	if (!path || access(path, X_OK) != 0)
+	if ((!is_builtin(c->u_data.s_cmd.args[0])) && (!path || access(path, X_OK) != 0))
 	{
 		print(2, "minishell: %s: command not found\n", c->u_data.s_cmd.args[0]);
 		return (127);
 	}
+	if (ft_strcmp(c->u_data.s_cmd.args[0], "exit") == 0)
+		exit_(c->u_data.s_cmd.args_count, c->u_data.s_cmd.args + 1, &ctx);
 	pid = fork();
 	if (pid == 0)
-		execve(path, c->u_data.s_cmd.args, environ);
+	{
+		if (is_builtin(c->u_data.s_cmd.args[0]))
+			builtins_manager(c, &ctx);
+		else
+			execve(path, c->u_data.s_cmd.args, environ);
+	}
 	status = 0;
 	waitpid(pid, &status, 0);
 	ctx->last_exit_status = WEXITSTATUS(status);

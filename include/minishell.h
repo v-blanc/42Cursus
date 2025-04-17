@@ -200,9 +200,8 @@ void						close_pipes(int (*pipes)[2], int pipes_nb);
 int							cd(int fd, int args_count, char **args,
 								t_gc **head);
 int							echo(int fd, char **arguments);
-int							env(int fd, char **arguments);
-int							exit_(int args_count, char **args,
-								t_context **context);
+int							env(t_ast *ast, t_context **context);
+int							exit_(int ac, char **av, t_context **context);
 int							export(int fd, int args_count, char **args,
 								t_gc **head);
 int							pwd(int fd);
