@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:50:07 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:59:58 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "unset", 6))
 		return_value = unset(args + 1, (*context)->head);
 	if (return_value)
-		printf(">>> BUILTINS ERROR\n");
+		print(2, ">>> BUILTINS ERROR\n");
 	return (return_value);
 }
 
@@ -48,6 +48,6 @@ void	exec_manager(t_ast *ast, t_context **context)
 		if (is_builtin(ast->u_data.s_cmd.args[0]))
 			builtins_manager(ast, context);
 		else
-			printf("Not builtins command: not working yet\n");
+			print(2, "Not builtins command: not working yet\n");
 	}
 }

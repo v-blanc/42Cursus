@@ -1,3 +1,5 @@
 
->> Corriger le heredoc (valgrind)
->> Remontée d'erreurs (builtins ✅, gc_functions ✅, parsing ✅, main ✅)
+>> `cat | cat | cat` then ctrl+c: handle multi sig (global var)
+>> remove ^\
+>> do not expand heredoc limiter
+>> check merge_tokens (echo test"" blbqbql)

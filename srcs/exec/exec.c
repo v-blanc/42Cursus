@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 16:37:00 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/17 19:52:21 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 		status = execute_command(node, ctx);
 	else if (node->type == NODE_BINARY_OP)
 		status = handle_operators(node, ctx);
-	printf("status: %d\n", status);
+	// print(2, "status: %d\n", status);
 	ctx->last_exit_status = status;
 	return (status);
 }
@@ -71,9 +71,9 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	pid_t		*pids;
 	int			i;
 	int			status;
-	int			(*pipes)[2];
 
-	pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
+	int(*pipes)[2];
+	pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	i = -1;
 	while (++i < cmds_nb - 1)
@@ -84,6 +84,7 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 		pids[i] = fork();
 		if (pids[i] == 0)
 		{
+			status = 0;
 			if (i > 0)
 				dup2(pipes[i - 1][IN_FD], STDIN_FILENO);
 			if (i < cmds_nb - 1)
@@ -104,9 +105,9 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 
 static int	handle_redirections(t_ast *c, t_gc **head)
 {
-	int			i;
-	int			fd;
-	t_ast		*redir;
+	int		i;
+	int		fd;
+	t_ast	*redir;
 
 	(void)head;
 	i = -1;
@@ -152,6 +153,7 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	pid = fork();
 	if (pid == 0)
 		execve(path, c->u_data.s_cmd.args, environ);
+	status = 0;
 	waitpid(pid, &status, 0);
 	ctx->last_exit_status = WEXITSTATUS(status);
 	return (ctx->last_exit_status);

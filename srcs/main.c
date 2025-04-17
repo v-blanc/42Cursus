@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 11:20:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 18:42:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// char	*set_readline_prompt(t_gc **head)
-// {
-// 	char	*rl_prompt;
-// 	char	*final_rl_prompt;
-// 	char	pwd[PATH_MAX];
-// 	char	*pwd_home;
-
-// 	ft_strlcpy(pwd, getenv("PWD"), PATH_MAX);
-// 	pwd_home = getenv("HOME");
-// 	if (pwd_home != NULL && !ft_strncmp(pwd, pwd_home, ft_strlen(pwd_home)))
-// 	{
-// 		ft_strlcpy(pwd, pwd + ft_strlen(pwd_home) - 1, PATH_MAX);
-// 		pwd[0] = '~';
-// 	}
-// 	rl_prompt = gc_strjoin("minishell:", pwd, head);
-// 	if (!rl_prompt)
-// 		return (NULL);
-// 	final_rl_prompt = gc_strjoin(rl_prompt, "$ ", head);
-// 	if (!final_rl_prompt)
-// 		return (NULL);
-// 	gc_free(rl_prompt, head);
-// 	return (final_rl_prompt);
-// }
 
 void	set_input(t_context **context, t_gc **head)
 {
@@ -52,32 +28,28 @@ void	set_input(t_context **context, t_gc **head)
 		if (rl_prompt == NULL)
 		{
 			gc_free_all(head);
-			// continue ;
+			continue ;
 		}
 		input = readline(rl_prompt);
 		if (!input)
-		{
-			print(2, "readline: %s\n", strerror(errno));
-			gc_free_all(head);
-		}
+			exit_eof(context);
+		add_history(input);
 		ast = NULL;
 		if (parsing(input, &ast, context, head))
 		{
 			free(input);
 			gc_free_all(head);
-			// continue ;
+			continue ;
 		}
+		free(input);
 		printf("\n******************************************\n");
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
 		if (execute_ast(ast, *context))
 		{
-			free(input);
 			gc_free_all(head);
 			continue ;
 		}
-		add_history(input);
-		free(input);
 		gc_free_all(head);
 	}
 }
@@ -88,17 +60,13 @@ int	init_environ(t_gc **head)
 {
 	char	*env_pwd;
 
-	env_pwd = NULL;
+	env_pwd = gc_malloc(PATH_MAX, head);
 	if (environ == NULL || environ[0] == NULL)
 	{
 		environ = (char **)gc_malloc_array_perm(3, head);
 		if (!environ)
 			return (1);
-		if (getcwd(env_pwd, PATH_MAX) == NULL)
-		{
-			print(2, "getcwd: %s\n", strerror(errno));
-			return (1);
-		}
+		getcwd(env_pwd, PATH_MAX);
 		if (!env_pwd)
 		{
 			print(2, "env error\n"); // TODO: update
