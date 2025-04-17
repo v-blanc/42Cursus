@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/17 04:58:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 06:28:29 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
 
@@ -70,6 +71,7 @@ int						ft_atoi(const char *str);
 /* --------------------- Functions --------------------- */
 
 int						init_table(t_table **table, int argc, char **argv);
+void					clear_table(t_table *table, int n_forks);
 void					*routine(void *arg);
 
 /* --------------------- Utils --------------------- */
