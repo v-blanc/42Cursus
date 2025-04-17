@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 11:15:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 16:37:00 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 				dup2(pipes[i][OUT_FD], STDOUT_FILENO);
 			close_pipes(pipes, cmds_nb - 1);
 			status = execute_command(pipe_node->u_data.s_pipe.commands[i], ctx);
-			gc_free_all(ctx->head);
-			free(ctx);
+			gc_free_all_perm(*(ctx->head));
 			exit(status);
 		}
 	}
