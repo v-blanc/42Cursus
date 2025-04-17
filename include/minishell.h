@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 20:41:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:51:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ void						init_sig(void);
 /* --------------------- Utils --------------------- */
 
 char						*set_readline_prompt(t_context *ctx);
+int							is_valid_rl_input(char *input, t_context **ctx);
 
 char						*get_next_line(int fd);
 size_t						string_length(const char *s);

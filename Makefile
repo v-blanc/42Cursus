@@ -7,7 +7,7 @@ SRCDIR := ./srcs
 OBJDIR := ./objs
 
 SRCS := main.c\
-		utils/set_readline_prompt.c utils/print.c utils/get_next_line.c utils/get_next_line_utils.c utils/exit_eof.c\
+		utils/set_readline_prompt.c utils/print.c utils/get_next_line.c utils/get_next_line_utils.c utils/exit_eof.c utils/is_valid_rl_input.c\
 		gc_functions/gc_alloc.c gc_functions/gc_free.c gc_functions/gc_setenv.c\
 		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
 		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\

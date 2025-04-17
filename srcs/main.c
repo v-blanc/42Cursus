@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 20:36:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:54:21 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	set_input(t_context **ctx)
 			continue ;
 		}
 		input = readline(rl_prompt);
-		if (!input)
-			exit_eof(ctx);
 		add_history(input);
+		if (!is_valid_rl_input(input, ctx))
+		{
+			free(input);
+			continue ;
+		}
 		ast = NULL;
 		if (parsing(input, &ast, ctx))
 		{
