@@ -27,7 +27,7 @@ int	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "echo", 5))
 		return_value = echo(fd, args + 1);
 	if (!ft_strncmp(args[0], "env", 4))
-		return_value = env(fd, args_count);
+		return_value = env(fd, args);
 	if (!ft_strncmp(args[0], "exit", 5))
 		return_value = exit_(args_count, args + 1, context);
 	if (!ft_strncmp(args[0], "export", 8))

@@ -3,3 +3,4 @@
 >> remove ^\
 >> do not expand heredoc limiter
 >> check merge_tokens (echo test"" blbqbql)
+>> check builtins
