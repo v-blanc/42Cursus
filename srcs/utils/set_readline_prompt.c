@@ -11,9 +11,7 @@ char	*set_readline_prompt(t_context *context, t_gc **head)
 	if (!pwd)
 		return (NULL);
 	home_path = getenv("HOME");
-	if (!home_path)
-		return (NULL);
-	if (home_path != NULL && !ft_strncmp(pwd, home_path, ft_strlen(home_path)))
+	if (home_path && !ft_strncmp(pwd, home_path, ft_strlen(home_path)))
 	{
 		ft_strlcpy(pwd, pwd + ft_strlen(home_path) - 1, PATH_MAX);
 		pwd[0] = '~';
