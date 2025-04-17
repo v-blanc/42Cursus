@@ -7,7 +7,7 @@ static int	is_valid_var_char(char c, int pos)
 	return (isalnum(c) || c == '_');
 }
 
-static int	sub_get_expand_len(char *word, int *i, int *len, t_context *context)
+static int	sub_get_expand_len(char *word, int *i, int *len, t_context *ctx)
 {
 	int		start;
 	char	*var_name;
@@ -17,11 +17,11 @@ static int	sub_get_expand_len(char *word, int *i, int *len, t_context *context)
 	start = (*i);
 	while (is_valid_var_char(word[(*i)], (*i)))
 		(*i)++;
-	var_name = gc_strndup(&word[start], (*i) - start, context->head);
+	var_name = gc_strndup(&word[start], (*i) - start, ctx->head);
 	if (!var_name)
 		return (1);
 	if (*i == start && word[(*i)] == '?')
-		(*len) += ft_intlen(context->last_exit_status);
+		(*len) += ft_intlen(ctx->last_exit_status);
 	else if (*i == start && word[(*i)] == '$')
 		(*len) += ft_intlen(getpid());
 	else
@@ -30,11 +30,11 @@ static int	sub_get_expand_len(char *word, int *i, int *len, t_context *context)
 		if (val)
 			(*len) += ft_strlen(val);
 	}
-	gc_free(var_name, context->head);
+	gc_free(var_name, ctx->head);
 	return (0);
 }
 
-static int	get_expand_len(char *word, t_context *context)
+static int	get_expand_len(char *word, t_context *ctx)
 {
 	int	i;
 	int	len;
@@ -50,7 +50,7 @@ static int	get_expand_len(char *word, t_context *context)
 				i += 2;
 				len += ft_strlen(getenv(&word[i]));
 			}
-			else if (sub_get_expand_len(word, &i, &len, context))
+			else if (sub_get_expand_len(word, &i, &len, ctx))
 				return (-1);
 		}
 		else
@@ -91,7 +91,7 @@ static int	expand_tilde(char **word, t_gc **head)
 	return (0);
 }
 
-int	expander(t_token **tokens, t_context *context, t_gc **head)
+int	expander(t_token **tokens, t_context *ctx)
 {
 	t_token	*cur;
 	int		len_value_expanded;
@@ -101,13 +101,12 @@ int	expander(t_token **tokens, t_context *context, t_gc **head)
 	{
 		if (cur->type == WORD && cur->quote != SINGLE_QUOTE && cur->value)
 		{
-			if (expand_tilde(&cur->value, head))
+			if (expand_tilde(&cur->value, ctx->head))
 				return (1);
-			len_value_expanded = get_expand_len(cur->value, context);
+			len_value_expanded = get_expand_len(cur->value, ctx);
 			if (len_value_expanded < 0)
 				return (1);
-			if (expand_one_token(&cur->value, len_value_expanded, context,
-					head))
+			if (expand_one_token(&cur->value, len_value_expanded, ctx))
 				return (1);
 		}
 		cur = cur->next;

@@ -1,12 +1,11 @@
 #include "minishell.h"
 
-char	*set_readline_prompt(t_context *context, t_gc **head)
+char	*set_readline_prompt(t_context *ctx)
 {
 	char	*pwd;
 	char	*home_path;
 	char	*rl_prompt;
 
-	(void)context;
 	pwd = getenv("PWD");
 	if (!pwd)
 		return (NULL);
@@ -16,16 +15,16 @@ char	*set_readline_prompt(t_context *context, t_gc **head)
 		ft_strlcpy(pwd, pwd + ft_strlen(home_path) - 1, PATH_MAX);
 		pwd[0] = '~';
 	}
-	rl_prompt = gc_strjoin(GREEN "minishell" RESET ":" BLUE, pwd, head);
+	rl_prompt = gc_strjoin(GREEN "minishell" RESET ":" BLUE, pwd, ctx->head);
 	if (!rl_prompt)
 		return (NULL);
-	rl_prompt = gc_strjoin(rl_prompt, RESET "$ ", head);
+	rl_prompt = gc_strjoin(rl_prompt, RESET "$ ", ctx->head);
 	if (!rl_prompt)
 		return (NULL);
-	if (context->last_exit_status == 0)
-		rl_prompt = gc_strjoin(GREEN "➜  " RESET, rl_prompt, head);
+	if (ctx->last_exit_status == 0)
+		rl_prompt = gc_strjoin(GREEN "➜  " RESET, rl_prompt, ctx->head);
 	else
-		rl_prompt = gc_strjoin(RED "➜  " RESET, rl_prompt, head);
+		rl_prompt = gc_strjoin(RED "➜  " RESET, rl_prompt, ctx->head);
 	if (!rl_prompt)
 		return (NULL);
 	return (rl_prompt);

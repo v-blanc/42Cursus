@@ -75,7 +75,7 @@ static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	return (0);
 }
 
-int	tokenizer(t_token **tokens, const char *s, t_gc **head)
+int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
 {
 	t_token	*tok;
 	int		i;
@@ -91,10 +91,10 @@ int	tokenizer(t_token **tokens, const char *s, t_gc **head)
 			break ;
 		if (is_operator_char(s[i]))
 		{
-			tok = new_token(get_op_type(&s[i], &len), 0, NULL, head);
+			tok = new_token(get_op_type(&s[i], &len), 0, NULL, (*ctx)->head);
 			i += len;
 		}
-		else if (sub_tokenizer(s, &i, &tok, head))
+		else if (sub_tokenizer(s, &i, &tok, (*ctx)->head))
 			return (1);
 		if (!tok)
 			return (1);

@@ -6,13 +6,13 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 18:42:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:36:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_input(t_context **context, t_gc **head)
+void	set_input(t_context **ctx)
 {
 	const int	temp_stdin = dup(STDIN_FILENO);
 	const int	temp_stdout = dup(STDOUT_FILENO);
@@ -24,33 +24,33 @@ void	set_input(t_context **context, t_gc **head)
 	{
 		dup2(temp_stdin, STDIN_FILENO);
 		dup2(temp_stdout, STDOUT_FILENO);
-		rl_prompt = set_readline_prompt(*context, head);
+		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
 		{
-			gc_free_all(head);
+			gc_free_all((*ctx)->head);
 			continue ;
 		}
 		input = readline(rl_prompt);
 		if (!input)
-			exit_eof(context);
+			exit_eof(ctx);
 		add_history(input);
 		ast = NULL;
-		if (parsing(input, &ast, context, head))
+		if (parsing(input, &ast, ctx))
 		{
 			free(input);
-			gc_free_all(head);
+			gc_free_all((*ctx)->head);
 			continue ;
 		}
 		free(input);
 		printf("\n******************************************\n");
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
-		if (execute_ast(ast, *context))
+		if (execute_ast(ast, *ctx))
 		{
-			gc_free_all(head);
+			gc_free_all((*ctx)->head);
 			continue ;
 		}
-		gc_free_all(head);
+		gc_free_all((*ctx)->head);
 	}
 }
 
@@ -109,6 +109,6 @@ int	main(int argc, char **argv)
 	init_sig();
 	if (init_environ(&head))
 		return (1);
-	set_input(&context, &head);
+	set_input(&context);
 	return (0);
 }

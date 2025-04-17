@@ -65,13 +65,13 @@ static int	sub_parse_command(t_token **tok, t_ast **ast, t_gc **head)
 	return (0);
 }
 
-t_ast	*parse_command(t_token **tok, t_gc **head)
+t_ast	*parse_command(t_token **tok, t_context **ctx)
 {
 	t_ast	*ast;
 	int		i;
 	int		fd_source;
 
-	if (sub_parse_command(tok, &ast, head))
+	if (sub_parse_command(tok, &ast, (*ctx)->head))
 		return (NULL);
 	if (!(*tok))
 		return (ast);
@@ -85,7 +85,8 @@ t_ast	*parse_command(t_token **tok, t_gc **head)
 		(*tok) = (*tok)->next;
 		if (!(*tok) || (*tok)->type != WORD)
 		{
-			print(2, "syntax error\n");
+			print(2, "syntax error HERE\n");
+			(*ctx)->last_exit_status = 2;
 			return (NULL);
 		}
 		ast->u_data.s_cmd.redirs[i++]->u_data.s_red.target = (*tok)->value;

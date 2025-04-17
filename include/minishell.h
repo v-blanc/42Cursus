@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 19:27:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 20:41:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,11 @@ t_token						*new_token(t_token_type type, char quote_type,
 void						token_add_back(t_token **tokens, t_token *new);
 
 int							tokenizer(t_token **tokens, const char *s,
-								t_gc **head);
+								t_context **ctx);
 
 int							expand_one_token(char **w, int len_w,
-								t_context *context, t_gc **head);
-int							expander(t_token **tokens, t_context *context,
-								t_gc **head);
+								t_context *ctx);
+int							expander(t_token **tokens, t_context *ctx);
 int							merge_tokens(t_token **tokens, t_gc **head);
 
 /* --------------------------- AST --------------------------- */
@@ -173,12 +172,12 @@ typedef struct s_ast
 
 int							count_cmd_args(t_token *tok);
 int							count_cmd_redir(t_token *tok);
-t_ast						*parse_command(t_token **tok, t_gc **head);
-t_ast						*parser(t_token **tokens, t_gc **head);
+t_ast						*parse_command(t_token **tok, t_context **ctx);
+t_ast						*parser(t_token **tokens, t_context **ctx);
 
-t_ast						*parse_pipeline(t_token **tokens, t_gc **head);
+t_ast						*parse_pipeline(t_token **tokens, t_context **ctx);
 int							parsing(char *input, t_ast **ast,
-								t_context **context, t_gc **head);
+								t_context **context);
 
 void						print_ast(t_ast *node, int depth);
 
@@ -214,8 +213,7 @@ void						init_sig(void);
 
 /* --------------------- Utils --------------------- */
 
-char						*set_readline_prompt(t_context *context,
-								t_gc **head);
+char						*set_readline_prompt(t_context *ctx);
 
 char						*get_next_line(int fd);
 size_t						string_length(const char *s);

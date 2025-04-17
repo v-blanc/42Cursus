@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-static t_ast	*parse_primary(t_token **tokens, t_gc **head)
+static t_ast	*parse_primary(t_token **tokens, t_context **ctx)
 {
 	t_ast	*node;
 
 	if (*tokens && (*tokens)->type == PAREN_OPEN)
 	{
 		*tokens = (*tokens)->next;
-		node = parser(tokens, head);
+		node = parser(tokens, ctx);
 		if (!node)
 			return (NULL);
 		if (!*tokens || (*tokens)->type != PAREN_CLOSE)
@@ -16,7 +16,7 @@ static t_ast	*parse_primary(t_token **tokens, t_gc **head)
 		return (node);
 	}
 	else
-		return (parse_command(tokens, head));
+		return (parse_command(tokens, ctx));
 }
 
 static int	pipe_cmd_count(t_token *tokens)
@@ -51,7 +51,7 @@ static int	init_pipe_node(t_ast **pipe_node, int cmd_count, t_gc **head)
 }
 
 static int	sub_parse_pipeline(t_token **tokens, t_ast **pipe_node, int *i,
-		t_gc **head)
+		t_context **ctx)
 {
 	t_ast	*curr_cmd;
 
@@ -60,9 +60,10 @@ static int	sub_parse_pipeline(t_token **tokens, t_ast **pipe_node, int *i,
 		&& (*tokens)->type != PAREN_CLOSE)
 	{
 		print(2, "syntax error\n");
+		(*ctx)->last_exit_status = 2;
 		return (1);
 	}
-	curr_cmd = parse_primary(tokens, head);
+	curr_cmd = parse_primary(tokens, ctx);
 	if (!curr_cmd)
 		return (1);
 	(*pipe_node)->u_data.s_pipe.commands[(*i)++] = curr_cmd;
@@ -70,24 +71,24 @@ static int	sub_parse_pipeline(t_token **tokens, t_ast **pipe_node, int *i,
 	return (0);
 }
 
-t_ast	*parse_pipeline(t_token **tokens, t_gc **head)
+t_ast	*parse_pipeline(t_token **tokens, t_context **ctx)
 {
 	t_ast	*pipe_node;
 	t_ast	*first_cmd;
 	int		i;
 
-	first_cmd = parse_primary(tokens, head);
+	first_cmd = parse_primary(tokens, ctx);
 	if (!first_cmd)
 		return (NULL);
 	if (!*tokens || (*tokens)->type != PIPE)
 		return (first_cmd);
-	if (init_pipe_node(&pipe_node, pipe_cmd_count(*tokens), head))
+	if (init_pipe_node(&pipe_node, pipe_cmd_count(*tokens), (*ctx)->head))
 		return (NULL);
 	i = 0;
 	pipe_node->u_data.s_pipe.commands[i++] = first_cmd;
 	while (*tokens && (*tokens)->type == PIPE)
 	{
-		if (sub_parse_pipeline(tokens, &pipe_node, &i, head))
+		if (sub_parse_pipeline(tokens, &pipe_node, &i, ctx))
 			return (NULL);
 	}
 	return (pipe_node);

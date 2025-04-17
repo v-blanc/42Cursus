@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	sub_parser(t_token **tokens, t_ast **left, t_gc **head)
+static int	sub_parser(t_token **tokens, t_ast **left, t_context **ctx)
 {
 	t_ast			*right;
 	t_ast			*op_node;
@@ -12,12 +12,13 @@ static int	sub_parser(t_token **tokens, t_ast **left, t_gc **head)
 		&& (*tokens)->type != PAREN_CLOSE)
 	{
 		print(2, "syntax error\n");
+		(*ctx)->last_exit_status = 2;
 		return (1);
 	}
-	right = parse_pipeline(tokens, head);
+	right = parse_pipeline(tokens, ctx);
 	if (!right)
 		return (1);
-	op_node = gc_malloc(sizeof(t_ast), head);
+	op_node = gc_malloc(sizeof(t_ast), (*ctx)->head);
 	if (!op_node)
 		return (1);
 	op_node->type = NODE_BINARY_OP;
@@ -28,16 +29,16 @@ static int	sub_parser(t_token **tokens, t_ast **left, t_gc **head)
 	return (0);
 }
 
-t_ast	*parser(t_token **tokens, t_gc **head)
+t_ast	*parser(t_token **tokens, t_context **ctx)
 {
 	t_ast	*left;
 
-	left = parse_pipeline(tokens, head);
+	left = parse_pipeline(tokens, ctx);
 	if (!left)
 		return (NULL);
 	while (*tokens && ((*tokens)->type == AND || (*tokens)->type == OR))
 	{
-		if (sub_parser(tokens, &left, head))
+		if (sub_parser(tokens, &left, ctx))
 			return (NULL);
 	}
 	return (left);

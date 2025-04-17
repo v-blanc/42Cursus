@@ -83,12 +83,12 @@ static void	positional_var(const char *word, t_context *context, char *result,
 	return ;
 }
 
-int	expand_one_token(char **w, int len_w, t_context *context, t_gc **head)
+int	expand_one_token(char **w, int len_w, t_context *ctx)
 {
 	char	*result;
 	int		ind[2];
 
-	result = gc_malloc(len_w, head);
+	result = gc_malloc(len_w, ctx->head);
 	if (!result)
 		return (1);
 	ind[0] = 0;
@@ -98,15 +98,15 @@ int	expand_one_token(char **w, int len_w, t_context *context, t_gc **head)
 		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1])
 		{
 			if (isdigit((*w)[ind[0] + 1]))
-				positional_var((*w), context, result, ind);
-			else if (sub_expand_one_var((*w), result, ind, context))
+				positional_var((*w), ctx, result, ind);
+			else if (sub_expand_one_var((*w), result, ind, ctx))
 				return (1);
 		}
 		else
 			result[ind[1]++] = (*w)[ind[0]++];
 	}
 	result[ind[1]] = '\0';
-	gc_free(w, head);
+	gc_free(w, ctx->head);
 	(*w) = result;
 	return (0);
 }
