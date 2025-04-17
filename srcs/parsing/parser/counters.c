@@ -19,7 +19,7 @@ int	count_cmd_args(t_token *tok)
 	return (count);
 }
 
-int	count_cmd_redir(t_token *tok)
+int	count_cmd_redir(t_token *tok, t_context **ctx)
 {
 	int	count;
 
@@ -30,11 +30,12 @@ int	count_cmd_redir(t_token *tok)
 	{
 		if (!tok->next || tok->next->type != WORD)
 		{
-			if (tok->type != REDIR_HEREDOC)
-			{
-				print(2, "syntax error\n");
-				return (-1);
-			}
+			// if (tok->type != REDIR_HEREDOC)
+			// {
+			print(2, "syntax error\n");
+			(*ctx)->last_exit_status = 2;
+			return (-1);
+			// }
 		}
 		count++;
 		tok = tok->next->next;

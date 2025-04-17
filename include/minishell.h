@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 20:51:14 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 21:04:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ typedef struct s_ast
 }							t_ast;
 
 int							count_cmd_args(t_token *tok);
-int							count_cmd_redir(t_token *tok);
+int							count_cmd_redir(t_token *tok, t_context **ctx);
 t_ast						*parse_command(t_token **tok, t_context **ctx);
 t_ast						*parser(t_token **tokens, t_context **ctx);
 

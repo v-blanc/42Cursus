@@ -41,20 +41,20 @@ static int	get_fd_source(t_token_type type)
 	return (0);
 }
 
-static int	sub_parse_command(t_token **tok, t_ast **ast, t_gc **head)
+static int	sub_parse_command(t_token **tok, t_ast **ast, t_context **ctx)
 {
 	int	args_count;
 	int	redir_count;
 	int	i;
 
-	*ast = gc_malloc(sizeof(t_ast), head);
+	*ast = gc_malloc(sizeof(t_ast), (*ctx)->head);
 	if (!(*ast))
 		return (1);
 	args_count = count_cmd_args(*tok);
-	redir_count = count_cmd_redir(*tok);
+	redir_count = count_cmd_redir(*tok, ctx);
 	if (args_count == -1 || redir_count == -1)
 		return (1);
-	if (init_cmd_node(ast, args_count, redir_count, head))
+	if (init_cmd_node(ast, args_count, redir_count, (*ctx)->head))
 		return (1);
 	i = 0;
 	while ((*tok) && (*tok)->type == WORD)
@@ -71,7 +71,7 @@ t_ast	*parse_command(t_token **tok, t_context **ctx)
 	int		i;
 	int		fd_source;
 
-	if (sub_parse_command(tok, &ast, (*ctx)->head))
+	if (sub_parse_command(tok, &ast, ctx))
 		return (NULL);
 	if (!(*tok))
 		return (ast);
