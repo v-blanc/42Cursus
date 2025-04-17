@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 11:17:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/17 19:27:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void						gc_free_all_perm(t_gc *head);
 char						*gc_strjoin(char *s1, char *s2, t_gc **head);
 char						*gc_strjoin_perm(char *s1, char *s2, t_gc **head);
 char						*gc_strdup(const char *s, t_gc **head);
+char						*gc_strdup_perm(const char *s, t_gc **head);
 char						*gc_substr(char const *s, unsigned int start,
 								size_t len, t_gc **head);
 char						**gc_split(char const *s, char c, t_gc **head);

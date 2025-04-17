@@ -12,3 +12,17 @@ char	*gc_strdup(const char *s, t_gc **head)
 	ft_memcpy(d, s, len);
 	return (d);
 }
+
+
+char	*gc_strdup_perm(const char *s, t_gc **head)
+{
+	char	*d;
+	size_t	len;
+
+	len = ft_strlen(s) + 1;
+	d = (char *)gc_malloc_perm(sizeof(char) * len, head);
+	if (!d)
+		return (NULL);
+	ft_memcpy(d, s, len);
+	return (d);
+}
