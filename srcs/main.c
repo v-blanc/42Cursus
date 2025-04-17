@@ -3,56 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 18:28:38 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:20:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*set_readline_prompt(t_gc **head)
-{
-	char	*rl_prompt;
-	char	*final_rl_prompt;
-	char	pwd[PATH_MAX];
-	char	*pwd_home;
+// char	*set_readline_prompt(t_gc **head)
+// {
+// 	char	*rl_prompt;
+// 	char	*final_rl_prompt;
+// 	char	pwd[PATH_MAX];
+// 	char	*pwd_home;
 
-	ft_strlcpy(pwd, getenv("PWD"), PATH_MAX);
-	pwd_home = getenv("HOME");
-	if (pwd_home != NULL && !ft_strncmp(pwd, pwd_home, ft_strlen(pwd_home)))
-	{
-		ft_strlcpy(pwd, pwd + ft_strlen(pwd_home) - 1, PATH_MAX);
-		pwd[0] = '~';
-	}
-	rl_prompt = gc_strjoin("minishell:", pwd, head);
-	if (!rl_prompt)
-		return (NULL);
-	final_rl_prompt = gc_strjoin(rl_prompt, "$ ", head);
-	if (!final_rl_prompt)
-		return (NULL);
-	gc_free(rl_prompt, head);
-	return (final_rl_prompt);
-}
-// test
+// 	ft_strlcpy(pwd, getenv("PWD"), PATH_MAX);
+// 	pwd_home = getenv("HOME");
+// 	if (pwd_home != NULL && !ft_strncmp(pwd, pwd_home, ft_strlen(pwd_home)))
+// 	{
+// 		ft_strlcpy(pwd, pwd + ft_strlen(pwd_home) - 1, PATH_MAX);
+// 		pwd[0] = '~';
+// 	}
+// 	rl_prompt = gc_strjoin("minishell:", pwd, head);
+// 	if (!rl_prompt)
+// 		return (NULL);
+// 	final_rl_prompt = gc_strjoin(rl_prompt, "$ ", head);
+// 	if (!final_rl_prompt)
+// 		return (NULL);
+// 	gc_free(rl_prompt, head);
+// 	return (final_rl_prompt);
+// }
+
 void	set_input(t_context **context, t_gc **head)
 {
 	const int	temp_stdin = dup(STDIN_FILENO);
 	const int	temp_stdout = dup(STDOUT_FILENO);
-	t_ast	*ast;
-	char	*input;
-	char	*rl_prompt;
+	t_ast		*ast;
+	char		*input;
+	char		*rl_prompt;
 
 	while (1)
 	{
 		dup2(temp_stdin, STDIN_FILENO);
 		dup2(temp_stdout, STDOUT_FILENO);
-		rl_prompt = set_readline_prompt(head);
+		rl_prompt = set_readline_prompt(*context, head);
 		if (rl_prompt == NULL)
 		{
 			gc_free_all(head);
-			//continue ;
+			// continue ;
 		}
 		input = readline(rl_prompt);
 		if (!input)
@@ -65,7 +65,7 @@ void	set_input(t_context **context, t_gc **head)
 		{
 			free(input);
 			gc_free_all(head);
-			//continue ;
+			// continue ;
 		}
 		printf("\n******************************************\n");
 		print_ast(ast, 0);

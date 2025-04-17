@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 10:47:50 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:17:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@
 # define BUFFER_SIZE 42
 # define IN_FD 0
 # define OUT_FD 1
+
+# define RED "\001\033[1;31m\002"
+# define GREEN "\001\033[1;32m\002"
+# define BLUE "\001\033[1;34m\002"
+# define RESET "\001\033[0m\002"
 
 /* --------------------- Garbage Collector --------------------- */
 
@@ -207,6 +212,9 @@ int							unset(char **to_unset, t_gc **head);
 void						init_sig(void);
 
 /* --------------------- Utils --------------------- */
+
+char						*set_readline_prompt(t_context *context,
+								t_gc **head);
 
 char						*get_next_line(int fd);
 size_t						string_length(const char *s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 18:27:41 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:15:31 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	else if (node->type == NODE_BINARY_OP)
 		status = handle_operators(node, ctx);
 	printf("status: %d\n", status);
+	ctx->last_exit_status = status;
 	return (status);
 }
 
