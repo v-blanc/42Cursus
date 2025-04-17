@@ -2,12 +2,8 @@
 
 static int	is_valid_arg(char *arg)
 {
-	char	*long_max;
-	char	*long_min;
 	int		i;
 
-	long_max = "9223372036854775807";
-	long_min = "-9223372036854775808";
 	i = 0;
 	if (arg[i] == '-')
 		i++;
@@ -16,14 +12,16 @@ static int	is_valid_arg(char *arg)
 		if (!isdigit(arg[i++]))
 			return (0);
 	}
+	if ((int)ft_strlen(arg) > 20)
+		return (0);
 	if (arg[0] == '-' && (int)ft_strlen(arg) == 20)
 	{
-		if (ft_strncmp(arg, long_min, ft_strlen(long_min)) > 0)
+		if (ft_strncmp(arg, "-9223372036854775808", 21) > 0)
 			return (0);
 	}
 	else if ((int)ft_strlen(arg) == 19)
 	{
-		if (ft_strncmp(arg, long_max, ft_strlen(long_max)) > 0)
+		if (ft_strncmp(arg, "9223372036854775807", 20) > 0)
 			return (0);
 	}
 	return (1);
@@ -39,7 +37,7 @@ int	exit_(int args_count, char **args, t_context **context)
 	{
 		if (!is_valid_arg(args[0]))
 		{
-			print(2, "exit: %s: numeric argument required", args[0]);
+			print(2, "exit: %s: numeric argument required\n", args[0]);
 			(*context)->last_exit_status = 2;
 			exit(2);
 		}
