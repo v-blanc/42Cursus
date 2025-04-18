@@ -47,8 +47,9 @@ static int	get_expand_len(char *word, t_context *ctx)
 		{
 			if (isdigit(word[i + 1]))
 			{
+				if (ctx->argc > ft_atoi(&word[i + 1]))
+					len += ft_strlen(ctx->argv[ft_atoi(&word[i + 1])]);
 				i += 2;
-				len += ft_strlen(getenv(&word[i]));
 			}
 			else if (sub_get_expand_len(word, &i, &len, ctx))
 				return (-1);
