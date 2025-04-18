@@ -15,6 +15,8 @@ static int	sub_merge_tokens(t_token *curr, t_token *next, t_gc **head)
 	ft_strlcat(joined, next->value, len_joined + 1);
 	gc_free(curr->value, head);
 	curr->value = joined;
+	curr->quote = next->quote;
+	curr->joined_next = next->joined_next;
 	curr->next = next->next;
 	gc_free(next, head);
 	return (0);
