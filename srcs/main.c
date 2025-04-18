@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 20:54:21 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/18 18:14:32 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	set_input(t_context **ctx)
 	{
 		dup2(temp_stdin, STDIN_FILENO);
 		dup2(temp_stdout, STDOUT_FILENO);
+		close(temp_stdin);
+		close(temp_stdout);
 		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
 		{
