@@ -75,6 +75,18 @@ static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	return (0);
 }
 
+int	handle_syntax_error(t_token *tok, int *i, int len, t_context **ctx)
+{
+	if (tok->type == END)
+	{
+		print(2, "syntax error\n");
+		(*ctx)->last_exit_status = 2;
+		return (1);
+	}
+	(*i) += len;
+	return (0);
+}
+
 int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
 {
 	t_token	*tok;
@@ -92,7 +104,8 @@ int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
 		if (is_operator_char(s[i]))
 		{
 			tok = new_token(get_op_type(&s[i], &len), 0, NULL, (*ctx)->head);
-			i += len;
+			if (handle_syntax_error(tok, &i, len, ctx))
+				return (1);
 		}
 		else if (sub_tokenizer(s, &i, &tok, (*ctx)->head))
 			return (1);
