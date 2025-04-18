@@ -1,6 +1,23 @@
 
->> `cat | cat | cat` then ctrl+c: handle multi sig (global var)
+>> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130
 >> remove ^\
 >> do not expand heredoc limiter
 >> check merge_tokens (echo test"" blbqbql)
 >> check builtins
+>> Check if args are empty values (exec)
+>> Handle cd /
+>> fix cd - after cd ~
+
+>> FIX `$` (expand_one_token.c) >> Not working
+"""
+		else
+		{
+			if ((*w)[ind[0]] != '$')
+				result[ind[1]++] = (*w)[ind[0]++];
+			else if ((*w)[ind[0] + 1] && !(ft_isspace((*w)[ind[0] + 1])
+					|| (*w)[ind[0] + 1] == '\0'))
+				ind[0]++;
+			else
+				result[ind[1]++] = (*w)[ind[0]++];
+		}
+"""

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 17:59:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/18 15:35:22 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	builtins_manager(t_ast *ast, t_context **context)
 		return_value = pwd(fd);
 	if (!ft_strncmp(args[0], "unset", 6))
 		return_value = unset(args + 1, (*context)->head);
-	gc_free_all_perm(*(*context)->head);
-	exit(return_value);
+	(*context)->last_exit_status = return_value; // TODO: delete
+	return (return_value);
 }
 
 void	exec_manager(t_ast *ast, t_context **context)

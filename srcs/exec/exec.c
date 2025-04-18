@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 14:03:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/18 15:32:01 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ static int	execute_command(t_ast *c, t_context *ctx)
 
 	if (handle_redirections(c, ctx->head))
 		return (1);
+	if (is_builtin(c->u_data.s_cmd.args[0]))
+		return(builtins_manager(c, &ctx));
 	path = track_paths(c->u_data.s_cmd.args[0], ctx->head);
 	if ((!is_builtin(c->u_data.s_cmd.args[0])) && (!path || access(path,
 				X_OK) != 0))
@@ -155,18 +157,13 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (is_builtin(c->u_data.s_cmd.args[0]))
-			builtins_manager(c, &ctx);
-		else
+		if (!stat(path, &sh) && S_ISDIR(sh.st_mode))
 		{
-			if (!stat(path, &sh) && S_ISDIR(sh.st_mode))
-			{
-				print(2, "minishell: %s: is a directory\n",
-					c->u_data.s_cmd.args[0]);
-				exit(126);
-			}
-			execve(path, c->u_data.s_cmd.args, environ);
+			print(2, "minishell: %s: is a directory\n",
+				c->u_data.s_cmd.args[0]);
+			exit(126);
 		}
+		execve(path, c->u_data.s_cmd.args, environ);
 	}
 	status = 0;
 	waitpid(pid, &status, 0);

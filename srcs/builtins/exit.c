@@ -2,10 +2,10 @@
 
 static int	is_valid_arg(char *arg)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	if (arg[i] == '-')
+	if (arg[i] == '-' || arg[i] == '+')
 		i++;
 	while (arg[i])
 	{

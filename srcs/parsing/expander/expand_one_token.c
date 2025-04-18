@@ -95,8 +95,9 @@ int	expand_one_token(char **w, int len_w, t_context *ctx)
 	ind[1] = 0;
 	while ((*w)[ind[0]])
 	{
-		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && ft_isalnum((*w)[ind[0]
-				+ 1]))
+		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && (ft_isalnum((*w)[ind[0]
+					+ 1]) || (*w)[ind[0] + 1] == '?' || (*w)[ind[0]
+				+ 1] == '$'))
 		{
 			if (isdigit((*w)[ind[0] + 1]))
 				positional_var((*w), ctx, result, ind);
