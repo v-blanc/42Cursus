@@ -109,6 +109,11 @@ int	expander(t_token **tokens, t_context *ctx)
 			if (expand_one_token(&cur->value, len_value_expanded, ctx))
 				return (1);
 		}
+		if (cur->type == REDIR_HEREDOC)
+		{
+			if (cur->next && cur->next->type == WORD)
+				cur = cur->next;
+		}
 		cur = cur->next;
 	}
 	return (0);
