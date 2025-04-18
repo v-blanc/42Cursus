@@ -4,7 +4,7 @@
 >> do not expand heredoc limiter
 >> check builtins
 >> Check if args are empty values (exec)
->> fix cd - after cd ~
+
 
 >> FIX `$` (expand_one_token.c) >> Not working
 """

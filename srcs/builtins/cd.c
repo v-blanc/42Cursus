@@ -69,6 +69,11 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 	if (!new_path)
 		return (1);
 	path = path_handler(fd, path);
+	if (getenv("HOME"))
+	{
+		if (expand_tilde(&path, head))
+			return (1);
+	}
 	if (path == NULL)
 		return (0);
 	if (cd_exec(path, new_path, head))

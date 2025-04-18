@@ -63,7 +63,7 @@ static int	get_expand_len(char *word, t_context *ctx)
 	return (len);
 }
 
-static int	expand_tilde(char **word, t_gc **head)
+int	expand_tilde(char **word, t_gc **head)
 {
 	char	*home;
 	char	*result;

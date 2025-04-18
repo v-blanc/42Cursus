@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/17 21:04:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/18 16:31:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 /* --------------------- Variables --------------------- */
@@ -124,6 +124,7 @@ void						token_add_back(t_token **tokens, t_token *new);
 int							tokenizer(t_token **tokens, const char *s,
 								t_context **ctx);
 
+int							expand_tilde(char **word, t_gc **head);
 int							expand_one_token(char **w, int len_w,
 								t_context *ctx);
 int							expander(t_token **tokens, t_context *ctx);
