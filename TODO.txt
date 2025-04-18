@@ -2,10 +2,8 @@
 >> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130
 >> remove ^\
 >> do not expand heredoc limiter
->> check merge_tokens (echo test"" blbqbql)
 >> check builtins
 >> Check if args are empty values (exec)
->> Handle cd /
 >> fix cd - after cd ~
 
 >> FIX `$` (expand_one_token.c) >> Not working
