@@ -6,11 +6,20 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:14:32 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:45:40 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	refresh_and_close(const int *temp_stdin, const int *temp_stdout)
+
+{
+	dup2(*temp_stdin, STDIN_FILENO);
+	dup2(*temp_stdout, STDOUT_FILENO);
+	close(*temp_stdin);
+	close(*temp_stdout);
+}
 
 void	set_input(t_context **ctx)
 {
@@ -22,10 +31,7 @@ void	set_input(t_context **ctx)
 
 	while (1)
 	{
-		dup2(temp_stdin, STDIN_FILENO);
-		dup2(temp_stdout, STDOUT_FILENO);
-		close(temp_stdin);
-		close(temp_stdout);
+		refresh_and_close(&temp_stdin, &temp_stdout);
 		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
 		{
