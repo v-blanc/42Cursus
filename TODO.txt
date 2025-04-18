@@ -1,10 +1,16 @@
 
->> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130
->> remove ^\
->> do not expand heredoc limiter
->> check builtins
+>> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
+>> Remove ^\
+>> Do not expand heredoc limiter
+>> Check builtins
 >> Check if args are empty values (exec)
 
+>> Fix CMD_NODE parsing | gdoc 574:
+"""
+$> echo hola > a
+$> >>b echo que tal
+$> cat a | <b cat | cat > c | cat
+"""
 
 >> FIX `$` (expand_one_token.c) >> Not working
 """
@@ -18,4 +24,50 @@
 			else
 				result[ind[1]++] = (*w)[ind[0]++];
 		}
+"""
+
+>> Light pipe bug: dont let the time to pipes to proprely end | gdoc 571.
+"""
+➜  minishell:~/workingspace/minishell$ time sleep 3 | sleep 3
+
+******************************************
+NODE_PIPE
+        NODE_CMD
+                argv: 'time' 'sleep' '3' 
+        NODE_CMD
+                argv: 'sleep' '3' 
+
+******************************************
+
+0.00user 0.00system 0:03.00elapsed 0%CPU (0avgtext+0avgdata 2124maxresident)k
+0inputs+0outputs (0major+90minor)pagefaults 0swaps
+"""
+
+>> Fix () parsing | gdoc 605:
+"""
+(ls && pwd)
+"""
+
+Fix expand in HEREDOC only if limiter if fully NO_QUOTE | gdoc 744:
+"""
+cat << hola
+> $HOME
+> hola
+/home/vietdu91
+$> 
+"""
+
+Fix visual bug | gdoc 750:
+"""
+cat << hola | rev
+"""
+
+Fix solo HEREDOC | gdoc 751:
+"""
+<< hola
+"""
+
+Fix mutli HEREDOC | gdoc 754:
+"""
+cat << prout << lol << koala
 """
