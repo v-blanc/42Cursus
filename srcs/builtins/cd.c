@@ -36,18 +36,18 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	if (chdir(path) < 0)
 	{
 		print(2, "cd: %s: %s\n", strerror(errno), path);
-		return (0);
+		return (1);
 	}
 	if (getcwd(new_path, PATH_MAX) == NULL)
 	{
 		print(2, "getcwd: %s\n", strerror(errno));
-		return (0);
+		return (1);
 	}
 	pwd_path = getenv("PWD");
 	if (!pwd_path)
 	{
 		print(2, "cd: PWD not set\n");
-		return (0);
+		return (1);
 	}
 	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
 		return (1);
@@ -62,7 +62,7 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 	if (args_count > 2)
 	{
 		print(2, "cd: too many arguments\n");
-		return (0);
+		return (1);
 	}
 	path = args[0];
 	new_path = gc_malloc(PATH_MAX, head);
@@ -76,7 +76,5 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 	}
 	if (path == NULL)
 		return (0);
-	if (cd_exec(path, new_path, head))
-		return (1);
-	return (0);
+	return (cd_exec(path, new_path, head));
 }
