@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 18:34:07 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/04/18 18:34:29 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 extern char	**environ;
@@ -25,6 +37,7 @@ static int	sub_unset_env(char **to_unset, int *k, char **name, t_gc **head)
 		return (1);
 	return (0);
 }
+
 static int	unset_env(char ***new_env, char **to_unset, t_gc **head)
 {
 	int		i;

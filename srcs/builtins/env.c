@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 18:33:43 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/04/18 18:34:48 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 extern char	**environ;
@@ -14,7 +26,6 @@ int	env(t_ast *ast, t_context **context)
 	//struct stat	buffer;
 	size_t		i;
 	//char 		**arguments = ast->u_data.s_cmd.args;
-
 	i = 0;
 	while (*ast->u_data.s_cmd.args && ft_strcmp(*ast->u_data.s_cmd.args, "env") == 0)
 		ast->u_data.s_cmd.args++;

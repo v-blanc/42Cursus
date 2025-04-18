@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 15:32:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/18 19:05:42 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			execute_ast(t_ast *node, t_context *ctx);
 static int	execute_command(t_ast *command, t_context *ctx);
-static int	handle_redirections(t_ast *c, t_gc **head);
+static int	handle_redirections(t_ast *c);
 static char	*track_paths(char *command, t_gc **head);
 
 extern char	**environ;
@@ -43,7 +43,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	if (node->type == NODE_PIPE)
 		status = handle_pipes(node, ctx);
 	else if (node->type == NODE_REDIR)
-		status = handle_redirections(node, ctx->head);
+		status = handle_redirections(node);
 	else if (node->type == NODE_CMD)
 		status = execute_command(node, ctx);
 	else if (node->type == NODE_BINARY_OP)
@@ -71,13 +71,14 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	pid_t		*pids;
 	int			i;
 	int			status;
+	int			(*pipes)[2];
 
-	int(*pipes)[2];
-	pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
+	pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	i = -1;
 	while (++i < cmds_nb - 1)
-		pipe(pipes[i]);
+		if (pipe(pipes[i]) < 0)
+			return (EXIT_FAILURE);
 	i = -1;
 	while (++i < cmds_nb)
 	{
@@ -103,13 +104,12 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	return (ctx->last_exit_status);
 }
 
-static int	handle_redirections(t_ast *c, t_gc **head)
+static int	handle_redirections(t_ast *c)
 {
 	int		i;
 	int		fd;
 	t_ast	*redir;
 
-	(void)head;
 	i = -1;
 	while (++i < c->u_data.s_cmd.redir_count)
 	{
@@ -124,11 +124,25 @@ static int	handle_redirections(t_ast *c, t_gc **head)
 			fd = open(redir->u_data.s_red.target, O_RDONLY);
 		else if (redir->u_data.s_red.op == REDIR_HEREDOC)
 			fd = handle_heredoc(redir->u_data.s_red.target);
+		if (fd < 0)
+			return (EXIT_FAILURE);
 		if (redir->u_data.s_red.op == REDIR_OUT
 			|| redir->u_data.s_red.op == REDIR_APPEND)
-			dup2(fd, STDOUT_FILENO);
+		{
+			if (dup2(fd, STDOUT_FILENO) < 0)
+			{
+				close(fd);
+				return (EXIT_FAILURE);
+			}
+		}
 		else
-			dup2(fd, STDIN_FILENO);
+		{
+			if (dup2(fd, STDIN_FILENO) < 0)
+			{
+				close(fd);
+				return (EXIT_FAILURE);
+			}
+		}
 		close(fd);
 	}
 	return (0);
@@ -141,10 +155,10 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	int			status;
 	struct stat	sh;
 
-	if (handle_redirections(c, ctx->head))
+	if (handle_redirections(c))
 		return (1);
 	if (is_builtin(c->u_data.s_cmd.args[0]))
-		return(builtins_manager(c, &ctx));
+		return (builtins_manager(c, &ctx));
 	path = track_paths(c->u_data.s_cmd.args[0], ctx->head);
 	if ((!is_builtin(c->u_data.s_cmd.args[0])) && (!path || access(path,
 				X_OK) != 0))
@@ -164,6 +178,7 @@ static int	execute_command(t_ast *c, t_context *ctx)
 			exit(126);
 		}
 		execve(path, c->u_data.s_cmd.args, environ);
+		exit(126);
 	}
 	status = 0;
 	waitpid(pid, &status, 0);

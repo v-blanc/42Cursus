@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 15:35:22 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/18 18:49:54 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	builtins_manager(t_ast *ast, t_context **context)
 	int		fd;
 
 	fd = 1;
+	return_value = 1;
 	args_count = ast->u_data.s_cmd.args_count;
 	args = ast->u_data.s_cmd.args;
 	if (!ft_strncmp(args[0], "cd", 3))
