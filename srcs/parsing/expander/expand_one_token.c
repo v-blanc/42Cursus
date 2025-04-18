@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-// static int	is_valid_var_char(char c, int pos)
-// {
-// 	if (pos == 0)
-// 		return (isalpha(c) || c == '_');
-// 	return (isalnum(c) || c == '_');
-// }
+static int	is_valid_var_char(char c, int pos)
+{
+	if (pos == 0)
+		return (isalpha(c) || c == '_' || c == '*');
+	return (isalnum(c) || c == '_' || c == '*');
+}
 
 static int	special_case(const char *word, char *result, int *ind,
 		t_context *context)
@@ -46,8 +46,7 @@ static int	sub_expand_one_var(const char *word, char *result, int *ind,
 	if (word[ind[0]] && (word[ind[0]] == '$' || word[ind[0]] == '?'))
 		return (special_case(word, result, ind, context));
 	len = 0;
-	// while (is_valid_var_char(word[ind[0]], len))
-	while (word[ind[0]] && !isspace(word[ind[0]]))
+	while (is_valid_var_char(word[ind[0]], len))
 	{
 		ind[0]++;
 		len++;
