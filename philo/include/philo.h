@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/21 00:13:54 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/21 01:13:58 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ struct					s_table
 	t_philo				*philos;
 };
 
-/* --------------------- Libft --------------------- */
-
-size_t					ft_strlen(const char *s);
-int						ft_atoi(const char *str);
-
 /* --------------------- Functions --------------------- */
 
 int						init_table(t_table **table, int argc, char **argv);
@@ -77,6 +72,8 @@ void					*routine(void *arg);
 
 /* --------------------- Utils --------------------- */
 
+size_t					ft_strlen(const char *s);
+int						ft_atoi(const char *str);
 int						is_valid_input(int argc, char **argv);
 void					ft_usleep(size_t ms);
 size_t					get_curr_time(void);

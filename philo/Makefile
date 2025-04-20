@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 14:54:04 by vblanc            #+#    #+#              #
-#    Updated: 2025/04/20 21:18:17 by vblanc           ###   ########.fr        #
+#    Updated: 2025/04/21 00:55:49 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRCDIR := ./srcs
 OBJDIR := ./objs
 
 SRCS := main.c manage_table.c routine.c monitoring.c\
-		utils/libft/ft_strlen.c utils/libft/ft_atoi.c\
-		utils/is_valid_input.c utils/time.c utils/print_action.c
+		utils/libft.c utils/is_valid_input.c utils/time.c utils/print_action.c
 SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
 OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
