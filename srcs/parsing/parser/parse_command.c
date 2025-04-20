@@ -85,7 +85,7 @@ t_ast	*parse_command(t_token **tok, t_context **ctx)
 		(*tok) = (*tok)->next;
 		if (!(*tok) || (*tok)->type != WORD)
 		{
-			print(2, "syntax error HERE\n");
+			print(2, "syntax error\n");
 			(*ctx)->last_exit_status = 2;
 			return (NULL);
 		}

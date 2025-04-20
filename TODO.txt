@@ -1,6 +1,6 @@
 
 >> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
->> Remove ^\
+>> Remove ^\ (should be good now)
 >> Do not expand heredoc limiter
 >> Check builtins
 >> Check if args are empty values (exec)
