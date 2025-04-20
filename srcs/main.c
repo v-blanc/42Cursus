@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/21 00:23:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/21 00:25:37 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static void	launch_philos(t_table *table, pthread_t monitor)
 {
-	for (int i = 0; i < table->n_philo; i++)
+	int	i;
+
+	i = 0;
+	while (i < table->n_philo)
 	{
 		if (pthread_create(&table->philos[i].thread, NULL, &routine,
 				&table->philos[i]))
@@ -22,10 +25,12 @@ static void	launch_philos(t_table *table, pthread_t monitor)
 			clear_table(table, table->n_philo);
 			return ;
 		}
+		i++;
 	}
 	pthread_join(monitor, NULL);
-	for (int i = 0; i < table->n_philo; i++)
-		pthread_join(table->philos[i].thread, NULL);
+	i = 0;
+	while (i < table->n_philo)
+		pthread_join(table->philos[i++].thread, NULL);
 }
 
 int	main(int argc, char **argv)
