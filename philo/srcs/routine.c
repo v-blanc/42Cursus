@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:23:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/21 00:20:38 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/21 01:18:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,43 @@ static void	*one_philo(t_philo *philo)
 	return (NULL);
 }
 
+static int	take_forks(t_philo *philo)
+{
+	pthread_mutex_lock(philo->l_fork);
+	if (!is_simulation_running(philo))
+	{
+		pthread_mutex_unlock(philo->l_fork);
+		return (1);
+	}
+	print_action(philo, "has taken a fork");
+	pthread_mutex_lock(philo->r_fork);
+	if (!is_simulation_running(philo))
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
+		return (1);
+	}
+	print_action(philo, "has taken a fork");
+	return (0);
+}
+
+static int	eat(t_philo *philo)
+{
+	if (!is_simulation_running(philo))
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
+		return (1);
+	}
+	print_action(philo, "is eating");
+	ft_usleep(philo->table->time_to_eat);
+	pthread_mutex_lock(&philo->table->table_lock);
+	philo->time_last_eat = get_curr_time();
+	philo->eat_count++;
+	pthread_mutex_unlock(&philo->table->table_lock);
+	return (0);
+}
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -50,33 +87,10 @@ void	*routine(void *arg)
 	while (is_simulation_running(philo))
 	{
 		print_action(philo, "is thinking");
-		pthread_mutex_lock(philo->l_fork);
-		if (!is_simulation_running(philo))
-		{
-			pthread_mutex_unlock(philo->l_fork);
+		if (take_forks(philo))
 			break ;
-		}
-		print_action(philo, "has taken a fork");
-		pthread_mutex_lock(philo->r_fork);
-		if (!is_simulation_running(philo))
-		{
-			pthread_mutex_unlock(philo->r_fork);
-			pthread_mutex_unlock(philo->l_fork);
+		if (eat(philo))
 			break ;
-		}
-		print_action(philo, "has taken a fork");
-		if (!is_simulation_running(philo))
-		{
-			pthread_mutex_unlock(philo->r_fork);
-			pthread_mutex_unlock(philo->l_fork);
-			break ;
-		}
-		print_action(philo, "is eating");
-		ft_usleep(philo->table->time_to_eat);
-		pthread_mutex_lock(&philo->table->table_lock);
-		philo->time_last_eat = get_curr_time();
-		philo->eat_count++;
-		pthread_mutex_unlock(&philo->table->table_lock);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
 		if (!is_simulation_running(philo))
