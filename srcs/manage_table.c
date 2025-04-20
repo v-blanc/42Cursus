@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:17:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/20 18:35:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/20 23:38:03 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ static int	init_philos(t_table *table)
 	{
 		philos[i].id = i + 1;
 		philos[i].eat_count = 0;
-		philos[i].time_last_eat = table->time_start;
+		// philos[i].time_last_eat = table->time_start;
 		philos[i].l_fork = &table->forks[(i + 1) % table->n_philo];
 		philos[i].r_fork = &table->forks[i];
-		// philos[i].table_lock = &table->table_lock;
-		// philos[i].write_lock = &table->write_lock;
 		philos[i].table = table;
 		i++;
 	}
@@ -99,9 +97,10 @@ int	init_table(t_table **table, int argc, char **argv)
 	(*table)->must_eat = -1;
 	if (argc == 6)
 		(*table)->must_eat = ft_atoi(argv[5]);
-	(*table)->time_start = get_curr_time();
-	if ((*table)->time_start == 0)
-		return (1);
+	// (*table)->time_start = get_curr_time();
+	// if ((*table)->time_start == 0)
+	// 	return (1);
+	(*table)->dead = 0;
 	(*table)->philos = NULL;
 	return (sub_init_table(table));
 }

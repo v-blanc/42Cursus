@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/20 19:07:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/20 23:36:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ struct					s_table
 
 	// Internal variables
 	size_t				time_start;
+	int					dead;
 	pthread_mutex_t		table_lock;
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		*forks;
@@ -70,6 +71,7 @@ int						ft_atoi(const char *str);
 
 int						init_table(t_table **table, int argc, char **argv);
 void					clear_table(t_table *table, int n_forks);
+void					*monitoring(void *arg);
 void					*routine(void *arg);
 
 /* --------------------- Utils --------------------- */
