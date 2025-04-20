@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/17 06:28:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/20 19:07:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ typedef struct s_philo
 
 	// Internal variables
 	int					eat_count;
-	size_t				time_start;
 	size_t				time_last_eat;
 
 	// Locks
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
-	pthread_mutex_t		*table_lock;
-	pthread_mutex_t		*write_lock;
 	t_table				*table;
 }						t_philo;
 
@@ -57,6 +54,7 @@ struct					s_table
 	int					must_eat;
 
 	// Internal variables
+	size_t				time_start;
 	pthread_mutex_t		table_lock;
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		*forks;
@@ -76,7 +74,9 @@ void					*routine(void *arg);
 
 /* --------------------- Utils --------------------- */
 
-size_t					get_curr_time(void);
 int						is_valid_input(int argc, char **argv);
+void					ft_usleep(size_t ms);
+size_t					get_curr_time(void);
+void					print_action(t_philo *philo, const char *msg);
 
 #endif
