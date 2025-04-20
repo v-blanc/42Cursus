@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:23:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/20 23:44:35 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/21 00:20:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	is_simulation_running(t_philo *philo)
 
 	pthread_mutex_lock(&philo->table->table_lock);
 	dead_flag = philo->table->dead;
-	eat_flag = (philo->eat_count < philo->table->must_eat);
+	eat_flag = philo->table->everyone_have_eat_enough;
 	pthread_mutex_unlock(&philo->table->table_lock);
-	return (!dead_flag && eat_flag);
+	return (!dead_flag && !eat_flag);
 }
 
 static void	*one_philo(t_philo *philo)
@@ -49,8 +49,6 @@ void	*routine(void *arg)
 		usleep(100);
 	while (is_simulation_running(philo))
 	{
-		if (!is_simulation_running(philo))
-			break ;
 		print_action(philo, "is thinking");
 		pthread_mutex_lock(philo->l_fork);
 		if (!is_simulation_running(philo))
@@ -67,10 +65,6 @@ void	*routine(void *arg)
 			break ;
 		}
 		print_action(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->table->table_lock);
-		philo->time_last_eat = get_curr_time();
-		philo->eat_count++;
-		pthread_mutex_unlock(&philo->table->table_lock);
 		if (!is_simulation_running(philo))
 		{
 			pthread_mutex_unlock(philo->r_fork);
@@ -79,6 +73,10 @@ void	*routine(void *arg)
 		}
 		print_action(philo, "is eating");
 		ft_usleep(philo->table->time_to_eat);
+		pthread_mutex_lock(&philo->table->table_lock);
+		philo->time_last_eat = get_curr_time();
+		philo->eat_count++;
+		pthread_mutex_unlock(&philo->table->table_lock);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
 		if (!is_simulation_running(philo))

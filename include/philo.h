@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/20 23:36:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/21 00:13:54 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ struct					s_table
 	// Internal variables
 	size_t				time_start;
 	int					dead;
+	int					everyone_have_eat_enough;
 	pthread_mutex_t		table_lock;
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		*forks;
