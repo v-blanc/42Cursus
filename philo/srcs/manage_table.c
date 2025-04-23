@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:17:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/21 00:22:39 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/23 18:19:08 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	sub_init_table(t_table **table)
 	else if (pthread_mutex_init(&(*table)->write_lock, NULL))
 		pthread_mutex_destroy(&(*table)->table_lock);
 	else if (init_forks(*table))
-		return_value = 1;
+		return (1);
 	else if (init_philos(*table))
 	{
 		clear_table(*table, (*table)->n_philo);
@@ -99,7 +99,7 @@ int	init_table(t_table **table, int argc, char **argv)
 		(*table)->must_eat = ft_atoi(argv[5]);
 	(*table)->time_start = get_curr_time();
 	if ((*table)->time_start == 0)
-		return (1);
+		return (2);
 	(*table)->dead = 0;
 	(*table)->everyone_have_eat_enough = 0;
 	(*table)->philos = NULL;
