@@ -1,6 +1,11 @@
 # Philosophers
 
+<div align="center">
+
+![Banner](assets/banner.png)
 ![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+
+</div>
 
 ## Grade
 ![Grade](assets/grade.png)
