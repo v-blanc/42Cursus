@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/01 16:51:47 by vblanc            #+#    #+#              #
-#    Updated: 2025/03/13 10:22:24 by vblanc           ###   ########.fr        #
+#    Updated: 2025/04/23 20:40:45 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ OBJS_BONUS := $(patsubst $(SRCDIR_BONUS)/%.c, $(OBJDIR_BONUS)/%.o, $(SRCS_BONUS)
 
 INCLUDES := -I./includes
 
-LIBFT := ./includes/libft/libft.a
-MLX := ./includes/minilibx-linux/libmlx.a
+LIBFT := ./libft/libft.a
+MLX := ./minilibx-linux/libmlx.a
 
 NAME := fractol
 NAME_BONUS := fractol_bonus
@@ -39,19 +39,19 @@ RM := rm -rf
 all: $(NAME)
 
 libft:
-	@make -C includes/libft;
+	@make -C libft;
 
 mlx:
-	@make -C includes/minilibx-linux;
+	@make -C minilibx-linux;
 
 $(NAME): $(OBJS)
-	@make -C includes/libft;
-	@make -C includes/minilibx-linux;
+	@make -C libft;
+	@make -C minilibx-linux;
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@if [ expr $(ls includes/libft | wc -l) ]\
-		|| [ expr $(ls includes/minilibx-linux | wc -l) ]; then\
+	@if [ expr $(ls libft | wc -l) ]\
+		|| [ expr $(ls minilibx-linux | wc -l) ]; then\
 		git submodule init && git submodule update;\
 	fi
 	@mkdir -p $(OBJDIR)
@@ -60,27 +60,27 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	@make -C includes/libft;
-	@make -C includes/minilibx-linux;
+	@make -C libft;
+	@make -C minilibx-linux;
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_BONUS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME_BONUS)
 
 $(OBJDIR_BONUS)/%.o: $(SRCDIR_BONUS)/%.c
-	@if [ expr $(ls includes/libft | wc -l) ]\
-		|| [ expr $(ls includes/minilibx-linux | wc -l) ]; then\
+	@if [ expr $(ls libft | wc -l) ]\
+		|| [ expr $(ls minilibx-linux | wc -l) ]; then\
 		git submodule init && git submodule update;\
 	fi
 	@mkdir -p $(OBJDIR_BONUS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@make -C includes/libft clean
-	@make -C includes/minilibx-linux clean
+	@make -C libft clean
+	@make -C minilibx-linux clean
 	$(RM) $(OBJDIR)
 	$(RM) $(OBJDIR_BONUS)
 
 fclean:
-	@make -C includes/libft fclean
-	@make -C includes/minilibx-linux clean
+	@make -C libft fclean
+	@make -C minilibx-linux clean
 	$(RM) $(OBJDIR)
 	$(RM) $(OBJDIR_BONUS)
 	$(RM) $(NAME)
