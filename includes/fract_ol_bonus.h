@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract_ol_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:56:26 by vblanc            #+#    #+#             */
-/*   Updated: 2025/03/03 16:56:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/23 20:38:47 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 /* Libraries */
 
-# include "../includes/libft/libft.h"
-# include "../includes/minilibx-linux/mlx.h"
+# include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
 # include <pthread.h>
 
 /* Macros */
