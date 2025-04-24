@@ -1,12 +1,11 @@
 #include "minishell.h"
 
-
 int	count_cmd_args(t_token *tok)
 {
 	int	count;
 
 	count = 0;
-	while (tok)
+	while (tok && (tok->type == WORD || is_redirection(tok->type)))
 	{
 		if (is_redirection(tok->type))
 		{
@@ -30,7 +29,7 @@ int	count_cmd_redir(t_token *tok, t_context **ctx)
 	int	count;
 
 	count = 0;
-	while (tok)
+	while (tok && (tok->type == WORD || is_redirection(tok->type)))
 	{
 		if (is_redirection(tok->type))
 		{

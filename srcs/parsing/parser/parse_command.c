@@ -85,7 +85,7 @@ t_ast	*parse_command(t_token **tok, t_context **ctx)
 		return (ast);
 	i = 0;
 	j = 0;
-	while (*tok)
+	while (*tok && ((*tok)->type == WORD || is_redirection((*tok)->type)))
 	{
 		if ((*tok)->type == WORD)
 		{
