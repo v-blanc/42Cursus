@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	disable_ctrl_backslash_echo(void)
+static void	disable_ctrl_backslash_echo(void)
 {
 	struct termios	term;
 
@@ -9,7 +9,7 @@ void	disable_ctrl_backslash_echo(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-void	sig_handler(int sig)
+static void	sig_handler(int sig)
 {
 	(void)sig;
 	write(1, "\n", 1);
