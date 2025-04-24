@@ -6,16 +6,18 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/23 18:46:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/24 15:36:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	launch_philos(t_table *table)
+static void	launch_philos(t_table *table, pthread_t monitor)
 {
 	int	i;
 
+	if (pthread_create(&monitor, NULL, &monitoring, table))
+		return ;
 	i = 0;
 	while (i < table->n_philo)
 	{
@@ -24,10 +26,12 @@ static void	launch_philos(t_table *table)
 		{
 			while (--i >= 0)
 				pthread_join(table->philos[i].thread, NULL);
+			pthread_join(monitor, NULL);
 			return ;
 		}
 		i++;
 	}
+	pthread_join(monitor, NULL);
 	i = 0;
 	while (i < table->n_philo)
 		pthread_join(table->philos[i++].thread, NULL);
@@ -52,13 +56,8 @@ int	main(int argc, char **argv)
 		free(table);
 		return (1);
 	}
-	if (pthread_create(&monitor, NULL, &monitoring, table))
-	{
-		clear_table(table, table->n_philo);
-		return (1);
-	}
-	launch_philos(table);
-	pthread_join(monitor, NULL);
+	monitor = 0;
+	launch_philos(table, monitor);
 	clear_table(table, table->n_philo);
 	return (0);
 }

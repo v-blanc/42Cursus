@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 00:25:04 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/21 01:04:12 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/24 15:39:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	sub_monitoring(t_table *table, int i, int *have_eaten_enough)
 		pthread_mutex_unlock(&table->table_lock);
 		return (1);
 	}
-	if (table->must_eat != -1 && table->philos[i].eat_count == table->must_eat)
+	if (table->must_eat != -1 && table->philos[i].eat_count >= table->must_eat)
 		(*have_eaten_enough)++;
 	pthread_mutex_unlock(&table->table_lock);
 	return (0);
