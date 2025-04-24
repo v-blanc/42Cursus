@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 16:31:10 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/24 18:31:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct s_ast
 	} u_data;
 }							t_ast;
 
+int							is_redirection(t_token_type type);
 int							count_cmd_args(t_token *tok);
 int							count_cmd_redir(t_token *tok, t_context **ctx);
 t_ast						*parse_command(t_token **tok, t_context **ctx);

@@ -22,6 +22,8 @@ void	print_ast(t_ast *node, int depth)
 	case NODE_CMD:
 		printf("NODE_CMD\n");
 		print_indent(depth + 1);
+		printf("args_count: %d\n", node->u_data.s_cmd.args_count);
+		print_indent(depth + 1);
 		printf("argv: ");
 		for (int i = 0; node->u_data.s_cmd.args
 			&& node->u_data.s_cmd.args[i]; i++)
@@ -29,6 +31,8 @@ void	print_ast(t_ast *node, int depth)
 		printf("\n");
 		if (node->u_data.s_cmd.redir_count > 0)
 		{
+			print_indent(depth + 1);
+			printf("redir_count: %d\n", node->u_data.s_cmd.redir_count);
 			print_indent(depth + 1);
 			printf("redirections:\n");
 			for (int i = 0; node->u_data.s_cmd.redirs[i]; i++)
@@ -44,7 +48,7 @@ void	print_ast(t_ast *node, int depth)
 		print_indent(depth + 1);
 		printf("fd_source: %d\n", node->u_data.s_red.fd_source);
 		print_indent(depth + 1);
-		printf("target: %s\n", node->u_data.s_red.target);
+		printf("target: `%s`\n", node->u_data.s_red.target);
 		break ;
 	case NODE_PIPE:
 		printf("NODE_PIPE\n");
