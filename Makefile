@@ -1,12 +1,14 @@
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -g
+CFLAGS := -Wall -Werror -Wextra -MMD -MP -g
 
-INCDIR := ./include
+NAME := minishell
+RM := rm -rf
 
-SRCDIR := ./srcs
-OBJDIR := ./objs
+INCDIR := include
+SRCDIR := srcs
+OBJDIR := objs
 
-SRCS := main.c\
+FILES := main.c\
 		utils/set_readline_prompt.c utils/print.c utils/get_next_line.c utils/get_next_line_utils.c utils/exit_eof.c utils/is_valid_rl_input.c\
 		gc_functions/gc_alloc.c gc_functions/gc_free.c gc_functions/gc_setenv.c\
 		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
@@ -20,13 +22,12 @@ SRCS := main.c\
 		sig/sig.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c\
 		builtins/export.c builtins/pwd.c builtins/unset.c
-SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
-OBJS := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+SRCS := $(addprefix $(SRCDIR)/, $(FILES))
+OBJS := $(addprefix $(OBJDIR)/, $(FILES:.c=.o))
+DEPS := $(addprefix $(OBJDIR)/, $(FILES:.c=.d))
 
-LIBFT := ./libft/libft.a
 
-NAME := minishell
-RM := rm -rf
+LIBFT := libft/libft.a
 
 all: $(NAME)
 
@@ -51,5 +52,7 @@ fclean:
 	$(RM) $(NAME)
 
 re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all libft clean fclean re
