@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:45:40 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:18:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	refresh_and_close(const int *temp_stdin, const int *temp_stdout)
-
+void	refresh_and_close(const int temp_stdin, const int temp_stdout)
 {
-	dup2(*temp_stdin, STDIN_FILENO);
-	dup2(*temp_stdout, STDOUT_FILENO);
-	close(*temp_stdin);
-	close(*temp_stdout);
+	dup2(temp_stdin, STDIN_FILENO);
+	dup2(temp_stdout, STDOUT_FILENO);
+	close(temp_stdin);
+	close(temp_stdout);
 }
 
 void	set_input(t_context **ctx)
@@ -31,7 +30,6 @@ void	set_input(t_context **ctx)
 
 	while (1)
 	{
-		refresh_and_close(&temp_stdin, &temp_stdout);
 		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
 		{
@@ -61,6 +59,7 @@ void	set_input(t_context **ctx)
 			gc_free_all((*ctx)->head);
 			continue ;
 		}
+		refresh_and_close(temp_stdin, temp_stdout);
 		gc_free_all((*ctx)->head);
 	}
 }
