@@ -10,6 +10,10 @@
 
 </div>
 
+## Grade
+
+![Grade](assets/grade.png)
+
 ## Description
 
 **Fract-ol** is a graphical application written in C that renders complex mathematical fractals such as the **Mandelbrot set**, **Julia sets**, and optionally the **Lotus** fractal.  
@@ -29,24 +33,13 @@ It was developed as part of the 42 curriculum using [**MiniLibX**](https://githu
   - Move, zoom, reset, change iterations, switch colors
 - Multithreaded rendering for performance
 
-## Controls
-
-| Input                     | Action                                   |
-|---------------------------|------------------------------------------|
-| `P` / `M` or Mouse Scroll | Zoom in/out                              |
-| Arrows                    | Move across the fractal                  |
-| `W` / `Q`                 | Increase or decrease iterations          |
-| `C`                       | Cycle through color palettes             |
-| `R`                       | Reset view to default                    |
-| `ESC`                     | Quit the application                     |
-
 ## Demo
 
 Here’s a screenshot of a rendered fractal after running `./fractol_bonus mandelbrot`:
 
 ![Fractal Screenshot](./assets/demo.png)
 
-## Installation
+## Usage
 
 ### Requirements
 
@@ -70,3 +63,14 @@ To use multithreading, run:
 ```bash
 ./fractol_bonus -mt ...
 ```
+
+## Controls
+
+| Input                     | Action                                   |
+|---------------------------|------------------------------------------|
+| `P` / `M` or Mouse Scroll | Zoom in/out                              |
+| Arrows                    | Move across the fractal                  |
+| `W` / `Q`                 | Increase or decrease iterations          |
+| `C`                       | Cycle through color palettes             |
+| `R`                       | Reset view to default                    |
+| `ESC`                     | Quit the application                     |
