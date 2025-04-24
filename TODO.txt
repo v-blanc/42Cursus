@@ -1,16 +1,6 @@
 
 >> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
->> Remove ^\ (should be good now)
->> Do not expand heredoc limiter
->> Check builtins
 >> Check if args are empty values (exec)
-
->> Fix CMD_NODE parsing | gdoc 574:
-"""
-$> echo hola > a
-$> >>b echo que tal
-$> cat a | <b cat | cat > c | cat
-"""
 
 >> FIX `$` (expand_one_token.c) >> Not working
 """

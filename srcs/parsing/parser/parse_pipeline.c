@@ -56,8 +56,8 @@ static int	sub_parse_pipeline(t_token **tokens, t_ast **pipe_node, int *i,
 	t_ast	*curr_cmd;
 
 	*tokens = (*tokens)->next;
-	if (*tokens && (*tokens)->type != WORD && (*tokens)->type != PAREN_OPEN
-		&& (*tokens)->type != PAREN_CLOSE)
+	if (*tokens && (*tokens)->type != WORD && !is_redirection((*tokens)->type)
+		&& (*tokens)->type != PAREN_OPEN && (*tokens)->type != PAREN_CLOSE)
 	{
 		print(2, "syntax error\n");
 		(*ctx)->last_exit_status = 2;
@@ -80,7 +80,8 @@ t_ast	*parse_pipeline(t_token **tokens, t_context **ctx)
 	first_cmd = parse_primary(tokens, ctx);
 	if (!first_cmd)
 		return (NULL);
-	// if (first_cmd->u_data.s_cmd.args[0] == NULL) //TODO: check if syntaxe is correct (HEREDOC)
+	// if (first_cmd->u_data.s_cmd.args[0] == NULL)
+	// TODO: check if syntaxe is correct (HEREDOC)
 	// {
 	// 	print(2, "syntax error\n");
 	// 	(*ctx)->last_exit_status = 2;
