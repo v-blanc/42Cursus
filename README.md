@@ -38,5 +38,5 @@ To run the program, run:
 
 ```bash
 make
-./philo [number_of_philosophers] [time_to_eat] [time_to_sleep] [time_to_wait]
+./philo [number_of_philosophers] [time_to_eat] [time_to_sleep] [time_to_wait] [optional: number_of_times_each_philosopher_must_eat]
 ```
