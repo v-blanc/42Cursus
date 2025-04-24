@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:46 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:33:48 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:03:52 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	exit_(int args_count, char **args, t_context **context)
 		(*context)->last_exit_status = 1;
 		return (0);
 	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &(*context)->orig_term);
 	gc_free_all_perm(*((*context)->head));
 	rl_clear_history();
 	exit(exit_status);

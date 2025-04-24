@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/24 18:31:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/24 19:44:57 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <string.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <termios.h>
 # include <unistd.h>
 
 /* --------------------- Variables --------------------- */
@@ -79,6 +80,7 @@ typedef struct s_context
 	int						argc;
 	char					**argv;
 	int						last_exit_status;
+	struct termios			orig_term;
 	t_gc					**head;
 }							t_context;
 
