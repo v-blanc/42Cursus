@@ -3,7 +3,7 @@
 <div align="center">
 
 ![Banner](assets/banner.png)
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c) ![Mutlithreading](https://shields.io/badge/Mutlithreading-pthread-blue) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
 
@@ -22,22 +22,21 @@ This project showcases the use of **C threads (pthreads)** to simulate parallel 
 - **Resource management**: Philosophers share forks, and it’s essential to prevent deadlock by correctly managing access to resources.
 - **Synchronization algorithms**: The program uses mutexes to synchronize philosopher actions and prevent race conditions.
 
+## Demo
+
+Here’s a screenshot of the program after running `./philo 5 1000 200 100 5`:
+
+![Demo](assets/demo.png)
+
+> Visual generated using this [Philosophers Visualizer](https://nafuka11.github.io/philosophers-visualizer/)
+
+
 ## Usage
 
-1. Clone the repository:
-```bash
-git clone https://github.com/v-blanc/philosophers.git
-```
+To run the program, run:
 
-2. Compile the project using make:
 
 ```bash
-cd philosophers
 make
-```
-
-3. Run the program:
-
-```bash
 ./philo [number_of_philosophers] [time_to_eat] [time_to_sleep] [time_to_wait]
 ```
