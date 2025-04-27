@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/24 19:44:57 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/27 20:14:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ int							cd(int fd, int args_count, char **args,
 int							echo(int fd, char **arguments);
 int							env(t_ast *ast, t_context **context);
 int							exit_(int ac, char **av, t_context **context);
+int							is_valid_export(char *str);
 int							export(int fd, int args_count, char **args,
 								t_gc **head);
 int							pwd(int fd);
