@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:34:07 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:34:29 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/27 19:00:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,53 @@ extern char	**environ;
 
 static int	to_unset_found(char **to_unset)
 {
-	int	i;
-	int	found;
+	int		i;
+	int		found;
+	int		j;
+	char	last_char;
 
 	found = 0;
 	i = 0;
 	while (to_unset[i])
 	{
-		if (getenv(to_unset[i]))
-			found++;
+		j = 0;
+		while (environ[j])
+		{
+			if (!ft_strncmp(environ[j], to_unset[i], ft_strlen(to_unset[i])))
+			{
+				last_char = environ[j][ft_strlen(to_unset[i])];
+				if (last_char == '\0' || last_char == '=')
+					found++;
+			}
+			j++;
+		}
 		i++;
 	}
 	return (found);
 }
 
-static int	sub_unset_env(char **to_unset, int *k, char **name, t_gc **head)
+static int	sub_unset_env(char **to_unset, int *i, int *k)
 {
-	*name = gc_strjoin(to_unset[(*k)++], "=", head);
-	if (!*name)
-		return (1);
+	char	last_char;
+
+	if (!ft_strncmp(environ[*i], to_unset[*k], ft_strlen(to_unset[*k])))
+	{
+		last_char = environ[*i][ft_strlen(to_unset[*k])];
+		if (last_char == '\0' || last_char == '=')
+		{
+			(*i)++;
+			*k = 0;
+			return (1);
+		}
+	}
 	return (0);
 }
 
-static int	unset_env(char ***new_env, char **to_unset, t_gc **head)
+static int	unset_env(char ***new_env, char **to_unset)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	*name;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
@@ -52,14 +71,9 @@ static int	unset_env(char ***new_env, char **to_unset, t_gc **head)
 		k = 0;
 		while (environ[i] && to_unset[k])
 		{
-			if (sub_unset_env(to_unset, &k, &name, head))
-				return (1);
-			if (!ft_strncmp(environ[i], name, ft_strlen(name)))
-			{
-				i++;
-				k = 0;
+			if (sub_unset_env(to_unset, &i, &k))
 				continue ;
-			}
+			k++;
 		}
 		if (environ[i])
 			(*new_env)[j++] = environ[i++];
@@ -80,7 +94,7 @@ int	unset(char **to_unset, t_gc **head)
 	new_env = (char **)gc_malloc_array_perm(new_env_size + 1, head);
 	if (!new_env)
 		return (1);
-	if (unset_env(&new_env, to_unset, head))
+	if (unset_env(&new_env, to_unset))
 		return (1);
 	environ = new_env;
 	return (0);
