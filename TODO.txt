@@ -1,5 +1,7 @@
 >> Check if args are empty values (exec)
 
+>> Check leaks for `""`
+
 >> Delete token if $VAR is empty | gdoc 172/206/209/236
 
 >> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
