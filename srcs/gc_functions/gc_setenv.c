@@ -9,7 +9,8 @@ static int	update_environ(char **to_update, char *name, char *value,
 	if (!(*to_update))
 		return (1);
 	ft_strlcpy((*to_update), name, ft_strlen(name) + 1);
-	ft_strlcat((*to_update), "=", ft_strlen((*to_update)) + 2);
+	if (value && value[0] != '\0')
+		ft_strlcat((*to_update), "=", ft_strlen((*to_update)) + 2);
 	ft_strlcat((*to_update), value, ft_strlen((*to_update)) + ft_strlen(value)
 		+ 1);
 	return (0);
@@ -39,7 +40,8 @@ static int	add_to_environ(int i, char *name, char *value, t_gc **head)
 
 int	gc_setenv(char *name, char *value, t_gc **head)
 {
-	int	i;
+	int		i;
+	char	last_char;
 
 	if (name == NULL || value == NULL)
 		return (1);
@@ -48,9 +50,13 @@ int	gc_setenv(char *name, char *value, t_gc **head)
 	{
 		if (!ft_strncmp(environ[i], name, ft_strlen(name)))
 		{
-			if (update_environ(&environ[i], name, value, head))
-				return (1);
-			return (0);
+			last_char = environ[i][ft_strlen(name)];
+			if (last_char == '\0' || last_char == '=')
+			{
+				if (update_environ(&environ[i], name, value, head))
+					return (1);
+				return (0);
+			}
 		}
 		i++;
 	}
