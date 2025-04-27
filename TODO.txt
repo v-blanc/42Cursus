@@ -1,6 +1,14 @@
+>> Check if args are empty values (exec)
+
+>> Delete token if $VAR is empty | gdoc 172/206/209/236
 
 >> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
->> Check if args are empty values (exec)
+
+>> Check permissions before exec | gdoc 459/461/464
+"""
+$> ./Makefile
+bash: ./Makefile: Permission denied
+"""
 
 >> FIX `$` (expand_one_token.c) >> Not working
 """
@@ -33,9 +41,10 @@ NODE_PIPE
 0inputs+0outputs (0major+90minor)pagefaults 0swaps
 """
 
->> Fix () parsing | gdoc 605:
+>> Handle redirections for parentesis | gdoc 609:
 """
-(ls && pwd)
+$> (ls && pwd) > hola
+$> cat hola
 """
 
 Fix expand in HEREDOC only if limiter if fully NO_QUOTE | gdoc 744:
