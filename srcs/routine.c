@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:23:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/21 01:18:10 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/27 17:43:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*routine(void *arg)
 	if (philo->table->n_philo == 1)
 		return (one_philo(philo));
 	if (philo->id % 2 == 0)
-		usleep(100);
+		ft_usleep(1);
 	while (is_simulation_running(philo))
 	{
 		print_action(philo, "is thinking");
