@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_pipeline.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 19:35:33 by vblanc            #+#    #+#             */
+/*   Updated: 2025/04/27 19:36:28 by vblanc           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static t_ast	*parse_primary(t_token **tokens, t_context **ctx)
@@ -80,13 +92,6 @@ t_ast	*parse_pipeline(t_token **tokens, t_context **ctx)
 	first_cmd = parse_primary(tokens, ctx);
 	if (!first_cmd)
 		return (NULL);
-	// if (first_cmd->u_data.s_cmd.args[0] == NULL)
-	// TODO: check if syntaxe is correct (HEREDOC)
-	// {
-	// 	print(2, "syntax error\n");
-	// 	(*ctx)->last_exit_status = 2;
-	// 	return (NULL);
-	// }
 	if (!*tokens || (*tokens)->type != PIPE)
 		return (first_cmd);
 	if (init_pipe_node(&pipe_node, pipe_cmd_count(*tokens), (*ctx)->head))

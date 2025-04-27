@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_itoa.c                                          :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 19:20:04 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:20:05 by vblanc           ###   ########.fr       */
+/*   Created: 2025/04/27 20:10:39 by vblanc            #+#    #+#             */
+/*   Updated: 2025/04/27 20:31:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*gc_itoa(int n, t_gc **head)
+int	is_valid_export(char *str)
 {
-	char	*str;
-	int		i;
+	int	i;
 
-	if (n == -2147483648)
-		return (gc_strdup("-2147483648", head));
-	str = gc_malloc(sizeof(char) * ft_intlen(n) + 1, head);
-	if (!str)
-		return (NULL);
-	i = ft_intlen(n);
-	str[i--] = '\0';
-	if (n < 0)
-		str[0] = '-';
-	n = ((n > 0) - (n < 0)) * n;
-	while (n > 9)
-	{
-		str[i--] = (n % 10) + '0';
-		n = n / 10;
-	}
-	str[i] = n + '0';
-	return (str);
+	if (!str || (!ft_isalpha(str[0]) && str[0] != '_'))
+		return (0);
+	i = 0;
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+		i++;
+	if (str[i] == '\0')
+		return (1);
+	if (str[i] == '=' && i == 0)
+		return (0);
+	if (str[i] != '=' && (!ft_isalnum(str[i]) && str[i] != '_'))
+		return (0);
+	return (1);
 }

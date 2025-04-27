@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:46 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/24 19:03:52 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/27 19:18:39 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ int	exit_(int args_count, char **args, t_context **context)
 	gc_free_all_perm(*((*context)->head));
 	rl_clear_history();
 	exit(exit_status);
-	return (0);
 }

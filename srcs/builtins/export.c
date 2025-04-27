@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:51 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:33:55 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/27 20:15:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ static int	export_one_var(char *arg, t_gc **head)
 int	export(int fd, int args_count, char **args, t_gc **head)
 {
 	int	i;
+	int	exit_status;
 
+	exit_status = 0;
 	if (args_count == 1)
 	{
 		if (print_export(fd, head))
@@ -116,10 +118,15 @@ int	export(int fd, int args_count, char **args, t_gc **head)
 		i = 0;
 		while (args[i])
 		{
-			if (export_one_var(args[i], head))
+			if (!is_valid_export(args[i]))
+			{
+				print(2, "export: `%s`: not a valid identifier\n", args[i]);
+				exit_status = 1;
+			}
+			else if (export_one_var(args[i], head))
 				return (1);
 			i++;
 		}
 	}
-	return (0);
+	return (exit_status);
 }

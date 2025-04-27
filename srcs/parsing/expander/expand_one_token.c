@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_one_token.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 19:35:15 by vblanc            #+#    #+#             */
+/*   Updated: 2025/04/27 19:37:52 by vblanc           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	is_valid_var_char(char c, int pos)
@@ -107,7 +119,6 @@ int	expand_one_token(char **w, int len_w, t_context *ctx)
 		else
 			result[ind[1]++] = (*w)[ind[0]++];
 	}
-	result[ind[1]] = '\0';
 	gc_free(w, ctx->head);
 	(*w) = result;
 	return (0);
