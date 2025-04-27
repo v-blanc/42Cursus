@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 19:05:42 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/04/27 18:10:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	handle_operators(t_ast *node, t_context *ctx)
 	status = execute_ast(node->u_data.s_op.left, ctx);
 	if (type == AND && status == 0)
 		return (execute_ast(node->u_data.s_op.right, ctx));
-	else if (type == OR && status == 1)
+	else if (type == OR && status != 0)
 		return (execute_ast(node->u_data.s_op.right, ctx));
 	return (type == AND);
 }
