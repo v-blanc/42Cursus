@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/24 20:05:21 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/27 20:32:31 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	set_input(t_context **ctx)
 	t_ast		*ast;
 	char		*input;
 	char		*rl_prompt;
+	int			exec_result;
 
 	while (1)
 	{
-		refresh_and_close(&temp_stdin, &temp_stdout);
 		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
 		{
@@ -55,12 +55,11 @@ void	set_input(t_context **ctx)
 		printf("\n******************************************\n");
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
-		if (execute_ast(ast, *ctx))
-		{
-			refresh_and_close(&temp_stdin, &temp_stdout);
-			gc_free_all((*ctx)->head);
+		exec_result = execute_ast(ast, *ctx);
+		refresh_and_close(&temp_stdin, &temp_stdout);
+		gc_free_all((*ctx)->head);
+		if (exec_result)
 			continue ;
-		}
 		refresh_and_close(&temp_stdin, &temp_stdout);
 		gc_free_all((*ctx)->head);
 	}
