@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 13:16:44 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 15:06:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ typedef struct s_philo
 	int					eat_count;
 	size_t				time_last_eat;
 
-	// Locks
+	// Forks
+	int					*l_fork_state;
+	int					*r_fork_state;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
+
 	t_table				*table;
 }						t_philo;
 
@@ -55,9 +58,13 @@ struct					s_table
 	size_t				time_start;
 	int					dead;
 	int					everyone_have_eat_enough;
+
 	pthread_mutex_t		table_lock;
 	pthread_mutex_t		write_lock;
+
+	int					*forks_state;
 	pthread_mutex_t		*forks;
+
 	t_philo				*philos;
 };
 

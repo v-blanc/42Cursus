@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:17:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/23 18:19:08 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 16:10:20 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	init_philos(t_table *table)
 		philos[i].id = i + 1;
 		philos[i].eat_count = 0;
 		philos[i].time_last_eat = table->time_start;
+		philos[i].l_fork_state = &table->forks_state[(i + 1) % table->n_philo];
+		philos[i].r_fork_state = &table->forks_state[i];
 		philos[i].l_fork = &table->forks[(i + 1) % table->n_philo];
 		philos[i].r_fork = &table->forks[i];
 		philos[i].table = table;
@@ -39,6 +41,12 @@ static int	init_forks(t_table *table)
 {
 	int	i;
 
+	table->forks_state = (int *)malloc(sizeof(int) * table->n_philo);
+	if (!table->forks_state)
+	{
+		clear_table(table, 0);
+		return (1);
+	}
 	i = 0;
 	while (i < table->n_philo)
 	{
@@ -97,7 +105,7 @@ int	init_table(t_table **table, int argc, char **argv)
 	(*table)->must_eat = -1;
 	if (argc == 6)
 		(*table)->must_eat = ft_atoi(argv[5]);
-	(*table)->time_start = get_curr_time();
+	(*table)->time_start = get_curr_time() + (*table)->n_philo * 10;
 	if ((*table)->time_start == 0)
 		return (2);
 	(*table)->dead = 0;
@@ -117,6 +125,8 @@ void	clear_table(t_table *table, int n_forks)
 	pthread_mutex_destroy(&table->write_lock);
 	if (table->philos)
 		free(table->philos);
+	if (table->forks_state)
+		free(table->forks_state);
 	if (table->forks)
 		free(table->forks);
 	free(table);

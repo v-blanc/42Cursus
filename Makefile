@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 14:54:04 by vblanc            #+#    #+#              #
-#    Updated: 2025/04/23 19:10:23 by vblanc           ###   ########.fr        #
+#    Updated: 2025/04/28 14:05:36 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCDIR := include
 SRCDIR := srcs
 OBJDIR := objs
 
-FILES := main.c manage_table.c routine.c monitoring.c\
+FILES := main.c manage_table.c routine.c monitoring.c utils/is_simulation_running.c\
 		utils/libft.c utils/is_valid_input.c utils/time.c utils/print_action.c
 SRCS := $(addprefix $(SRCDIR)/, $(FILES))
 OBJS := $(addprefix $(OBJDIR)/, $(FILES:.c=.o))

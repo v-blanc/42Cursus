@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/24 15:36:43 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 14:45:49 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	launch_philos(t_table *table, pthread_t monitor)
 {
 	int	i;
 
-	if (pthread_create(&monitor, NULL, &monitoring, table))
-		return ;
 	i = 0;
 	while (i < table->n_philo)
 	{
@@ -26,10 +24,15 @@ static void	launch_philos(t_table *table, pthread_t monitor)
 		{
 			while (--i >= 0)
 				pthread_join(table->philos[i].thread, NULL);
-			pthread_join(monitor, NULL);
 			return ;
 		}
 		i++;
+	}
+	if (pthread_create(&monitor, NULL, &monitoring, table))
+	{
+		while (--i >= 0)
+			pthread_join(table->philos[i].thread, NULL);
+		return ;
 	}
 	pthread_join(monitor, NULL);
 	i = 0;

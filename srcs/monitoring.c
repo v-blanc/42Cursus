@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 00:25:04 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 13:16:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 16:27:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	*monitoring(void *arg)
 	int		i;
 
 	table = (t_table *)arg;
+	while (get_curr_time() < table->time_start)
+		usleep(10);
 	while (1)
 	{
 		have_eaten_enough = 0;
