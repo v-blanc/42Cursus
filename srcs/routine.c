@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:23:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 16:40:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 20:27:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	*routine(void *arg)
 	while (is_simulation_running(philo->table))
 	{
 		print_action(philo, "is thinking");
-		if (philo->eat_count >= philo->table->must_eat)
+		if (philo->table->must_eat != -1
+			&& philo->eat_count >= philo->table->must_eat)
 			break ;
 		if (take_forks(philo))
 			break ;
