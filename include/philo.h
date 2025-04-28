@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:55:05 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/23 18:53:50 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:16:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ struct					s_table
 int						init_table(t_table **table, int argc, char **argv);
 void					clear_table(t_table *table, int n_forks);
 void					*monitoring(void *arg);
+int						is_simulation_running(t_table *table);
 void					*routine(void *arg);
 
 /* --------------------- Utils --------------------- */
@@ -73,7 +74,7 @@ void					*routine(void *arg);
 size_t					ft_strlen(const char *s);
 int						ft_atoi(const char *str);
 int						is_valid_input(int argc, char **argv);
-void					ft_usleep(size_t ms);
+void					ft_usleep(size_t ms, t_table *table);
 size_t					get_curr_time(void);
 void					print_action(t_philo *philo, const char *msg);
 

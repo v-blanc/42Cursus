@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 00:25:04 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/24 15:39:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:16:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*monitoring(void *arg)
 			table->everyone_have_eat_enough = 1;
 			return (NULL);
 		}
-		ft_usleep(1);
+		ft_usleep(1, table);
 	}
 	return (NULL);
 }

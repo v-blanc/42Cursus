@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 04:19:06 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/20 19:06:17 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:21:03 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(size_t ms)
+void	ft_usleep(size_t ms, t_table *table)
 {
 	size_t	start;
 
