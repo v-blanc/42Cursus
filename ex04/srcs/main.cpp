@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 18:27:06 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 19:35:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 20:10:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,53 @@
 
 int	main(int argc, char **argv)
 {
-	int	i;
-
 	if (argc != 4)
 	{
 		std::cout << "Error: invalid number of arguments" << std::endl;
 		return (1);
 	}
+	std::string filename = argv[1];
 	std::string const s1 = argv[2];
 	std::string const s2 = argv[3];
-	std::fstream file(argv[1]);
+	std::ifstream file(argv[1]);
 	if (!file.is_open())
 	{
-		std::cout << "Error: could not open file" << std::endl;
+		std::cout << "Error: could not open file" << filename << std::endl;
 		return (1);
 	}
-	std::string str_file;
-	std::string new_file = "";
+	filename += ".replace";
+	std::ofstream new_file(filename.c_str());
+	if (!new_file.is_open())
 	{
-		std::string line;
-		while (std::getline(file, line))
-			str_file += line + "\n";
+		std::cout << "Error: could not open file" << filename << std::endl;
+		return (1);
 	}
-	(std::string const) str_file;
+	std::string line;
+	std::string new_line;
 	std::size_t offset;
 	std::size_t pos;
-	offset = 0;
-	pos = 0;
-	i = 0;
-	while (offset != std::string::npos)
+	while (std::getline(file, line))
 	{
-		if (i++ == 10)
-			break ;
-		if (offset == 0)
-			offset = str_file.find(s1);
-		else
-			offset = str_file.find(s1, offset + 1);
-		if (offset != std::string::npos)
+		line += "\n";
+		new_line = "";
+		offset = 0;
+		pos = 0;
+		while (offset != std::string::npos)
 		{
-			new_file += str_file.substr(pos, offset - pos);
-			new_file += s2;
-			pos = offset + s1.length();
+			offset = line.find(s1, offset);
+			if (offset != std::string::npos)
+			{
+				new_line += line.substr(pos, offset - pos);
+				new_line += s2;
+				pos = offset + s1.length();
+				offset++;
+			}
+			else
+				new_line += line.substr(pos, offset - pos);
 		}
-		else
-			new_file += str_file.substr(pos, offset - pos);
+		new_file << new_line;
 	}
-	std::cout << new_file;
+	new_file.close();
 	file.close();
 	return (0);
 }
