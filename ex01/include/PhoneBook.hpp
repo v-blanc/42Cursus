@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:27:09 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 11:58:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:35:52 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-
-using namespace	std;
 
 class PhoneBook
 {

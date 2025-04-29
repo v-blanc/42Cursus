@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:25:22 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 11:59:10 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:37:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	main(void)
 {
 	PhoneBook	phonebook;
-	string		action;
 
-	cout << "Welcome to your AWESOME PhoneBook !" << endl;
+	std::string action;
+	std::cout << "Welcome to your AWESOME PhoneBook !" << std::endl;
 	while (action != "EXIT")
 	{
-		cout << endl << "--------------------------------------------------";
-		cout << endl << "Please enter an action : ADD, SEARCH or EXIT";
-		cout << endl << "  > ";
-		cin >> action;
+		std::cout << std::endl << "--------------------------------------------------";
+		std::cout << std::endl << "Please enter an action :";
+		std::cout << " ADD, SEARCH or EXIT " << std::endl << "  > ";
+		std::cin >> action;
 		if (action == "ADD")
 			phonebook.addContact();
 		else if (action == "SEARCH")

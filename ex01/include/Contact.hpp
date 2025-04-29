@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:27:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 11:58:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:35:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,17 @@
 #include <iostream>
 #include <string>
 
-using namespace	std;
-
 class Contact
 {
   public:
-	string first_name;
-	string last_name;
-	string nickname;
-	string phone_number;
-	string darkest_secret;
+	std::string first_name;
+	std::string last_name;
+	std::string nickname;
+	std::string phone_number;
+	std::string darkest_secret;
 
-	Contact(string first_name, string last_name, string nickname,
-		string phone_number, string _darkest_secret);
+	Contact(std::string first_name, std::string last_name, std::string nickname,
+		std::string phone_number, std::string _darkest_secret);
 	~Contact(void);
 
 	void displayContact(void) const;

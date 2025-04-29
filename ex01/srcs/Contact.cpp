@@ -6,18 +6,19 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:36:44 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 11:57:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:36:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
-Contact::Contact(string first_name, string last_name, string nickname,
-	string phone_number, string darkest_secret) : first_name(first_name),
-	last_name(last_name), nickname(nickname), phone_number(phone_number),
+Contact::Contact(std::string first_name, std::string last_name,
+	std::string nickname, std::string phone_number,
+	std::string darkest_secret) : first_name(first_name), last_name(last_name),
+	nickname(nickname), phone_number(phone_number),
 	darkest_secret(darkest_secret)
 {
-	cout << endl << "  Contact added in your AWESOME PhoneBook !" << endl;
+	std::cout << std::endl << "  Contact added in your AWESOME PhoneBook !" << std::endl;
 }
 
 Contact::Contact(void)
@@ -30,9 +31,9 @@ Contact::~Contact(void)
 
 void Contact::displayContact(void) const
 {
-	cout << endl << "    First name: " << this->first_name << endl;
-	cout << "    Last name: " << this->last_name << endl;
-	cout << "    Nickname: " << this->nickname << endl;
-	cout << "    Phone number: " << this->phone_number << endl;
-	cout << "    Darkest secret: " << this->darkest_secret << endl;
+	std::cout << std::endl << "    First name: " << this->first_name << std::endl;
+	std::cout << "    Last name: " << this->last_name << std::endl;
+	std::cout << "    Nickname: " << this->nickname << std::endl;
+	std::cout << "    Phone number: " << this->phone_number << std::endl;
+	std::cout << "    Darkest secret: " << this->darkest_secret << std::endl;
 }

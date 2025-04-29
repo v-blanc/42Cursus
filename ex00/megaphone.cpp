@@ -6,13 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 20:47:48 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 21:22:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 12:35:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-
-using namespace	std;
 
 int	main(int argc, char **argv)
 {
@@ -23,14 +21,14 @@ int	main(int argc, char **argv)
 			for (int j = 0; argv[i][j]; j++)
 			{
 				if (islower(argv[i][j]))
-					cout << (char)toupper(argv[i][j]);
+					std::cout << (char)toupper(argv[i][j]);
 				else
-					cout << argv[i][j];
+					std::cout << argv[i][j];
 			}
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 	else
-		cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << endl;
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	return (0);
 }
