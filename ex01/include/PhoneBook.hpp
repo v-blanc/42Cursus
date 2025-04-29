@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:27:09 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 23:09:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:58:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ class PhoneBook
 
 	PhoneBook(void);
 	~PhoneBook(void);
-	void add_contact(void);
-	void search_contact(void) const;
+
+	void addContact(void);
+	void searchContact(void) const;
 
   private:
 	int _last_contact;

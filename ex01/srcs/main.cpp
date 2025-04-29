@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:25:22 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 23:07:12 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:59:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(void)
 		cout << endl << "  > ";
 		cin >> action;
 		if (action == "ADD")
-			phonebook.add_contact();
+			phonebook.addContact();
 		else if (action == "SEARCH")
-			phonebook.search_contact();
+			phonebook.searchContact();
 	}
 	return (0);
 }

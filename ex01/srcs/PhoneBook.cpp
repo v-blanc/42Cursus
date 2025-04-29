@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:55:07 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 23:13:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:58:37 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ PhoneBook::~PhoneBook(void)
 {
 }
 
-void PhoneBook::add_contact(void)
+void PhoneBook::addContact(void)
 {
 	string	first_name;
 	string	last_name;
@@ -45,7 +45,7 @@ void PhoneBook::add_contact(void)
 	this->_last_contact = (this->_last_contact + 1) % 8;
 }
 
-static void	print_info(string info)
+static void	printInfo(string info)
 {
 	if (info.length() > 10)
 		cout << info.substr(0, 9) << ".|";
@@ -53,7 +53,7 @@ static void	print_info(string info)
 		cout << info << setw(11 - info.length()) << "|";
 }
 
-void PhoneBook::search_contact(void) const
+void PhoneBook::searchContact(void) const
 {
 	int index;
 
@@ -61,9 +61,9 @@ void PhoneBook::search_contact(void) const
 	while (index < 8 && this->contacts[index].first_name != "")
 	{
 		cout << endl << "|#" << index + 1 << setw(8) << "|";
-		print_info(this->contacts[index].first_name);
-		print_info(this->contacts[index].last_name);
-		print_info(this->contacts[index].nickname);
+		printInfo(this->contacts[index].first_name);
+		printInfo(this->contacts[index].last_name);
+		printInfo(this->contacts[index].nickname);
 		index++;
 	}
 	if (index == 0)
@@ -80,5 +80,5 @@ void PhoneBook::search_contact(void) const
 		else
 			break ;
 	}
-	this->contacts[index - 1].display_contact();
+	this->contacts[index - 1].displayContact();
 }

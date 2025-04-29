@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 21:36:44 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 23:05:48 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:57:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Contact::~Contact(void)
 {
 }
 
-void Contact::display_contact(void) const
+void Contact::displayContact(void) const
 {
 	cout << endl << "    First name: " << this->first_name << endl;
 	cout << "    Last name: " << this->last_name << endl;
