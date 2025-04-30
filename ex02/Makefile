@@ -8,7 +8,7 @@ INCDIR := include
 SRCDIR := srcs
 OBJDIR := objs
 
-FILES :=main.cpp FragTrap.cpp ScavTrap.cpp ClapTrap.cpp
+FILES := main.cpp FragTrap.cpp ScavTrap.cpp ClapTrap.cpp
 SRCS := $(addprefix $(SRCDIR)/, $(FILES))
 OBJS := $(addprefix $(OBJDIR)/, $(FILES:.cpp=.o))
 DEPS := $(OBJS:.o=.d)
