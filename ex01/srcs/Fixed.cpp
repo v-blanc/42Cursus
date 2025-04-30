@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 13:01:25 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 13:55:56 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/04/30 14:35:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ bool Fixed::getIsInt(void) const
 
 float Fixed::toFloat(void) const
 {
-	return ((float)this->_value / (float)(1 << Fixed::_bits));
+	if (this->_isInt == false)
+		return ((float)this->_value / (1 << Fixed::_bits));
+	return ((float)this->_value);
 }
 
 int Fixed::toInt(void) const
