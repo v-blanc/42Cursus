@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:23:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/28 20:27:14 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:06:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	take_forks_loop(t_philo *philo, char type)
 		fork_state = philo->r_fork_state;
 		fork = philo->r_fork;
 	}
-	while (1)
+	while (is_simulation_running(philo->table))
 	{
 		pthread_mutex_lock(fork);
 		if (*fork_state == 0)
@@ -51,7 +51,7 @@ static void	take_forks_loop(t_philo *philo, char type)
 			break ;
 		}
 		pthread_mutex_unlock(fork);
-		usleep(10);
+		usleep(50);
 	}
 }
 
