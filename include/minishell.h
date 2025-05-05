@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/27 20:14:27 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/05 06:59:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ typedef enum e_node_type
 	NODE_CMD,
 	NODE_REDIR,
 	NODE_PIPE,
-	NODE_BINARY_OP
+	NODE_BINARY_OP,
+	NODE_PAREN,
 }							t_node_type;
 
 typedef struct s_ast
@@ -167,6 +168,12 @@ typedef struct s_ast
 		} s_op;
 		struct
 		{
+			struct s_ast	*content;
+			int				redir_count;
+			struct s_ast	**redirs;
+		} s_par;
+		struct
+		{
 			int				op;
 			int				fd_source;
 			char			*target;
@@ -177,10 +184,12 @@ typedef struct s_ast
 int							is_redirection(t_token_type type);
 int							count_cmd_args(t_token *tok);
 int							count_cmd_redir(t_token *tok, t_context **ctx);
+
+t_ast						*parse_primary(t_token **tokens, t_context **ctx);
+t_ast						*parse_pipeline(t_token **tokens, t_context **ctx);
 t_ast						*parse_command(t_token **tok, t_context **ctx);
 t_ast						*parser(t_token **tokens, t_context **ctx);
 
-t_ast						*parse_pipeline(t_token **tokens, t_context **ctx);
 int							parsing(char *input, t_ast **ast,
 								t_context **context);
 

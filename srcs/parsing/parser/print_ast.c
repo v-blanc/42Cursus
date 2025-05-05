@@ -63,6 +63,22 @@ void	print_ast(t_ast *node, int depth)
 		print_ast(node->u_data.s_op.left, depth + 1);
 		print_ast(node->u_data.s_op.right, depth + 1);
 		break ;
+	case NODE_PAREN:
+		printf("NODE_PAREN\n");
+		print_ast(node->u_data.s_par.content, depth + 1);
+		printf("\n");
+		if (node->u_data.s_par.redir_count > 0)
+		{
+			print_indent(depth + 1);
+			printf("redir_count: %d\n", node->u_data.s_par.redir_count);
+			print_indent(depth + 1);
+			printf("redirections:\n");
+			for (int i = 0; node->u_data.s_par.redirs[i]; i++)
+			{
+				print_ast(node->u_data.s_par.redirs[i], depth + 2);
+			}
+		}
+		break ;
 	default:
 		print_indent(depth);
 		printf("Unknown node type\n");

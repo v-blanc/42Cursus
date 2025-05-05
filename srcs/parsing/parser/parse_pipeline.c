@@ -6,30 +6,11 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:36:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/05 06:57:56 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static t_ast	*parse_primary(t_token **tokens, t_context **ctx)
-{
-	t_ast	*node;
-
-	if (*tokens && (*tokens)->type == PAREN_OPEN)
-	{
-		*tokens = (*tokens)->next;
-		node = parser(tokens, ctx);
-		if (!node)
-			return (NULL);
-		if (!*tokens || (*tokens)->type != PAREN_CLOSE)
-			return (NULL);
-		*tokens = (*tokens)->next;
-		return (node);
-	}
-	else
-		return (parse_command(tokens, ctx));
-}
 
 static int	pipe_cmd_count(t_token *tokens)
 {
