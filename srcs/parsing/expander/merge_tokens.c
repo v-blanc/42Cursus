@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:20 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:35:21 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/06 09:50:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int	sub_merge_tokens(t_token *curr, t_token *next, t_gc **head)
 	joined = gc_malloc(len_joined + 1, head);
 	if (!joined)
 		return (1);
-	ft_strlcpy(joined, curr->value, len_curr_value + 1);
+	if (curr->value[len_curr_value - 1] == '$' && next->quote != NO_QUOTE)
+		ft_strlcpy(joined, curr->value, len_curr_value);
+	else
+		ft_strlcpy(joined, curr->value, len_curr_value + 1);
 	ft_strlcat(joined, next->value, len_joined + 1);
 	gc_free(curr->value, head);
 	curr->value = joined;
