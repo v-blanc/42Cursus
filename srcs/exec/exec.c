@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/27 18:10:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/06 21:03:05 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	status = 0;
 	if (!node)
 		return (0);
-	if (node->type == NODE_PIPE)
+	if (node->type == NODE_BINARY_OP)
+		status = handle_operators(node, ctx);
+	else if (node->type == NODE_PIPE)
 		status = handle_pipes(node, ctx);
 	else if (node->type == NODE_REDIR)
 		status = handle_redirections(node);
 	else if (node->type == NODE_CMD)
 		status = execute_command(node, ctx);
-	else if (node->type == NODE_BINARY_OP)
-		status = handle_operators(node, ctx);
+
 	// print(2, "status: %d\n", status);
 	ctx->last_exit_status = status;
 	return (status);
@@ -110,6 +111,8 @@ static int	handle_redirections(t_ast *c)
 	int		fd;
 	t_ast	*redir;
 
+	if (!c || c->type != NODE_CMD || c->u_data.s_cmd.redir_count <= 0)
+		return (0);
 	i = -1;
 	while (++i < c->u_data.s_cmd.redir_count)
 	{
@@ -153,10 +156,15 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	char		*path;
 	pid_t		pid;
 	int			status;
-	struct stat	sh;
+
 
 	if (handle_redirections(c))
 		return (1);
+	if (c->u_data.s_cmd.args_count == 0 || c->u_data.s_cmd.args[0][0] == '\0')
+	{
+		print(2, "minishell: '' command not found\n");
+		return (127);
+	}
 	if (is_builtin(c->u_data.s_cmd.args[0]))
 		return (builtins_manager(c, &ctx));
 	path = track_paths(c->u_data.s_cmd.args[0], ctx->head);
@@ -169,14 +177,8 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	if (ft_strcmp(c->u_data.s_cmd.args[0], "exit") == 0)
 		exit_(c->u_data.s_cmd.args_count, c->u_data.s_cmd.args + 1, &ctx);
 	pid = fork();
-	if (pid == 0)
+	if (!pid)
 	{
-		if (!stat(path, &sh) && S_ISDIR(sh.st_mode))
-		{
-			print(2, "minishell: %s: is a directory\n",
-				c->u_data.s_cmd.args[0]);
-			exit(126);
-		}
 		execve(path, c->u_data.s_cmd.args, environ);
 		exit(126);
 	}
@@ -192,11 +194,20 @@ static char	*track_paths(char *command, t_gc **head)
 	char		**directories;
 	char		*whole_path;
 	short		i;
+	struct stat	sh;
 
 	if (!command)
 		return (NULL);
 	if (ft_strchr(command, '/') || !path)
 		return (gc_strdup(command, head));
+	if (stat(path, &sh) == 0)
+	{
+		if (S_ISDIR(sh.st_mode))
+			print(2, "minishell: %s: Is a directory\n", command);
+		if (access(path, X_OK) != 0)
+			print(2, "minishell: %s: Permission denied\n", command);
+		return (NULL);
+	}
 	directories = gc_split(path, ':', head);
 	if (!directories)
 		return (NULL);

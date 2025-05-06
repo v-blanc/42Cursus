@@ -6,12 +6,14 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/16 14:44:04 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:37:23 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <termios.h>
+
+extern char **environ;
 
 static void	print_warning_eof(int count, const char *delimiter)
 {
@@ -41,7 +43,7 @@ int	handle_heredoc(const char *delimiter)
 				print_warning_eof(count, delimiter);
 			break ;
 		}
-		write(pipe_fd[OUT_FD], line, ft_strlen(line));
+		print(pipe_fd[OUT_FD], "%s\n", line);
 		free(line);
 		count++;
 	}
