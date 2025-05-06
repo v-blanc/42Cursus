@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/06 21:03:05 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:01:22 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static int	handle_redirections(t_ast *c)
 		else if (redir->u_data.s_red.op == REDIR_IN)
 			fd = open(redir->u_data.s_red.target, O_RDONLY);
 		else if (redir->u_data.s_red.op == REDIR_HEREDOC)
-			fd = handle_heredoc(redir->u_data.s_red.target);
+			fd = handle_heredoc(redir->u_data.s_red.target, false);
 		if (fd < 0)
 			return (EXIT_FAILURE);
 		if (redir->u_data.s_red.op == REDIR_OUT

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/06 21:57:29 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:00:58 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
-int							handle_heredoc(const char *delimiter);
+int							handle_heredoc(const char *delimiter, const bool heredoc);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
 void						close_pipes(int (*pipes)[2], int pipes_nb);
