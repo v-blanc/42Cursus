@@ -1,20 +1,18 @@
->> Check if args are empty values (exec)
+>> Exec: Check in NODE_CMD if args_count == 0
 
 >> Exec: Check for this cmd type: `echo test | (ls && pwd)`
 
->> Check leaks for `""`
+>> Exec: Check leaks for `""`
 
->> Delete token if $VAR is empty | gdoc 172/206/209/236
+>> Sig: `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
 
->> `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
-
->> Check permissions before exec | gdoc 459/461/464
+>> Exec: Check permissions before exec | gdoc 459/461/464
 """
 $> ./Makefile
 bash: ./Makefile: Permission denied
 """
 
->> Light pipe bug: dont let the time to pipes to proprely end | gdoc 571.
+>> Exec: Light pipe bug: dont let the time to pipes to proprely end | gdoc 571.
 """
 ➜  minishell:~/workingspace/minishell$ time sleep 3 | sleep 3
 
@@ -37,7 +35,7 @@ $> (ls && pwd) > hola
 $> cat hola
 """
 
-Fix expand in HEREDOC only if limiter if fully NO_QUOTE | gdoc 744:
+>> Exec: Fix expand in HEREDOC only if limiter if fully NO_QUOTE | gdoc 744:
 """
 cat << hola
 > $HOME
@@ -46,17 +44,17 @@ cat << hola
 $> 
 """
 
-Fix visual bug | gdoc 750:
+Exec: Fix visual bug | gdoc 750:
 """
 cat << hola | rev
 """
 
-Fix solo HEREDOC | gdoc 751:
+Exec: Fix solo HEREDOC | gdoc 751:
 """
 << hola
 """
 
-Fix mutli HEREDOC | gdoc 754:
+Exec: Fix mutli HEREDOC | gdoc 754:
 """
 cat << prout << lol << koala
 """
