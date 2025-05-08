@@ -6,24 +6,22 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/27 21:21:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/08 18:23:48 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	refresh_and_close(const int *temp_stdin, const int *temp_stdout)
+void	refresh(int backup_fds[2])
 {
-	dup2(*temp_stdin, STDIN_FILENO);
-	dup2(*temp_stdout, STDOUT_FILENO);
-	close(*temp_stdin);
-	close(*temp_stdout);
+	dup2(backup_fds[IN_FD], STDIN_FILENO);
+	dup2(backup_fds[OUT_FD], STDOUT_FILENO);
+	close(backup_fds[0]);
+	close(backup_fds[1]);
 }
 
 void	set_input(t_context **ctx)
 {
-	const int	temp_stdin = dup(STDIN_FILENO);
-	const int	temp_stdout = dup(STDOUT_FILENO);
 	t_ast		*ast;
 	char		*input;
 	char		*rl_prompt;
@@ -56,11 +54,11 @@ void	set_input(t_context **ctx)
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
 		exec_result = execute_ast(ast, *ctx);
-		refresh_and_close(&temp_stdin, &temp_stdout);
+		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);
 		if (exec_result)
 			continue ;
-		refresh_and_close(&temp_stdin, &temp_stdout);
+		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);
 	}
 }
@@ -104,6 +102,8 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->last_exit_status = 0;
 	(*context)->head = head;
 	(*context)->orig_term = (struct termios){0};
+	(*context)->backup_fds[IN_FD] = dup(STDIN_FILENO);
+	(*context)->backup_fds[OUT_FD] = dup(STDOUT_FILENO);
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
 	return (0);
 }
