@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/08 18:23:48 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/08 19:02:43 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	refresh(int backup_fds[2])
 	dup2(backup_fds[OUT_FD], STDOUT_FILENO);
 	close(backup_fds[0]);
 	close(backup_fds[1]);
+	backup_fds[IN_FD] = dup(STDIN_FILENO);
+	backup_fds[OUT_FD] = dup(STDOUT_FILENO);
 }
 
 void	set_input(t_context **ctx)
