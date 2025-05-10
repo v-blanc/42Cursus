@@ -1,3 +1,5 @@
+>> Exec: Check for errors and leaks | gdoc 654
+
 >> Exec: Check in NODE_CMD if args_count == 0
 
 >> Exec: Check for this cmd type: `echo test | (ls && pwd)`
