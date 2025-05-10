@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:05 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:33:05 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/10 08:20:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static char	*path_handler(int fd, char *path)
 	{
 		new_path = getenv("HOME");
 		if (new_path == NULL)
-		{
-			print(2, "cd: HOME not set\n");
-			return (NULL);
-		}
+			return (path);
 	}
 	else if (!ft_strncmp(path, "-", 2))
 	{
