@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 16:55:54 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/11 18:10:11 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 	int				pipe_fd[2];
 	int				count;
 	char			*line;
-	const size_t	delimiter_length = ft_strlen(delimiter);
 
 	if (pipe(pipe_fd) < 0)
 		return (EXIT_FAILURE);
@@ -65,8 +64,7 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 	{
 		write(3, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
-		if (!line || (ft_strncmp(line, delimiter, delimiter_length) == 0
-				&& line[delimiter_length] == '\n'))
+		if (!line || (ft_strncmp(line, delimiter, ft_strlen(line) - 1) == 0))
 		{
 			if (!line)
 				print_warning_eof(count, delimiter);
@@ -82,4 +80,11 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 	free(line);
 	close(pipe_fd[OUT_FD]);
 	return (pipe_fd[IN_FD]);
+}
+
+bool	input_came_from_heredoc(t_ast *c)
+
+{
+	(void)c;
+	return (false);
 }

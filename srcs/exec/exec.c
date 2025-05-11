@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 14:42:30 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/11 18:01:25 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,8 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	pid_t		pid;
 	int			status;
 
-
+	if (input_came_from_heredoc(c))
+		return (0);
 	if (handle_redirections(c))
 		return (1);
 	if (!c->u_data.s_cmd.args_count)
