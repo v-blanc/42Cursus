@@ -6,11 +6,3 @@
    fun:readline
    ...
 }
-{
-   ignore_add_history
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:add_history
-   ...
-}

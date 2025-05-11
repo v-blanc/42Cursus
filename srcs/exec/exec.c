@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/06 22:01:22 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:42:30 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	execute_ast(t_ast *node, t_context *ctx)
 		status = handle_redirections(node);
 	else if (node->type == NODE_CMD)
 		status = execute_command(node, ctx);
-
-	// print(2, "status: %d\n", status);
 	ctx->last_exit_status = status;
 	return (status);
 }
@@ -160,7 +158,16 @@ static int	execute_command(t_ast *c, t_context *ctx)
 
 	if (handle_redirections(c))
 		return (1);
-	if (c->u_data.s_cmd.args_count == 0 || c->u_data.s_cmd.args[0][0] == '\0')
+	if (!c->u_data.s_cmd.args_count)
+	{
+		refresh(ctx->backup_fds);
+		c->u_data.s_cmd.args_count++;
+		c->u_data.s_cmd.args = get_input();
+		status = execute_command(c, ctx);
+		ctx->last_exit_status = WEXITSTATUS(status);
+		return (ctx->last_exit_status);
+	}
+	if (c->u_data.s_cmd.args[0][0] == '\0')
 	{
 		print(2, "minishell: '' command not found\n");
 		return (127);

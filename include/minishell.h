@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/08 18:23:14 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:43:10 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ int							handle_heredoc(const char *delimiter, const bool heredoc);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
 void						close_pipes(int (*pipes)[2], int pipes_nb);
+void    					refresh(int backup_fds[2]);
 
 /* --------------------- Buildins --------------------- */
 
@@ -230,6 +231,7 @@ void						init_sig(void);
 
 char						*set_readline_prompt(t_context *ctx);
 int							is_valid_rl_input(char *input, t_context **ctx);
+char    					**get_input(void);
 
 char						*get_next_line(int fd);
 size_t						string_length(const char *s);

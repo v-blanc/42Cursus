@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:49:54 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:33:07 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,31 @@ void	exec_manager(t_ast *ast, t_context **context)
 		else
 			print(2, "Not builtins command: not working yet\n");
 	}
+}
+
+char	**get_input(void)
+
+{
+	size_t		i;
+	size_t		length;
+	static char	*input[2];
+
+	write(1, "> ", 2);
+	input[0] = get_next_line(STDIN_FILENO);
+	i = 0;
+	length = ft_strlen(input[0]);
+	while (i < length)
+	{
+		if ((input[0][i] >= '\t' && input[0][i] <= '\r') || input[0][i] == ' ')
+		{
+			while (i < length)
+			{
+				input[0][i] = '\0';
+				i++;
+			}
+		}
+		i++;
+	}
+	input[1] = NULL;
+	return (input);
 }

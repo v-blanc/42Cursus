@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/08 19:02:43 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:04:43 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_input(t_context **ctx)
 	char		*rl_prompt;
 	int			exec_result;
 
-	while (1)
+	while (true)
 	{
 		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
