@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 17:39:44 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:55:58 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_context
 	int						argc;
 	char					**argv;
 	int						last_exit_status;
+	int						last_node_type;
 	struct termios			orig_term;
 	int						backup_fds[2];
 	t_gc					**head;

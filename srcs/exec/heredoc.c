@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 18:10:11 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:58:51 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,4 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 	free(line);
 	close(pipe_fd[OUT_FD]);
 	return (pipe_fd[IN_FD]);
-}
-
-bool	input_came_from_heredoc(t_ast *c)
-
-{
-	(void)c;
-	return (false);
 }

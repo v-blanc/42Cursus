@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 14:04:43 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:56:28 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->argc = argc;
 	(*context)->argv = argv;
 	(*context)->last_exit_status = 0;
+	(*context)->last_node_type = -1;
 	(*context)->head = head;
 	(*context)->orig_term = (struct termios){0};
 	(*context)->backup_fds[IN_FD] = dup(STDIN_FILENO);

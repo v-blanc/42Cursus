@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 18:01:25 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:03:07 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			execute_ast(t_ast *node, t_context *ctx);
 static int	execute_command(t_ast *command, t_context *ctx);
-static int	handle_redirections(t_ast *c);
+static int	handle_redirections(t_ast *c, t_context *ctx);
 static char	*track_paths(char *command, t_gc **head);
 
 extern char	**environ;
@@ -45,7 +45,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	else if (node->type == NODE_PIPE)
 		status = handle_pipes(node, ctx);
 	else if (node->type == NODE_REDIR)
-		status = handle_redirections(node);
+		status = handle_redirections(node, ctx);
 	else if (node->type == NODE_CMD)
 		status = execute_command(node, ctx);
 	ctx->last_exit_status = status;
@@ -103,7 +103,7 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	return (ctx->last_exit_status);
 }
 
-static int	handle_redirections(t_ast *c)
+static int	handle_redirections(t_ast *c, t_context *ctx)
 {
 	int		i;
 	int		fd;
@@ -124,7 +124,10 @@ static int	handle_redirections(t_ast *c)
 		else if (redir->u_data.s_red.op == REDIR_IN)
 			fd = open(redir->u_data.s_red.target, O_RDONLY);
 		else if (redir->u_data.s_red.op == REDIR_HEREDOC)
+		{
 			fd = handle_heredoc(redir->u_data.s_red.target, false);
+			ctx->last_node_type = 666;
+		}
 		if (fd < 0)
 			return (EXIT_FAILURE);
 		if (redir->u_data.s_red.op == REDIR_OUT
@@ -155,13 +158,13 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	pid_t		pid;
 	int			status;
 
-	if (input_came_from_heredoc(c))
-		return (0);
-	if (handle_redirections(c))
+	if (handle_redirections(c, ctx))
 		return (1);
 	if (!c->u_data.s_cmd.args_count)
 	{
 		refresh(ctx->backup_fds);
+		if (ctx->last_node_type == 666)
+			return (0);
 		c->u_data.s_cmd.args_count++;
 		c->u_data.s_cmd.args = get_input();
 		status = execute_command(c, ctx);
