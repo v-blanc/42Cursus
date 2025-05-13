@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/12 17:58:51 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:16:48 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 		line = get_next_line(STDIN_FILENO);
 		if (!line || (ft_strncmp(line, delimiter, ft_strlen(line) - 1) == 0))
 		{
+			if (line[0] == '\n' && !line[1])
+				continue ;
 			if (!line)
 				print_warning_eof(count, delimiter);
 			break ;

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/12 18:03:07 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:11:10 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ static int	handle_redirections(t_ast *c, t_context *ctx)
 			fd = open(redir->u_data.s_red.target, O_RDONLY);
 		else if (redir->u_data.s_red.op == REDIR_HEREDOC)
 		{
+			if (ctx->last_node_type == 666)
+				refresh(ctx->backup_fds);
 			fd = handle_heredoc(redir->u_data.s_red.target, false);
 			ctx->last_node_type = 666;
 		}
@@ -164,7 +166,10 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	{
 		refresh(ctx->backup_fds);
 		if (ctx->last_node_type == 666)
+		{
+			ctx->last_node_type = 0;
 			return (0);
+		}
 		c->u_data.s_cmd.args_count++;
 		c->u_data.s_cmd.args = get_input();
 		status = execute_command(c, ctx);
