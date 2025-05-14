@@ -205,11 +205,11 @@ void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
-int							handle_heredoc(const char *delimiter, const bool heredoc);
+int							handle_heredoc(const char *dlim, const bool hdoc);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
 void						close_pipes(int (*pipes)[2], int pipes_nb);
-void    					refresh(int backup_fds[2]);
+void						refresh(int backup_fds[2]);
 
 /* --------------------- Buildins --------------------- */
 
@@ -232,7 +232,7 @@ void						init_sig(void);
 
 char						*set_readline_prompt(t_context *ctx);
 int							is_valid_rl_input(char *input, t_context **ctx);
-char    					**get_input(void);
+char						**get_input(void);
 bool						input_came_from_heredoc(t_ast *c);
 
 char						*get_next_line(int fd);

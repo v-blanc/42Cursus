@@ -13,7 +13,7 @@
 #include "minishell.h"
 #include <termios.h>
 
-extern char **environ;
+extern char	**environ;
 
 static void	print_warning_eof(int count, const char *delimiter)
 {
@@ -47,7 +47,6 @@ void	expand_vars(int fd, const char *input)
 			input++;
 		}
 	}
-
 }
 
 int	handle_heredoc(const char *delimiter, const bool expand)
@@ -64,10 +63,10 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 	{
 		write(3, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
+		if (line[0] == '\n' && !line[1])
+			continue ;
 		if (!line || (ft_strncmp(line, delimiter, ft_strlen(line) - 1) == 0))
 		{
-			if (line[0] == '\n' && !line[1])
-				continue ;
 			if (!line)
 				print_warning_eof(count, delimiter);
 			break ;
@@ -79,7 +78,5 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 		free(line);
 		count++;
 	}
-	free(line);
-	close(pipe_fd[OUT_FD]);
-	return (pipe_fd[IN_FD]);
+	return (free(line), close(pipe_fd[OUT_FD]), pipe_fd[IN_FD]);
 }

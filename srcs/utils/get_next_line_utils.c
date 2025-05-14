@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/14 20:49:16 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/05/14 20:49:39 by yabokhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 size_t	string_length(const char *s)
@@ -40,10 +52,7 @@ char	*concatenate_(char *line, char *buffer)
 
 	concatened_line = malloc(sizeof(char) * (total_length + 1));
 	if (!concatened_line)
-	{
-		free(line);
-		return (NULL);
-	}
+		return (free(line), NULL);
 	i = 0;
 	j = 0;
 	if (line)
@@ -60,8 +69,7 @@ char	*concatenate_(char *line, char *buffer)
 		j++;
 	}
 	concatened_line[i] = '\0';
-	free(line);
-	return (concatened_line);
+	return (free(line), concatened_line);
 }
 
 void	shift_(char *buffer)

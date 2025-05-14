@@ -39,6 +39,15 @@ static int	is_valid_arg(char *arg)
 	return (1);
 }
 
+static void	clean(t_context **context)
+
+{
+	close((*context)->backup_fds[IN_FD]);
+	close((*context)->backup_fds[OUT_FD]);
+	gc_free_all_perm(*((*context)->head));
+	rl_clear_history();
+}
+
 int	exit_(int args_count, char **args, t_context **context)
 {
 	int	exit_status;
@@ -63,9 +72,6 @@ int	exit_(int args_count, char **args, t_context **context)
 		return (0);
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &(*context)->orig_term);
-	close((*context)->backup_fds[IN_FD]);
-	close((*context)->backup_fds[OUT_FD]);
-	gc_free_all_perm(*((*context)->head));
-	rl_clear_history();
+	clean(context);
 	exit(exit_status);
 }
