@@ -16,8 +16,8 @@ void	refresh(int backup_fds[2])
 {
 	dup2(backup_fds[IN_FD], STDIN_FILENO);
 	dup2(backup_fds[OUT_FD], STDOUT_FILENO);
-	close(backup_fds[0]);
-	close(backup_fds[1]);
+	close(backup_fds[IN_FD]);
+	close(backup_fds[OUT_FD]);
 	backup_fds[IN_FD] = dup(STDIN_FILENO);
 	backup_fds[OUT_FD] = dup(STDOUT_FILENO);
 }

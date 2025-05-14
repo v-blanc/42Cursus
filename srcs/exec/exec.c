@@ -189,8 +189,9 @@ static int	execute_command(t_ast *c, t_context *ctx)
 	if ((!is_builtin(c->u_data.s_cmd.args[0])) && (!path || access(path,
 				X_OK) != 0))
 	{
-		print(2, "minishell: %s: command not found\n", c->u_data.s_cmd.args[0]);
-		return (127);
+		if (errno == ENOENT)
+			print(2, "minishell: %s: command not found\n", c->u_data.s_cmd.args[0]);
+		return (126);
 	}
 	if (ft_strcmp(c->u_data.s_cmd.args[0], "exit") == 0)
 		exit_(c->u_data.s_cmd.args_count, c->u_data.s_cmd.args + 1, &ctx);
@@ -217,7 +218,27 @@ static char	*track_paths(char *command, t_gc **head)
 	if (!command)
 		return (NULL);
 	if (ft_strchr(command, '/') || !path)
+	{
+		if (!stat(command, &sh))
+		{
+			if (S_ISDIR(sh.st_mode))
+			{
+				print(2, "minishell: %s: Is a directory\n", command);
+				return (NULL);
+			}
+			else if (access(command, X_OK))
+			{
+				print(2, "minishell: %s: Permission denied\n", command);
+				return (NULL);
+			}
+			else
+			{
+				print(2, "minishell: %s: No such file or directory\n", command);
+				return (NULL);
+			}
+		}
 		return (gc_strdup(command, head));
+	}
 	if (stat(path, &sh) == 0)
 	{
 		if (S_ISDIR(sh.st_mode))

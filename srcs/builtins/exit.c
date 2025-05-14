@@ -63,6 +63,8 @@ int	exit_(int args_count, char **args, t_context **context)
 		return (0);
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &(*context)->orig_term);
+	close((*context)->backup_fds[IN_FD]);
+	close((*context)->backup_fds[OUT_FD]);
 	gc_free_all_perm(*((*context)->head));
 	rl_clear_history();
 	exit(exit_status);
