@@ -13,7 +13,6 @@
 #include "minishell.h"
 
 int			execute_ast(t_ast *node, t_context *ctx);
-static int	execute_command(t_ast *command, t_context *ctx);
 static int	handle_redirections(t_ast *c, t_context *ctx);
 static char	*track_paths(char *command, t_gc **head);
 
@@ -62,47 +61,6 @@ void	close_pipes(int (*pipes)[2], int pipes_nb)
 		close(pipes[i][IN_FD]);
 		close(pipes[i][OUT_FD]);
 	}
-}
-
-int	handle_pipes(t_ast *pipe_node, t_context *ctx)
-{
-	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
-	pid_t		*pids;
-	int			i;
-	int			status;
-	int			(*pipes)[2];
-
-	pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
-	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
-	i = -1;
-	while (++i < cmds_nb - 1)
-		if (pipe(pipes[i]) < 0)
-			return (EXIT_FAILURE);
-	i = -1;
-	while (++i < cmds_nb)
-	{
-		pids[i] = fork();
-		if (pids[i] == 0)
-		{
-			status = 0;
-			if (i > 0)
-				dup2(pipes[i - 1][IN_FD], STDIN_FILENO);
-			if (i < cmds_nb - 1)
-				dup2(pipes[i][OUT_FD], STDOUT_FILENO);
-			close_pipes(pipes, cmds_nb - 1);
-			status = execute_command(pipe_node->u_data.s_pipe.commands[i], ctx);
-			close(ctx->backup_fds[0]);
-			close(ctx->backup_fds[1]);
-			gc_free_all_perm(*(ctx->head));
-			exit(status);
-		}
-	}
-	close_pipes(pipes, cmds_nb - 1);
-	i = -1;
-	while (++i < cmds_nb)
-		waitpid(pids[i], &status, 0);
-	ctx->last_exit_status = WEXITSTATUS(status);
-	return (ctx->last_exit_status);
 }
 
 static int	handle_redirections(t_ast *c, t_context *ctx)
@@ -156,7 +114,7 @@ static int	handle_redirections(t_ast *c, t_context *ctx)
 	return (0);
 }
 
-static int	execute_command(t_ast *c, t_context *ctx)
+int	execute_command(t_ast *c, t_context *ctx)
 {
 	char		*path;
 	pid_t		pid;

@@ -204,11 +204,12 @@ int							is_builtin(char *command);
 void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
+int							execute_command(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
 int							handle_heredoc(const char *dlim, const bool hdoc);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
-void						close_pipes(int (*pipes)[2], int pipes_nb);
+void						close_pipes(int (*pipes)[2], int cmds_nb);
 void						refresh(int backup_fds[2]);
 
 /* --------------------- Buildins --------------------- */

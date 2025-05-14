@@ -19,7 +19,7 @@ FILES := main.c\
 		parsing/parser/counters.c parsing/parser/is_redirection.c parsing/parser/parse_paren.c\
 		parsing/parser/print_ast.c\
 		parsing/parsing.c\
-		exec/exec.c exec/heredoc.c exec/is_builtin.c exec/exec_manager.c\
+		exec/exec.c exec/heredoc.c exec/is_builtin.c exec/exec_manager.c exec/pipes.c\
 		sig/sig.c\
 		builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c\
 		builtins/export.c builtins/export_utils.c builtins/pwd.c builtins/unset.c
