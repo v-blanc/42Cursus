@@ -247,7 +247,7 @@ char						*concatenate_(char *line, char *buffer,
 void						shift_(char *buffer);
 bool						string_contains_newline(char *buffer);
 
-int							print(int fd, const char *format, ...);
+void						print(int fd, const char *format, ...);
 
 int							exit_eof(t_context **context);
 

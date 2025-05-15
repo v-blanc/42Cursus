@@ -12,34 +12,57 @@
 
 #include "minishell.h"
 
-static int	print_s(int fd, const char *s)
+void		print(int fd, const char *format, ...);
+static void	print_string(int fd, const char *s);
+static void	print_number(int fd, const int n);
+
+void	print(int fd, const char *format, ...)
+{
+	va_list	arguments;
+
+	if (!format)
+		return ;
+	va_start(arguments, format);
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == 's')
+				print_string(fd, va_arg(arguments, char *));
+			else if (*format == 'd')
+				print_number(fd, va_arg(arguments, int));
+		}
+		else
+			write(fd, format, 1);
+		format++;
+	}
+	va_end(arguments);
+}
+static void	print_string(int fd, const char *s)
 {
 	size_t	characters_in_string;
-	size_t	characters_printed;
 
 	if (!s)
 	{
-		characters_printed = write(fd, "(null)", 6);
-		return (characters_printed);
+		write(fd, "(null)", 6);
+		return ;
 	}
 	characters_in_string = 0;
 	while (s[characters_in_string])
 		characters_in_string++;
-	characters_printed = write(fd, s, characters_in_string);
-	return (characters_printed);
+	write(fd, s, characters_in_string);
 }
 
-static short	print_d(int fd, int n)
+static void	print_number(int fd, const int n)
 {
-	short			characters_printed;
-	short			i;
-	char			buffer[12];
-	unsigned int	abs_n;
-	const bool		negative = (n < 0);
+	short				i;
+	char				buffer[12];
+	unsigned int		abs_n;
+	const bool			negative = (n < 0);
 
 	i = 11;
 	buffer[i] = '\0';
-	characters_printed = 0;
 	if (n == 0)
 		buffer[--i] = '0';
 	abs_n = ft_abs(n);
@@ -50,33 +73,5 @@ static short	print_d(int fd, int n)
 	}
 	if (negative)
 		buffer[--i] = '-';
-	characters_printed += write(fd, &buffer[i], 12 - i);
-	return (characters_printed);
-}
-
-int	print(int fd, const char *format, ...)
-{
-	va_list	arguments;
-	int		characters_printed;
-
-	if (!format)
-		return (-1);
-	va_start(arguments, format);
-	characters_printed = 0;
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == 's')
-				characters_printed += print_s(fd, va_arg(arguments, char *));
-			else if (*format == 'd')
-				characters_printed += print_d(fd, va_arg(arguments, int));
-			format++;
-		}
-		else
-			format += write(fd, format, 1);
-	}
-	va_end(arguments);
-	return (characters_printed);
+	write(fd, &buffer[i], 12 - i);
 }
