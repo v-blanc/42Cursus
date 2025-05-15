@@ -213,7 +213,6 @@ int							handle_heredoc(const char *dlim, const bool hdoc,
 								t_context *ctx);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
-void						close_pipes(int (*pipes)[2], int cmds_nb);
 void						refresh(int backup_fds[2]);
 
 /* --------------------- Buildins --------------------- */
