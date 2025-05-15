@@ -29,16 +29,13 @@ void	print_ast(t_ast *node, int depth)
 			&& node->u_data.s_cmd.args[i]; i++)
 			printf("'%s' ", node->u_data.s_cmd.args[i]);
 		printf("\n");
-		if (node->u_data.s_cmd.redir_count > 0)
+		print_indent(depth + 1);
+		printf("redir_count: %d\n", node->u_data.s_cmd.redir_count);
+		print_indent(depth + 1);
+		printf("redirections:\n");
+		for (int i = 0; node->u_data.s_cmd.redirs[i]; i++)
 		{
-			print_indent(depth + 1);
-			printf("redir_count: %d\n", node->u_data.s_cmd.redir_count);
-			print_indent(depth + 1);
-			printf("redirections:\n");
-			for (int i = 0; node->u_data.s_cmd.redirs[i]; i++)
-			{
-				print_ast(node->u_data.s_cmd.redirs[i], depth + 2);
-			}
+			print_ast(node->u_data.s_cmd.redirs[i], depth + 2);
 		}
 		break ;
 	case NODE_REDIR:
