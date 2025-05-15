@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 13:52:22 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 16:46:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	check_void_paren(t_token *tok, t_context **ctx)
 		}
 		tok = tok->next;
 	}
-	return (1);
+	return (0);
 }
 
 int	parsing(char *input, t_ast **ast, t_context **ctx)
@@ -101,13 +101,14 @@ int	parsing(char *input, t_ast **ast, t_context **ctx)
 
 	if (!input || (input && (input[0] == '\0' || input[0] == '\n')))
 		return (0);
-	tokens = NULL;
-	if (full_tokenize(input, &tokens, ctx))
+	tokens_head = NULL;
+	if (full_tokenize(input, &tokens_head, ctx))
 		return (1);
-	tokens_head = tokens;
+	tokens = tokens_head;
 	if (check_void_paren(tokens, ctx))
 		return (1);
-	*ast = parser(&tokens_head, ctx);
+	tokens = tokens_head;
+	*ast = parser(&tokens, ctx);
 	if (!(*ast))
 		return (1);
 	return (0);
