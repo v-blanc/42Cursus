@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/13 20:32:24 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:04:15 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ static int	handle_redirections(t_ast *c, t_context *ctx)
 		{
 			if (ctx->last_node_type == 666)
 				refresh(ctx->backup_fds);
-			fd = handle_heredoc(redir->u_data.s_red.target, false);
+			fd = handle_heredoc(redir->u_data.s_red.target,
+					redir->u_data.s_red.to_expand, ctx);
 			ctx->last_node_type = 666;
 		}
 		if (fd < 0)
@@ -116,9 +117,9 @@ static int	handle_redirections(t_ast *c, t_context *ctx)
 
 int	execute_command(t_ast *c, t_context *ctx)
 {
-	char		*path;
-	pid_t		pid;
-	int			status;
+	char	*path;
+	pid_t	pid;
+	int		status;
 
 	if (handle_redirections(c, ctx))
 		return (1);
@@ -148,7 +149,8 @@ int	execute_command(t_ast *c, t_context *ctx)
 				X_OK) != 0))
 	{
 		if (errno == ENOENT)
-			print(2, "minishell: %s: command not found\n", c->u_data.s_cmd.args[0]);
+			print(2, "minishell: %s: command not found\n",
+				c->u_data.s_cmd.args[0]);
 		return (126);
 	}
 	if (ft_strcmp(c->u_data.s_cmd.args[0], "exit") == 0)

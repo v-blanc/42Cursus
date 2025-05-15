@@ -46,6 +46,9 @@ void	print_ast(t_ast *node, int depth)
 		printf("fd_source: %d\n", node->u_data.s_red.fd_source);
 		print_indent(depth + 1);
 		printf("target: `%s`\n", node->u_data.s_red.target);
+		print_indent(depth + 1);
+		printf("to_expand: %s\n",
+			node->u_data.s_red.to_expand ? "true" : "false");
 		break ;
 	case NODE_PIPE:
 		printf("NODE_PIPE\n");

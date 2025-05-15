@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 12:47:03 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 18:02:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void						token_add_back(t_token **tokens, t_token *new);
 int							tokenizer(t_token **tokens, const char *s,
 								t_context **ctx);
 
+int							get_expand_len(char *word, t_context *ctx);
 int							expand_tilde(char **word, t_gc **head);
 int							expand_one_token(char **w, int len_w,
 								t_context *ctx);
@@ -179,6 +180,7 @@ typedef struct s_ast
 			int				op;
 			int				fd_source;
 			char			*target;
+			bool			to_expand;
 		} s_red;
 	} u_data;
 }							t_ast;
@@ -207,7 +209,8 @@ void						exec_manager(t_ast *ast, t_context **context);
 int							execute_ast(t_ast *node, t_context *ctx);
 int							execute_command(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
-int							handle_heredoc(const char *dlim, const bool hdoc);
+int							handle_heredoc(const char *dlim, const bool hdoc,
+								t_context *ctx);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
 void						close_pipes(int (*pipes)[2], int cmds_nb);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:28 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 12:46:22 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 17:48:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	sub_parse_command(t_token **tok, t_ast **ast, int *j,
 		(*ctx)->last_exit_status = 2;
 		return (1);
 	}
+	(*ast)->u_data.s_cmd.redirs[*j]->u_data.s_red.to_expand = ((*tok)->quote == NO_QUOTE);
 	(*ast)->u_data.s_cmd.redirs[(*j)++]->u_data.s_red.target = (*tok)->value;
 	*tok = (*tok)->next;
 	return (0);

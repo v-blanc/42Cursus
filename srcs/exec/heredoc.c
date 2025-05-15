@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/13 17:16:48 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:15:31 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,33 @@ static void	print_warning_eof(int count, const char *delimiter)
 	print(2, "delimited by end-of-file (wanted `%s')\n", delimiter);
 }
 
-void	expand_vars(int fd, const char *input)
-
+int	expander_heredoc(int fd, char *line, t_context *ctx)
 {
-	char	var_name[256];
-	char	*var;
-	char	*value;
+	t_token	*tok;
+	int		len_value_expanded;
 
-	while (*input)
+	tok = NULL;
+	if (tokenizer(&tok, line, &ctx))
+		return (1);
+	while (tok)
 	{
-		if (*input == '$' && (ft_isalpha(input[1]) || input[1] == '_'))
-		{
-			var = var_name;
-			input++;
-			while (ft_isalnum(*input) || *input == '_')
-				*var++ = *input++;
-			*var = '\0';
-			value = getenv(var_name);
-			if (value)
-				print(fd, "%s", value);
-		}
-		else
-		{
-			write(fd, input, 1);
-			input++;
-		}
+		len_value_expanded = get_expand_len(tok->value, ctx);
+		if (len_value_expanded < 0)
+			return (1);
+		if (expand_one_token(&tok->value, len_value_expanded, ctx))
+			return (1);
+		print(fd, "%s\n", tok->value);
+		tok = tok->next;
 	}
+	return (0);
 }
 
-int	handle_heredoc(const char *delimiter, const bool expand)
+int	handle_heredoc(const char *delimiter, const bool expand, t_context *ctx)
 
 {
-	int				pipe_fd[2];
-	int				count;
-	char			*line;
+	int pipe_fd[2];
+	int count;
+	char *line;
 
 	if (pipe(pipe_fd) < 0)
 		return (EXIT_FAILURE);
@@ -64,15 +57,19 @@ int	handle_heredoc(const char *delimiter, const bool expand)
 		write(3, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 		if (line[0] == '\n' && !line[1])
+		{
+			print(pipe_fd[OUT_FD], "\n");
 			continue ;
-		if (!line || (ft_strncmp(line, delimiter, ft_strlen(line) - 1) == 0))
+		}
+		if (!line || (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
+				&& line[ft_strlen(delimiter)] == '\n'))
 		{
 			if (!line)
 				print_warning_eof(count, delimiter);
 			break ;
 		}
 		if (expand)
-			expand_vars(pipe_fd[OUT_FD], line);
+			expander_heredoc(pipe_fd[OUT_FD], line, ctx);
 		else
 			print(pipe_fd[OUT_FD], "%s", line);
 		free(line);

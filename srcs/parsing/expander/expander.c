@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:35:19 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 17:56:05 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	sub_get_expand_len(char *word, int *i, int *len, t_context *ctx)
 	return (0);
 }
 
-static int	get_expand_len(char *word, t_context *ctx)
+int	get_expand_len(char *word, t_context *ctx)
 {
 	int	i;
 	int	len;
