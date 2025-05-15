@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 06:58:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/05 08:08:34 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 12:49:04 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ static int	init_paren_node(t_ast *node, t_ast **par_node, int redir_count,
 			return (1);
 		i++;
 	}
-	return (0);
-}
-
-static int	get_fd_source(t_token_type type)
-{
-	if (type == REDIR_OUT || type == REDIR_APPEND)
-		return (1);
 	return (0);
 }
 
@@ -87,6 +80,17 @@ static int	handle_error(t_token *tokens, t_context **ctx)
 	return (0);
 }
 
+static int	handle_syntax_error(t_token *tokens, t_context **ctx)
+{
+	if (tokens->next && tokens->next->type == PAREN_CLOSE)
+	{
+		print(2, "syntaxe error\n");
+		(*ctx)->last_exit_status = 2;
+		return (1);
+	}
+	return (0);
+}
+
 t_ast	*parse_primary(t_token **tokens, t_context **ctx)
 {
 	t_ast	*node;
@@ -95,6 +99,8 @@ t_ast	*parse_primary(t_token **tokens, t_context **ctx)
 		return (NULL);
 	if (*tokens && (*tokens)->type == PAREN_OPEN)
 	{
+		if (handle_syntax_error(*tokens, ctx))
+			return (NULL);
 		*tokens = (*tokens)->next;
 		node = parser(tokens, ctx);
 		if (!node)
@@ -110,6 +116,5 @@ t_ast	*parse_primary(t_token **tokens, t_context **ctx)
 		}
 		return (node);
 	}
-	else
-		return (parse_command(tokens, ctx));
+	return (parse_command(tokens, ctx));
 }

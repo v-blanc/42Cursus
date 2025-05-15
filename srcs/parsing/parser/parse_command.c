@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:28 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:35:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 12:46:22 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	init_parse_command(t_token **tok, t_ast **ast, t_context **ctx)
 	return (0);
 }
 
-static int	get_fd_source(t_token_type type)
+int	get_fd_source(t_token_type type)
 {
 	if (type == REDIR_OUT || type == REDIR_APPEND)
 		return (1);
