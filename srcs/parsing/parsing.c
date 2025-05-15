@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 16:46:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:16:13 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	sub_is_valid_input(const char **line, char *quote, int *paren,
 		{
 			if ((*paren) == 0)
 			{
-				print(2, "Missing opening parenthesis\n");
+				print(2, "minishell: Missing opening parenthesis\n");
 				(*ctx)->last_exit_status = 2;
 				return (1);
 			}
@@ -56,9 +56,9 @@ static int	is_valid_input(const char *line, t_context **ctx)
 	if (quote || paren)
 	{
 		if (paren)
-			print(2, "Missing closing parenthesis\n");
+			print(2, "minishell: Missing closing parenthesis\n");
 		else if (quote)
-			print(2, "Missing closing quote `%c`\n", quote);
+			print(2, "minishell: Missing closing quote `%c`\n", quote);
 		(*ctx)->last_exit_status = 2;
 		return (1);
 	}
@@ -85,7 +85,7 @@ static int	check_void_paren(t_token *tok, t_context **ctx)
 		if (tok->type == PAREN_OPEN && tok->next
 			&& tok->next->type == PAREN_CLOSE)
 		{
-			print(2, "syntax error\n");
+			print(2, "minishell: syntax error\n");
 			(*ctx)->last_exit_status = 2;
 			return (1);
 		}

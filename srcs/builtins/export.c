@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:51 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/27 20:15:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:13:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	export_one_var(char *arg, t_gc **head)
 		i++;
 	if (arg[i] && i == 0)
 	{
-		print(2, "export: %s: not a valid identifier\n", arg);
+		print(2, "minishell: export: %s: not a valid identifier\n", arg);
 		return (0);
 	}
 	name = gc_strndup(arg, i, head);
@@ -120,7 +120,7 @@ int	export(int fd, int args_count, char **args, t_gc **head)
 		{
 			if (!is_valid_export(args[i]))
 			{
-				print(2, "export: `%s`: not a valid identifier\n", args[i]);
+				print(2, "minishell: export: `%s`: not a valid identifier\n", args[i]);
 				exit_status = 1;
 			}
 			else if (export_one_var(args[i], head))

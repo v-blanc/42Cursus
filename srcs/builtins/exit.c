@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:46 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/13 20:46:58 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:13:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	exit_(int args_count, char **args, t_context **context)
 	{
 		if (!is_valid_arg(args[0]))
 		{
-			print(2, "exit: %s: numeric argument required\n", args[0]);
+			print(2, "minishell: exit: %s: numeric argument required\n", args[0]);
 			(*context)->last_exit_status = 2;
 			exit(2);
 		}
@@ -67,7 +67,7 @@ int	exit_(int args_count, char **args, t_context **context)
 	}
 	else if (args_count > 2)
 	{
-		print(2, "exit: too many arguments\n");
+		print(2, "minishell: exit: too many arguments\n");
 		(*context)->last_exit_status = 1;
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:05 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/10 08:20:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:12:49 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*path_handler(int fd, char *path)
 		new_path = getenv("OLDPWD");
 		if (new_path == NULL)
 		{
-			print(2, "cd: OLDPWD not set\n");
+			print(2, "minishell: cd: OLDPWD not set\n");
 			return (NULL);
 		}
 		print(fd, "%s\n", new_path);
@@ -44,18 +44,18 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 
 	if (chdir(path) < 0)
 	{
-		print(2, "cd: %s: %s\n", strerror(errno), path);
+		print(2, "minishell: cd: %s: %s\n", strerror(errno), path);
 		return (1);
 	}
 	if (getcwd(new_path, PATH_MAX) == NULL)
 	{
-		print(2, "getcwd: %s\n", strerror(errno));
+		print(2, "minishell: getcwd: %s\n", strerror(errno));
 		return (1);
 	}
 	pwd_path = getenv("PWD");
 	if (!pwd_path)
 	{
-		print(2, "cd: PWD not set\n");
+		print(2, "minishell: cd: PWD not set\n");
 		return (1);
 	}
 	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
@@ -70,7 +70,7 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 
 	if (args_count > 2)
 	{
-		print(2, "cd: too many arguments\n");
+		print(2, "minishell: cd: too many arguments\n");
 		return (1);
 	}
 	path = args[0];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/12 17:56:28 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:16:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	init_environ(t_gc **head)
 		getcwd(env_pwd, PATH_MAX);
 		if (!env_pwd)
 		{
-			print(2, "env error\n"); // TODO: update
+			print(2, "minishell: env error\n"); // TODO: update
 			return (1);
 		}
 		environ[0] = gc_strjoin_perm("PWD=", env_pwd, head);

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:28 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 17:48:40 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:15:21 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	sub_parse_command(t_token **tok, t_ast **ast, int *j,
 	*tok = (*tok)->next;
 	if (!(*tok) || (*tok)->type != WORD)
 	{
-		print(2, "syntax error\n");
+		print(2, "minishell: syntax error\n");
 		(*ctx)->last_exit_status = 2;
 		return (1);
 	}

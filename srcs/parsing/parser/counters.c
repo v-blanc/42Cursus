@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   counters.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:23 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:35:24 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:15:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	count_cmd_redir(t_token *tok, t_context **ctx)
 		{
 			if (!tok->next || tok->next->type != WORD)
 			{
-				print(2, "syntax error\n");
+				print(2, "minishell: syntax error\n");
 				(*ctx)->last_exit_status = 2;
 				return (-1);
 			}

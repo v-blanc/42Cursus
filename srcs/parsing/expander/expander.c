@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:10:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:14:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	expand_tilde(char **word, t_gc **head)
 	home = getenv("HOME");
 	if (!home)
 	{
-		print(2, "getenv: HOME not set\n");
+		print(2, "minishell: getenv: HOME not set\n");
 		return (1);
 	}
 	len_home = ft_strlen(home);

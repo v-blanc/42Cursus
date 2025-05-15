@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipeline.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/05 06:57:56 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:15:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	sub_parse_pipeline(t_token **tokens, t_ast **pipe_node, int *i,
 	if (*tokens && (*tokens)->type != WORD && !is_redirection((*tokens)->type)
 		&& (*tokens)->type != PAREN_OPEN && (*tokens)->type != PAREN_CLOSE)
 	{
-		print(2, "syntax error\n");
+		print(2, "minishell: syntax error\n");
 		(*ctx)->last_exit_status = 2;
 		return (1);
 	}

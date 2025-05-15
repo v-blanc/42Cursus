@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/04/18 18:34:03 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:13:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pwd(int fd)
 
 	if (getcwd(path, PATH_MAX) == NULL)
 	{
-		print(2, "getcwd: %s\n", strerror(errno));
+		print(2, "minishell: getcwd: %s\n", strerror(errno));
 		return (1);
 	}
 	else

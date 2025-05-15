@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_paren.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 06:58:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 12:49:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:15:35 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_ast	*handle_redir(t_token **tok, t_ast *node, t_context **ctx)
 		*tok = (*tok)->next;
 		if (!(*tok) || (*tok)->type != WORD)
 		{
-			print(2, "syntax error\n");
+			print(2, "minishell: syntax error\n");
 			(*ctx)->last_exit_status = 2;
 			return (NULL);
 		}
@@ -73,7 +73,7 @@ static int	handle_error(t_token *tokens, t_context **ctx)
 	if (tokens && (tokens->type != AND && tokens->type != OR) && tokens->next
 		&& tokens->next->type == PAREN_OPEN)
 	{
-		print(2, "syntax error\n");
+		print(2, "minishell: syntax error\n");
 		(*ctx)->last_exit_status = 2;
 		return (1);
 	}
@@ -84,7 +84,7 @@ static int	handle_syntax_error(t_token *tokens, t_context **ctx)
 {
 	if (tokens->next && tokens->next->type == PAREN_CLOSE)
 	{
-		print(2, "syntaxe error\n");
+		print(2, "minishell: syntaxe error\n");
 		(*ctx)->last_exit_status = 2;
 		return (1);
 	}
