@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:09:10 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/14 21:09:11 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 20:06:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx);
 int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 
 {
-	int			(*pipes)[2];
-	pid_t		*pids;
-	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
-	int			i;
+	int(*pipes)[2];
+	pid_t *pids;
+	const int cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
+	int i;
 
 	if (!c_pipes(&pipes, ctx, cmds_nb) || !c_processes(&pids, ctx, cmds_nb))
 		return (EXIT_FAILURE);
@@ -45,9 +45,9 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 
 {
-	int	i;
+	int i;
 
-	*pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
+	*pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
 	if (!*pipes)
 		return (false);
 	i = -1;
@@ -67,7 +67,7 @@ static bool	c_processes(pid_t **pids, t_context *ctx, int cmds_nb)
 static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 
 {
-	int	status;
+	int status;
 
 	status = 0;
 	if (i > 0)
@@ -75,7 +75,7 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 	if (i < pn->u_data.s_pipe.cmd_count - 1)
 		dup2(pipes[i][OUT_FD], STDOUT_FILENO);
 	close_pipes(pipes, pn->u_data.s_pipe.cmd_count - 1);
-	status = execute_command(pn->u_data.s_pipe.commands[i], ctx);
+	status = execute_ast(pn->u_data.s_pipe.commands[i], ctx);
 	close(ctx->backup_fds[0]);
 	close(ctx->backup_fds[1]);
 	gc_free_all_perm(*(ctx->head));
@@ -85,8 +85,8 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
 
 {
-	int	i;
-	int	status;
+	int i;
+	int status;
 
 	i = -1;
 	while (++i < cmds_nb)
