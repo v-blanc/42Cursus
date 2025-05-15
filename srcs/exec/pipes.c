@@ -95,7 +95,7 @@ static void	close_pipes(int (*pipes)[2], int cmds_nb)
 
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < cmds_nb)
 	{

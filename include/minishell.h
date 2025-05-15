@@ -209,7 +209,7 @@ void						exec_manager(t_ast *ast, t_context **context);
 int							execute_ast(t_ast *node, t_context *ctx);
 int							execute_command(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
-int							handle_heredoc(const char *dlim, const bool hdoc,
+int							handle_heredoc(char *dlim, const bool hdoc,
 								t_context *ctx);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
