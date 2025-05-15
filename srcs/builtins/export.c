@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:51 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 21:13:24 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:22:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,17 @@ int	export(int fd, int args_count, char **args, t_gc **head)
 	}
 	else
 	{
-		i = 0;
-		while (args[i])
+		i = -1;
+		while (args[++i])
 		{
 			if (!is_valid_export(args[i]))
 			{
-				print(2, "minishell: export: `%s`: not a valid identifier\n", args[i]);
+				print(2, "minishell: export: `%s`: not a valid identifier\n",
+					args[i]);
 				exit_status = 1;
 			}
 			else if (export_one_var(args[i], head))
 				return (1);
-			i++;
 		}
 	}
 	return (exit_status);

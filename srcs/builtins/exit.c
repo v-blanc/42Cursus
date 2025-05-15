@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:46 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 21:13:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:22:55 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	exit_(int args_count, char **args, t_context **context)
 	{
 		if (!is_valid_arg(args[0]))
 		{
-			print(2, "minishell: exit: %s: numeric argument required\n", args[0]);
+			print(2, "minishell: exit: %s: numeric argument required\n",
+				args[0]);
 			(*context)->last_exit_status = 2;
 			exit(2);
 		}
