@@ -1,18 +1,11 @@
 >> Exec: Check for errors and leaks | gdoc 654
 
->> Exec: Check in NODE_CMD if args_count == 0
 
 >> Exec: Check for this cmd type: `echo test | (ls && pwd)`
 
->> Exec: Check leaks for `""`
 
 >> Sig: `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
 
->> Exec: Check permissions before exec | gdoc 459/461/464
-"""
-$> ./Makefile
-bash: ./Makefile: Permission denied
-"""
 
 >> Exec: Light pipe bug: dont let the time to pipes to proprely end | gdoc 571.
 """
@@ -44,19 +37,4 @@ cat << hola
 > hola
 /home/vietdu91
 $> 
-"""
-
-Exec: Fix visual bug | gdoc 750:
-"""
-cat << hola | rev
-"""
-
-Exec: Fix solo HEREDOC | gdoc 751:
-"""
-<< hola
-"""
-
-Exec: Fix mutli HEREDOC | gdoc 754:
-"""
-cat << prout << lol << koala
 """
