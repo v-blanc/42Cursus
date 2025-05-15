@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:36:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 13:52:22 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,22 @@ static int	full_tokenize(char *input, t_token **tokens, t_context **ctx)
 	return (0);
 }
 
+static int	check_void_paren(t_token *tok, t_context **ctx)
+{
+	while (tok)
+	{
+		if (tok->type == PAREN_OPEN && tok->next
+			&& tok->next->type == PAREN_CLOSE)
+		{
+			print(2, "syntax error\n");
+			(*ctx)->last_exit_status = 2;
+			return (1);
+		}
+		tok = tok->next;
+	}
+	return (1);
+}
+
 int	parsing(char *input, t_ast **ast, t_context **ctx)
 {
 	t_token	*tokens_head;
@@ -89,6 +105,8 @@ int	parsing(char *input, t_ast **ast, t_context **ctx)
 	if (full_tokenize(input, &tokens, ctx))
 		return (1);
 	tokens_head = tokens;
+	if (check_void_paren(tokens, ctx))
+		return (1);
 	*ast = parser(&tokens_head, ctx);
 	if (!(*ast))
 		return (1);
