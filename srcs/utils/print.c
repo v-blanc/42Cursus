@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:49:19 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/14 20:49:41 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 20:28:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static short	print_d(int fd, int n)
 	unsigned int	abs_n;
 	const bool		negative = (n < 0);
 
-	i = 12;
+	i = 11;
 	buffer[i] = '\0';
 	characters_printed = 0;
 	if (n == 0)

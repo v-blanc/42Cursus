@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:32:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 20:10:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	handle_heredoc(const char *delimiter, const bool expand, t_context *ctx)
 	{
 		write(3, "> ", 2);
 		line = get_next_line(STDIN_FILENO, ctx);
-		if (line[0] == '\n' && !line[1])
+		if (line && line[0] == '\n' && !line[1])
 		{
 			print(pipe_fd[OUT_FD], "\n");
 			continue ;
