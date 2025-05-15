@@ -1,40 +1,8 @@
 >> Exec: Check for errors and leaks | gdoc 654
 
-
->> Exec: Check for this cmd type: `echo test | (ls && pwd)`
-
-
 >> Sig: `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
 
+-------------------------------------------------------------------------------------------
 
->> Exec: Light pipe bug: dont let the time to pipes to proprely end | gdoc 571.
-"""
-➜  minishell:~/workingspace/minishell$ time sleep 3 | sleep 3
-
-******************************************
-NODE_PIPE
-        NODE_CMD
-                argv: 'time' 'sleep' '3' 
-        NODE_CMD
-                argv: 'sleep' '3' 
-
-******************************************
-
-0.00user 0.00system 0:03.00elapsed 0%CPU (0avgtext+0avgdata 2124maxresident)k
-0inputs+0outputs (0major+90minor)pagefaults 0swaps
-"""
-
->> Exec: Handle redirections for parentesis (handle by parsing) | gdoc 609:
-"""
-$> (ls && pwd) > hola
-$> cat hola
-"""
-
->> Exec: Fix expand in HEREDOC only if limiter if fully NO_QUOTE | gdoc 744:
-"""
-cat << hola
-> $HOME
-> hola
-/home/vietdu91
-$> 
-"""
+- Check quote type parsing
+- Track fd
