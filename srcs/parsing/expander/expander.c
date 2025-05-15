@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 17:56:05 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:10:01 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	expander(t_token **tokens, t_context *ctx)
 	{
 		if (cur->type == WORD && cur->quote != SINGLE_QUOTE && cur->value)
 		{
-			if (expand_tilde(&cur->value, ctx->head))
+			if (cur->quote == NO_QUOTE && expand_tilde(&cur->value, ctx->head))
 				return (1);
 			len_value_expanded = get_expand_len(cur->value, ctx);
 			if (len_value_expanded < 0)
