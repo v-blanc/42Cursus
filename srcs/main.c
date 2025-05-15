@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 21:16:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:31:22 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	refresh(int backup_fds[2])
 
 void	set_input(t_context **ctx)
 {
-	t_ast		*ast;
-	char		*input;
-	char		*rl_prompt;
-	int			exec_result;
+	t_ast	*ast;
+	char	*input;
+	char	*rl_prompt;
+	int		exec_result;
 
 	while (true)
 	{
@@ -84,7 +84,7 @@ int	init_environ(t_gc **head)
 			return (1);
 		}
 		environ[0] = gc_strjoin_perm("PWD=", env_pwd, head);
-		environ[1] = gc_strjoin_perm("SHLVL=1", "", head);
+		environ[1] = gc_strjoin_perm("SHLVL=0", "", head);
 		// TODO: change to use `which env` ou autre ?
 		environ[2] = gc_strjoin_perm("_=/usr/bin/env", "", head);
 		environ[3] = NULL;
@@ -116,12 +116,12 @@ int	main(int argc, char **argv)
 	t_gc		*head;
 	t_context	*context;
 
-	if (argc > 1) // TODO: rework to allow multiple arguments ?
-		return (1);
 	head = NULL;
 	context = NULL;
 	if (init_context(&context, argc, argv, &head))
 		return (1);
+	// TODO: do this cleaner
+	gc_setenv("SHLVL", gc_itoa(ft_atoi(getenv("SHLVL")) + 1, &head), &head);
 	init_sig();
 	if (init_environ(&head))
 		return (1);
