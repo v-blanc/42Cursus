@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:04:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 18:26:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 			return (0);
 		}
 		c->u_data.s_cmd.args_count++;
-		c->u_data.s_cmd.args = get_input();
+		c->u_data.s_cmd.args = get_input(ctx);
 		status = execute_command(c, ctx);
 		ctx->last_exit_status = WEXITSTATUS(status);
 		return (ctx->last_exit_status);

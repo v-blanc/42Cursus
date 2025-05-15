@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:02:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 18:42:02 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,13 +237,13 @@ void						init_sig(void);
 
 char						*set_readline_prompt(t_context *ctx);
 int							is_valid_rl_input(char *input, t_context **ctx);
-char						**get_input(void);
-bool						input_came_from_heredoc(t_ast *c);
+char						**get_input(t_context *ctx);
 
-char						*get_next_line(int fd);
+char						*get_next_line(int fd, t_context *ctx);
 size_t						string_length(const char *s);
-char						*duplicate_(char *buffer);
-char						*concatenate_(char *line, char *buffer);
+char						*duplicate_(char *buffer, t_context *ctx);
+char						*concatenate_(char *line, char *buffer,
+								t_context *ctx);
 void						shift_(char *buffer);
 bool						string_contains_newline(char *buffer);
 

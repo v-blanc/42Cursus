@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:49:16 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/14 20:49:39 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:41:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	string_length(const char *s)
 	return (length);
 }
 
-char	*duplicate_(char *buffer)
+char	*duplicate_(char *buffer, t_context *ctx)
 {
 	char	*duplicated_line;
 	size_t	length;
@@ -33,7 +33,7 @@ char	*duplicate_(char *buffer)
 	length = string_length(buffer);
 	if (!length)
 		return (NULL);
-	duplicated_line = malloc(sizeof(char) * (length + 1));
+	duplicated_line = gc_malloc(sizeof(char) * (length + 1), ctx->head);
 	if (!duplicated_line)
 		return (NULL);
 	i = -1;
@@ -43,16 +43,16 @@ char	*duplicate_(char *buffer)
 	return (duplicated_line);
 }
 
-char	*concatenate_(char *line, char *buffer)
+char	*concatenate_(char *line, char *buffer, t_context *ctx)
 {
 	char			*concatened_line;
 	const size_t	total_length = string_length(line) + string_length(buffer);
 	size_t			i;
 	size_t			j;
 
-	concatened_line = malloc(sizeof(char) * (total_length + 1));
+	concatened_line = gc_malloc(sizeof(char) * (total_length + 1), ctx->head);
 	if (!concatened_line)
-		return (free(line), NULL);
+		return (gc_free(line, ctx->head), NULL);
 	i = 0;
 	j = 0;
 	if (line)
@@ -69,7 +69,7 @@ char	*concatenate_(char *line, char *buffer)
 		j++;
 	}
 	concatened_line[i] = '\0';
-	return (free(line), concatened_line);
+	return (gc_free(line, ctx->head), concatened_line);
 }
 
 void	shift_(char *buffer)

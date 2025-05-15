@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:15:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 18:32:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	handle_heredoc(const char *delimiter, const bool expand, t_context *ctx)
 	while (true)
 	{
 		write(3, "> ", 2);
-		line = get_next_line(STDIN_FILENO);
+		line = get_next_line(STDIN_FILENO, ctx);
 		if (line[0] == '\n' && !line[1])
 		{
 			print(pipe_fd[OUT_FD], "\n");
@@ -72,8 +72,8 @@ int	handle_heredoc(const char *delimiter, const bool expand, t_context *ctx)
 			expander_heredoc(pipe_fd[OUT_FD], line, ctx);
 		else
 			print(pipe_fd[OUT_FD], "%s", line);
-		free(line);
+		gc_free(line, ctx->head);
 		count++;
 	}
-	return (free(line), close(pipe_fd[OUT_FD]), pipe_fd[IN_FD]);
+	return (gc_free(line, ctx->head), close(pipe_fd[OUT_FD]), pipe_fd[IN_FD]);
 }

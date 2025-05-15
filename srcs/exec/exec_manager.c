@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/11 14:33:07 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:26:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	exec_manager(t_ast *ast, t_context **context)
 	}
 }
 
-char	**get_input(void)
+char	**get_input(t_context *ctx)
 
 {
 	size_t		i;
@@ -60,7 +60,7 @@ char	**get_input(void)
 	static char	*input[2];
 
 	write(1, "> ", 2);
-	input[0] = get_next_line(STDIN_FILENO);
+	input[0] = get_next_line(STDIN_FILENO, ctx);
 	i = 0;
 	length = ft_strlen(input[0]);
 	while (i < length)
