@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 20:02:08 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/15 22:11:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,11 @@ int	execute_command(t_ast *c, t_context *ctx)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		execve(path, c->u_data.s_cmd.args, environ);
+		print(2, "minishell: %s: %s\n", c->u_data.s_cmd.args[0],
+			strerror(errno));
+		close(ctx->backup_fds[0]);
+		close(ctx->backup_fds[1]);
+		gc_free_all_perm(*ctx->head);
 		exit(126);
 	}
 	status = 0;
@@ -220,7 +225,7 @@ static char	*track_paths(char *command, t_gc **head)
 				print(2, "minishell: %s: Permission denied\n", command);
 				return (NULL);
 			}
-			else
+			else if (!(sh.st_mode & S_IXUSR))
 			{
 				print(2, "minishell: %s: No such file or directory\n", command);
 				return (NULL);
