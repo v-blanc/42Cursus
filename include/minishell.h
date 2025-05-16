@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 22:27:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 22:48:16 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ int							export(int fd, int args_count, char **args,
 								t_gc **head);
 int							pwd(int fd);
 int							unset(char **to_unset, t_gc **head);
+int							repeat(t_ast *ast, t_context **ctx);
 
 /* --------------------- Signals --------------------- */
 

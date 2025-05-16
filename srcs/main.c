@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 22:23:05 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 22:38:18 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ void	set_input(t_context **ctx)
 		exec_result = execute_ast(ast, *ctx);
 		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);
-		if (exec_result)
-			continue ;
-		refresh((*ctx)->backup_fds);
-		gc_free_all((*ctx)->head);
-		//
 	}
 }
 

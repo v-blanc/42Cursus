@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/16 22:11:41 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/16 22:49:20 by yabokhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FILES := main.c\
 		parsing/parsing.c\
 		exec/exec.c exec/track_paths.c exec/heredoc.c exec/exec_manager.c exec/pipes.c exec/redirections.c\
 		sig/sig.c\
-		builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c\
+		builtins/repeat.c builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c\
 		builtins/export.c builtins/export_utils.c builtins/pwd.c builtins/unset.c
 SRCS := $(addprefix $(SRCDIR)/, $(FILES))
 OBJS := $(addprefix $(OBJDIR)/, $(FILES:.c=.o))

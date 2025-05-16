@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:48:25 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 23:23:21 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,26 @@ int	builtins_manager(t_ast *ast, t_context **context)
 {
 	int		args_count;
 	char	**args;
-	int		return_value;
-	int		fd;
 
-	fd = 1;
-	return_value = 1;
 	args_count = ast->u_data.s_cmd.args_count;
 	args = ast->u_data.s_cmd.args;
 	if (!ft_strncmp(args[0], "cd", 3))
-		return_value = cd(fd, args_count, args + 1, (*context)->head);
+		return (cd(1, args_count, args + 1, (*context)->head));
 	if (!ft_strncmp(args[0], "echo", 5))
-		return_value = echo(fd, args + 1);
+		return (echo(1, args + 1));
 	if (!ft_strncmp(args[0], "env", 4))
-		return_value = env(ast, context);
+		return (env(ast, context));
 	if (!ft_strncmp(args[0], "exit", 5))
-		return_value = exit_(args_count, args + 1, context);
+		return (exit_(args_count, args + 1, context));
 	if (!ft_strncmp(args[0], "export", 8))
-		return_value = export(fd, args_count, args + 1, (*context)->head);
+		return (export(1, args_count, args + 1, (*context)->head));
 	if (!ft_strncmp(args[0], "pwd", 4))
-		return_value = pwd(fd);
+		return (pwd(1));
 	if (!ft_strncmp(args[0], "unset", 6))
-		return_value = unset(args + 1, (*context)->head);
-	(*context)->last_exit_status = return_value; // TODO: delete
-	return (return_value);
-}
-
-void	exec_manager(t_ast *ast, t_context **context)
-{
-	if (ast->type == NODE_CMD)
-	{
-		if (is_builtin(ast->u_data.s_cmd.args[0]))
-			builtins_manager(ast, context);
-		else
-			print(2, "Not builtins command: not working yet\n");
-	}
+		return (unset(args + 1, (*context)->head));
+	if (!ft_strncmp(args[0], "repeat", 6))
+		return (repeat(ast, context));
+	return (EXIT_FAILURE);
 }
 
 char	**get_input(t_context *ctx)
@@ -97,6 +83,8 @@ bool	is_builtin(char *command)
 	if (!ft_strncmp(command, "pwd", 4))
 		return (true);
 	if (!ft_strncmp(command, "unset", 6))
+		return (true);
+	if (!ft_strncmp(command, "repeat", 6))
 		return (true);
 	return (false);
 }
