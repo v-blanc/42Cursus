@@ -6,3 +6,4 @@
 
 - Parsing: handle `&&` or `
 - Track fd
+- test
