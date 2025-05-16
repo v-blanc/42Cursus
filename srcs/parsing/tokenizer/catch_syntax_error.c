@@ -6,11 +6,20 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:24:59 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:25:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:44:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	sub_print_syntax_error(char *type_str, t_context **ctx)
+{
+	if (!type_str)
+		return (1);
+	print(2, "minishell: syntax error near unexpected token `%s'\n", type_str);
+	(*ctx)->last_exit_status = 2;
+	return (1);
+}
 
 static int	print_syntax_error(t_token_type type, t_context **ctx)
 {
@@ -32,13 +41,11 @@ static int	print_syntax_error(t_token_type type, t_context **ctx)
 		type_str = gc_strdup("<<", (*ctx)->head);
 	else if (type == AND)
 		type_str = gc_strdup("&&", (*ctx)->head);
-	else
+	else if (type == OR)
 		type_str = gc_strdup("||", (*ctx)->head);
-	if (!type_str)
-		return (1);
-	print(2, "minishell: syntax error near unexpected token `%s'\n", type_str);
-	(*ctx)->last_exit_status = 2;
-	return (1);
+	else
+		type_str = gc_strdup("newline", (*ctx)->head);
+	return (sub_print_syntax_error(type_str, ctx));
 }
 
 static int	check_left_and_right(t_token *t, t_token *prev, t_context **ctx)
@@ -52,6 +59,16 @@ static int	check_left_and_right(t_token *t, t_token *prev, t_context **ctx)
 		return (print_syntax_error(t->type, ctx));
 	return (0);
 }
+
+static int	check_redir(t_token *t, t_context **ctx)
+{
+	if (!t->next)
+		return (print_syntax_error(END, ctx));
+	if (t->next->type != WORD)
+		return (print_syntax_error(t->next->type, ctx));
+	return (0);
+}
+
 int	catch_syntax_error(t_token *t, t_context **ctx)
 {
 	t_token	*prev;
@@ -70,8 +87,8 @@ int	catch_syntax_error(t_token *t, t_context **ctx)
 			return (1);
 		else if (t->type == PIPE && check_left_and_right(t, prev, ctx))
 			return (1);
-		else if (is_redirection(t->type) && t->next && t->next->type != WORD)
-			return (print_syntax_error(t->next->type, ctx));
+		else if (is_redirection(t->type) && check_redir(t, ctx))
+			return (1);
 		prev = t;
 		t = t->next;
 	}
