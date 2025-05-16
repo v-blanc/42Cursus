@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:24:59 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:44:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 18:32:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static int	print_syntax_error(t_token_type type, t_context **ctx)
 
 static int	check_left_and_right(t_token *t, t_token *prev, t_context **ctx)
 {
+	if (!prev || (prev->type != WORD && !is_redirection(t->next->type)
+			&& prev->type != PAREN_CLOSE))
+		return (print_syntax_error(t->type, ctx));
 	if (!t->next)
 		return (print_syntax_error(t->type, ctx));
 	if (t->next->type != WORD && t->next->type != PAREN_OPEN)
 		return (print_syntax_error(t->next->type, ctx));
-	if (!prev || (prev->type != WORD && !is_redirection(t->next->type)
-			&& prev->type != PAREN_CLOSE))
-		return (print_syntax_error(t->type, ctx));
 	return (0);
 }
 
@@ -78,10 +78,7 @@ int	catch_syntax_error(t_token *t, t_context **ctx)
 	{
 		if (t->type == PAREN_OPEN && t->next && t->next->type != WORD
 			&& !is_redirection(t->next->type) && t->next->type != PAREN_OPEN)
-			return (print_syntax_error(t->next->type, ctx));
-		else if (t->type == PAREN_CLOSE && t->next
-			&& t->next->type == PAREN_OPEN)
-			return (print_syntax_error(t->next->type, ctx));
+			return (print_syntax_error(t->type, ctx));
 		else if ((t->type == AND || t->type == OR) && check_left_and_right(t,
 				prev, ctx))
 			return (1);
