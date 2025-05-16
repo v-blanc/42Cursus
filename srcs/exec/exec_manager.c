@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:46:24 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:48:25 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	**get_input(t_context *ctx)
 }
 
 bool	is_builtin(char *command)
+
 {
 	if (!command)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:46:47 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:54:32 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
 int							execute_command(t_ast *node, t_context *ctx);
+char						*track_paths(char *command, t_gc **head);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
 int							handle_redirections(t_ast *c, t_context *ctx);
 int							handle_heredoc(char *dlim, const bool hdoc,
