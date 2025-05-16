@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:52:24 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 17:45:31 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:06:56 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static char	*relative_path(char *command, t_gc **head)
 
 	if (!stat(command, &sh))
 	{
+		if (!errno)
+			return (gc_strdup(command, head));
 		if (S_ISDIR(sh.st_mode))
 			print(2, "minishell: %s: Is a directory\n", command);
 		else if (access(command, X_OK))

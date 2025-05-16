@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 17:13:41 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:05:39 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,15 @@ int	execute_command(t_ast *c, t_context *ctx)
 				X_OK) != 0))
 	{
 		if (errno == ENOENT)
-			print(2, "minishell: %s: command not found\n",
-				c->u_data.s_cmd.args[0]);
-		return (126);
+		{
+			print(2, "minishell: %s: command not found\n", c->u_data.s_cmd.args[0]);
+			return (127);
+		}
+		else
+		{
+			print(2, "minishell: %s: %s\n", c->u_data.s_cmd.args[0], strerror(errno));
+			return (126);
+		}
 	}
 	if (ft_strcmp(c->u_data.s_cmd.args[0], "exit") == 0)
 		exit_(c->u_data.s_cmd.args_count, c->u_data.s_cmd.args + 1, &ctx);
