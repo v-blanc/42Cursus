@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 20:10:40 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 19:01:59 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
 
 	if (*line == NULL)
 	{
+		if (errno == EINTR)
+			return (true);
 		print(2, "minishell: warning: here-document at line %d ", count);
 		print(2, "delimited by end-of-file (wanted `%s')\n", delim);
 		return (true);
