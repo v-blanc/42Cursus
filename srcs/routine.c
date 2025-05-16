@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:23:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/01 14:06:06 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 12:13:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->table->n_philo == 1)
-		return (one_philo(philo));
 	while (get_curr_time() <= philo->table->time_start)
 		usleep(100);
+	if (philo->table->n_philo == 1)
+		return (one_philo(philo));
 	if (philo->id % 2 == 0)
 		ft_usleep(4, philo->table);
 	while (is_simulation_running(philo->table))
