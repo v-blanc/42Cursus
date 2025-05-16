@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:25:31 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:25:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 22:26:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ static void	disable_ctrl_backslash_echo(void)
 
 static void	sig_handler(int sig)
 {
+	t_context	*ctx;
+
 	(void)sig;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	ctx = get_ptr();
+	ctx->signal_flag = 1;
+	ctx->last_exit_status = 130;
 }
 
 void	init_sig(void)

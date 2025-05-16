@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/16 18:59:25 by yabokhar         ###   ########.fr        #
+#    Updated: 2025/05/16 22:11:41 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ OBJDIR := objs
 
 FILES := main.c\
 		utils/set_readline_prompt.c utils/print.c utils/get_next_line.c utils/get_next_line_utils.c utils/exit_eof.c utils/is_valid_rl_input.c\
+		utils/handle_ptr.c\
 		gc_functions/gc_alloc.c gc_functions/gc_free.c gc_functions/gc_setenv.c\
 		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
 		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\

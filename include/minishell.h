@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 17:00:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 22:27:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_context
 	int						last_node_type;
 	struct termios			orig_term;
 	int						backup_fds[2];
+	int						signal_flag;
 	t_gc					**head;
 }							t_context;
 
@@ -241,6 +242,8 @@ int							unset(char **to_unset, t_gc **head);
 /* --------------------- Signals --------------------- */
 
 void						init_sig(void);
+void						set_ptr(void *ptr);
+void						*get_ptr(void);
 
 /* --------------------- Utils --------------------- */
 

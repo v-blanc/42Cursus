@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 21:31:22 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 22:23:05 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void	refresh(int backup_fds[2])
 	backup_fds[OUT_FD] = dup(STDOUT_FILENO);
 }
 
+static int	set_readline_hook(void)
+{
+	t_context	*ctx;
+
+	ctx = get_ptr();
+	if (ctx->signal_flag)
+		rl_done = 1;
+	return (!rl_done);
+}
+
 void	set_input(t_context **ctx)
 {
 	t_ast	*ast;
@@ -29,6 +39,7 @@ void	set_input(t_context **ctx)
 	char	*rl_prompt;
 	int		exec_result;
 
+	rl_event_hook = set_readline_hook;
 	while (true)
 	{
 		rl_prompt = set_readline_prompt(*ctx);
@@ -38,6 +49,8 @@ void	set_input(t_context **ctx)
 			continue ;
 		}
 		input = readline(rl_prompt);
+		rl_done = 0;
+		(*ctx)->signal_flag = 0;
 		if (!is_valid_rl_input(input, ctx))
 		{
 			free(input);
@@ -62,6 +75,7 @@ void	set_input(t_context **ctx)
 			continue ;
 		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);
+		//
 	}
 }
 
@@ -99,6 +113,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context) = gc_malloc_perm(sizeof(t_context), head);
 	if (!(*context))
 		return (1);
+	set_ptr(*context);
 	(*context)->argc = argc;
 	(*context)->argv = argv;
 	(*context)->last_exit_status = 0;
@@ -107,6 +122,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->orig_term = (struct termios){0};
 	(*context)->backup_fds[IN_FD] = dup(STDIN_FILENO);
 	(*context)->backup_fds[OUT_FD] = dup(STDOUT_FILENO);
+	(*context)->signal_flag = 0;
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
 	return (0);
 }
