@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:42:15 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:46:34 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static int	get_target(t_ast **redirs, t_context *ctx, int i)
 				redirs[i]->u_data.s_red.to_expand, ctx);
 		ctx->last_node_type = REDIR_HEREDOC;
 	}
+	if (fd < 0)
+		print(2, "minishell: %s: %s\n", redirs[i]->u_data.s_red.target, strerror(errno));
 	return (fd);
 }
 
