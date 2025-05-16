@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:28 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:27:33 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:32:52 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ int	get_fd_source(t_token_type type)
 	return (0);
 }
 
-static int	sub_parse_command(t_token **tok, t_ast **ast, int *j,
-		t_context **ctx)
+static int	sub_parse_command(t_token **tok, t_ast **ast, int *j)
 {
 	int		fd_source;
 	bool	to_expand;
@@ -105,7 +104,7 @@ t_ast	*parse_command(t_token **tok, t_context **ctx)
 		}
 		else if (is_redirection((*tok)->type))
 		{
-			if (sub_parse_command(tok, &ast, &j, ctx))
+			if (sub_parse_command(tok, &ast, &j))
 				return (NULL);
 		}
 	}
