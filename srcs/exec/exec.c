@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:53:50 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:13:41 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 	if (!c->u_data.s_cmd.args_count)
 	{
 		refresh(ctx->backup_fds);
-		if (ctx->last_node_type == 666)
+		if (ctx->last_node_type == REDIR_HEREDOC)
 		{
 			ctx->last_node_type = 0;
 			return (0);
