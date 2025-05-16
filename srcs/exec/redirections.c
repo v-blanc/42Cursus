@@ -6,7 +6,7 @@
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:20:07 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:42:15 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int			handle_redirections(t_ast *c, t_context *ctx);
 static int	get_redirections_type(t_ast *c, t_ast ***redir);
+static int	get_target(t_ast **redirs, t_context *ctx, int i);
+static int	close_then_return_exit_failure(int fd);
 
 int	handle_redirections(t_ast *c, t_context *ctx)
 {
@@ -27,47 +29,25 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 	i = -1;
 	while (++i < redirs_count)
 	{
-		if (redirs[i]->u_data.s_red.op == REDIR_OUT)
-			fd = open(redirs[i]->u_data.s_red.target,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redirs[i]->u_data.s_red.op == REDIR_APPEND)
-			fd = open(redirs[i]->u_data.s_red.target,
-					O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redirs[i]->u_data.s_red.op == REDIR_IN)
-			fd = open(redirs[i]->u_data.s_red.target, O_RDONLY);
-		else if (redirs[i]->u_data.s_red.op == REDIR_HEREDOC)
-		{
-			if (ctx->last_node_type == 666)
-				refresh(ctx->backup_fds);
-			fd = handle_heredoc(redirs[i]->u_data.s_red.target,
-					redirs[i]->u_data.s_red.to_expand, ctx);
-			ctx->last_node_type = 666;
-		}
+		fd = get_target(redirs, ctx, i);
 		if (fd < 0)
 			return (EXIT_FAILURE);
 		if (redirs[i]->u_data.s_red.op == REDIR_OUT
 			|| redirs[i]->u_data.s_red.op == REDIR_APPEND)
 		{
 			if (dup2(fd, STDOUT_FILENO) < 0)
-			{
-				close(fd);
-				return (EXIT_FAILURE);
-			}
+				close_then_return_exit_failure(fd);
 		}
 		else
-		{
 			if (dup2(fd, STDIN_FILENO) < 0)
-			{
-				close(fd);
-				return (EXIT_FAILURE);
-			}
-		}
+				close_then_return_exit_failure(fd);
 		close(fd);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 static int	get_redirections_type(t_ast *c, t_ast ***redir)
+
 {
 	if (!c)
 		return (0);
@@ -82,4 +62,36 @@ static int	get_redirections_type(t_ast *c, t_ast ***redir)
 		return (c->u_data.s_par.redir_count > 0);
 	}
 	return (0);
+}
+
+static int	get_target(t_ast **redirs, t_context *ctx, int i)
+
+{
+	int	fd;
+
+	fd = 0;
+	if (redirs[i]->u_data.s_red.op == REDIR_OUT)
+		fd = open(redirs[i]->u_data.s_red.target,
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (redirs[i]->u_data.s_red.op == REDIR_APPEND)
+		fd = open(redirs[i]->u_data.s_red.target,
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else if (redirs[i]->u_data.s_red.op == REDIR_IN)
+		fd = open(redirs[i]->u_data.s_red.target, O_RDONLY);
+	else if (redirs[i]->u_data.s_red.op == REDIR_HEREDOC)
+	{
+		if (ctx->last_node_type == REDIR_HEREDOC)
+			refresh(ctx->backup_fds);
+		fd = handle_heredoc(redirs[i]->u_data.s_red.target,
+				redirs[i]->u_data.s_red.to_expand, ctx);
+		ctx->last_node_type = REDIR_HEREDOC;
+	}
+	return (fd);
+}
+
+static int	close_then_return_exit_failure(int fd)
+
+{
+	close(fd);
+	return (EXIT_FAILURE);
 }
