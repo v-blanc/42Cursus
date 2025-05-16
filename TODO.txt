@@ -3,7 +3,3 @@
 >> Sig: `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
 
 -------------------------------------------------------------------------------------------
-
-- Parsing: handle `&&` or `
-- Track fd
-- test

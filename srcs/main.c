@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 22:38:18 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 23:38:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	set_readline_hook(void)
 	t_context	*ctx;
 
 	ctx = get_ptr();
-	if (ctx->signal_flag)
+	if (ctx->signal)
 		rl_done = 1;
 	return (!rl_done);
 }
@@ -50,7 +50,12 @@ void	set_input(t_context **ctx)
 		}
 		input = readline(rl_prompt);
 		rl_done = 0;
-		(*ctx)->signal_flag = 0;
+		if ((*ctx)->signal)
+		{
+			(*ctx)->last_exit_status = (*ctx)->signal;
+			(*ctx)->signal = 0;
+			continue ;
+		}
 		if (!is_valid_rl_input(input, ctx))
 		{
 			free(input);
@@ -69,6 +74,11 @@ void	set_input(t_context **ctx)
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
 		exec_result = execute_ast(ast, *ctx);
+		if ((*ctx)->signal)
+		{
+			(*ctx)->last_exit_status = (*ctx)->signal;
+			(*ctx)->signal = 0;
+		}
 		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);
 	}
@@ -117,7 +127,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->orig_term = (struct termios){0};
 	(*context)->backup_fds[IN_FD] = dup(STDIN_FILENO);
 	(*context)->backup_fds[OUT_FD] = dup(STDOUT_FILENO);
-	(*context)->signal_flag = 0;
+	(*context)->signal = 0;
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
 	return (0);
 }
@@ -133,7 +143,7 @@ int	main(int argc, char **argv)
 		return (1);
 	// TODO: do this cleaner
 	gc_setenv("SHLVL", gc_itoa(ft_atoi(getenv("SHLVL")) + 1, &head), &head);
-	init_sig();
+	init_sig(context->sa);
 	if (init_environ(&head))
 		return (1);
 	set_input(&context);
