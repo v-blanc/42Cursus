@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 06:58:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:27 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:28:12 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static t_ast	*handle_redir(t_token **tok, t_ast *node, t_context **ctx)
 	int		i;
 	t_ast	**curr_redir;
 
-	if (init_paren_node(node, &paren_node, count_cmd_redir(*tok),
-			(*ctx)->head))
+	if (init_paren_node(node, &paren_node, count_cmd_redir(*tok), (*ctx)->head))
 		return (NULL);
 	i = -1;
 	while (++i < paren_node->u_data.s_par.redir_count)
@@ -57,50 +56,19 @@ static t_ast	*handle_redir(t_token **tok, t_ast *node, t_context **ctx)
 		(*curr_redir)->u_data.s_red.fd_source = get_fd_source((*tok)->type);
 		*tok = (*tok)->next;
 		if (!(*tok) || (*tok)->type != WORD)
-		{
-			print(2, "minishell: syntax error\n");
-			(*ctx)->last_exit_status = 2;
 			return (NULL);
-		}
 		(*curr_redir)->u_data.s_red.target = (*tok)->value;
 		*tok = (*tok)->next;
 	}
 	return (paren_node);
 }
 
-static int	handle_error(t_token *tokens, t_context **ctx)
-{
-	if (tokens && (tokens->type != AND && tokens->type != OR) && tokens->next
-		&& tokens->next->type == PAREN_OPEN)
-	{
-		print(2, "minishell: syntax error\n");
-		(*ctx)->last_exit_status = 2;
-		return (1);
-	}
-	return (0);
-}
-
-static int	handle_syntax_error_paren(t_token *tokens, t_context **ctx)
-{
-	if (tokens->next && tokens->next->type == PAREN_CLOSE)
-	{
-		print(2, "minishell: syntaxe error\n");
-		(*ctx)->last_exit_status = 2;
-		return (1);
-	}
-	return (0);
-}
-
 t_ast	*parse_primary(t_token **tokens, t_context **ctx)
 {
 	t_ast	*node;
 
-	if (handle_error(*tokens, ctx))
-		return (NULL);
 	if (*tokens && (*tokens)->type == PAREN_OPEN)
 	{
-		if (handle_syntax_error_paren(*tokens, ctx))
-			return (NULL);
 		*tokens = (*tokens)->next;
 		node = parser(tokens, ctx);
 		if (!node)

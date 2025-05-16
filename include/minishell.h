@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:54:32 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:00:28 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,14 @@ void						token_add_back(t_token **tokens, t_token *new);
 
 int							tokenizer(t_token **tokens, const char *s,
 								t_context **ctx);
-int 						heredoc_tokenizer(t_token **tks, const char *s,
+int							heredoc_tokenizer(t_token **tks, const char *s,
 								t_context **ctx, t_gc **gc);
 int							handle_syntax_error(t_token *tk, int *i, int len,
 								t_context **ctx);
 int							sub_tokenizer(const char *s, int *i, t_token **tok,
 								t_gc **head);
+
+int							catch_syntax_error(t_token *t, t_context **ctx);
 
 int							get_expand_len(char *word, t_context *ctx);
 int							expand_tilde(char **word, t_gc **head);

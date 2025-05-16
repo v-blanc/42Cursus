@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:15:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:28:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,6 @@ static int	sub_parse_pipeline(t_token **tokens, t_ast **pipe_node, int *i,
 	t_ast	*curr_cmd;
 
 	*tokens = (*tokens)->next;
-	if (*tokens && (*tokens)->type != WORD && !is_redirection((*tokens)->type)
-		&& (*tokens)->type != PAREN_OPEN && (*tokens)->type != PAREN_CLOSE)
-	{
-		print(2, "minishell: syntax error\n");
-		(*ctx)->last_exit_status = 2;
-		return (1);
-	}
 	curr_cmd = parse_primary(tokens, ctx);
 	if (!curr_cmd)
 		return (1);

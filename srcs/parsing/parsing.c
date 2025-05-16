@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:16:13 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:26:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,12 @@ static int	full_tokenize(char *input, t_token **tokens, t_context **ctx)
 		return (1);
 	if (tokenizer(tokens, input, ctx))
 		return (1);
+	if (catch_syntax_error(*tokens, ctx))
+		return (1);
 	if (expander(tokens, *ctx))
 		return (1);
 	if (merge_tokens(tokens, (*ctx)->head))
 		return (1);
-	return (0);
-}
-
-static int	check_void_paren(t_token *tok, t_context **ctx)
-{
-	while (tok)
-	{
-		if (tok->type == PAREN_OPEN && tok->next
-			&& tok->next->type == PAREN_CLOSE)
-		{
-			print(2, "minishell: syntax error\n");
-			(*ctx)->last_exit_status = 2;
-			return (1);
-		}
-		tok = tok->next;
-	}
 	return (0);
 }
 
@@ -103,9 +89,6 @@ int	parsing(char *input, t_ast **ast, t_context **ctx)
 		return (0);
 	tokens_head = NULL;
 	if (full_tokenize(input, &tokens_head, ctx))
-		return (1);
-	tokens = tokens_head;
-	if (check_void_paren(tokens, ctx))
 		return (1);
 	tokens = tokens_head;
 	*ast = parser(&tokens, ctx);

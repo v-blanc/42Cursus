@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/16 16:55:01 by yabokhar         ###   ########.fr        #
+#    Updated: 2025/05/16 16:59:43 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FILES := main.c\
 		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
 		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\
 		parsing/tokenizer/tokenizer.c parsing/tokenizer/tokenizer_utils.c parsing/tokenizer/heredoc_tokenizer.c\
+		parsing/tokenizer/catch_syntax_error.c\
 		parsing/expander/expander.c parsing/expander/expand_one_token.c parsing/expander/merge_tokens.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/parse_pipeline.c\
 		parsing/parser/counters.c parsing/parser/is_redirection.c parsing/parser/parse_paren.c\

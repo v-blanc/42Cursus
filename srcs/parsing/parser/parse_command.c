@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:28 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 15:45:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:27:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ static int	init_parse_command(t_token **tok, t_ast **ast, t_context **ctx)
 	args_count = count_cmd_args(*tok);
 	redir_count = count_cmd_redir(*tok);
 	if (args_count == -1 || redir_count == -1)
-	{
-		print(2, "minishell: syntax error\n");
-		(*ctx)->last_exit_status = 2;
 		return (1);
-	}
 	if (init_cmd_node(ast, args_count, redir_count, (*ctx)->head))
 		return (1);
 	return (0);
@@ -80,11 +76,7 @@ static int	sub_parse_command(t_token **tok, t_ast **ast, int *j,
 	(*ast)->u_data.s_cmd.redirs[*j]->u_data.s_red.fd_source = fd_source;
 	*tok = (*tok)->next;
 	if (!(*tok) || (*tok)->type != WORD)
-	{
-		print(2, "minishell: syntax error\n");
-		(*ctx)->last_exit_status = 2;
 		return (1);
-	}
 	to_expand = ((*tok)->quote == NO_QUOTE);
 	(*ast)->u_data.s_cmd.redirs[*j]->u_data.s_red.to_expand = to_expand;
 	(*ast)->u_data.s_cmd.redirs[(*j)++]->u_data.s_red.target = (*tok)->value;
