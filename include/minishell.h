@@ -127,6 +127,12 @@ void						token_add_back(t_token **tokens, t_token *new);
 
 int							tokenizer(t_token **tokens, const char *s,
 								t_context **ctx);
+int 						heredoc_tokenizer(t_token **tks, const char *s,
+								t_context **ctx, t_gc **gc);
+int							handle_syntax_error(t_token *tk, int *i, int len,
+								t_context **ctx);
+int							sub_tokenizer(const char *s, int *i, t_token **tok,
+								t_gc **head);
 
 int							get_expand_len(char *word, t_context *ctx);
 int							expand_tilde(char **word, t_gc **head);
@@ -209,11 +215,10 @@ void						exec_manager(t_ast *ast, t_context **context);
 int							execute_ast(t_ast *node, t_context *ctx);
 int							execute_command(t_ast *node, t_context *ctx);
 int							handle_pipes(t_ast *pipe_node, t_context *ctx);
-int							handle_heredoc(const char *dlim, const bool hdoc,
+int							handle_heredoc(char *dlim, const bool hdoc,
 								t_context *ctx);
 // bool						is_builtin(char *query);
 // int						execute_builtin(t_ast *command, t_context *ctx);
-void						close_pipes(int (*pipes)[2], int cmds_nb);
 void						refresh(int backup_fds[2]);
 
 /* --------------------- Buildins --------------------- */
@@ -247,7 +252,7 @@ char						*concatenate_(char *line, char *buffer,
 void						shift_(char *buffer);
 bool						string_contains_newline(char *buffer);
 
-int							print(int fd, const char *format, ...);
+void						print(int fd, const char *format, ...);
 
 int							exit_eof(t_context **context);
 

@@ -15,42 +15,35 @@
 
 extern char	**environ;
 
-static void	print_warning_eof(int count, const char *delimiter)
-{
-	print(2, "minishell: warning: here-document at line %d ", count);
-	print(2, "delimited by end-of-file (wanted `%s')\n", delimiter);
-}
+int			handle_heredoc(char *delim, const bool ex, t_context *ctx);
+static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx);
+static bool	delim_reached(char **line, char *delim, int count, t_context *ctx);
+static bool	print_line(int fd, char *line, const bool expand, t_context *ctx);
+static bool	expander_heredoc(int fd, char *line, t_context *ctx);
 
-int	expander_heredoc(int fd, char *line, t_context *ctx)
-{
-	t_token	*tok;
-	int		len_value_expanded;
-
-	tok = NULL;
-	if (tokenizer(&tok, line, &ctx))
-		return (1);
-	while (tok)
-	{
-		len_value_expanded = get_expand_len(tok->value, ctx);
-		if (len_value_expanded < 0)
-			return (1);
-		if (expand_one_token(&tok->value, len_value_expanded, ctx))
-			return (1);
-		print(fd, "%s\n", tok->value);
-		tok = tok->next;
-	}
-	return (0);
-}
-
-int	handle_heredoc(const char *delimiter, const bool expand, t_context *ctx)
+int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 
 {
-	int pipe_fd[2];
-	int count;
-	char *line;
+	int	pipe_fd[2];
 
 	if (pipe(pipe_fd) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
+	if (!read_input(pipe_fd[OUT_FD], delimiter, expand, ctx))
+	{
+		close(pipe_fd[OUT_FD]);
+		close(pipe_fd[IN_FD]);
+		return (-1);
+	}
+	close(pipe_fd[OUT_FD]);
+	return (pipe_fd[IN_FD]);
+}
+
+static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
+
+{
+	char	*line;
+	int		count;
+
 	count = 1;
 	while (true)
 	{
@@ -58,22 +51,82 @@ int	handle_heredoc(const char *delimiter, const bool expand, t_context *ctx)
 		line = get_next_line(STDIN_FILENO, ctx);
 		if (line && line[0] == '\n' && !line[1])
 		{
-			print(pipe_fd[OUT_FD], "\n");
+			write(fd, "\n", 1);
+			gc_free(line, ctx->head);
+			count++;
 			continue ;
 		}
-		if (!line || (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
-				&& line[ft_strlen(delimiter)] == '\n'))
-		{
-			if (!line)
-				print_warning_eof(count, delimiter);
+		if (delim_reached(&line, delim, count, ctx))
 			break ;
-		}
-		if (expand)
-			expander_heredoc(pipe_fd[OUT_FD], line, ctx);
-		else
-			print(pipe_fd[OUT_FD], "%s", line);
+		if (!print_line(fd, line, ex, ctx))
+			return (false);
 		gc_free(line, ctx->head);
 		count++;
 	}
-	return (gc_free(line, ctx->head), close(pipe_fd[OUT_FD]), pipe_fd[IN_FD]);
+	gc_free(line, ctx->head);
+	return (true);
+}
+
+static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
+
+{
+	const size_t	delim_size = ft_strlen(delim);
+
+	if (*line == NULL)
+	{
+		print(2, "minishell: warning: here-document at line %d ", count);
+		print(2, "delimited by end-of-file (wanted `%s')\n", delim);
+		return (true);
+	}
+	if (!ft_strncmp(*line, delim, delim_size) && (*line)[delim_size] == '\n')
+	{
+		gc_free(*line, ctx->head);
+		return (true);
+	}
+	return (false);
+}
+
+static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
+
+{
+	if (expand)
+	{
+		if (!expander_heredoc(fd, line, ctx))
+		{
+			gc_free(line, ctx->head);
+			return (false);
+		}
+	}
+	else
+		print(fd, "%s", line);
+	return (true);
+}
+
+static bool	expander_heredoc(int fd, char *line, t_context *ctx)
+
+{
+	t_token	*tok;
+	t_gc	*temp_head;
+	int		len_expand;
+
+	temp_head = NULL;
+	tok = NULL;
+	if (heredoc_tokenizer(&tok, line, &ctx, &temp_head))
+	{
+		gc_free_all(&temp_head);
+		return (false);
+	}
+	while (tok)
+	{
+		len_expand = get_expand_len(tok->value, ctx);
+		if (len_expand < 0 || expand_one_token(&tok->value, len_expand, ctx))
+		{
+			gc_free_all(&temp_head);
+			return (false);
+		}
+		print(fd, "%s\n", tok->value);
+		tok = tok->next;
+	}
+	gc_free_all(&temp_head);
+	return (true);
 }

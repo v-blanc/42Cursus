@@ -14,9 +14,9 @@
 
 int			handle_pipes(t_ast *pipe_node, t_context *ctx);
 static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb);
-static bool	c_processes(pid_t **pids, t_context *ctx, int cmds_nb);
 static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx);
 static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx);
+static void	close_pipes(int (*pipes)[2], int cmds_nb);
 
 int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 
@@ -26,7 +26,8 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
 	int			i;
 
-	if (!c_pipes(&pipes, ctx, cmds_nb) || !c_processes(&pids, ctx, cmds_nb))
+	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
+	if (!c_pipes(&pipes, ctx, cmds_nb))
 		return (EXIT_FAILURE);
 	i = -1;
 	while (++i < cmds_nb)
@@ -55,13 +56,6 @@ static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 		if (pipe((*pipes)[i]) < 0)
 			return (false);
 	return (true);
-}
-
-static bool	c_processes(pid_t **pids, t_context *ctx, int cmds_nb)
-
-{
-	*pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
-	return (*pids != NULL);
 }
 
 static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
@@ -94,5 +88,19 @@ static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
 		waitpid(pids[i], &status, 0);
 		if (WIFEXITED(status))
 			ctx->last_exit_status = WEXITSTATUS(status);
+	}
+}
+
+static void	close_pipes(int (*pipes)[2], int cmds_nb)
+
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds_nb)
+	{
+		close(pipes[i][IN_FD]);
+		close(pipes[i][OUT_FD]);
+		i++;
 	}
 }

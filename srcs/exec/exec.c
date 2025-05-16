@@ -57,18 +57,6 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	return (status);
 }
 
-void	close_pipes(int (*pipes)[2], int pipes_nb)
-{
-	int	i;
-
-	i = -1;
-	while (++i < pipes_nb)
-	{
-		close(pipes[i][IN_FD]);
-		close(pipes[i][OUT_FD]);
-	}
-}
-
 static int	handle_redirections_type(t_ast *c, t_ast ***redir)
 {
 	if (!c)

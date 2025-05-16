@@ -13,7 +13,7 @@ FILES := main.c\
 		gc_functions/gc_alloc.c gc_functions/gc_free.c gc_functions/gc_setenv.c\
 		gc_functions/gc_strjoin.c gc_functions/gc_strdup.c gc_functions/gc_substr.c\
 		gc_functions/gc_split.c gc_functions/gc_itoa.c gc_functions/gc_strndup.c\
-		parsing/tokenizer/tokenizer.c parsing/tokenizer/tokenizer_utils.c\
+		parsing/tokenizer/tokenizer.c parsing/tokenizer/tokenizer_utils.c parsing/tokenizer/heredoc_tokenizer.c\
 		parsing/expander/expander.c parsing/expander/expand_one_token.c parsing/expander/merge_tokens.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/parse_pipeline.c\
 		parsing/parser/counters.c parsing/parser/is_redirection.c parsing/parser/parse_paren.c\
