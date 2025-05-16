@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:26:06 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:46:24 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,25 @@ char	**get_input(t_context *ctx)
 	}
 	input[1] = NULL;
 	return (input);
+}
+
+bool	is_builtin(char *command)
+{
+	if (!command)
+		return (false);
+	if (!ft_strncmp(command, "cd", 3))
+		return (true);
+	if (!ft_strncmp(command, "echo", 5))
+		return (true);
+	if (!ft_strncmp(command, "env", 4))
+		return (true);
+	if (!ft_strncmp(command, "exit", 5))
+		return (true);
+	if (!ft_strncmp(command, "export", 8))
+		return (true);
+	if (!ft_strncmp(command, "pwd", 4))
+		return (true);
+	if (!ft_strncmp(command, "unset", 6))
+		return (true);
+	return (false);
 }

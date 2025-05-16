@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:49:19 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 20:28:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:47:23 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	print(int fd, const char *format, ...)
 	}
 	va_end(arguments);
 }
+
 static void	print_string(int fd, const char *s)
 {
 	size_t	characters_in_string;

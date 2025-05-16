@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:18:44 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:46:47 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void						print_ast(t_ast *node, int depth);
 /* --------------------- Execution --------------------- */
 
 int							builtins_manager(t_ast *ast, t_context **context);
-int							is_builtin(char *command);
+bool						is_builtin(char *command);
 void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
