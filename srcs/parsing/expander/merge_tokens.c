@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:20 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 16:14:28 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:46:36 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ static int	sub_merge_tokens(t_token **curr, t_token *next, t_gc **head)
 	return (0);
 }
 
-static int	handle_empty_token(t_token **tokens, t_token *prev, t_token *curr)
+static int	handle_empty_token(t_token **tokens, t_token *prev, t_token **curr)
 {
-	if (curr->type == WORD && curr->quote == NO_QUOTE
-		&& ft_strlen(curr->value) == 0)
+	if ((*curr)->type == WORD && (*curr)->quote == NO_QUOTE
+		&& ft_strlen((*curr)->value) == 0)
 	{
 		if (prev)
-			prev->next = curr->next;
+			prev->next = (*curr)->next;
 		else
-			*tokens = curr->next;
+			*tokens = (*curr)->next;
+		(*curr) = (*curr)->next;
 		return (1);
 	}
 	return (0);
@@ -61,11 +62,8 @@ int	merge_tokens(t_token **tokens, t_gc **head)
 	curr = *tokens;
 	while (curr)
 	{
-		if (handle_empty_token(tokens, prev, curr))
-		{
-			curr = curr->next;
+		if (handle_empty_token(tokens, prev, &curr))
 			continue ;
-		}
 		next = curr->next;
 		prev = curr;
 		if (!next)
