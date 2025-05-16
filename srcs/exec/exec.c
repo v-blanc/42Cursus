@@ -6,31 +6,17 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 22:11:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:18:06 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int			execute_ast(t_ast *node, t_context *ctx);
-static int	handle_redirections(t_ast *c, t_context *ctx);
+int			handle_operators(t_ast *node, t_context *ctx);
 static char	*track_paths(char *command, t_gc **head);
 
 extern char	**environ;
-
-int	handle_operators(t_ast *node, t_context *ctx)
-{
-	int	status;
-	int	type;
-
-	type = node->u_data.s_op.op;
-	status = execute_ast(node->u_data.s_op.left, ctx);
-	if (type == AND && status == 0)
-		return (execute_ast(node->u_data.s_op.right, ctx));
-	else if (type == OR && status != 0)
-		return (execute_ast(node->u_data.s_op.right, ctx));
-	return (type == AND);
-}
 
 int	execute_ast(t_ast *node, t_context *ctx)
 {
@@ -57,73 +43,18 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	return (status);
 }
 
-static int	handle_redirections_type(t_ast *c, t_ast ***redir)
+int	handle_operators(t_ast *node, t_context *ctx)
 {
-	if (!c)
-		return (0);
-	if (c->type == NODE_CMD)
-	{
-		*redir = c->u_data.s_cmd.redirs;
-		return (c->u_data.s_cmd.redir_count);
-	}
-	else if (c->type == NODE_PAREN)
-	{
-		*redir = c->u_data.s_par.redirs;
-		return (c->u_data.s_par.redir_count > 0);
-	}
-	return (0);
-}
+	int	status;
+	int	type;
 
-static int	handle_redirections(t_ast *c, t_context *ctx)
-{
-	t_ast	**redirs;
-	int		redirs_count;
-	int		i;
-	int		fd;
-
-	redirs = NULL;
-	redirs_count = handle_redirections_type(c, &redirs);
-	i = -1;
-	while (++i < redirs_count)
-	{
-		if (redirs[i]->u_data.s_red.op == REDIR_OUT)
-			fd = open(redirs[i]->u_data.s_red.target,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redirs[i]->u_data.s_red.op == REDIR_APPEND)
-			fd = open(redirs[i]->u_data.s_red.target,
-					O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redirs[i]->u_data.s_red.op == REDIR_IN)
-			fd = open(redirs[i]->u_data.s_red.target, O_RDONLY);
-		else if (redirs[i]->u_data.s_red.op == REDIR_HEREDOC)
-		{
-			if (ctx->last_node_type == 666)
-				refresh(ctx->backup_fds);
-			fd = handle_heredoc(redirs[i]->u_data.s_red.target,
-					redirs[i]->u_data.s_red.to_expand, ctx);
-			ctx->last_node_type = 666;
-		}
-		if (fd < 0)
-			return (EXIT_FAILURE);
-		if (redirs[i]->u_data.s_red.op == REDIR_OUT
-			|| redirs[i]->u_data.s_red.op == REDIR_APPEND)
-		{
-			if (dup2(fd, STDOUT_FILENO) < 0)
-			{
-				close(fd);
-				return (EXIT_FAILURE);
-			}
-		}
-		else
-		{
-			if (dup2(fd, STDIN_FILENO) < 0)
-			{
-				close(fd);
-				return (EXIT_FAILURE);
-			}
-		}
-		close(fd);
-	}
-	return (0);
+	type = node->u_data.s_op.op;
+	status = execute_ast(node->u_data.s_op.left, ctx);
+	if (type == AND && status == 0)
+		return (execute_ast(node->u_data.s_op.right, ctx));
+	else if (type == OR && status != 0)
+		return (execute_ast(node->u_data.s_op.right, ctx));
+	return (type == AND);
 }
 
 int	execute_command(t_ast *c, t_context *ctx)
