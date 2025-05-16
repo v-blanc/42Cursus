@@ -106,10 +106,12 @@ static bool	expander_heredoc(int fd, char *line, t_context *ctx)
 
 {
 	t_token	*tok;
+	t_gc	*temp_head;
 	int		len_value_expanded;
 
+	temp_head = NULL;
 	tok = NULL;
-	if (tokenizer(&tok, line, &ctx))
+	if (heredoc_tokenizer(&tok, line, &ctx, &temp_head))
 		return (false);
 	while (tok)
 	{
@@ -121,5 +123,6 @@ static bool	expander_heredoc(int fd, char *line, t_context *ctx)
 		print(fd, "%s\n", tok->value);
 		tok = tok->next;
 	}
+	gc_free_all(&temp_head);
 	return (true);
 }

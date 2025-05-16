@@ -127,6 +127,12 @@ void						token_add_back(t_token **tokens, t_token *new);
 
 int							tokenizer(t_token **tokens, const char *s,
 								t_context **ctx);
+int 						heredoc_tokenizer(t_token **tks, const char *s,
+								t_context **ctx, t_gc **gc);
+int							handle_syntax_error(t_token *tk, int *i, int len,
+								t_context **ctx);
+int							sub_tokenizer(const char *s, int *i, t_token **tok,
+								t_gc **head);
 
 int							get_expand_len(char *word, t_context *ctx);
 int							expand_tilde(char **word, t_gc **head);

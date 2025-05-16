@@ -64,7 +64,7 @@ static char	*parse_word(const char *s, int *i, t_gc **head)
 	return (gc_strndup(buf, j, head));
 }
 
-static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
+int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 {
 	char	*val;
 	char	quote_type;

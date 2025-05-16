@@ -80,7 +80,7 @@ static int	handle_error(t_token *tokens, t_context **ctx)
 	return (0);
 }
 
-static int	handle_syntax_error(t_token *tokens, t_context **ctx)
+static int	handle_syntax_error_paren(t_token *tokens, t_context **ctx)
 {
 	if (tokens->next && tokens->next->type == PAREN_CLOSE)
 	{
@@ -99,7 +99,7 @@ t_ast	*parse_primary(t_token **tokens, t_context **ctx)
 		return (NULL);
 	if (*tokens && (*tokens)->type == PAREN_OPEN)
 	{
-		if (handle_syntax_error(*tokens, ctx))
+		if (handle_syntax_error_paren(*tokens, ctx))
 			return (NULL);
 		*tokens = (*tokens)->next;
 		node = parser(tokens, ctx);
