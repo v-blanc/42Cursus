@@ -107,19 +107,23 @@ static bool	expander_heredoc(int fd, char *line, t_context *ctx)
 {
 	t_token	*tok;
 	t_gc	*temp_head;
-	int		len_value_expanded;
+	int		len_expand;
 
 	temp_head = NULL;
 	tok = NULL;
 	if (heredoc_tokenizer(&tok, line, &ctx, &temp_head))
+	{
+		gc_free_all(&temp_head);
 		return (false);
+	}
 	while (tok)
 	{
-		len_value_expanded = get_expand_len(tok->value, ctx);
-		if (len_value_expanded < 0)
+		len_expand = get_expand_len(tok->value, ctx);
+		if (len_expand < 0 || expand_one_token(&tok->value, len_expand, ctx))
+		{
+			gc_free_all(&temp_head);
 			return (false);
-		if (expand_one_token(&tok->value, len_value_expanded, ctx))
-			return (false);
+		}
 		print(fd, "%s\n", tok->value);
 		tok = tok->next;
 	}
