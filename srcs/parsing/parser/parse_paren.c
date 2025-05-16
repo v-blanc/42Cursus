@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 06:58:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:15:35 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 15:28:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_ast	*handle_redir(t_token **tok, t_ast *node, t_context **ctx)
 	int		i;
 	t_ast	**curr_redir;
 
-	if (init_paren_node(node, &paren_node, count_cmd_redir(*tok, ctx),
+	if (init_paren_node(node, &paren_node, count_cmd_redir(*tok),
 			(*ctx)->head))
 		return (NULL);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:28 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 13:28:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 15:45:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	init_parse_command(t_token **tok, t_ast **ast, t_context **ctx)
 	if (!(*ast))
 		return (1);
 	args_count = count_cmd_args(*tok);
-	redir_count = count_cmd_redir(*tok, ctx);
+	redir_count = count_cmd_redir(*tok);
 	if (args_count == -1 || redir_count == -1)
 	{
 		print(2, "minishell: syntax error\n");

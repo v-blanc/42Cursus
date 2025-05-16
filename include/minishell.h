@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:42:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 15:28:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ typedef struct s_ast
 
 int							is_redirection(t_token_type type);
 int							count_cmd_args(t_token *tok);
-int							count_cmd_redir(t_token *tok, t_context **ctx);
+int							count_cmd_redir(t_token *tok);
 int							get_fd_source(t_token_type type);
 
 t_ast						*parse_primary(t_token **tokens, t_context **ctx);

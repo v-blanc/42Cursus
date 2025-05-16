@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:20 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 17:46:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/16 15:24:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,18 @@ static int	sub_merge_tokens(t_token **curr, t_token *next, t_gc **head)
 	return (0);
 }
 
-static void	handle_empty_token(t_token **tokens, t_token *prev, t_token *curr,
-		t_token *next)
+static int	handle_empty_token(t_token **tokens, t_token *prev, t_token *curr)
 {
 	if (curr->type == WORD && curr->quote == NO_QUOTE
 		&& ft_strlen(curr->value) == 0)
 	{
 		if (prev)
-			prev->next = next;
+			prev->next = curr->next;
 		else
-			*tokens = next;
+			*tokens = curr->next;
+		return (1);
 	}
+	return (0);
 }
 
 int	merge_tokens(t_token **tokens, t_gc **head)
@@ -59,8 +60,12 @@ int	merge_tokens(t_token **tokens, t_gc **head)
 	curr = *tokens;
 	while (curr)
 	{
+		if (handle_empty_token(tokens, prev, curr))
+		{
+			curr = curr->next;
+			continue ;
+		}
 		next = curr->next;
-		handle_empty_token(tokens, prev, curr, next);
 		prev = curr;
 		if (!next)
 			break ;
