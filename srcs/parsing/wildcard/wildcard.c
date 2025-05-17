@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:07:21 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/17 20:39:43 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 21:33:54 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,53 @@
 
 static int	is_file_needed(t_token *tok, char *file)
 {
-	(void)tok;
-	(void)file;
+	int	i;
+	int	j;
+	int	len_to_cmp;
+	int	k;
+
+	i = 0;
+	j = 0;
+	while (tok->value[i] && file[j])
+	{
+		printf("> &file[%d]: %s\n", j, &file[j]);
+		printf("> &tok->value[%d]: %s\n", i, &tok->value[i]);
+		if (tok->value[i] == '*')
+		{
+			printf("* found\n");
+			while (tok->value[i] && tok->value[i] == '*')
+				i++;
+			printf("> new &tok->value[%d]: %s\n", i, &tok->value[i]);
+			if (!tok->value[i])
+			{
+				printf("End of tok->value\n");
+				return (1);
+			}
+			// while (file[j] && file[j] != tok->value[i])
+			// 	j++;
+			// printf("> new &file[%d]: %s\n", j, &file[j]);
+			len_to_cmp = 0;
+			k = i;
+			while (tok->value[k] && tok->value[k++] != '*')
+				len_to_cmp++;
+			if (!len_to_cmp)
+				return (1);
+			printf("len_to_cmp: %d\n", len_to_cmp);
+			if (found_last_match(&tok->value[i], &file[j], len_to_cmp))
+			{
+				i += len_to_cmp;
+				j += len_to_cmp;
+			}
+		}
+		else if (tok->value[i] != file[j])
+		{
+			printf("No match\n");
+			return (0);
+		}
+		i++;
+		j++;
+		printf("\n");
+	}
 	return (0);
 }
 
@@ -31,8 +76,10 @@ static int	wildcard_replace(t_token *tok, t_token **wildcard_tok, char **files)
 	i = 0;
 	while (files[i])
 	{
+		printf("---------------------------------\n");
 		if (!is_file_needed(tok, files[i]))
 		{
+			printf("Skipping file: %s\n\n", files[i]);
 			i++;
 			continue ;
 		}
@@ -40,6 +87,7 @@ static int	wildcard_replace(t_token *tok, t_token **wildcard_tok, char **files)
 		if (!tmp)
 			return (1);
 		token_add_back(wildcard_tok, tmp);
+		printf("Adding file: %s\n\n", files[i]);
 		i++;
 	}
 	return (0);
@@ -55,7 +103,7 @@ static int	sub_wildcard(t_token **tok, t_token **curr, t_token **prev,
 	{
 		if (ft_strchr((*curr)->value, '*'))
 		{
-			if (wildcard_replace(*tok, &wildcard_tok, files))
+			if (wildcard_replace(*curr, &wildcard_tok, files))
 				return (1);
 			if (!wildcard_tok)
 				return (0);
