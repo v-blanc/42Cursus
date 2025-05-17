@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:46 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:26:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 19:48:05 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int	full_tokenize(char *input, t_token **tokens, t_context **ctx)
 	if (expander(tokens, *ctx))
 		return (1);
 	if (merge_tokens(tokens, (*ctx)->head))
+		return (1);
+	if (wildcard(tokens, (*ctx)->head))
 		return (1);
 	return (0);
 }

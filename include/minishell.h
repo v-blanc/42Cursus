@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 13:44:50 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 17:12:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /* --------------------- Libraries --------------------- */
 
 # include "../libft/libft.h"
+# include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -261,5 +262,8 @@ void						print(int fd, const char *format, ...);
 void						set_ptr(void *ptr);
 void						*get_ptr(void);
 int							exit_eof(t_context **context);
+
+int							get_wildcard(char ***files, t_gc **head);
+int							wildcard(t_token **tokens, t_gc **head);
 
 #endif
