@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:24:59 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 18:32:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 16:18:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	catch_syntax_error(t_token *t, t_context **ctx)
 			return (1);
 		else if (is_redirection(t->type) && check_redir(t, ctx))
 			return (1);
+		else if (t->type == WORD && t->next && t->next->type == PAREN_OPEN)
+			return (print_syntax_error(t->next->type, ctx));
 		prev = t;
 		t = t->next;
 	}
