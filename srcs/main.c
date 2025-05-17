@@ -14,12 +14,12 @@
 
 void	refresh(int backup_fds[2])
 {
-	dup2(backup_fds[IN_FD], STDIN_FILENO);
-	dup2(backup_fds[OUT_FD], STDOUT_FILENO);
-	close(backup_fds[IN_FD]);
-	close(backup_fds[OUT_FD]);
-	backup_fds[IN_FD] = dup(STDIN_FILENO);
-	backup_fds[OUT_FD] = dup(STDOUT_FILENO);
+	dup2(backup_fds[STDIN_FILENO], STDIN_FILENO);
+	dup2(backup_fds[STDOUT_FILENO], STDOUT_FILENO);
+	close(backup_fds[STDIN_FILENO]);
+	close(backup_fds[STDOUT_FILENO]);
+	backup_fds[STDIN_FILENO] = dup(STDIN_FILENO);
+	backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
 }
 
 static int	set_readline_hook(void)
@@ -124,8 +124,8 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->last_node_type = -1;
 	(*context)->head = head;
 	(*context)->orig_term = (struct termios){0};
-	(*context)->backup_fds[IN_FD] = dup(STDIN_FILENO);
-	(*context)->backup_fds[OUT_FD] = dup(STDOUT_FILENO);
+	(*context)->backup_fds[STDIN_FILENO] = dup(STDIN_FILENO);
+	(*context)->backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
 	(*context)->signal = 0;
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
 	return (0);

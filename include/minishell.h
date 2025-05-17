@@ -37,8 +37,6 @@
 # define QUOTES_MAX 1024
 # define FD_MAX 1024
 # define BUFFER_SIZE 42
-# define IN_FD 0
-# define OUT_FD 1
 
 # define RED "\001\033[1;31m\002"
 # define GREEN "\001\033[1;32m\002"

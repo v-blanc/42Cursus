@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int			repeat(t_ast *ast, t_context **ctx);
+
 int	repeat(t_ast *ast, t_context **ctx)
 
 {

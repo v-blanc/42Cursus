@@ -65,13 +65,13 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 
 	status = 0;
 	if (i > 0)
-		dup2(pipes[i - 1][IN_FD], STDIN_FILENO);
+		dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO);
 	if (i < pn->u_data.s_pipe.cmd_count - 1)
-		dup2(pipes[i][OUT_FD], STDOUT_FILENO);
+		dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO);
 	close_pipes(pipes, pn->u_data.s_pipe.cmd_count - 1);
 	status = execute_ast(pn->u_data.s_pipe.commands[i], ctx);
-	close(ctx->backup_fds[0]);
-	close(ctx->backup_fds[1]);
+	close(ctx->backup_fds[STDIN_FILENO]);
+	close(ctx->backup_fds[STDOUT_FILENO]);
 	gc_free_all_perm(*(ctx->head));
 	exit(status);
 }
@@ -99,8 +99,8 @@ static void	close_pipes(int (*pipes)[2], int cmds_nb)
 	i = 0;
 	while (i < cmds_nb)
 	{
-		close(pipes[i][IN_FD]);
-		close(pipes[i][OUT_FD]);
+		close(pipes[i][STDIN_FILENO]);
+		close(pipes[i][STDOUT_FILENO]);
 		i++;
 	}
 }

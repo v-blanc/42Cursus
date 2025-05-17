@@ -16,6 +16,8 @@ static void	disable_ctrl_backslash_echo(void)
 {
 	struct termios	term;
 
+	if (!isatty(STDIN_FILENO))
+		return ;
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
@@ -32,6 +34,8 @@ static void	sig_handler(int sig)
 
 void	init_sig(struct sigaction sa)
 {
+	if (!isatty(STDIN_FILENO))
+		return ;
 	disable_ctrl_backslash_echo();
 	sa = (struct sigaction){0};
 	sa.sa_flags = 0;

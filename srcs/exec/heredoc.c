@@ -28,14 +28,14 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
-	if (!read_input(pipe_fd[OUT_FD], delimiter, expand, ctx))
+	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
-		close(pipe_fd[OUT_FD]);
-		close(pipe_fd[IN_FD]);
+		close(pipe_fd[STDOUT_FILENO]);
+		close(pipe_fd[STDIN_FILENO]);
 		return (-1);
 	}
-	close(pipe_fd[OUT_FD]);
-	return (pipe_fd[IN_FD]);
+	close(pipe_fd[STDOUT_FILENO]);
+	return (pipe_fd[STDIN_FILENO]);
 }
 
 static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
