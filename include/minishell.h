@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 17:12:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 20:13:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ char						*gc_itoa(int n, t_gc **head);
 char						*gc_strndup(const char *s, size_t n, t_gc **head);
 int							gc_setenv(char *name, char *value, t_gc **head);
 
+/*-----------------------Alias--------------------------*/
+
+typedef struct s_alias
+{
+	char			*key;
+	char			*value;
+	struct s_alias	*next;
+}	t_alias;
+
 /* --------------------- Context --------------------- */
 
 typedef struct s_context
@@ -83,6 +92,7 @@ typedef struct s_context
 	int						last_node_type;
 	struct termios			orig_term;
 	int						backup_fds[2];
+	t_alias					*aliases;
 	t_gc					**head;
 }							t_context;
 
@@ -208,6 +218,8 @@ int							parsing(char *input, t_ast **ast,
 
 void						print_ast(t_ast *node, int depth);
 
+
+
 /* --------------------- Execution --------------------- */
 
 int							builtins_manager(t_ast *ast, t_context **context);
@@ -238,6 +250,9 @@ int							export(int fd, int args_count, char **args,
 int							pwd(int fd);
 int							unset(char **to_unset, t_gc **head);
 int							repeat(t_ast *ast, t_context **ctx);
+int							alias(int argc, char **argv, t_context *ctx);
+void						create_aliases(t_context *ctx);
+void						add_alias(const char *k, const char *v, t_context *x);
 
 /* --------------------- Signals --------------------- */
 

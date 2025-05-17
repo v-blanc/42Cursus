@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 12:34:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 18:38:06 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	set_input(t_context **ctx)
 	rl_event_hook = set_readline_hook;
 	while (true)
 	{
+		create_aliases(*ctx);
 		rl_prompt = set_readline_prompt(*ctx);
 		if (rl_prompt == NULL)
 		{
@@ -127,6 +128,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->backup_fds[STDIN_FILENO] = dup(STDIN_FILENO);
 	(*context)->backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
 	(*context)->signal = 0;
+	(*context)->aliases = NULL;
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
 	return (0);
 }
