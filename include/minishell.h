@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 18:00:28 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:25:42 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,8 +249,9 @@ int							export(int fd, int args_count, char **args,
 int							pwd(int fd);
 int							unset(char **to_unset, t_gc **head);
 int							repeat(t_ast *ast, t_context **ctx);
-int							alias(void);
+int							alias(int argc, char **argv, t_context *ctx);
 void						create_aliases(t_context *ctx);
+void						add_alias(const char *k, const char *v, t_context *x);
 
 /* --------------------- Signals --------------------- */
 

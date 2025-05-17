@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias.c                                            :+:      :+:    :+:   */
+/*   alias_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:37:48 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 18:03:17 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:37:24 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		create_aliases(t_context *ctx);
 static void	get_content(int st_size, int fd, t_context *ctx);
 static void	process_content(char **lines, t_context *ctx);
 static bool	invalid_alias(const char *line);
-static void	add_alias(const char *key, const char *value, t_context *ctx);
 
 void	create_aliases(t_context *ctx)
 
@@ -86,13 +85,20 @@ static void	process_content(char **lines, t_context *ctx)
 	{
 		line = lines[i];
 		if (invalid_alias(line))
+		{
+			i++;
 			continue ;
+		}
 		key = ft_strchr(line, '=');
 		if (!key || key == line)
+		{
+			i++;
 			continue ;
+		}
 		*key = '\0';
 		value = key + 1;
 		add_alias(line, value, ctx);
+		i++;
 	}
 }
 
@@ -114,7 +120,7 @@ static bool	invalid_alias(const char *line)
 	return (true);
 }
 
-static void	add_alias(const char *key, const char *value, t_context *ctx)
+void	add_alias(const char *key, const char *value, t_context *ctx)
 
 {
 	t_alias	*alias;
