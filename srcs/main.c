@@ -37,7 +37,6 @@ void	set_input(t_context **ctx)
 	t_ast	*ast;
 	char	*input;
 	char	*rl_prompt;
-	int		exec_result;
 
 	rl_event_hook = set_readline_hook;
 	while (true)
@@ -73,7 +72,7 @@ void	set_input(t_context **ctx)
 		printf("\n******************************************\n");
 		print_ast(ast, 0);
 		printf("\n******************************************\n\n");
-		exec_result = execute_ast(ast, *ctx);
+		execute_ast(ast, *ctx);
 		if ((*ctx)->signal)
 		{
 			(*ctx)->last_exit_status = (*ctx)->signal;
