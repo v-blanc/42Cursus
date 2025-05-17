@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:25:31 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 23:35:17 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 13:44:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void	sig_handler(int sig)
 	ctx->signal = 130;
 }
 
-void	init_sig(struct sigaction sa)
+void	init_sig(void)
 {
+	struct sigaction	sa;
+
 	if (!isatty(STDIN_FILENO))
 		return ;
 	disable_ctrl_backslash_echo();

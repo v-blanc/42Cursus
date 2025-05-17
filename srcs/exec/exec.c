@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 23:34:10 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 13:44:35 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	execute_command(t_ast *c, t_context *ctx)
 	signal(SIGQUIT, SIG_IGN);
 	if (!pid)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		execve(path, c->u_data.s_cmd.args, environ);
 		print(2, "minishell: %s: %s\n", c->u_data.s_cmd.args[0],
 			strerror(errno));
@@ -111,10 +113,10 @@ int	execute_command(t_ast *c, t_context *ctx)
 	}
 	status = 0;
 	waitpid(pid, &status, 0);
-	init_sig(ctx->sa);
 	if (WIFSIGNALED(status))
 		ctx->last_exit_status = 128 + WTERMSIG(status);
 	else
 		ctx->last_exit_status = WEXITSTATUS(status);
+	init_sig();
 	return (ctx->last_exit_status);
 }

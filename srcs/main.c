@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 23:38:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 12:34:01 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	main(int argc, char **argv)
 		return (1);
 	// TODO: do this cleaner
 	gc_setenv("SHLVL", gc_itoa(ft_atoi(getenv("SHLVL")) + 1, &head), &head);
-	init_sig(context->sa);
+	init_sig();
 	if (init_environ(&head))
 		return (1);
 	set_input(&context);

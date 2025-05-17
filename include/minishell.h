@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 23:38:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/17 13:44:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct s_context
 	int						last_exit_status;
 	int						last_node_type;
 	struct termios			orig_term;
-	struct sigaction		sa;
 	int						backup_fds[2];
 	t_gc					**head;
 }							t_context;
@@ -241,8 +240,7 @@ int							repeat(t_ast *ast, t_context **ctx);
 
 /* --------------------- Signals --------------------- */
 
-void						init_sig(struct sigaction sa);
-void						init_sig_interact(struct sigaction sa);
+void						init_sig(void);
 
 /* --------------------- Utils --------------------- */
 
