@@ -8,3 +8,4 @@ srcs/execution/a.out
 srcs/*.swp
 srcs/*/*.swp
 srcs/*/*/*.swp
+.vscode/launch.json

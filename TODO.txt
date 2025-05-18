@@ -1,5 +1,0 @@
->> Exec: Check for errors and leaks | gdoc 654
-
->> Sig: `cat | cat | cat` then ctrl+c: handle multi sig (global var) and set ctrl+c status to 130 | gdoc 221
-
--------------------------------------------------------------------------------------------
