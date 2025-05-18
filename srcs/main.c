@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:51:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:56:17 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	refresh(int backup_fds[2])
 	backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
 }
 
+static void	exit_main(t_context *ctx)
+{
+	close(ctx->backup_fds[STDIN_FILENO]);
+	close(ctx->backup_fds[STDOUT_FILENO]);
+	gc_free_all_perm(*(ctx->head));
+	exit(1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_gc		*head;
@@ -30,13 +38,13 @@ int	main(int argc, char **argv)
 
 	head = NULL;
 	context = NULL;
-	if (init_context(&context, argc, argv, &head))
-		return (1);
-	if (update_shlvl(&head))
-		return (1);
 	init_sig();
+	if (init_context(&context, argc, argv, &head))
+		exit_main(context);
 	if (init_environ(&head))
-		return (1);
+		exit_main(context);
+	if (update_shlvl(&head))
+		exit_main(context);
 	set_input(&context);
 	return (0);
 }

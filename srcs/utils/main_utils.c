@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:25:07 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 14:54:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:54:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ int	init_environ(t_gc **head)
 		environ = (char **)gc_malloc_array_perm(3, head);
 		if (!environ)
 			return (1);
-		getcwd(env_pwd, PATH_MAX);
+		env_pwd = gc_malloc(PATH_MAX, head);
 		if (!env_pwd)
+			return (1);
+		if (getcwd(env_pwd, PATH_MAX) == NULL)
 		{
-			// TODO: update
 			print(2, "minishell: env error\n");
+			gc_free_all_perm(*head);
 			return (1);
 		}
 		environ[0] = gc_strjoin_perm("PWD=", env_pwd, head);
 		environ[1] = gc_strjoin_perm("SHLVL=0", "", head);
-		// TODO: change to use `which env` ou autre ?
-		environ[2] = gc_strjoin_perm("_=/usr/bin/env", "", head);
+		environ[2] = gc_strjoin_perm("_=/usr/bin", "", head);
 		environ[3] = NULL;
 		if (!environ[0] || !environ[1] || !environ[2])
 			return (1);
