@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:25:31 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 14:32:20 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 19:54:48 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@ static void	disable_ctrl_backslash_echo(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-static void	sig_handler(int sig)
+void	heredoc_sig(int sig)
+
+{
+	t_context	*ctx;
+
+	(void)sig;
+	ctx = get_ptr();
+	write(1, "\n", 1);
+	ctx->signal = 130;
+}
+
+void	sig_handler(int sig)
 {
 	t_context	*ctx;
 
