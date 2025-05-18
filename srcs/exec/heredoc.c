@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:22:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:27:37 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static bool	print_line(int fd, char *line, const bool expand, t_context *ctx);
 static bool	expander_heredoc(int fd, char *line, t_context *ctx);
 
 int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
-
 {
-	int pipe_fd[2];
+	int	pipe_fd[2];
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
@@ -38,10 +37,9 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 }
 
 static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
-
 {
-	char *line;
-	int count;
+	char	*line;
+	int		count;
 
 	count = 1;
 	while (true)
@@ -67,9 +65,8 @@ static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
 }
 
 static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
-
 {
-	const size_t delim_size = ft_strlen(delim);
+	const size_t	delim_size = ft_strlen(delim);
 
 	if (*line == NULL)
 	{
@@ -88,7 +85,6 @@ static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
 }
 
 static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
-
 {
 	if (expand)
 	{
@@ -104,11 +100,10 @@ static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
 }
 
 static bool	expander_heredoc(int fd, char *line, t_context *ctx)
-
 {
-	t_token *tok;
-	t_gc *temp_head;
-	int len_expand;
+	t_token	*tok;
+	t_gc	*temp_head;
+	int		len_expand;
 
 	temp_head = NULL;
 	tok = NULL;

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:22:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:31:15 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ static void	which_error(char *file);
 static int	close_then_return_exit_failure(int fd);
 
 int	handle_redirections(t_ast *c, t_context *ctx)
-
 {
-	t_ast **redirs;
-	int redirs_count;
-	int i;
-	int fd;
+	t_ast	**redirs;
+	int		redirs_count;
+	int		i;
+	int		fd;
 
 	redirs = NULL;
 	redirs_count = get_redirections_type(c, &redirs);
@@ -48,7 +47,6 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 }
 
 static int	get_redirections_type(t_ast *c, t_ast ***redir)
-
 {
 	if (!c)
 		return (0);
@@ -66,9 +64,8 @@ static int	get_redirections_type(t_ast *c, t_ast ***redir)
 }
 
 static int	get_target(t_ast **redirs, t_context *ctx, int i)
-
 {
-	int fd;
+	int	fd;
 
 	fd = 0;
 	if (redirs[i]->u_data.s_red.op == REDIR_OUT)
@@ -93,9 +90,8 @@ static int	get_target(t_ast **redirs, t_context *ctx, int i)
 }
 
 static void	which_error(char *file)
-
 {
-	struct stat sh;
+	struct stat	sh;
 
 	if (!stat(file, &sh))
 	{
@@ -112,7 +108,6 @@ static void	which_error(char *file)
 }
 
 static int	close_then_return_exit_failure(int fd)
-
 {
 	close(fd);
 	return (EXIT_FAILURE);

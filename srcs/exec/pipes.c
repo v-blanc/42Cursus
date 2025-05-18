@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:09:10 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:22:37 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:31:04 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx);
 static void	close_pipes(int (*pipes)[2], int cmds_nb);
 
 int	handle_pipes(t_ast *pipe_node, t_context *ctx)
-
 {
-	int(*pipes)[2];
-	pid_t *pids;
-	const int cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
-	int i;
+	pid_t		*pids;
+	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
+	int			i;
+	int			(*pipes)[2];
 
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	if (!c_pipes(&pipes, ctx, cmds_nb))
@@ -44,11 +43,10 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 }
 
 static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
-
 {
-	int i;
+	int	i;
 
-	*pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
+	*pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
 	if (!*pipes)
 		return (false);
 	i = -1;
@@ -59,9 +57,8 @@ static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 }
 
 static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
-
 {
-	int status;
+	int	status;
 
 	status = 0;
 	if (i > 0)
@@ -77,10 +74,9 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 }
 
 static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
-
 {
-	int i;
-	int status;
+	int	i;
+	int	status;
 
 	i = -1;
 	while (++i < cmds_nb)
@@ -92,9 +88,8 @@ static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
 }
 
 static void	close_pipes(int (*pipes)[2], int cmds_nb)
-
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < cmds_nb)
