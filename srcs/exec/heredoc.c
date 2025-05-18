@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 19:55:49 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 23:31:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
+	init_sig_heredoc();
+	ctx->is_in_heredoc = 1;
 	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
+		ctx->is_in_heredoc = 0;
 		close(pipe_fd[STDOUT_FILENO]);
 		close(pipe_fd[STDIN_FILENO]);
 		return (-1);
 	}
+	ctx->is_in_heredoc = 0;
 	close(pipe_fd[STDOUT_FILENO]);
 	return (pipe_fd[STDIN_FILENO]);
 }
@@ -45,30 +49,38 @@ static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
 	count = 1;
 	while (true)
 	{
-		write(3, "> ", 2);
-		line = get_next_line(STDIN_FILENO, ctx);
+		if (ctx->signal == 130)
+			break ;
+		line = readline("> ");
 		if (line && line[0] == '\n' && !line[1])
 		{
+			free(line);
 			write(fd, "\n", 1);
-			gc_free(line, ctx->head);
 			count++;
 			continue ;
 		}
 		if (delim_reached(&line, delim, count, ctx))
-			break ;
+		{
+			free(line);
+			return (true);
+		}
 		if (!print_line(fd, line, ex, ctx))
+		{
+			free(line);
 			return (false);
-		gc_free(line, ctx->head);
+		}
+		free(line);
 		count++;
 	}
-	gc_free(line, ctx->head);
 	return (true);
 }
 
 static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
 {
 	const size_t	delim_size = ft_strlen(delim);
+	const size_t	line_size = ft_strlen(*line);
 
+	(void)ctx;
 	if (*line == NULL)
 	{
 		if (errno == EINTR)
@@ -77,12 +89,7 @@ static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
 		print(2, "delimited by end-of-file (wanted `%s')\n", delim);
 		return (true);
 	}
-	if (!ft_strncmp(*line, delim, delim_size) && (*line)[delim_size] == '\n')
-	{
-		gc_free(*line, ctx->head);
-		return (true);
-	}
-	return (false);
+	return (!ft_strcmp(*line, delim) && line_size == delim_size);
 }
 
 static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
@@ -90,10 +97,7 @@ static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
 	if (expand)
 	{
 		if (!expander_heredoc(fd, line, ctx))
-		{
-			gc_free(line, ctx->head);
 			return (false);
-		}
 	}
 	else
 		print(fd, "%s", line);

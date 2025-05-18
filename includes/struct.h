@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 13:24:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 13:30:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 21:30:39 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_context
 	int						last_node_type;
 	struct termios			orig_term;
 	int						backup_fds[2];
-	t_alias					*aliases;
+	int						is_in_heredoc;
 	t_gc					**head;
 }							t_context;
 

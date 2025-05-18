@@ -6,13 +6,13 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 19:34:37 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:35:55 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "set_input.h"
 
-static int	set_readline_hook(void)
+int	set_readline_hook(void)
 {
 	t_context	*ctx;
 
@@ -36,6 +36,7 @@ static int	get_user_input(char **input, t_context **ctx)
 	rl_done = 0;
 	if ((*ctx)->signal)
 	{
+		free(*input);
 		(*ctx)->last_exit_status = (*ctx)->signal;
 		(*ctx)->signal = 0;
 		return (1);
@@ -67,6 +68,7 @@ void	set_input(t_context **ctx)
 	input = NULL;
 	while (true)
 	{
+		init_sig();
 		if (get_user_input(&input, ctx))
 			continue ;
 		ast = NULL;

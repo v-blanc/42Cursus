@@ -1,6 +1,7 @@
 {
    ignore_readline
    Memcheck:Leak
+   match-leak-kinds: reachable
    ...
    fun:readline
    ...

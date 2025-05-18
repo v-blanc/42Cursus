@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 13:50:02 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 16:38:38 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:28:01 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+
+int		set_readline_hook(void);
 
 int		builtins_manager(t_ast *ast, t_context **context);
 bool	is_builtin(char *command);

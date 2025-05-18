@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:09:10 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 16:31:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 22:42:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
 	int	i;
 	int	status;
 
+	status = 0;
 	i = -1;
 	while (++i < cmds_nb)
 	{

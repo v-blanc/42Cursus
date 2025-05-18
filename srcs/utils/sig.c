@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:25:31 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 19:54:48 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:53:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,7 @@ static void	disable_ctrl_backslash_echo(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-void	heredoc_sig(int sig)
-
-{
-	t_context	*ctx;
-
-	(void)sig;
-	ctx = get_ptr();
-	write(1, "\n", 1);
-	ctx->signal = 130;
-}
-
-void	sig_handler(int sig)
+static void	sig_handler(int sig)
 {
 	t_context	*ctx;
 
@@ -53,6 +42,32 @@ void	init_sig(void)
 	sa = (struct sigaction){0};
 	sa.sa_flags = 0;
 	sa.sa_handler = sig_handler;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+static void	sig_handler_heredoc(int sig)
+{
+	t_context	*ctx;
+
+	(void)sig;
+	ctx = get_ptr();
+	ctx->signal = 130;
+	if (ctx->is_in_heredoc)
+		ctx->is_in_heredoc = 0;
+}
+
+void	init_sig_heredoc(void)
+{
+	struct sigaction sa;
+
+	if (!isatty(STDIN_FILENO))
+		return ;
+	disable_ctrl_backslash_echo();
+	sa = (struct sigaction){0};
+	sa.sa_flags = 0;
+	sa.sa_handler = sig_handler_heredoc;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
