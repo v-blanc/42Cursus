@@ -5,3 +5,6 @@ libft/objs
 libft/libft.a
 srcs/a.out
 srcs/execution/a.out
+srcs/*.swp
+srcs/*/*.swp
+srcs/*/*/*.swp
