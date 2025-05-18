@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 14:49:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:28:36 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,54 @@ static int	set_readline_hook(void)
 	return (!rl_done);
 }
 
+static int	get_user_input(char **input, t_context **ctx)
+{
+	char	*rl_prompt;
+
+	rl_prompt = set_readline_prompt(*ctx);
+	if (rl_prompt == NULL)
+	{
+		gc_free_all((*ctx)->head);
+		return (1);
+	}
+	(*input) = readline(rl_prompt);
+	rl_done = 0;
+	if ((*ctx)->signal)
+	{
+		(*ctx)->last_exit_status = (*ctx)->signal;
+		(*ctx)->signal = 0;
+		return (1);
+	}
+	if (!is_valid_rl_input(*input, ctx))
+	{
+		free(*input);
+		return (1);
+	}
+	add_history(*input);
+	return (0);
+}
+
+static void	handle_signal(t_context **ctx)
+{
+	if ((*ctx)->signal)
+	{
+		(*ctx)->last_exit_status = (*ctx)->signal;
+		(*ctx)->signal = 0;
+	}
+}
+
 void	set_input(t_context **ctx)
 {
 	t_ast	*ast;
 	char	*input;
-	char	*rl_prompt;
 
 	rl_event_hook = set_readline_hook;
+	input = NULL;
 	while (true)
 	{
 		create_aliases(*ctx);
-		rl_prompt = set_readline_prompt(*ctx);
-		if (rl_prompt == NULL)
-		{
-			gc_free_all((*ctx)->head);
+		if (get_user_input(&input, ctx))
 			continue ;
-		}
-		input = readline(rl_prompt);
-		rl_done = 0;
-		if ((*ctx)->signal)
-		{
-			(*ctx)->last_exit_status = (*ctx)->signal;
-			(*ctx)->signal = 0;
-			continue ;
-		}
-		if (!is_valid_rl_input(input, ctx))
-		{
-			free(input);
-			continue ;
-		}
-		add_history(input);
 		ast = NULL;
 		if (parsing(input, &ast, ctx))
 		{
@@ -60,15 +78,11 @@ void	set_input(t_context **ctx)
 			continue ;
 		}
 		free(input);
-		printf("\n******************************************\n");
-		print_ast(ast, 0);
-		printf("\n******************************************\n\n");
+		// printf("\n******************************************\n");
+		// print_ast(ast, 0);
+		// printf("\n******************************************\n\n");
 		execute_ast(ast, *ctx);
-		if ((*ctx)->signal)
-		{
-			(*ctx)->last_exit_status = (*ctx)->signal;
-			(*ctx)->signal = 0;
-		}
+		handle_signal(ctx);
 		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);
 	}
