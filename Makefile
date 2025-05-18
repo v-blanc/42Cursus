@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/18 12:39:00 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/18 12:43:27 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,8 +72,8 @@ FILES := main.c\
 		\
 		utils/main_utils.c\
 		utils/print.c\
-		utils/get_next_line.c utils/get_next_line_utils.c\
-		utils/set_input.c utils/set_input_utils.c\
+		utils/gnl/get_next_line.c utils/gnl/get_next_line_utils.c\
+		utils/set_input/set_input.c utils/set_input/set_input_utils.c\
 		utils/pointer.c\
 		utils/exit_eof.c
 
