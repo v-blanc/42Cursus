@@ -6,18 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 13:42:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 19:02:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-static int	is_valid_var_char(char c, int pos)
-{
-	if (pos == 0)
-		return (ft_isalpha(c) || c == '_');
-	return (ft_isalnum(c) || c == '_');
-}
 
 static int	sub_get_expand_len(char *word, int *i, int *len, t_context *ctx)
 {

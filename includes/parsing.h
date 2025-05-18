@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 13:08:12 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 17:29:56 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 19:03:47 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				catch_syntax_error(t_token *t, t_context **ctx);
 
 // expander
 
+int				is_valid_var_char(char c, int pos);
 int				get_expand_len(char *word, t_context *ctx);
 int				expand_tilde(char **word, t_gc **head);
 int				expand_one_token(char **w, int len_w, t_context *ctx);

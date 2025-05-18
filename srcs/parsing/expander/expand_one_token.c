@@ -6,18 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 14:55:13 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 19:06:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-static int	is_valid_var_char(char c, int pos)
-{
-	if (pos == 0)
-		return (ft_isalpha(c) || c == '_' || c == '*');
-	return (ft_isalnum(c) || c == '_' || c == '*');
-}
 
 static int	special_case(const char *word, char *result, int *ind,
 		t_context *context)
@@ -95,6 +88,14 @@ static void	positional_var(const char *word, t_context *context, char *result,
 	return ;
 }
 
+static int	handle_end(char **w, char *result, int *ind)
+{
+	if (!result[ind[1]] || !(*w)[ind[0]])
+		return (1);
+	result[ind[1]++] = (*w)[ind[0]++];
+	return (0);
+}
+
 int	expand_one_token(char **w, int len_w, t_context *ctx)
 {
 	char	*result;
@@ -116,8 +117,8 @@ int	expand_one_token(char **w, int len_w, t_context *ctx)
 			else if (sub_expand_one_var((*w), result, ind, ctx))
 				return (1);
 		}
-		else
-			result[ind[1]++] = (*w)[ind[0]++];
+		else if (handle_end(w, result, ind))
+			return (0);
 	}
 	gc_free(w, ctx->head);
 	(*w) = result;
