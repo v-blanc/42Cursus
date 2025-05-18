@@ -6,14 +6,14 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 20:13:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:17:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-/* --------------------- Libraries --------------------- */
+/* --------------------------- Libraries --------------------------- */
 
 # include "../libft/libft.h"
 # include <dirent.h>
@@ -32,10 +32,9 @@
 # include <termios.h>
 # include <unistd.h>
 
-/* --------------------- Variables --------------------- */
+/* --------------------------- Variables --------------------------- */
 
 # define PATH_MAX 4096
-# define QUOTES_MAX 1024
 # define FD_MAX 1024
 # define BUFFER_SIZE 42
 
@@ -44,7 +43,7 @@
 # define BLUE "\001\033[1;34m\002"
 # define RESET "\001\033[0m\002"
 
-/* --------------------- Garbage Collector --------------------- */
+/* --------------------------- Garbage Collector --------------------------- */
 
 typedef struct s_gc
 {
@@ -72,16 +71,16 @@ char						*gc_itoa(int n, t_gc **head);
 char						*gc_strndup(const char *s, size_t n, t_gc **head);
 int							gc_setenv(char *name, char *value, t_gc **head);
 
-/*-----------------------Alias--------------------------*/
+/* --------------------------- Alias --------------------------- */
 
 typedef struct s_alias
 {
-	char			*key;
-	char			*value;
-	struct s_alias	*next;
-}	t_alias;
+	char					*key;
+	char					*value;
+	struct s_alias			*next;
+}							t_alias;
 
-/* --------------------- Context --------------------- */
+/* --------------------------- Context --------------------------- */
 
 typedef struct s_context
 {
@@ -129,11 +128,15 @@ typedef struct s_token
 	struct s_token			*next;
 }							t_token;
 
+// tokens_utils
+
 int							is_operator_char(char c);
 t_token_type				get_op_type(const char *s, int *len);
 t_token						*new_token(t_token_type type, char quote_type,
 								const char *value, t_gc **head);
 void						token_add_back(t_token **tokens, t_token *new);
+
+// tokenizer
 
 int							tokenizer(t_token **tokens, const char *s,
 								t_context **ctx);
@@ -143,8 +146,9 @@ int							handle_syntax_error(t_token *tk, int *i, int len,
 								t_context **ctx);
 int							sub_tokenizer(const char *s, int *i, t_token **tok,
 								t_gc **head);
-
 int							catch_syntax_error(t_token *t, t_context **ctx);
+
+// expander
 
 int							get_expand_len(char *word, t_context *ctx);
 int							expand_tilde(char **word, t_gc **head);
@@ -152,6 +156,12 @@ int							expand_one_token(char **w, int len_w,
 								t_context *ctx);
 int							expander(t_token **tokens, t_context *ctx);
 int							merge_tokens(t_token **tokens, t_gc **head);
+
+// wildcard
+
+bool						is_file_needed(t_token *tok, char *file);
+int							get_wildcard(char ***files, t_gc **head);
+int							wildcard(t_token **tokens, t_gc **head);
 
 /* --------------------------- AST --------------------------- */
 
@@ -203,28 +213,30 @@ typedef struct s_ast
 	} u_data;
 }							t_ast;
 
+// parser_utils
+
 int							is_redirection(t_token_type type);
 int							count_cmd_args(t_token *tok);
 int							count_cmd_redir(t_token *tok);
 int							get_fd_source(t_token_type type);
+
+// parser
 
 t_ast						*parse_primary(t_token **tokens, t_context **ctx);
 t_ast						*parse_pipeline(t_token **tokens, t_context **ctx);
 t_ast						*parse_command(t_token **tok, t_context **ctx);
 t_ast						*parser(t_token **tokens, t_context **ctx);
 
+// main parsing
 int							parsing(char *input, t_ast **ast,
 								t_context **context);
 
 void						print_ast(t_ast *node, int depth);
 
-
-
-/* --------------------- Execution --------------------- */
+/* --------------------------- Execution --------------------------- */
 
 int							builtins_manager(t_ast *ast, t_context **context);
 bool						is_builtin(char *command);
-void						exec_manager(t_ast *ast, t_context **context);
 
 int							execute_ast(t_ast *node, t_context *ctx);
 int							execute_command(t_ast *node, t_context *ctx);
@@ -233,11 +245,11 @@ int							handle_pipes(t_ast *pipe_node, t_context *ctx);
 int							handle_redirections(t_ast *c, t_context *ctx);
 int							handle_heredoc(char *dlim, const bool hdoc,
 								t_context *ctx);
-// bool						is_builtin(char *query);
-// int						execute_builtin(t_ast *command, t_context *ctx);
 void						refresh(int backup_fds[2]);
 
-/* --------------------- Buildins --------------------- */
+/* --------------------------- Buildins --------------------------- */
+
+// Mandatory
 
 int							cd(int fd, int args_count, char **args,
 								t_gc **head);
@@ -249,16 +261,20 @@ int							export(int fd, int args_count, char **args,
 								t_gc **head);
 int							pwd(int fd);
 int							unset(char **to_unset, t_gc **head);
+
+// Bonus
+
 int							repeat(t_ast *ast, t_context **ctx);
 int							alias(int argc, char **argv, t_context *ctx);
 void						create_aliases(t_context *ctx);
-void						add_alias(const char *k, const char *v, t_context *x);
+void						add_alias(const char *k, const char *v,
+								t_context *x);
 
-/* --------------------- Signals --------------------- */
+/* --------------------------- Signals --------------------------- */
 
 void						init_sig(void);
 
-/* --------------------- Utils --------------------- */
+/* --------------------------- Utils --------------------------- */
 
 char						*set_readline_prompt(t_context *ctx);
 int							is_valid_rl_input(char *input, t_context **ctx);
@@ -276,9 +292,7 @@ void						print(int fd, const char *format, ...);
 
 void						set_ptr(void *ptr);
 void						*get_ptr(void);
-int							exit_eof(t_context **context);
 
-int							get_wildcard(char ***files, t_gc **head);
-int							wildcard(t_token **tokens, t_gc **head);
+int							exit_eof(t_context **context);
 
 #endif

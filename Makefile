@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/17 20:13:50 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/18 12:09:18 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ FILES := main.c\
 		parsing/expander/expander.c parsing/expander/expand_one_token.c parsing/expander/merge_tokens.c\
 		parsing/parser/parser.c parsing/parser/parse_command.c parsing/parser/parse_pipeline.c\
 		parsing/parser/counters.c parsing/parser/is_redirection.c parsing/parser/parse_paren.c\
-		parsing/wildcard/wildcard.c parsing/wildcard/get_wildcard.c\
+		parsing/wildcard/wildcard.c parsing/wildcard/get_wildcard.c parsing/wildcard/is_file_needed.c\
 		parsing/parser/print_ast.c\
 		parsing/parsing.c\
 		exec/exec.c exec/track_paths.c exec/heredoc.c exec/exec_manager.c exec/pipes.c exec/redirections.c\
