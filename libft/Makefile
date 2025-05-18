@@ -6,13 +6,14 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/12 00:52:17 by vblanc            #+#    #+#              #
-#    Updated: 2025/04/14 20:47:44 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/18 16:24:58 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -MMD -MP
 
+INCDIR := libft.h
 OBJDIR := ./objs
 
 SRCS := ft_abs.c ft_atoi.c ft_bzero.c ft_calloc.c ft_intlen.c ft_isalnum.c ft_isalpha.c\
@@ -23,15 +24,16 @@ SRCS := ft_abs.c ft_atoi.c ft_bzero.c ft_calloc.c ft_intlen.c ft_isalnum.c ft_is
 	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strtrim.c\
 	ft_substr.c ft_tolower.c ft_toupper.c ft_strcmp.c ft_strlen_array.c
 OBJS := $(patsubst %.c,$(OBJDIR)/%.o, $(SRCS))
+DEPS := $(addprefix $(OBJDIR)/, $(FILES:.c=.d))
 
 BONUS := ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
 		ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 OBJSB := $(patsubst %.c,$(OBJDIR)/%.o,$(BONUS))
 
-
 NAME := libft.a
 RM := rm -rf
+
 
 all: $(NAME)
 
@@ -43,7 +45,7 @@ bonus: $(OBJSB)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -include $(INCDIR) -c $< -o $@
 
 clean:
 	$(RM) $(OBJDIR)
@@ -52,5 +54,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re bonus

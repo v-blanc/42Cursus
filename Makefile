@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/18 16:03:42 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/18 16:24:50 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,10 +83,10 @@ SRCS := $(addprefix $(SRCDIR)/, $(FILES))
 OBJS := $(addprefix $(OBJDIR)/, $(FILES:.c=.o))
 DEPS := $(addprefix $(OBJDIR)/, $(FILES:.c=.d))
 
-
 LIBFT := libft/libft.a
 
-all: $(NAME)
+
+all: libft $(NAME)
 
 bonus: $(NAME_BONUS)
 
