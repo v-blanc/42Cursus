@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 15:28:36 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 19:34:37 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	set_input(t_context **ctx)
 	input = NULL;
 	while (true)
 	{
-		create_aliases(*ctx);
 		if (get_user_input(&input, ctx))
 			continue ;
 		ast = NULL;
