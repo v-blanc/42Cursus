@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/18 14:59:14 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/18 16:03:42 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC := cc
 CFLAGS := -Wall -Werror -Wextra -MMD -MP -g
 
 NAME := minishell
+NAME_BONUS := minishell_bonus
 RM := rm -rf
 
 INCDIR := includes
@@ -87,12 +88,18 @@ LIBFT := libft/libft.a
 
 all: $(NAME)
 
+bonus: $(NAME_BONUS)
+
 libft:
 	@make -C libft
 
 $(NAME): $(OBJS)
 	@make -C libft
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
+
+$(NAME_BONUS): $(OBJS)
+	@make -C libft
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME_BONUS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
