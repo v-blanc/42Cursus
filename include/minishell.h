@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:41:01 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 12:17:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:29:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,22 +276,40 @@ void						init_sig(void);
 
 /* --------------------------- Utils --------------------------- */
 
+// main_utils
+
+int							init_environ(t_gc **head);
+int							init_context(t_context **context, int argc,
+								char **argv, t_gc **head);
+int							update_shlvl(t_gc **head);
+
+// set_input
+
 char						*set_readline_prompt(t_context *ctx);
 int							is_valid_rl_input(char *input, t_context **ctx);
 char						**get_input(t_context *ctx);
+void						set_input(t_context **ctx);
 
-char						*get_next_line(int fd, t_context *ctx);
+// get_next_line
+
 size_t						string_length(const char *s);
 char						*duplicate_(char *buffer, t_context *ctx);
 char						*concatenate_(char *line, char *buffer,
 								t_context *ctx);
 void						shift_(char *buffer);
 bool						string_contains_newline(char *buffer);
+char						*get_next_line(int fd, t_context *ctx);
+
+// print
 
 void						print(int fd, const char *format, ...);
 
+// pointer
+
 void						set_ptr(void *ptr);
 void						*get_ptr(void);
+
+// exit
 
 int							exit_eof(t_context **context);
 
