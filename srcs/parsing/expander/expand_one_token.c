@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 19:06:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 20:37:31 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ static int	sub_expand_one_var(const char *word, char *result, int *ind,
 	if (word[ind[0]] && (word[ind[0]] == '$' || word[ind[0]] == '?'))
 		return (special_case(word, result, ind, context));
 	len = 0;
+	if (!is_valid_var_char(word[ind[0]], len))
+	{
+		ind[0]++;
+		return (0);
+	}
 	while (is_valid_var_char(word[ind[0]], len))
 	{
 		ind[0]++;
@@ -88,14 +93,6 @@ static void	positional_var(const char *word, t_context *context, char *result,
 	return ;
 }
 
-static int	handle_end(char **w, char *result, int *ind)
-{
-	if (!result[ind[1]] || !(*w)[ind[0]])
-		return (1);
-	result[ind[1]++] = (*w)[ind[0]++];
-	return (0);
-}
-
 int	expand_one_token(char **w, int len_w, t_context *ctx)
 {
 	char	*result;
@@ -108,17 +105,15 @@ int	expand_one_token(char **w, int len_w, t_context *ctx)
 	ind[1] = 0;
 	while ((*w)[ind[0]])
 	{
-		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1] && (ft_isalnum((*w)[ind[0]
-					+ 1]) || (*w)[ind[0] + 1] == '?' || (*w)[ind[0]
-				+ 1] == '$'))
+		if ((*w)[ind[0]] == '$' && (*w)[ind[0] + 1])
 		{
 			if (ft_isdigit((*w)[ind[0] + 1]))
 				positional_var((*w), ctx, result, ind);
 			else if (sub_expand_one_var((*w), result, ind, ctx))
 				return (1);
 		}
-		else if (handle_end(w, result, ind))
-			return (0);
+		else
+			result[ind[1]++] = (*w)[ind[0]++];
 	}
 	gc_free(w, ctx->head);
 	(*w) = result;
