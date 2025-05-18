@@ -3,14 +3,15 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/includes"
             ],
             "defines": [
-                "_POSIX_C_SOURCE=200809L"
+                "_POSIX_C_SOURCE=200809L",
+                "DT_UNKNOWN",
+                "ECHOCTL"
             ],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/cc",
             "cStandard": "c17",
-            "cppStandard": "c++14",
             "intelliSenseMode": "linux-clang-x64"
         }
     ],
