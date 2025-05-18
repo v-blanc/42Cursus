@@ -6,13 +6,13 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:47:14 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:55:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 17:10:55 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	heredoc_tokenizer(t_token **tks, const char *s, t_context **ctx, t_gc **gc)
+int	heredoc_tokenizer(t_token **tks, const char *s, t_gc **gc)
 {
 	t_token	*tok;
 	int		i;
@@ -29,7 +29,7 @@ int	heredoc_tokenizer(t_token **tks, const char *s, t_context **ctx, t_gc **gc)
 		if (is_operator_char(s[i]))
 		{
 			tok = new_token(get_op_type(&s[i], &len), 0, NULL, gc);
-			if (handle_syntax_error(tok, &i, len, ctx))
+			if (handle_error(tok, &i, len))
 				return (1);
 		}
 		else if (sub_tokenizer(s, &i, &tok, gc))

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 16:27:37 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 17:11:05 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static bool	expander_heredoc(int fd, char *line, t_context *ctx)
 
 	temp_head = NULL;
 	tok = NULL;
-	if (heredoc_tokenizer(&tok, line, &ctx, &temp_head))
+	if (heredoc_tokenizer(&tok, line, &temp_head))
 	{
 		gc_free_all(&temp_head);
 		return (false);

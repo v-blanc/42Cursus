@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:43 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 13:42:20 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 17:15:12 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,10 @@ int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	return (0);
 }
 
-int	handle_syntax_error(t_token *tok, int *i, int len, t_context **ctx)
+int	handle_error(t_token *tok, int *i, int len)
 {
-	if (tok->type == END)
-	{
-		print(2, "minishell: syntax error\n");
-		(*ctx)->last_exit_status = 2;
+	if (!tok)
 		return (1);
-	}
 	(*i) += len;
 	return (0);
 }
@@ -116,7 +112,7 @@ int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
 		if (is_operator_char(s[i]))
 		{
 			tok = new_token(get_op_type(&s[i], &len), 0, NULL, (*ctx)->head);
-			if (handle_syntax_error(tok, &i, len, ctx))
+			if (handle_error(tok, &i, len))
 				return (1);
 		}
 		else if (sub_tokenizer(s, &i, &tok, (*ctx)->head))
