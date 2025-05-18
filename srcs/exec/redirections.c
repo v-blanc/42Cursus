@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 23:26:55 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 00:27:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static int	get_target(t_ast **redirs, t_context *ctx, int i)
 		fd = open(redirs[i]->u_data.s_red.target, O_RDONLY);
 	else if (redirs[i]->u_data.s_red.op == REDIR_HEREDOC)
 	{
-		if (ctx->last_node_type == REDIR_HEREDOC)
-			refresh(ctx->backup_fds);
+		// if (ctx->last_node_type == REDIR_HEREDOC)
+		refresh(ctx->backup_fds);
 		fd = handle_heredoc(redirs[i]->u_data.s_red.target,
 				redirs[i]->u_data.s_red.to_expand, ctx);
 		ctx->last_node_type = REDIR_HEREDOC;
