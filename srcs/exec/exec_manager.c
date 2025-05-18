@@ -6,11 +6,50 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 16:27:03 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:38:48 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+int	execute_ast(t_ast *node, t_context *ctx)
+{
+	int	status;
+
+	status = 0;
+	if (!node)
+		return (0);
+	if (node->type == NODE_PAREN)
+	{
+		if (handle_redirections(node, ctx))
+			return (-1);
+		status = execute_ast(node->u_data.s_par.content, ctx);
+	}
+	else if (node->type == NODE_BINARY_OP)
+		status = handle_operators(node, ctx);
+	else if (node->type == NODE_PIPE)
+		status = handle_pipes(node, ctx);
+	else if (node->type == NODE_REDIR)
+		status = handle_redirections(node, ctx);
+	else if (node->type == NODE_CMD)
+		status = execute_command(node, ctx);
+	ctx->last_exit_status = status;
+	return (status);
+}
+
+int	handle_operators(t_ast *node, t_context *ctx)
+{
+	int	status;
+	int	type;
+
+	type = node->u_data.s_op.op;
+	status = execute_ast(node->u_data.s_op.left, ctx);
+	if (type == AND && status == 0)
+		return (execute_ast(node->u_data.s_op.right, ctx));
+	else if (type == OR && status != 0)
+		return (execute_ast(node->u_data.s_op.right, ctx));
+	return (type == AND);
+}
 
 int	builtins_manager(t_ast *ast, t_context **context)
 {
@@ -36,32 +75,6 @@ int	builtins_manager(t_ast *ast, t_context **context)
 	if (!ft_strncmp(args[0], "repeat", 6))
 		return (repeat(ast, context));
 	return (EXIT_FAILURE);
-}
-
-char	**get_input(t_context *ctx)
-{
-	size_t		i;
-	size_t		length;
-	static char	*input[2];
-
-	write(1, "> ", 2);
-	input[0] = get_next_line(STDIN_FILENO, ctx);
-	i = 0;
-	length = ft_strlen(input[0]);
-	while (i < length)
-	{
-		if ((input[0][i] >= '\t' && input[0][i] <= '\r') || input[0][i] == ' ')
-		{
-			while (i < length)
-			{
-				input[0][i] = '\0';
-				i++;
-			}
-		}
-		i++;
-	}
-	input[1] = NULL;
-	return (input);
 }
 
 bool	is_builtin(char *command)
