@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:07:21 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 13:42:45 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:30:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ static int	wildcard_replace(t_token *tok, t_token **wildcard_tok, char **files)
 	i = 0;
 	while (files[i])
 	{
-		printf("---------------------------------\n");
 		if (!is_file_needed(tok, files[i]))
 		{
-			printf("Skipping file: %s\n\n", files[i]);
 			i++;
 			continue ;
 		}
@@ -35,7 +33,6 @@ static int	wildcard_replace(t_token *tok, t_token **wildcard_tok, char **files)
 		if (!tmp)
 			return (1);
 		token_add_back(wildcard_tok, tmp);
-		printf("Adding file: %s\n\n", files[i]);
 		i++;
 	}
 	return (0);
