@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   track_paths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:52:24 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 19:06:56 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:22:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 char		*track_paths(char *command, t_gc **head);
 static char	*relative_path(char *command, t_gc **head);
@@ -19,10 +19,10 @@ static bool	cannot_access_file(const char *path);
 char	*track_paths(char *command, t_gc **head)
 
 {
-	const char	*path = getenv("PATH");
-	char		**directories;
-	char		*whole_path;
-	short		i;
+	const char *path = getenv("PATH");
+	char **directories;
+	char *whole_path;
+	short i;
 
 	if (!command)
 		return (NULL);
@@ -47,7 +47,7 @@ char	*track_paths(char *command, t_gc **head)
 static char	*relative_path(char *command, t_gc **head)
 
 {
-	struct stat	sh;
+	struct stat sh;
 
 	if (!stat(command, &sh))
 	{
@@ -67,7 +67,7 @@ static char	*relative_path(char *command, t_gc **head)
 static bool	cannot_access_file(const char *path)
 
 {
-	struct stat	sh;
+	struct stat sh;
 
 	if (!stat(path, &sh))
 	{

@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:19:59 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:13:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:47:36 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "gc_functions.h"
 
 void	*gc_malloc(size_t size, t_gc **head)
 {

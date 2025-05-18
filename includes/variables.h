@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_strndup.c                                       :+:      :+:    :+:   */
+/*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 19:20:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 12:48:43 by vblanc           ###   ########.fr       */
+/*   Created: 2025/05/18 13:32:57 by vblanc            #+#    #+#             */
+/*   Updated: 2025/05/18 14:56:57 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gc_functions.h"
+#ifndef VARIABLES_H
+# define VARIABLES_H
 
-char	*gc_strndup(const char *s, size_t n, t_gc **head)
-{
-	size_t	i;
-	char	*dup;
+// Constants
 
-	dup = gc_malloc(n + 1, head);
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < n && s[i])
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+# define PATH_MAX 4096
+# define FD_MAX 1024
+# define BUFFER_SIZE 42
+
+// Colors
+
+# define RED "\001\033[1;31m\002"
+# define GREEN "\001\033[1;32m\002"
+# define BLUE "\001\033[1;34m\002"
+# define RESET "\001\033[0m\002"
+
+#endif

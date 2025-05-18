@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 06:58:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:28:12 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:41:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	init_paren_node(t_ast *node, t_ast **par_node, int redir_count,
 		t_gc **head)

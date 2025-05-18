@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   expand_one_token.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:37:52 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:55:13 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	is_valid_var_char(char c, int pos)
 {
 	if (pos == 0)
-		return (isalpha(c) || c == '_' || c == '*');
-	return (isalnum(c) || c == '_' || c == '*');
+		return (ft_isalpha(c) || c == '_' || c == '*');
+	return (ft_isalnum(c) || c == '_' || c == '*');
 }
 
 static int	special_case(const char *word, char *result, int *ind,
@@ -111,7 +111,7 @@ int	expand_one_token(char **w, int len_w, t_context *ctx)
 					+ 1]) || (*w)[ind[0] + 1] == '?' || (*w)[ind[0]
 				+ 1] == '$'))
 		{
-			if (isdigit((*w)[ind[0] + 1]))
+			if (ft_isdigit((*w)[ind[0] + 1]))
 				positional_var((*w), ctx, result, ind);
 			else if (sub_expand_one_var((*w), result, ind, ctx))
 				return (1);

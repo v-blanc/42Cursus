@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:49:19 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:47:23 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:32:15 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "print.h"
 
 void		print(int fd, const char *format, ...);
 static void	print_string(int fd, const char *s);
@@ -57,10 +57,10 @@ static void	print_string(int fd, const char *s)
 
 static void	print_number(int fd, const int n)
 {
-	short				i;
-	char				buffer[12];
-	unsigned int		abs_n;
-	const bool			negative = (n < 0);
+	short			i;
+	char			buffer[12];
+	unsigned int	abs_n;
+	const bool		negative = (n < 0);
 
 	i = 11;
 	buffer[i] = '\0';

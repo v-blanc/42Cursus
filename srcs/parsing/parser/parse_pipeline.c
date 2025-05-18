@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:33 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:28:25 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	pipe_cmd_count(t_token *tokens)
 {

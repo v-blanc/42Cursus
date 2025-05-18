@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:25:07 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 12:25:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:54:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
 extern char	**environ;
 
@@ -27,7 +27,8 @@ int	init_environ(t_gc **head)
 		getcwd(env_pwd, PATH_MAX);
 		if (!env_pwd)
 		{
-			print(2, "minishell: env error\n"); // TODO: update
+			// TODO: update
+			print(2, "minishell: env error\n");
 			return (1);
 		}
 		environ[0] = gc_strjoin_perm("PWD=", env_pwd, head);

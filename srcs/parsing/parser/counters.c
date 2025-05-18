@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:23 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 15:37:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:41:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 int	count_cmd_args(t_token *tok)
 {

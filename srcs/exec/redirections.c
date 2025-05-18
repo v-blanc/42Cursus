@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 19:56:37 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:22:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int			handle_redirections(t_ast *c, t_context *ctx);
 static int	get_redirections_type(t_ast *c, t_ast ***redir);
@@ -21,10 +21,10 @@ static int	close_then_return_exit_failure(int fd);
 int	handle_redirections(t_ast *c, t_context *ctx)
 
 {
-	t_ast	**redirs;
-	int		redirs_count;
-	int		i;
-	int		fd;
+	t_ast **redirs;
+	int redirs_count;
+	int i;
+	int fd;
 
 	redirs = NULL;
 	redirs_count = get_redirections_type(c, &redirs);
@@ -40,9 +40,8 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 			if (dup2(fd, STDOUT_FILENO) < 0)
 				close_then_return_exit_failure(fd);
 		}
-		else
-			if (dup2(fd, STDIN_FILENO) < 0)
-				close_then_return_exit_failure(fd);
+		else if (dup2(fd, STDIN_FILENO) < 0)
+			close_then_return_exit_failure(fd);
 		close(fd);
 	}
 	return (EXIT_SUCCESS);
@@ -69,15 +68,15 @@ static int	get_redirections_type(t_ast *c, t_ast ***redir)
 static int	get_target(t_ast **redirs, t_context *ctx, int i)
 
 {
-	int	fd;
+	int fd;
 
 	fd = 0;
 	if (redirs[i]->u_data.s_red.op == REDIR_OUT)
-		fd = open(redirs[i]->u_data.s_red.target,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(redirs[i]->u_data.s_red.target, O_WRONLY | O_CREAT | O_TRUNC,
+				0644);
 	else if (redirs[i]->u_data.s_red.op == REDIR_APPEND)
-		fd = open(redirs[i]->u_data.s_red.target,
-				O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(redirs[i]->u_data.s_red.target, O_WRONLY | O_CREAT | O_APPEND,
+				0644);
 	else if (redirs[i]->u_data.s_red.op == REDIR_IN)
 		fd = open(redirs[i]->u_data.s_red.target, O_RDONLY);
 	else if (redirs[i]->u_data.s_red.op == REDIR_HEREDOC)
@@ -96,7 +95,7 @@ static int	get_target(t_ast **redirs, t_context *ctx, int i)
 static void	which_error(char *file)
 
 {
-	struct stat	sh;
+	struct stat sh;
 
 	if (!stat(file, &sh))
 	{

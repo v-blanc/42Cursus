@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:37:58 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/17 20:09:27 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	count_files(char *cwd)
 {

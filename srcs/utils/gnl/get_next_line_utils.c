@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:49:16 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:41:50 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:31:31 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
 size_t	string_length(const char *s)
 {

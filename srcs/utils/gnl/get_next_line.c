@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 20:49:22 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 18:32:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:31:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
 char	*get_next_line(int fd, t_context *ctx)
 {

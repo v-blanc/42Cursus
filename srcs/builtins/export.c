@@ -6,11 +6,12 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:51 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/15 21:22:45 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:26:55 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
+#include "exec.h"
 
 extern char	**environ;
 

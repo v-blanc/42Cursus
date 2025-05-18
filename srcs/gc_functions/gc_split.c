@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gc_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:20:19 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:20:20 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:48:07 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "gc_functions.h"
 
 static int	ft_count_words(char const *s, char c)
 {

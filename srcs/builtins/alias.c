@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   alias.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:06:28 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 18:26:08 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:26:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
+#include "exec.h"
 
 int			alias(int argc, char **argv, t_context *ctx);
 static int	print_aliases_then_return_zero(t_context *ctx);
-static int	update_aliases(int argc, char **argv, t_context *ctx); 
+static int	update_aliases(int argc, char **argv, t_context *ctx);
 
 int	alias(int argc, char **argv, t_context *ctx)
 
@@ -27,7 +28,7 @@ int	alias(int argc, char **argv, t_context *ctx)
 static int	print_aliases_then_return_zero(t_context *ctx)
 
 {
-	t_alias	*current;
+	t_alias *current;
 
 	current = ctx->aliases;
 	while (current)
@@ -41,9 +42,9 @@ static int	print_aliases_then_return_zero(t_context *ctx)
 static int	update_aliases(int argc, char **argv, t_context *ctx)
 
 {
-	int		i;
-	char	*temp;
-	t_alias	*aliases;
+	int i;
+	char *temp;
+	t_alias *aliases;
 
 	i = 0;
 	while (++i < argc)

@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:35 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 17:28:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:41:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	sub_parser(t_token **tokens, t_ast **left, t_context **ctx)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:35:42 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:15 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 int	is_operator_char(char c)
 {
@@ -87,19 +87,19 @@ t_token	*new_token(t_token_type type, char quote_type, const char *value,
 	return (token);
 }
 
-void	token_add_back(t_token **tokens, t_token *new)
+void	token_add_back(t_token **tokens, t_token *new_token)
 {
 	t_token	*tmp;
 
-	if (!tokens || !new)
+	if (!tokens || !new_token)
 		return ;
 	if (!*tokens)
 	{
-		*tokens = new;
+		*tokens = new_token;
 		return ;
 	}
 	tmp = *tokens;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = new;
+	tmp->next = new_token;
 }

@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "gc_functions.h": "c",
+        "libft.h": "c",
+        "print.h": "c",
+        "tokens.h": "c",
+        "parse.h": "c",
+        "parsing_utils.h": "c",
+        "parsing.h": "c",
+        "builtins.h": "c",
+        "readline.h": "c",
+        "exec.h": "c",
+        "utils.h": "c",
+        "fcntl.h": "c",
+        "minishell.h": "c",
+        "history.h": "c",
+        "set_input.h": "c"
+    }
+}

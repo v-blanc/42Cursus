@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 23:23:21 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:22:21 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int	builtins_manager(t_ast *ast, t_context **context)
 {
@@ -41,9 +41,9 @@ int	builtins_manager(t_ast *ast, t_context **context)
 char	**get_input(t_context *ctx)
 
 {
-	size_t		i;
-	size_t		length;
-	static char	*input[2];
+	size_t i;
+	size_t length;
+	static char *input[2];
 
 	write(1, "> ", 2);
 	input[0] = get_next_line(STDIN_FILENO, ctx);

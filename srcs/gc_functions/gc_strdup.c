@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gc_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:19:57 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:19:58 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:48:17 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "gc_functions.h"
 
 char	*gc_strdup(const char *s, t_gc **head)
 {

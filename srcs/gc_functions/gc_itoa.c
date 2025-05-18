@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gc_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:20:04 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/27 19:20:05 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:47:47 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "gc_functions.h"
 
 char	*gc_itoa(int n, t_gc **head)
 {

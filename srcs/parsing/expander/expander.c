@@ -6,17 +6,17 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:14:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:29 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	is_valid_var_char(char c, int pos)
 {
 	if (pos == 0)
-		return (isalpha(c) || c == '_');
-	return (isalnum(c) || c == '_');
+		return (ft_isalpha(c) || c == '_');
+	return (ft_isalnum(c) || c == '_');
 }
 
 static int	sub_get_expand_len(char *word, int *i, int *len, t_context *ctx)
@@ -57,7 +57,7 @@ int	get_expand_len(char *word, t_context *ctx)
 	{
 		if (word[i] == '$' && word[i + 1])
 		{
-			if (isdigit(word[i + 1]))
+			if (ft_isdigit(word[i + 1]))
 			{
 				if (ctx->argc > ft_atoi(&word[i + 1]))
 					len += ft_strlen(ctx->argv[ft_atoi(&word[i + 1])]);
@@ -84,7 +84,7 @@ int	expand_tilde(char **word, t_gc **head)
 
 	if ((*word)[0] != '~')
 		return (0);
-	if ((*word)[1] && (*word)[1] != '/' && !isspace((*word)[1]))
+	if ((*word)[1] && (*word)[1] != '/' && !ft_isspace((*word)[1]))
 		return (0);
 	home = getenv("HOME");
 	if (!home)

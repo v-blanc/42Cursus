@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:08:58 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 12:09:02 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static void	update_vars(int *start_index, int *match, int *i, int j)
 {

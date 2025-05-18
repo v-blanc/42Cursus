@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_eof.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:39 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/16 21:12:03 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:31:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
 int	exit_eof(t_context **context)
 {

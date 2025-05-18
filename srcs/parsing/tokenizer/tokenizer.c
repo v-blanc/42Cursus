@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:43 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/15 21:16:01 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:20 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static char	*parse_quoted_word(const char *s, int *i, t_gc **head)
 {
@@ -49,8 +49,8 @@ static char	*parse_word(const char *s, int *i, t_gc **head)
 	if (!buf)
 		return (NULL);
 	j = 0;
-	while (s[*i] && !isspace((unsigned char)s[*i]) && !is_operator_char(s[*i])
-		&& s[*i] != '\'' && s[*i] != '"')
+	while (s[*i] && !ft_isspace((unsigned char)s[*i])
+		&& !is_operator_char(s[*i]) && s[*i] != '\'' && s[*i] != '"')
 	{
 		if (s[*i] == '\\' && s[*i + 1])
 		{
@@ -82,7 +82,7 @@ int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	(*tok) = new_token(WORD, quote_type, val, head);
 	if (!(*tok))
 		return (1);
-	if (s[*i] && !isspace((unsigned char)s[*i]) && !is_operator_char(s[*i]))
+	if (s[*i] && !ft_isspace((unsigned char)s[*i]) && !is_operator_char(s[*i]))
 		(*tok)->joined_next = 1;
 	return (0);
 }
@@ -109,7 +109,7 @@ int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
 	len = 0;
 	while (s[i])
 	{
-		while (s[i] && isspace((unsigned char)s[i]))
+		while (s[i] && ft_isspace((unsigned char)s[i]))
 			i++;
 		if (!s[i])
 			break ;

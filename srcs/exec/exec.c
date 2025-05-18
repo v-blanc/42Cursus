@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 13:44:35 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:22:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int			execute_ast(t_ast *node, t_context *ctx);
 int			handle_operators(t_ast *node, t_context *ctx);

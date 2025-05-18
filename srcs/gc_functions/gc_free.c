@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gc_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:20:01 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/13 20:38:24 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:47:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "gc_functions.h"
 
 void	gc_free(void *mem, t_gc **head)
 {

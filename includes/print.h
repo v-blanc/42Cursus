@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_strndup.c                                       :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 19:20:13 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 12:48:43 by vblanc           ###   ########.fr       */
+/*   Created: 2025/05/18 12:54:30 by vblanc            #+#    #+#             */
+/*   Updated: 2025/05/18 13:03:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gc_functions.h"
+#ifndef PRINT_H
+# define PRINT_H
 
-char	*gc_strndup(const char *s, size_t n, t_gc **head)
-{
-	size_t	i;
-	char	*dup;
+# include "../libft/libft.h"
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
 
-	dup = gc_malloc(n + 1, head);
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < n && s[i])
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+void	print(int fd, const char *format, ...);
+
+#endif

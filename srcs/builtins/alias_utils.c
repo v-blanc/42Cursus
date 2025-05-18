@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   alias_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:37:48 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/17 18:37:24 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:26:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
+#include "exec.h"
 
 void		create_aliases(t_context *ctx);
 static void	get_content(int st_size, int fd, t_context *ctx);
@@ -20,10 +21,10 @@ static bool	invalid_alias(const char *line);
 void	create_aliases(t_context *ctx)
 
 {
-	char		*home;
-	char		*path;
-	int			fd;
-	struct stat	st;
+	char *home;
+	char *path;
+	int fd;
+	struct stat st;
 
 	home = getenv("HOME");
 	if (!home)
@@ -43,12 +44,12 @@ void	create_aliases(t_context *ctx)
 	get_content(st.st_size, fd, ctx);
 }
 
-static void	get_content(int	st_size, int fd, t_context *ctx)
+static void	get_content(int st_size, int fd, t_context *ctx)
 
 {
-	char	*content;
-	char	**lines;
-	ssize_t	bytes_read;
+	char *content;
+	char **lines;
+	ssize_t bytes_read;
 
 	content = gc_malloc(st_size + 1, ctx->head);
 	if (!content)
@@ -75,10 +76,10 @@ static void	get_content(int	st_size, int fd, t_context *ctx)
 static void	process_content(char **lines, t_context *ctx)
 
 {
-	char	*line;
-	char	*key;
-	char	*value;
-	size_t	i;
+	char *line;
+	char *key;
+	char *value;
+	size_t i;
 
 	i = 0;
 	while (lines[i])
@@ -105,8 +106,8 @@ static void	process_content(char **lines, t_context *ctx)
 static bool	invalid_alias(const char *line)
 
 {
-	const char	*temp = ft_strchr(line, '=');
-	size_t		i;
+	const char *temp = ft_strchr(line, '=');
+	size_t i;
 
 	if (!temp || temp == line)
 		return (true);
@@ -123,8 +124,8 @@ static bool	invalid_alias(const char *line)
 void	add_alias(const char *key, const char *value, t_context *ctx)
 
 {
-	t_alias	*alias;
-	t_alias	*new_alias;
+	t_alias *alias;
+	t_alias *new_alias;
 
 	alias = ctx->aliases;
 	while (alias)

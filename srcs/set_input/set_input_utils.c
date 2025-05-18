@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 12:31:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:49:18 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "set_input.h"
 
 static int	sub_set_readline_prompt(char **rl_prompt, t_context *ctx)
 {

@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:07:21 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 12:08:48 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	wildcard_replace(t_token *tok, t_token **wildcard_tok, char **files)
 {

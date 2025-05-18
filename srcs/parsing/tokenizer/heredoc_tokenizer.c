@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_tokenizer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:47:14 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/16 16:47:14 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:55:02 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 int	heredoc_tokenizer(t_token **tks, const char *s, t_context **ctx, t_gc **gc)
-
 {
 	t_token	*tok;
 	int		i;
@@ -23,7 +22,7 @@ int	heredoc_tokenizer(t_token **tks, const char *s, t_context **ctx, t_gc **gc)
 	len = 0;
 	while (s[i])
 	{
-		while (s[i] && isspace((unsigned char)s[i]))
+		while (s[i] && ft_isspace((unsigned char)s[i]))
 			i++;
 		if (!s[i])
 			break ;

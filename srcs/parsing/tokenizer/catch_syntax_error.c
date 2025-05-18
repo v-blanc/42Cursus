@@ -6,11 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:24:59 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/17 16:18:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/18 13:42:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 static int	sub_print_syntax_error(char *type_str, t_context **ctx)
 {
