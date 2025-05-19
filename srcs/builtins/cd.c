@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:05 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 14:28:36 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 20:57:17 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static char	*path_handler(int fd, char *path)
 	{
 		new_path = getenv("HOME");
 		if (new_path == NULL)
-			return (path);
+		{
+			print(2, "minishell: cd: HOME not set\n");
+			return (NULL);
+		}
 	}
 	else if (!ft_strncmp(path, "-", 2))
 	{
@@ -56,7 +59,7 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	}
 	if (getcwd(new_path, PATH_MAX) == NULL)
 	{
-		print(2, "minishell: getcwd: %s\n", strerror(errno));
+		print(2, "minishell: cd: %s\n", strerror(errno));
 		return (1);
 	}
 	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
@@ -79,6 +82,8 @@ int	cd(int fd, int args_count, char **args, t_gc **head)
 	if (!new_path)
 		return (1);
 	path = path_handler(fd, path);
+	if (path == NULL)
+		return (1);
 	if (getenv("HOME"))
 	{
 		if (expand_tilde(&path, head))
