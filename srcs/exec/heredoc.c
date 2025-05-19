@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 15:51:53 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 21:35:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
 static bool	delim_reached(char **line, char *delim, int count)
 {
 	const size_t	delim_size = ft_strlen(delim);
-	const size_t	line_size = ft_strlen(*line);
 	bool			answer;
 
 	if (*line == NULL)
@@ -83,7 +82,7 @@ static bool	delim_reached(char **line, char *delim, int count)
 		print(2, "delimited by end-of-file (wanted `%s')\n", delim);
 		return (true);
 	}
-	answer = !ft_strcmp(*line, delim) && line_size == delim_size;
+	answer = !ft_strcmp(*line, delim) && ft_strlen(*line) == delim_size;
 	if (answer == true)
 		free(*line);
 	return (answer);
