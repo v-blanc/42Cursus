@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 18:45:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 19:39:17 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,25 @@ int	expand_tilde(char **word, t_gc **head)
 	return (0);
 }
 
+static void	handle_heredoc_expand(t_token **cur)
+{
+	t_token	*prev;
+
+	prev = NULL;
+	*cur = (*cur)->next;
+	while (*cur && (*cur)->type == WORD && (*cur)->joined_next)
+	{
+		if (ft_strlen((*cur)->value) == 1 && (*cur)->value[0] == '$')
+		{
+			prev->next = (*cur)->next;
+			*cur = (*cur)->next;
+			continue ;
+		}
+		prev = *cur;
+		*cur = (*cur)->next;
+	}
+}
+
 int	expander(t_token **tokens, t_context *ctx)
 {
 	t_token	*cur;
@@ -116,11 +135,7 @@ int	expander(t_token **tokens, t_context *ctx)
 				return (1);
 		}
 		if (cur->type == REDIR_HEREDOC)
-		{
-			cur = cur->next;
-			while (cur && cur->type == WORD && cur->joined_next)
-				cur = cur->next;
-		}
+			handle_heredoc_expand(&cur);
 		cur = cur->next;
 	}
 	return (0);
