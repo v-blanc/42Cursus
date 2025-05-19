@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:20 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 18:28:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 20:17:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 static int	sub_merge_tokens(t_token **curr, t_token *next, t_gc **head)
 {
-	char	*joined;
-	int		len_curr_value;
-	int		len_joined;
+	char		*joined;
+	const int	len_curr_value = ft_strlen((*curr)->value);
+	const int	len_next_value = ft_strlen(next->value);
+	int			len_joined;
 
-	len_curr_value = ft_strlen((*curr)->value);
-	len_joined = len_curr_value + ft_strlen(next->value);
+	len_joined = len_curr_value + len_next_value;
 	joined = gc_malloc(len_joined + 1, head);
 	if (!joined)
 		return (1);
-	ft_strlcpy(joined, (*curr)->value, len_curr_value + 1);
-	ft_strlcat(joined, next->value, len_joined + 1);
+	if (!(len_curr_value == 1 && (*curr)->quote == NO_QUOTE
+			&& (*curr)->value[0] == '$'))
+		ft_strlcpy(joined, (*curr)->value, len_curr_value + 1);
+	if (!(len_next_value == 1 && next->quote == NO_QUOTE
+			&& next->value[0] == '$'))
+		ft_strlcat(joined, next->value, len_joined + 1);
 	(*curr)->value = joined;
 	if ((*curr)->quote == NO_QUOTE)
 		(*curr)->quote = next->quote;
