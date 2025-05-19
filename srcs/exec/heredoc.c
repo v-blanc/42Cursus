@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 23:31:14 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 15:51:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
 		}
 	}
 	else
-		print(fd, "%s", line);
+		print(fd, "%s\n", line);
 	return (true);
 }
 
