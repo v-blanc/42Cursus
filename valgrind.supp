@@ -7,6 +7,13 @@
    ...
 }
 {
+    ignore_readline_internal
+    Memcheck:Leak
+    ...
+    fun:readline_internal_char
+    ...
+}
+{
     leak add_history
     Memcheck:Leak
     ...
