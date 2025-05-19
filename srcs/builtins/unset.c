@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:34:07 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 14:25:48 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 15:30:35 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,6 @@ int	unset(char **to_unset, t_gc **head)
 
 	if (to_unset == NULL || to_unset[0] == NULL)
 		return (0);
-	if (to_unset[0][0] == '\0')
-	{
-		printf("minishell: unset: `': not a valid identifier\n");
-		return (1);
-	}
 	if (to_unset_found(to_unset) == 0)
 		return (0);
 	new_env_size = ft_strlen_array(environ) - to_unset_found(to_unset);
