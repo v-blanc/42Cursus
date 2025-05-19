@@ -72,7 +72,7 @@ void	set_input(t_context **ctx)
 		if (get_user_input(&input, ctx))
 			continue ;
 		ast = NULL;
-		if (parsing(input, &ast, ctx))
+		if (parsing(input, &ast, ctx) || !resolve_all_heredocs(ast, *ctx))
 		{
 			free(input);
 			gc_free_all((*ctx)->head);

@@ -128,6 +128,7 @@ typedef struct s_ast
 			int				fd_source;
 			char			*target;
 			bool			to_expand;
+			int				heredoc_fd;
 		} s_red;
 	} u_data;
 }							t_ast;

@@ -22,33 +22,28 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 {
 	pid_t		*pids;
 	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
-	int			i;
-	int			j;
+	int			index[2];
 	t_ast		*curr_cmd;
 
 	int(*pipes)[2];
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	if (!c_pipes(&pipes, ctx, cmds_nb))
 		return (EXIT_FAILURE);
-	i = -1;
-	while (++i < cmds_nb)
+	index[0] = -1;
+	while (++index[0] < cmds_nb)
 	{
-		pids[i] = fork();
-		if (pids[i] == 0)
-			execute_child(i, pipes, pipe_node, ctx);
-		else if (pids[i] < 0)
+		pids[index[0]] = fork();
+		if (pids[index[0]] == 0)
+			execute_child(index[0], pipes, pipe_node, ctx);
+		else if (pids[index[0]] < 0)
 			return (EXIT_FAILURE);
-		j = 0;
-		curr_cmd = pipe_node->u_data.s_pipe.commands[i];
-		while (curr_cmd->u_data.s_cmd.redirs[j])
+		index[1] = 0;
+		curr_cmd = pipe_node->u_data.s_pipe.commands[index[0]];
+		while (curr_cmd->u_data.s_cmd.redirs[index[1]])
 		{
-			if (curr_cmd->u_data.s_cmd.redirs[j]->u_data.s_red.op == 5)
-			{
-				waitpid(pids[i], NULL, 0);
-				// Reconnect STDOUT from last child to STDIN of next child
-				// dup2(pipes[i][STDOUT_FILENO], STDIN_FILENO);
-			}
-			j++;
+			if (curr_cmd->u_data.s_cmd.redirs[index[1]]->u_data.s_red.op == 5)
+				waitpid(pids[index[0]], NULL, 0);
+			index[1]++;
 		}
 	}
 	close_pipes(pipes, cmds_nb - 1);

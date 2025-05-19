@@ -54,6 +54,7 @@ FILES := main.c\
 		exec/exec.c\
 		exec/track_paths.c\
 		exec/heredoc.c\
+		exec/resolve_heredoc.c\
 		exec/exec_manager.c\
 		exec/pipes.c\
 		exec/redirections.c\

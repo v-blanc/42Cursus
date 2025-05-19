@@ -32,6 +32,7 @@ char	*track_paths(char *command, t_gc **head);
 int		handle_pipes(t_ast *pipe_node, t_context *ctx);
 int		handle_redirections(t_ast *c, t_context *ctx);
 int		handle_heredoc(char *dlim, const bool hdoc, t_context *ctx);
+bool	resolve_all_heredocs(t_ast *ast, t_context *ctx);
 void	refresh(int backup_fds[2]);
 
 #endif

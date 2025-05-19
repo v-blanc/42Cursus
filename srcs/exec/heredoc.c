@@ -17,7 +17,7 @@ extern char	**environ;
 
 int			handle_heredoc(char *delim, const bool ex, t_context *ctx);
 static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx);
-static bool	delim_reached(char **line, char *delim, int count, t_context *ctx);
+static bool	delim_reached(char **line, char *delim, int count);
 static bool	print_line(int fd, char *line, const bool expand, t_context *ctx);
 static bool	expander_heredoc(int fd, char *line, t_context *ctx);
 
@@ -59,28 +59,22 @@ static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
 			count++;
 			continue ;
 		}
-		if (delim_reached(&line, delim, count, ctx))
-		{
-			free(line);
+		if (delim_reached(&line, delim, count))
 			return (true);
-		}
 		if (!print_line(fd, line, ex, ctx))
-		{
-			free(line);
 			return (false);
-		}
 		free(line);
 		count++;
 	}
 	return (true);
 }
 
-static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
+static bool	delim_reached(char **line, char *delim, int count)
 {
 	const size_t	delim_size = ft_strlen(delim);
 	const size_t	line_size = ft_strlen(*line);
+	bool			answer;
 
-	(void)ctx;
 	if (*line == NULL)
 	{
 		if (errno == EINTR)
@@ -89,7 +83,10 @@ static bool	delim_reached(char **line, char *delim, int count, t_context *ctx)
 		print(2, "delimited by end-of-file (wanted `%s')\n", delim);
 		return (true);
 	}
-	return (!ft_strcmp(*line, delim) && line_size == delim_size);
+	answer = !ft_strcmp(*line, delim) && line_size == delim_size;
+	if (answer == true)
+		free(*line);
+	return (answer);
 }
 
 static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
@@ -97,7 +94,10 @@ static bool	print_line(int fd, char *line, const bool expand, t_context *ctx)
 	if (expand)
 	{
 		if (!expander_heredoc(fd, line, ctx))
+		{
+			free(line);
 			return (false);
+		}
 	}
 	else
 		print(fd, "%s", line);

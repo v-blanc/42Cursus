@@ -68,6 +68,7 @@ static int	get_target(t_ast **redirs, t_context *ctx, int i)
 	int	fd;
 
 	fd = 0;
+	(void)ctx;
 	if (redirs[i]->u_data.s_red.op == REDIR_OUT)
 		fd = open(redirs[i]->u_data.s_red.target, O_WRONLY | O_CREAT | O_TRUNC,
 				0644);
@@ -77,13 +78,7 @@ static int	get_target(t_ast **redirs, t_context *ctx, int i)
 	else if (redirs[i]->u_data.s_red.op == REDIR_IN)
 		fd = open(redirs[i]->u_data.s_red.target, O_RDONLY);
 	else if (redirs[i]->u_data.s_red.op == REDIR_HEREDOC)
-	{
-		// if (ctx->last_node_type == REDIR_HEREDOC)
-		refresh(ctx->backup_fds);
-		fd = handle_heredoc(redirs[i]->u_data.s_red.target,
-				redirs[i]->u_data.s_red.to_expand, ctx);
-		ctx->last_node_type = REDIR_HEREDOC;
-	}
+		fd = redirs[i]->u_data.s_red.heredoc_fd;
 	if (fd < 0)
 		which_error(redirs[i]->u_data.s_red.target);
 	return (fd);

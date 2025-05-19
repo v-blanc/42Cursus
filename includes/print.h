@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdbool.h>
+# include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
 
