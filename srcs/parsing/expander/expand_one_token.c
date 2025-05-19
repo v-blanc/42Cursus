@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 12:59:05 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:34:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,10 @@ int	expand_one_token(char **w, int len_w, t_context *ctx)
 			else if (sub_expand_one_var((*w), result, ind, ctx))
 				return (1);
 		}
-		else
+		else if ((*w)[ind[0]] != '$')
 			result[ind[1]++] = (*w)[ind[0]++];
+		else
+			ind[0]++;
 	}
 	gc_free(w, ctx->head);
 	(*w) = result;

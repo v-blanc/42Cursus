@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:43 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 15:42:34 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:10:08 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static char	*parse_word(const char *s, int *i, t_gc **head)
 			buf[j++] = s[*i + 1];
 			*i += 2;
 		}
+		else if (j > 0 && s[*i] == '$' && s[*i + 1] && s[*i + 1] != '$')
+			break ;
 		else
 			buf[j++] = s[(*i)++];
 	}

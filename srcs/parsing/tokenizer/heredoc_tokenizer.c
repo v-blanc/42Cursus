@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:47:14 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 15:41:37 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:39:33 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,8 @@ int	heredoc_tokenizer(t_token **tks, const char *s, t_gc **gc)
 {
 	t_token	*tok;
 	int		i;
-	int		len;
 
 	i = 0;
-	len = 0;
 	while (s[i])
 	{
 		while (s[i] && ft_isspace((unsigned char)s[i]))

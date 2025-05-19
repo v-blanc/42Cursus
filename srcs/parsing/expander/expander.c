@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:18 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 20:26:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:45:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int	expander(t_token **tokens, t_context *ctx)
 		}
 		if (cur->type == REDIR_HEREDOC)
 		{
-			if (cur->next && cur->next->type == WORD)
+			cur = cur->next;
+			while (cur && cur->type == WORD && cur->joined_next)
 				cur = cur->next;
 		}
 		cur = cur->next;
