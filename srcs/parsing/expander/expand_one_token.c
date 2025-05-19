@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:15 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 20:37:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:59:05 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ static int	special_case(const char *word, char *result, int *ind,
 	return (0);
 }
 
+static void	get_var_len(const char *word, int *ind, int *len)
+{
+	while (is_valid_var_char(word[*ind], *len))
+	{
+		(*ind)++;
+		(*len)++;
+	}
+}
+
 static int	sub_expand_one_var(const char *word, char *result, int *ind,
 		t_context *context)
 {
@@ -56,11 +65,7 @@ static int	sub_expand_one_var(const char *word, char *result, int *ind,
 		ind[0]++;
 		return (0);
 	}
-	while (is_valid_var_char(word[ind[0]], len))
-	{
-		ind[0]++;
-		len++;
-	}
+	get_var_len(word, &ind[0], &len);
 	var_name = gc_strndup(&word[start], len, context->head);
 	if (!var_name)
 		return (1);
