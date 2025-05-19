@@ -79,6 +79,7 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 	// if (pn->u_data.s_pipe.commands[i]->u_data.s_cmd.redirs)
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
+	close_heredoc_fds(pn);
 	gc_free_all_perm(*(ctx->head));
 	exit(status);
 }

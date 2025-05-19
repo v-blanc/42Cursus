@@ -21,7 +21,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 		return (0);
 	if (node->type == NODE_PAREN)
 	{
-		if (handle_redirections(node, ctx))
+		if (handle_redirections(node))
 			return (-1);
 		status = execute_ast(node->u_data.s_par.content, ctx);
 	}
@@ -30,7 +30,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	else if (node->type == NODE_PIPE)
 		status = handle_pipes(node, ctx);
 	else if (node->type == NODE_REDIR)
-		status = handle_redirections(node, ctx);
+		status = handle_redirections(node);
 	else if (node->type == NODE_CMD)
 		status = execute_command(node, ctx);
 	ctx->last_exit_status = status;

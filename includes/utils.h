@@ -52,4 +52,8 @@ void	*get_ptr(void);
 
 int		exit_eof(t_context **context);
 
+// heredoc_fds
+
+void	close_heredoc_fds(t_ast *node);
+
 #endif

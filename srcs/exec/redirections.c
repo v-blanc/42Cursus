@@ -12,13 +12,13 @@
 
 #include "exec.h"
 
-int			handle_redirections(t_ast *c, t_context *ctx);
+int			handle_redirections(t_ast *c);
 static int	get_redirections_type(t_ast *c, t_ast ***redir);
-static int	get_target(t_ast **redirs, t_context *ctx, int i);
+static int	get_target(t_ast **redirs, int i);
 static void	which_error(char *file);
 static int	close_then_return_exit_failure(int fd);
 
-int	handle_redirections(t_ast *c, t_context *ctx)
+int	handle_redirections(t_ast *c)
 {
 	t_ast	**redirs;
 	int		redirs_count;
@@ -30,7 +30,7 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 	i = -1;
 	while (++i < redirs_count)
 	{
-		fd = get_target(redirs, ctx, i);
+		fd = get_target(redirs, i);
 		if (fd < 0)
 			return (EXIT_FAILURE);
 		if (redirs[i]->u_data.s_red.op == REDIR_OUT
@@ -63,12 +63,11 @@ static int	get_redirections_type(t_ast *c, t_ast ***redir)
 	return (0);
 }
 
-static int	get_target(t_ast **redirs, t_context *ctx, int i)
+static int	get_target(t_ast **redirs, int i)
 {
 	int	fd;
 
 	fd = 0;
-	(void)ctx;
 	if (redirs[i]->u_data.s_red.op == REDIR_OUT)
 		fd = open(redirs[i]->u_data.s_red.target, O_WRONLY | O_CREAT | O_TRUNC,
 				0644);

@@ -13,7 +13,7 @@
 #include "exec.h"
 
 int			execute_command(t_ast *c, t_context *ctx);
-static bool	invalid_node_or_redirs(int *error, t_ast *node, t_context *ctx);
+static bool	invalid_node_or_redirs(int *error, t_ast *node);
 static void	let_child_execute(t_ast *node, t_context *ctx, char *path);
 static int	wait_for_child(pid_t pid, t_context *ctx);
 static int	print_error_and_return(t_ast *node);
@@ -26,7 +26,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 	int		error;
 	pid_t	pid;
 
-	if (invalid_node_or_redirs(&error, c, ctx))
+	if (invalid_node_or_redirs(&error, c))
 		return (error);
 	if (is_builtin(c->u_data.s_cmd.args[0]))
 		return (builtins_manager(c, &ctx));
@@ -43,7 +43,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 	return (wait_for_child(pid, ctx));
 }
 
-static bool	invalid_node_or_redirs(int *error, t_ast *node, t_context *ctx)
+static bool	invalid_node_or_redirs(int *error, t_ast *node)
 {
 	const bool	command_node = (node->type == NODE_CMD);
 	const bool	no_args = (node->u_data.s_cmd.args_count == 0);
@@ -54,7 +54,7 @@ static bool	invalid_node_or_redirs(int *error, t_ast *node, t_context *ctx)
 	*error = -1;
 	if (command_node && no_args && no_redirs)
 		*error = 0;
-	else if (handle_redirections(node, ctx))
+	else if (handle_redirections(node))
 		*error = EXIT_FAILURE;
 	else if (no_args)
 		*error = 0;

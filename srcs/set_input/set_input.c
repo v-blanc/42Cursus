@@ -74,6 +74,7 @@ void	set_input(t_context **ctx)
 		ast = NULL;
 		if (parsing(input, &ast, ctx) || !resolve_all_heredocs(ast, *ctx))
 		{
+			close_heredoc_fds(ast);
 			free(input);
 			gc_free_all((*ctx)->head);
 			continue ;
@@ -83,6 +84,7 @@ void	set_input(t_context **ctx)
 		// print_ast(ast, 0);
 		// printf("\n******************************************\n\n");
 		execute_ast(ast, *ctx);
+		close_heredoc_fds(ast);
 		handle_signal(ctx);
 		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);

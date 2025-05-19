@@ -73,6 +73,7 @@ FILES := main.c\
 		set_input/set_input_utils.c\
 		\
 		utils/main_utils.c\
+		utils/close_heredoc_fds.c\
 		utils/print.c\
 		utils/gnl/get_next_line.c utils/gnl/get_next_line_utils.c\
 		utils/sig.c\
