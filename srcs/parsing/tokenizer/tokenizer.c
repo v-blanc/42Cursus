@@ -6,13 +6,13 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:43 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 17:40:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 15:42:34 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char	*parse_quoted_word(const char *s, int *i, t_gc **head)
+char	*parse_quoted_word(const char *s, int *i, t_gc **head)
 {
 	char	quote;
 	char	*buf;
@@ -64,7 +64,7 @@ static char	*parse_word(const char *s, int *i, t_gc **head)
 	return (gc_strndup(buf, j, head));
 }
 
-int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
+static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 {
 	char	*val;
 	char	quote_type;
@@ -87,7 +87,7 @@ int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	return (0);
 }
 
-int	handle_error(t_token *tok, const char *s, int *i, int len)
+static int	handle_error(t_token *tok, const char *s, int *i, int len)
 {
 	t_context	*ctx;
 
