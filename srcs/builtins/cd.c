@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:05 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:26:39 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 14:28:36 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 {
 	char	*pwd_path;
 
+	pwd_path = getenv("PWD");
+	if (!pwd_path)
+	{
+		print(2, "minishell: cd: PWD not set\n");
+		return (1);
+	}
 	if (chdir(path) < 0)
 	{
 		print(2, "minishell: cd: %s: %s\n", strerror(errno), path);
@@ -51,12 +57,6 @@ static int	cd_exec(char *path, char *new_path, t_gc **head)
 	if (getcwd(new_path, PATH_MAX) == NULL)
 	{
 		print(2, "minishell: getcwd: %s\n", strerror(errno));
-		return (1);
-	}
-	pwd_path = getenv("PWD");
-	if (!pwd_path)
-	{
-		print(2, "minishell: cd: PWD not set\n");
 		return (1);
 	}
 	if (gc_setenv("OLDPWD", pwd_path, head) || gc_setenv("PWD", new_path, head))
