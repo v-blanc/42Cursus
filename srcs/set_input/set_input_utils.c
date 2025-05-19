@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 14:49:18 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 14:21:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,17 @@ char	*set_readline_prompt(t_context *ctx)
 	char	*rl_prompt;
 
 	pwd = getenv("PWD");
-	if (!pwd)
-		return (NULL);
-	home_path = getenv("HOME");
-	if (home_path && !ft_strncmp(pwd, home_path, ft_strlen(home_path)))
+	if (pwd)
 	{
-		ft_strlcpy(pwd, pwd + ft_strlen(home_path) - 1, PATH_MAX);
-		pwd[0] = '~';
+		home_path = getenv("HOME");
+		if (home_path && !ft_strncmp(pwd, home_path, ft_strlen(home_path)))
+		{
+			ft_strlcpy(pwd, pwd + ft_strlen(home_path) - 1, PATH_MAX);
+			pwd[0] = '~';
+		}
 	}
+	else
+		pwd = "";
 	rl_prompt = gc_strjoin(GREEN "minishell" RESET ":" BLUE, pwd, ctx->head);
 	if (!rl_prompt)
 		return (NULL);
