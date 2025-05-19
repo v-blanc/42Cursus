@@ -24,8 +24,8 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
 	int			index[2];
 	t_ast		*curr_cmd;
+	int			(*pipes)[2];
 
-	int(*pipes)[2];
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	if (!c_pipes(&pipes, ctx, cmds_nb))
 		return (EXIT_FAILURE);
@@ -55,7 +55,7 @@ static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 {
 	int	i;
 
-	*pipes = gc_malloc(sizeof(int[2]) * (cmds_nb - 1), ctx->head);
+	*pipes = gc_malloc(sizeof(int [2]) * (cmds_nb - 1), ctx->head);
 	if (!*pipes)
 		return (false);
 	i = -1;
@@ -76,7 +76,6 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 		dup2(pipes[i][STDOUT_FILENO], STDOUT_FILENO);
 	close_pipes(pipes, pn->u_data.s_pipe.cmd_count - 1);
 	status = execute_ast(pn->u_data.s_pipe.commands[i], ctx);
-	// if (pn->u_data.s_pipe.commands[i]->u_data.s_cmd.redirs)
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
 	close_heredoc_fds(pn);

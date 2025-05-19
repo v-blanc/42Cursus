@@ -83,6 +83,7 @@ static void	let_child_execute(t_ast *node, t_context *ctx, char *path)
 	print(2, "minishell: %s: %s\n", command, error_message);
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
+	close_heredoc_fds(node);
 	gc_free_all_perm(*ctx->head);
 	exit(126);
 }

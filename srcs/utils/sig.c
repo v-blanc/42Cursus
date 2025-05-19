@@ -60,7 +60,7 @@ static void	sig_handler_heredoc(int sig)
 
 void	init_sig_heredoc(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	if (!isatty(STDIN_FILENO))
 		return ;
