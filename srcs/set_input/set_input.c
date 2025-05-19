@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 22:35:55 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 19:43:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,6 @@ void	set_input(t_context **ctx)
 			continue ;
 		}
 		free(input);
-		// printf("\n******************************************\n");
-		// print_ast(ast, 0);
-		// printf("\n******************************************\n\n");
 		execute_ast(ast, *ctx);
 		close_heredoc_fds(ast);
 		handle_signal(ctx);

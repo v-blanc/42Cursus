@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 13:08:12 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 15:42:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/19 19:44:17 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,5 @@ t_ast			*parser(t_token **tokens, t_context **ctx);
 
 // main parsing
 int				parsing(char *input, t_ast **ast, t_context **context);
-
-void			print_ast(t_ast *node, int depth);
 
 #endif

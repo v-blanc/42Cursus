@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/18 19:33:56 by yabokhar         ###   ########.fr        #
+#    Updated: 2025/05/19 19:44:01 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,6 @@ FILES := main.c\
 		parsing/wildcard/wildcard.c\
 		parsing/wildcard/get_wildcard.c\
 		parsing/wildcard/is_file_needed.c\
-		\
-		parsing/parser/print_ast.c\
 		\
 		parsing/parsing_utils.c\
 		parsing/parsing.c\
