@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 15:21:50 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 21:10:39 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	set_input(t_context **ctx)
 		free(input);
 		execute_ast(ast, *ctx);
 		close_heredoc_fds(ast);
+		close((*ctx)->cmd_backup_fds[STDIN_FILENO]);
+		close((*ctx)->cmd_backup_fds[STDOUT_FILENO]);
 		handle_signal(ctx);
 		refresh((*ctx)->backup_fds);
 		gc_free_all((*ctx)->head);

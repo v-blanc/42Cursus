@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:33:46 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 14:26:48 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 20:42:01 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	clean(t_context **context)
 {
 	close((*context)->backup_fds[STDIN_FILENO]);
 	close((*context)->backup_fds[STDOUT_FILENO]);
+	close((*context)->cmd_backup_fds[STDIN_FILENO]);
+	close((*context)->cmd_backup_fds[STDOUT_FILENO]);
 	gc_free_all_perm(*((*context)->head));
 	rl_clear_history();
 }

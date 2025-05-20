@@ -6,27 +6,11 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 15:56:17 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 21:15:29 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "set_input.h"
-
-// TODO: move to another file
-void	refresh(int backup_fds[2])
-{
-	if (dup2(backup_fds[STDIN_FILENO], STDIN_FILENO) < 0)
-		return ;
-	if (dup2(backup_fds[STDOUT_FILENO], STDOUT_FILENO) < 0)
-	{
-		close(backup_fds[STDIN_FILENO]);
-		return ;
-	}
-	close(backup_fds[STDIN_FILENO]);
-	close(backup_fds[STDOUT_FILENO]);
-	backup_fds[STDIN_FILENO] = dup(STDIN_FILENO);
-	backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
-}
 
 static void	exit_main(t_context *ctx)
 {
@@ -41,6 +25,8 @@ int	main(int argc, char **argv)
 	t_gc		*head;
 	t_context	*context;
 
+	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO) || !isatty(2))
+		return (EXIT_FAILURE);
 	head = NULL;
 	context = NULL;
 	init_sig();

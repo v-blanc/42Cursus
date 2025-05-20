@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 18:25:14 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:12:04 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 	int		error;
 	pid_t	pid;
 
+	command_fd_dup(ctx->cmd_backup_fds);
 	if (invalid_node_or_redirs(&error, c, ctx))
 		return (error);
 	if (is_builtin(c->u_data.s_cmd.args[0]))
@@ -42,6 +43,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 		let_child_execute(c, ctx, path);
 	else if (pid < 0)
 		return (EXIT_FAILURE);
+	command_refresh(ctx->cmd_backup_fds);
 	return (wait_for_child(pid, ctx));
 }
 
@@ -90,6 +92,8 @@ static void	let_child_execute(t_ast *node, t_context *ctx, char *path)
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
 	close_heredoc_fds(node);
+	close(ctx->cmd_backup_fds[STDIN_FILENO]);
+	close(ctx->cmd_backup_fds[STDOUT_FILENO]);
 	gc_free_all_perm(*ctx->head);
 	exit(126);
 }

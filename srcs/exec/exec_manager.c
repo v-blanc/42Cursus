@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 19:19:22 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:08:50 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,29 @@ int	builtins_manager(t_ast *ast, t_context **context)
 {
 	int		args_count;
 	char	**args;
+	int		status;
 
+	status = 0;
 	args_count = ast->u_data.s_cmd.args_count;
 	args = ast->u_data.s_cmd.args;
 	if (!ft_strncmp(args[0], "cd", 3))
-		return (cd(1, args_count, args + 1, (*context)->head));
+		status = cd(1, args_count, args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "echo", 5))
-		return (echo(1, args + 1));
+		status = echo(1, args + 1);
 	if (!ft_strncmp(args[0], "env", 4))
-		return (env(ast, context));
+		status = env(ast, context);
 	if (!ft_strncmp(args[0], "exit", 5))
-		return (exit_(args_count, args + 1, context));
+		status = exit_(args_count, args + 1, context);
 	if (!ft_strncmp(args[0], "export", 8))
-		return (export(1, args_count, args + 1, (*context)->head));
+		status = export(1, args_count, args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "pwd", 4))
-		return (pwd(1));
+		status = pwd(1);
 	if (!ft_strncmp(args[0], "unset", 6))
-		return (unset(args + 1, (*context)->head));
+		status = unset(args + 1, (*context)->head);
 	if (!ft_strncmp(args[0], "repeat", 6))
-		return (repeat(ast, context));
-	return (EXIT_FAILURE);
+		status = repeat(ast, context);
+	command_refresh((*context)->cmd_backup_fds);
+	return (status);
 }
 
 bool	is_builtin(char *command)

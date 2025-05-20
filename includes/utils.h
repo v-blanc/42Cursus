@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:49:42 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 22:30:44 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 21:18:47 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ int		update_shlvl(t_gc **head);
 void	init_sig(void);
 void	init_sig_heredoc(void);
 
-// get_next_line
-
-size_t	string_length(const char *s);
-char	*duplicate_(char *buffer, t_context *ctx);
-char	*concatenate_(char *line, char *buffer, t_context *ctx);
-void	shift_(char *buffer);
-bool	string_contains_newline(char *buffer);
-char	*get_next_line(int fd, t_context *ctx);
-
 // print
 
 void	print(int fd, const char *format, ...);
@@ -52,8 +43,11 @@ void	*get_ptr(void);
 
 int		exit_eof(t_context **context);
 
-// heredoc_fds
+// fds
 
 void	close_heredoc_fds(t_ast *node);
+void	refresh(int backup_fds[2]);
+void	command_fd_dup(int cmd_backup_fds[2]);
+void	command_refresh(int cmd_backup_fds[2]);
 
 #endif

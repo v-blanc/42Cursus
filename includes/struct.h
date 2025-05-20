@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 13:24:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 18:48:58 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:20:46 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_context
 	int						last_node_type;
 	struct termios			orig_term;
 	int						backup_fds[2];
+	int						cmd_backup_fds[2];
 	int						is_in_heredoc;
 	bool					in_subshell;
 	t_gc					**head;

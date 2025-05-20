@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/19 19:44:01 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/20 21:17:33 by yabokhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,9 +71,9 @@ FILES := main.c\
 		set_input/set_input_utils.c\
 		\
 		utils/main_utils.c\
+		utils/refresh.c\
 		utils/close_heredoc_fds.c\
 		utils/print.c\
-		utils/gnl/get_next_line.c utils/gnl/get_next_line_utils.c\
 		utils/sig.c\
 		utils/pointer.c\
 		utils/exit_eof.c

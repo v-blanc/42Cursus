@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 15:18:40 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 21:17:55 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ char	*set_readline_prompt(t_context *ctx)
 	char	*pwd;
 	char	*rl_prompt;
 
-	if (!isatty(STDIN_FILENO))
-	{
-		rl_prompt = get_next_line(STDIN_FILENO, ctx);
-		return (rl_prompt);
-	}
 	pwd = NULL;
 	get_pwd(&pwd);
 	rl_prompt = gc_strjoin(GREEN "minishell" RESET ":" BLUE, pwd, ctx->head);
