@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 13:12:45 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 18:00:32 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	get_redirections_type(t_ast *c, t_ast ***redir)
 	else if (c->type == NODE_PAREN)
 	{
 		*redir = c->u_data.s_par.redirs;
-		return (c->u_data.s_par.redir_count > 0);
+		return (c->u_data.s_par.redir_count);
 	}
 	return (0);
 }
