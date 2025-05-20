@@ -26,8 +26,6 @@ static int	get_user_input(char **input, t_context **ctx)
 {
 	char	*rl_prompt;
 
-	if (!isatty(STDIN_FILENO))
-		return (0);
 	rl_prompt = set_readline_prompt(*ctx);
 	if (rl_prompt == NULL)
 	{

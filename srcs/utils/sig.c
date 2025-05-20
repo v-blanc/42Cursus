@@ -16,8 +16,6 @@ static void	disable_ctrl_backslash_echo(void)
 {
 	struct termios	term;
 
-	if (!isatty(STDIN_FILENO))
-		return ;
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);

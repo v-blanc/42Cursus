@@ -15,8 +15,6 @@
 // TODO: move to another file
 void	refresh(int backup_fds[2])
 {
-	if (!isatty(STDIN_FILENO) && !isatty(STDOUT_FILENO))
-		return ;
 	if (dup2(backup_fds[STDIN_FILENO], STDIN_FILENO) < 0)
 		return ;
 	if (dup2(backup_fds[STDOUT_FILENO], STDOUT_FILENO) < 0)
