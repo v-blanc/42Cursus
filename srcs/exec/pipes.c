@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:09:10 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 00:27:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 19:17:19 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 			return (EXIT_FAILURE);
 		index[1] = 0;
 		curr_cmd = pipe_node->u_data.s_pipe.commands[index[0]];
-		while (curr_cmd->u_data.s_cmd.redirs[index[1]])
+		while (curr_cmd->u_data.s_cmd.redirs && curr_cmd->u_data.s_cmd.redirs[index[1]])
 		{
 			if (curr_cmd->u_data.s_cmd.redirs[index[1]]->u_data.s_red.op == 5)
 				waitpid(pids[index[0]], NULL, 0);
