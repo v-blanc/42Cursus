@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 18:28:38 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:50:56 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	execute_ast(t_ast *node, t_context *ctx)
 		return (0);
 	if (node->type == NODE_PAREN)
 	{
+		ctx->in_subshell = true;
 		if (handle_redirections(node, ctx))
 			return (-1);
 		status = execute_ast(node->u_data.s_par.content, ctx);
+		ctx->in_subshell = false;
 	}
 	else if (node->type == NODE_BINARY_OP)
 		status = handle_operators(node, ctx);
@@ -44,7 +46,8 @@ int	handle_operators(t_ast *node, t_context *ctx)
 
 	type = node->u_data.s_op.op;
 	status = execute_ast(node->u_data.s_op.left, ctx);
-	if (ctx->last_node_type == NODE_REDIR)
+	if (node->type != NODE_REDIR && ctx->last_node_type == NODE_REDIR
+		&& !(ctx->in_subshell))
 		refresh(ctx->backup_fds);
 	if (type == AND && status == 0)
 		return (execute_ast(node->u_data.s_op.right, ctx));
