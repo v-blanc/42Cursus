@@ -82,8 +82,9 @@ static bool	resolve_redirs(t_ast **redirs, int count, t_context *ctx)
 			fd = handle_heredoc(target, to_expand, ctx);
 			if (fd < 0)
 			{
-				refresh(ctx->backup_fds);
-				return (false);
+				print(2, "minishell: pipe() has lead to a fatal error\n");
+				close_heredoc_fds(*redirs);
+				exit_eof(&ctx);
 			}
 			redirs[i]->u_data.s_red.heredoc_fd = fd;
 		}

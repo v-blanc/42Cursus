@@ -29,6 +29,7 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 		return (-1);
 	init_sig_heredoc();
 	ctx->is_in_heredoc = 1;
+	ctx->last_exit_status = 666;
 	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
 		close(pipe_fd[STDOUT_FILENO]);
