@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 00:27:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 13:12:45 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int	handle_redirections(t_ast *c)
 	{
 		fd = get_target(redirs, i);
 		if (fd < 0)
+		{
+			print(2, "minishell: %s: %s\n", redirs[i]->u_data.s_red.target,
+				strerror(errno));
 			return (EXIT_FAILURE);
+		}
 		if (redirs[i]->u_data.s_red.op == REDIR_OUT
 			|| redirs[i]->u_data.s_red.op == REDIR_APPEND)
 		{

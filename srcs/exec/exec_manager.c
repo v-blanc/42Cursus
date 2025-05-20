@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 16:38:48 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:13:19 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	handle_operators(t_ast *node, t_context *ctx)
 		return (execute_ast(node->u_data.s_op.right, ctx));
 	else if (type == OR && status != 0)
 		return (execute_ast(node->u_data.s_op.right, ctx));
-	return (type == AND);
+	return (status);
 }
 
 int	builtins_manager(t_ast *ast, t_context **context)
