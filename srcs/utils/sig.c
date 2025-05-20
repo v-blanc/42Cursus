@@ -37,7 +37,11 @@ void	init_sig(void)
 	struct sigaction	sa;
 
 	if (!isatty(STDIN_FILENO))
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		return ;
+	}
 	disable_ctrl_backslash_echo();
 	sa = (struct sigaction){0};
 	sa.sa_flags = 0;

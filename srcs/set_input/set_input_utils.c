@@ -29,6 +29,8 @@ char	*set_readline_prompt(t_context *ctx)
 	char	*home_path;
 	char	*rl_prompt;
 
+	if (!isatty(STDIN_FILENO))
+		return (gc_strdup("", ctx->head));
 	pwd = getenv("PWD");
 	if (pwd)
 	{

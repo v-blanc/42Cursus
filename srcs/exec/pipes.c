@@ -62,7 +62,7 @@ static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 	while (++i < cmds_nb - 1)
 		if (pipe((*pipes)[i]) < 0)
 		{
-			close_pipes(pipes, i);
+			close_pipes(*pipes, i);
 			return (false);
 		}
 	return (true);
