@@ -23,5 +23,5 @@ int	exit_eof(t_context **context)
 	gc_free_all_perm(*((*context)->head));
 	rl_clear_history();
 	exit(exit_status);
-	return (0);
+	return (EXIT_SUCCESS);
 }

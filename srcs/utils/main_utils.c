@@ -47,7 +47,7 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 {
 	(*context) = gc_malloc_perm(sizeof(t_context), head);
 	if (!(*context))
-		return (1);
+		return (EXIT_FAILURE);
 	set_ptr(*context);
 	(*context)->argc = argc;
 	(*context)->argv = argv;
@@ -56,11 +56,15 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->head = head;
 	(*context)->orig_term = (struct termios){0};
 	(*context)->backup_fds[STDIN_FILENO] = dup(STDIN_FILENO);
+	if (((*context)->backup_fds[STDIN_FILENO] < 0))
+		return (EXIT_FAILURE);
 	(*context)->backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
+	if (((*context)->backup_fds[STDIN_FILENO] < 0))
+		return (EXIT_FAILURE);
 	(*context)->signal = 0;
 	(*context)->is_in_heredoc = 0;
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	update_shlvl(t_gc **head)
