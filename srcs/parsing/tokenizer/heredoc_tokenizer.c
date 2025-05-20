@@ -51,13 +51,13 @@ static int	sub_tokenizer_heredoc(const char *s, int *i, t_token **tok,
 	else
 		val = parse_word(s, i, head);
 	if (!val)
-		return (1);
+		return (EXIT_FAILURE);
 	(*tok) = new_token(WORD, quote_type, val, head);
 	if (!(*tok))
-		return (1);
+		return (EXIT_FAILURE);
 	if (s[*i] && !ft_isspace((unsigned char)s[*i]))
 		(*tok)->joined_next = 1;
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	heredoc_tokenizer(t_token **tks, const char *s, t_gc **gc)
@@ -73,10 +73,10 @@ int	heredoc_tokenizer(t_token **tks, const char *s, t_gc **gc)
 		if (!s[i])
 			break ;
 		else if (sub_tokenizer_heredoc(s, &i, &tok, gc))
-			return (1);
+			return (EXIT_FAILURE);
 		if (!tok)
-			return (1);
+			return (EXIT_FAILURE);
 		token_add_back(tks, tok);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

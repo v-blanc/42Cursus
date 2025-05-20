@@ -81,7 +81,10 @@ static bool	resolve_redirs(t_ast **redirs, int count, t_context *ctx)
 			to_expand = redirs[i]->u_data.s_red.to_expand;
 			fd = handle_heredoc(target, to_expand, ctx);
 			if (fd < 0)
+			{
+				refresh(ctx->backup_fds);
 				return (false);
+			}
 			redirs[i]->u_data.s_red.heredoc_fd = fd;
 		}
 	}

@@ -31,10 +31,11 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 	ctx->is_in_heredoc = 1;
 	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
-		ctx->is_in_heredoc = 0;
 		close(pipe_fd[STDOUT_FILENO]);
 		close(pipe_fd[STDIN_FILENO]);
-		return (-1);
+		print(2, "minishell: retrieving environment variables ");
+		print(2, "has lead to a fatal error\n");
+		exit_eof(&ctx);
 	}
 	ctx->is_in_heredoc = 0;
 	close(pipe_fd[STDOUT_FILENO]);

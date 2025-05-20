@@ -40,6 +40,8 @@ int	execute_command(t_ast *c, t_context *ctx)
 	signal(SIGQUIT, SIG_IGN);
 	if (!pid)
 		let_child_execute(c, ctx, path);
+	else if (pid < 0)
+		return (EXIT_FAILURE);
 	return (wait_for_child(pid, ctx));
 }
 
