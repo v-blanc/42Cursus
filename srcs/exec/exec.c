@@ -76,13 +76,17 @@ static bool	invalid_node_or_redirs(int *error, t_ast *node)
 
 static void	let_child_execute(t_ast *node, t_context *ctx, char *path)
 {
+	struct stat	sh;
 	const char	*command = node->u_data.s_cmd.args[0];
 	const char	*error_message = strerror(errno);
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	execve(path, node->u_data.s_cmd.args, environ);
-	print(2, "minishell: %s: %s\n", command, error_message);
+	if (!stat(path, &sh) && S_ISDIR(sh.st_mode))
+		print(2, "minishell: %s Is a directory\n", path);
+	else
+		print(2, "minishell: %s: %s\n", command, error_message);
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
 	close_heredoc_fds(node);
