@@ -15,8 +15,13 @@
 // TODO: move to another file
 void	refresh(int backup_fds[2])
 {
-	dup2(backup_fds[STDIN_FILENO], STDIN_FILENO);
-	dup2(backup_fds[STDOUT_FILENO], STDOUT_FILENO);
+	if (dup2(backup_fds[STDIN_FILENO], STDIN_FILENO) < 0)
+		return ;
+	if (dup2(backup_fds[STDOUT_FILENO], STDOUT_FILENO) < 0)
+	{
+		close(backup_fds[STDIN_FILENO]);
+		return ;
+	}
 	close(backup_fds[STDIN_FILENO]);
 	close(backup_fds[STDOUT_FILENO]);
 	backup_fds[STDIN_FILENO] = dup(STDIN_FILENO);
@@ -28,7 +33,7 @@ static void	exit_main(t_context *ctx)
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
 	gc_free_all_perm(*(ctx->head));
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv)
@@ -46,5 +51,5 @@ int	main(int argc, char **argv)
 	if (update_shlvl(&head))
 		exit_main(context);
 	set_input(&context);
-	return (0);
+	return (EXIT_SUCCESS);
 }
