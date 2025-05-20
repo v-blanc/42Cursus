@@ -6,16 +6,22 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:08:58 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/18 13:42:43 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:13:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void	update_vars(int *start_index, int *match, int *i, int j)
+static int	update_vars(int *start_index, int *match, int *i, int *j)
 {
-	*start_index = (*i)++;
-	*match = j;
+	if (*start_index != -1)
+	{
+		*i = *start_index + 1;
+		*j = ++(*match);
+		return (0);
+	}
+	else
+		return (1);
 }
 
 static int	sub_is_file_needed(t_token *tok, char *file, int *i, int *j)
@@ -35,29 +41,24 @@ static int	sub_is_file_needed(t_token *tok, char *file, int *i, int *j)
 			(*j)++;
 		}
 		else if (*i < len_tok && tok->value[*i] == '*')
-			update_vars(&start_index, &match, i, *j);
-		else if (start_index != -1)
 		{
-			*i = start_index + 1;
-			*j = ++match;
+			start_index = (*i)++;
+			match = *j;
 		}
-		else
+		else if (update_vars(&start_index, &match, i, j))
 			return (*i == len_tok);
 	}
-	return (-1);
+	while (*i < len_tok && tok->value[*i] == '*')
+		(*i)++;
+	return (*i == len_tok);
 }
 
 bool	is_file_needed(t_token *tok, char *file)
 {
-	const int	len_tok = ft_strlen(tok->value);
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	if (sub_is_file_needed(tok, file, &i, &j) == -1)
-		return (i == len_tok);
-	while (i < len_tok && tok->value[i] == '*')
-		i++;
-	return (i == len_tok);
+	return (sub_is_file_needed(tok, file, &i, &j));
 }
