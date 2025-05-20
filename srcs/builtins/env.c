@@ -20,6 +20,8 @@ int	env(t_ast *ast, t_context **context)
 	size_t	i;
 	int		j;
 
+	if (!ast || !context || !*context)
+		return (EXIT_FAILURE);
 	i = 0;
 	while (*ast->u_data.s_cmd.args && ft_strcmp(*ast->u_data.s_cmd.args,
 			"env") == 0)
