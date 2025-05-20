@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 14:21:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:18:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,27 @@ static int	sub_set_readline_prompt(char **rl_prompt, t_context *ctx)
 	return (0);
 }
 
+static void	get_pwd(char **pwd)
+{
+	char	*home_path;
+
+	*pwd = getenv("PWD");
+	if (*pwd)
+	{
+		home_path = getenv("HOME");
+		if (home_path && !ft_strncmp(*pwd, home_path, ft_strlen(home_path)))
+		{
+			ft_strlcpy(*pwd, *pwd + ft_strlen(home_path) - 1, PATH_MAX);
+			(*pwd)[0] = '~';
+		}
+	}
+	else
+		*pwd = "";
+}
+
 char	*set_readline_prompt(t_context *ctx)
 {
 	char	*pwd;
-	char	*home_path;
 	char	*rl_prompt;
 
 	if (!isatty(STDIN_FILENO))
@@ -34,18 +51,8 @@ char	*set_readline_prompt(t_context *ctx)
 		rl_prompt = get_next_line(STDIN_FILENO, ctx);
 		return (rl_prompt);
 	}
-	pwd = getenv("PWD");
-	if (pwd)
-	{
-		home_path = getenv("HOME");
-		if (home_path && !ft_strncmp(pwd, home_path, ft_strlen(home_path)))
-		{
-			ft_strlcpy(pwd, pwd + ft_strlen(home_path) - 1, PATH_MAX);
-			pwd[0] = '~';
-		}
-	}
-	else
-		pwd = "";
+	pwd = NULL;
+	get_pwd(&pwd);
 	rl_prompt = gc_strjoin(GREEN "minishell" RESET ":" BLUE, pwd, ctx->head);
 	if (!rl_prompt)
 		return (NULL);

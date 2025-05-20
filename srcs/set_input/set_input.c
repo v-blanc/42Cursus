@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 19:43:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:21:50 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ int	set_readline_hook(void)
 	return (!rl_done);
 }
 
+static void	refresh_if_isatty(t_context **ctx)
+{
+	if (isatty(STDIN_FILENO))
+		refresh((*ctx)->backup_fds);
+}
+
 static int	get_user_input(char **input, t_context **ctx)
 {
 	char	*rl_prompt;
 
-	if (isatty(STDIN_FILENO))
-		refresh((*ctx)->backup_fds);
+	refresh_if_isatty(ctx);
 	rl_prompt = set_readline_prompt(*ctx);
 	if (rl_prompt == NULL)
 	{
