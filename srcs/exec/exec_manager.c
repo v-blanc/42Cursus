@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 13:13:19 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/20 18:28:38 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 		return (0);
 	if (node->type == NODE_PAREN)
 	{
-		if (handle_redirections(node))
+		if (handle_redirections(node, ctx))
 			return (-1);
 		status = execute_ast(node->u_data.s_par.content, ctx);
 	}
@@ -30,7 +30,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	else if (node->type == NODE_PIPE)
 		status = handle_pipes(node, ctx);
 	else if (node->type == NODE_REDIR)
-		status = handle_redirections(node);
+		status = handle_redirections(node, ctx);
 	else if (node->type == NODE_CMD)
 		status = execute_command(node, ctx);
 	ctx->last_exit_status = status;
@@ -44,6 +44,8 @@ int	handle_operators(t_ast *node, t_context *ctx)
 
 	type = node->u_data.s_op.op;
 	status = execute_ast(node->u_data.s_op.left, ctx);
+	if (ctx->last_node_type == NODE_REDIR)
+		refresh(ctx->backup_fds);
 	if (type == AND && status == 0)
 		return (execute_ast(node->u_data.s_op.right, ctx));
 	else if (type == OR && status != 0)

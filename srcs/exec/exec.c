@@ -6,14 +6,14 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/18 17:20:02 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:25:14 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
 int			execute_command(t_ast *c, t_context *ctx);
-static bool	invalid_node_or_redirs(int *error, t_ast *node);
+static bool	invalid_node_or_redirs(int *error, t_ast *node, t_context *ctx);
 static void	let_child_execute(t_ast *node, t_context *ctx, char *path);
 static int	wait_for_child(pid_t pid, t_context *ctx);
 static int	print_error_and_return(t_ast *node);
@@ -26,7 +26,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 	int		error;
 	pid_t	pid;
 
-	if (invalid_node_or_redirs(&error, c))
+	if (invalid_node_or_redirs(&error, c, ctx))
 		return (error);
 	if (is_builtin(c->u_data.s_cmd.args[0]))
 		return (builtins_manager(c, &ctx));
@@ -45,7 +45,7 @@ int	execute_command(t_ast *c, t_context *ctx)
 	return (wait_for_child(pid, ctx));
 }
 
-static bool	invalid_node_or_redirs(int *error, t_ast *node)
+static bool	invalid_node_or_redirs(int *error, t_ast *node, t_context *ctx)
 {
 	const bool	command_node = (node->type == NODE_CMD);
 	const bool	no_args = (node->u_data.s_cmd.args_count == 0);
@@ -56,7 +56,7 @@ static bool	invalid_node_or_redirs(int *error, t_ast *node)
 	*error = -1;
 	if (command_node && no_args && no_redirs)
 		*error = 0;
-	else if (handle_redirections(node))
+	else if (handle_redirections(node, ctx))
 		*error = EXIT_FAILURE;
 	else if (no_args)
 		*error = 0;

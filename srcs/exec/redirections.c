@@ -6,19 +6,19 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 18:00:32 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:28:03 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int			handle_redirections(t_ast *c);
+int			handle_redirections(t_ast *c, t_context *ctx);
 static int	get_redirections_type(t_ast *c, t_ast ***redir);
 static int	get_target(t_ast **redirs, int i);
 static void	which_error(char *file);
 static int	close_then_return_exit_failure(int fd);
 
-int	handle_redirections(t_ast *c)
+int	handle_redirections(t_ast *c, t_context *ctx)
 {
 	t_ast	**redirs;
 	int		redirs_count;
@@ -47,6 +47,7 @@ int	handle_redirections(t_ast *c)
 			close_then_return_exit_failure(fd);
 		close(fd);
 	}
+	ctx->last_node_type = NODE_REDIR;
 	return (EXIT_SUCCESS);
 }
 
