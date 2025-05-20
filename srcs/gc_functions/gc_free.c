@@ -16,7 +16,7 @@ void	gc_free(void *mem, t_gc **head)
 {
 	t_gc	*tmp;
 
-	if ((*head)->mem == mem)
+	if (head && *head && (*head)->mem == mem)
 	{
 		tmp = (*head)->next;
 		free((*head)->mem);
