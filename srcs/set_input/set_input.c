@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 16:48:49 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 17:17:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	set_input(t_context **ctx)
 		ast = NULL;
 		if (parsing(input, &ast, ctx) || !resolve_all_heredocs(ast, *ctx))
 		{
+			(*ctx)->last_exit_status = 1;
 			close_heredoc_fds(ast);
 			free(input);
 			gc_free_all((*ctx)->head);
