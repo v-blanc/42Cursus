@@ -30,7 +30,11 @@ int	execute_command(t_ast *c, t_context *ctx)
 	if (invalid_node_or_redirs(&error, c, ctx))
 		return (error);
 	if (is_builtin(c->u_data.s_cmd.args[0]))
+	{
+		if (handle_redirections(c, ctx))
+			return (1);
 		return (builtins_manager(c, &ctx));
+	}
 	path = track_paths(c->u_data.s_cmd.args[0], ctx->head);
 	if ((!is_builtin(c->u_data.s_cmd.args[0])) && (!path || access(path, X_OK)))
 		return (print_error_and_return(c));
@@ -40,7 +44,11 @@ int	execute_command(t_ast *c, t_context *ctx)
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	if (!pid)
+	{
+		if (handle_redirections(c, ctx))
+			exit(EXIT_FAILURE);
 		let_child_execute(c, ctx, path);
+	}
 	else if (pid < 0)
 		return (EXIT_FAILURE);
 	command_refresh(ctx->cmd_backup_fds);

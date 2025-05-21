@@ -14,7 +14,8 @@
 
 int	execute_ast(t_ast *node, t_context *ctx)
 {
-	int	status;
+	int		status;
+	pid_t	pid;
 
 	status = 0;
 	if (!node)
@@ -22,10 +23,26 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	if (node->type == NODE_PAREN)
 	{
 		ctx->in_subshell = true;
-		if (handle_redirections(node, ctx))
-			return (-1);
-		status = execute_ast(node->u_data.s_par.content, ctx);
-		ctx->in_subshell = false;
+		pid = fork();
+		if (!pid)
+		{
+			if (handle_redirections(node, ctx))
+				exit(EXIT_FAILURE);
+			int sstatus = execute_ast(node->u_data.s_par.content, ctx);
+			close_heredoc_fds(node);
+			close(ctx->backup_fds[STDIN_FILENO]);
+			close(ctx->backup_fds[STDOUT_FILENO]);
+			close(ctx->cmd_backup_fds[STDIN_FILENO]);
+			close(ctx->cmd_backup_fds[STDOUT_FILENO]);
+			gc_free_all_perm(*ctx->head);
+			exit(sstatus);
+		}
+		else
+		{
+			wait(NULL);
+			ctx->in_subshell = false;
+			return (0);
+		}
 	}
 	else if (node->type == NODE_BINARY_OP)
 		status = handle_operators(node, ctx);
@@ -45,19 +62,30 @@ int	execute_ast(t_ast *node, t_context *ctx)
 
 int	handle_operators(t_ast *node, t_context *ctx)
 {
-	int	status;
-	int	type;
+	const int	type = node->u_data.s_op.op;
+	int			status;
+	int			exit_status;
+	pid_t		pid;
 
-	type = node->u_data.s_op.op;
-	status = execute_ast(node->u_data.s_op.left, ctx);
-	if (node->type != NODE_REDIR && ctx->last_node_type == NODE_REDIR
-		&& !(ctx->in_subshell))
-		refresh(ctx->backup_fds);
-	if (type == AND && status == 0)
-		return (execute_ast(node->u_data.s_op.right, ctx));
-	else if (type == OR && status != 0)
-		return (execute_ast(node->u_data.s_op.right, ctx));
-	return (status);
+	pid = fork();
+	if (!pid)
+	{
+		if (handle_redirections(node, ctx))
+			exit(EXIT_FAILURE);
+		exit_status = execute_ast(node->u_data.s_op.left, ctx);
+		if (type == AND && status == 0)
+			exit_status = execute_ast(node->u_data.s_op.right, ctx);
+		else if (type == OR && status != 0)
+			exit_status = execute_ast(node->u_data.s_op.right, ctx);
+		gc_free_all_perm(*ctx->head);
+		exit(exit_status);
+	}
+	else if (pid < 0)
+		return (EXIT_FAILURE);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		ctx->last_exit_status = WEXITSTATUS(status);
+	return (ctx->last_exit_status);
 }
 
 int	builtins_manager(t_ast *ast, t_context **context)
