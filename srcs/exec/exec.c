@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:52:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:55:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static int	wait_for_child(pid_t pid, t_context *ctx)
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 		ctx->last_exit_status = 128 + WTERMSIG(status);
-	else 
+	else
 		ctx->last_exit_status = WEXITSTATUS(status);
 	if (errno == ECHILD)
 	{
