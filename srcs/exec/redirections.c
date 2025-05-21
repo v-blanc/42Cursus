@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:20:01 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:34:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			handle_redirections(t_ast *c, t_context *ctx);
 static int	get_redirections_type(t_ast *c, t_ast ***redir);
 static int	get_target(t_ast **redirs, int i);
 static void	which_error(char *file);
-// static int	close_then_return_exit_failure(int fd);
+static int	dup_redir(t_ast *redir, int fd);
 
 int	handle_redirections(t_ast *c, t_context *ctx)
 {
@@ -37,18 +37,8 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 				strerror(errno));
 			return (EXIT_FAILURE);
 		}
-		if (redirs[i]->u_data.s_red.op == REDIR_OUT
-			|| redirs[i]->u_data.s_red.op == REDIR_APPEND)
-		{
-			if (dup2(fd, STDOUT_FILENO) < 0)
-			{
-				close(fd);
-				return (EXIT_FAILURE);
-			}
-		}
-		else
-			dup2(fd, STDIN_FILENO);
-		close(fd);
+		if (dup_redir(redirs[i], fd))
+			return (EXIT_FAILURE);
 	}
 	ctx->last_node_type = NODE_REDIR;
 	return (EXIT_SUCCESS);
@@ -109,8 +99,19 @@ static void	which_error(char *file)
 	return ;
 }
 
-// static int	close_then_return_exit_failure(int fd)
-// {
-// 	close(fd);
-// 	return (EXIT_FAILURE);
-// }
+static int	dup_redir(t_ast *redir, int fd)
+{
+	if (redir->u_data.s_red.op == REDIR_OUT
+		|| redir->u_data.s_red.op == REDIR_APPEND)
+	{
+		if (dup2(fd, STDOUT_FILENO) < 0)
+		{
+			close(fd);
+			return (EXIT_FAILURE);
+		}
+	}
+	else
+		dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (EXIT_SUCCESS);
+}
