@@ -6,15 +6,25 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:30:14 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:27:26 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
+static int	execute_pipe(t_ast *node, t_context *ctx)
+{
+	int	status;
+
+	ctx->in_subshell = true;
+	status = handle_pipes(node, ctx);
+	ctx->in_subshell = false;
+	return (status);
+}
+
 int	execute_ast(t_ast *node, t_context *ctx)
 {
-	int		status;
+	int	status;
 
 	status = 0;
 	if (!node)
@@ -30,11 +40,7 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	else if (node->type == NODE_BINARY_OP)
 		status = handle_operators(node, ctx);
 	else if (node->type == NODE_PIPE)
-	{
-		ctx->in_subshell = true;
-		status = handle_pipes(node, ctx);
-		ctx->in_subshell = false;
-	}
+		status = execute_pipe(node, ctx);
 	else if (node->type == NODE_REDIR)
 		status = handle_redirections(node, ctx);
 	else if (node->type == NODE_CMD)
