@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:09:10 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 19:17:19 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:10:30 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,28 @@ int			handle_pipes(t_ast *pipe_node, t_context *ctx);
 static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb);
 static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx);
 static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx);
-static void	close_pipes(int (*pipes)[2], int cmds_nb);
 
 int	handle_pipes(t_ast *pipe_node, t_context *ctx)
 {
 	pid_t		*pids;
 	const int	cmds_nb = pipe_node->u_data.s_pipe.cmd_count;
-	int			index[2];
+	int			i;
 	t_ast		*curr_cmd;
 	int			(*pipes)[2];
 
 	pids = gc_malloc(sizeof(pid_t) * cmds_nb, ctx->head);
 	if (!c_pipes(&pipes, ctx, cmds_nb))
 		return (EXIT_FAILURE);
-	index[0] = -1;
-	while (++index[0] < cmds_nb)
+	i = -1;
+	while (++i < cmds_nb)
 	{
-		pids[index[0]] = fork();
-		if (pids[index[0]] == 0)
-			execute_child(index[0], pipes, pipe_node, ctx);
-		else if (pids[index[0]] < 0)
+		pids[i] = fork();
+		if (pids[i] == 0)
+			execute_child(i, pipes, pipe_node, ctx);
+		else if (pids[i] < 0)
 			return (EXIT_FAILURE);
-		index[1] = 0;
-		curr_cmd = pipe_node->u_data.s_pipe.commands[index[0]];
-		while (curr_cmd->u_data.s_cmd.redirs && curr_cmd->u_data.s_cmd.redirs[index[1]])
-		{
-			if (curr_cmd->u_data.s_cmd.redirs[index[1]]->u_data.s_red.op == 5)
-				waitpid(pids[index[0]], NULL, 0);
-			index[1]++;
-		}
+		curr_cmd = pipe_node->u_data.s_pipe.commands[i];
+		wait_for_heredocs(curr_cmd, pids);
 	}
 	close_pipes(pipes, cmds_nb - 1);
 	wait_children(pids, cmds_nb, ctx);
@@ -60,11 +53,13 @@ static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 		return (false);
 	i = -1;
 	while (++i < cmds_nb - 1)
+	{
 		if (pipe((*pipes)[i]) < 0)
 		{
 			close_pipes(*pipes, i);
 			return (false);
 		}
+	}
 	return (true);
 }
 
@@ -89,13 +84,7 @@ static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 			exit_eof(&ctx);
 		}
 	}
-	close_pipes(pipes, pn->u_data.s_pipe.cmd_count - 1);
-	status = execute_ast(pn->u_data.s_pipe.commands[i], ctx);
-	close(ctx->backup_fds[STDIN_FILENO]);
-	close(ctx->backup_fds[STDOUT_FILENO]);
-	close_heredoc_fds(pn);
-	gc_free_all_perm(*(ctx->head));
-	exit(status);
+	clean_exit(pipes, i, pn, ctx);
 }
 
 static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
@@ -110,18 +99,5 @@ static void	wait_children(pid_t *pids, int cmds_nb, t_context *ctx)
 		waitpid(pids[i], &status, 0);
 		if (WIFEXITED(status))
 			ctx->last_exit_status = WEXITSTATUS(status);
-	}
-}
-
-static void	close_pipes(int (*pipes)[2], int cmds_nb)
-{
-	int	i;
-
-	i = 0;
-	while (i < cmds_nb)
-	{
-		close(pipes[i][STDIN_FILENO]);
-		close(pipes[i][STDOUT_FILENO]);
-		i++;
 	}
 }
