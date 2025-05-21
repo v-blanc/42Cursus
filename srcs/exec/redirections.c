@@ -41,11 +41,14 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 			|| redirs[i]->u_data.s_red.op == REDIR_APPEND)
 		{
 			if (dup2(fd, STDOUT_FILENO) < 0)
-				close_then_return_exit_failure(fd);
+				return (close_then_return_exit_failure(fd));
+			if (fd != STDOUT_FILENO)
+				close(fd);
 		}
 		else if (dup2(fd, STDIN_FILENO) < 0)
-			close_then_return_exit_failure(fd);
-		close(fd);
+			return (close_then_return_exit_failure(fd));
+		if (fd != STDIN_FILENO)
+			close(fd);
 	}
 	ctx->last_node_type = NODE_REDIR;
 	return (EXIT_SUCCESS);

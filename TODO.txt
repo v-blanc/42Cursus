@@ -1,4 +1,5 @@
 $> cat << toto
 > &&
 /!\ Seg fault
+perhaps removing the fork in paren
 

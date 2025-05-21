@@ -27,6 +27,12 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
+	if (pipe_fd[0] <= 2)
+	{
+		int new_fd = dup(pipe_fd[0]);
+		close(pipe_fd[0]);
+		pipe_fd[0] = new_fd;
+	}
 	init_sig_heredoc();
 	ctx->is_in_heredoc = 1;
 	ctx->last_exit_status = 666;

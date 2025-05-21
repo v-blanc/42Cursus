@@ -73,9 +73,9 @@ int	handle_operators(t_ast *node, t_context *ctx)
 		if (handle_redirections(node, ctx))
 			exit(EXIT_FAILURE);
 		exit_status = execute_ast(node->u_data.s_op.left, ctx);
-		if (type == AND && status == 0)
+		if (type == AND && exit_status == 0)
 			exit_status = execute_ast(node->u_data.s_op.right, ctx);
-		else if (type == OR && status != 0)
+		else if (type == OR && exit_status != 0)
 			exit_status = execute_ast(node->u_data.s_op.right, ctx);
 		gc_free_all_perm(*ctx->head);
 		exit(exit_status);
