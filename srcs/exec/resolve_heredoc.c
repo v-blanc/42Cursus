@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolve_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:16:45 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 21:16:45 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:19:12 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static bool	resolve_cmd_or_paren(t_ast *ast, t_context *ctx)
 	if (ast->type == NODE_PAREN)
 	{
 		count = ast->u_data.s_par.redir_count;
-		return (resolve_redirs(paren, count, ctx));
+		resolve_redirs(paren, count, ctx);
+		return (resolve_all_heredocs(ast->u_data.s_par.content, ctx));
 	}
 	return (true);
 }

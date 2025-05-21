@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 21:12:04 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:55:32 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static void	let_child_execute(t_ast *node, t_context *ctx, char *path)
 		print(2, "minishell: %s: %s\n", command, error_message);
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
-	close_heredoc_fds(node);
 	close(ctx->cmd_backup_fds[STDIN_FILENO]);
 	close(ctx->cmd_backup_fds[STDOUT_FILENO]);
 	gc_free_all_perm(*ctx->head);
