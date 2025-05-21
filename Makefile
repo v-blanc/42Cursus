@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/21 14:33:41 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/21 17:19:10 by yabokhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ FILES := main.c\
 		exec/resolve_heredoc.c\
 		exec/exec_manager.c\
 		exec/pipes.c\
+		exec/pipes_utils.c\
 		exec/redirections.c\
 		\
 		builtins/cd.c\
