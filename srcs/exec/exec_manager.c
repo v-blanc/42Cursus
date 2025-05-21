@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 17:27:26 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 18:21:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ int	builtins_manager(t_ast *ast, t_context **context)
 		status = pwd(1);
 	if (!ft_strncmp(args[0], "unset", 6))
 		status = unset(args + 1, (*context)->head);
-	if (!ft_strncmp(args[0], "repeat", 6))
-		status = repeat(ast, context);
 	command_refresh((*context)->cmd_backup_fds);
 	return (status);
 }

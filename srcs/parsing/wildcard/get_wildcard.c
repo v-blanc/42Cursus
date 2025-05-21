@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:37:58 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 17:47:49 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 18:21:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,7 @@ int	get_wildcard(char ***files, t_gc **head)
 
 	cwd = gc_malloc(PATH_MAX, head);
 	if (getcwd(cwd, PATH_MAX) == NULL)
-	{
-		// printf("minishell: getcwd: %s\n", strerror(errno));
 		return (0);
-	}
 	count = count_files(cwd);
 	if (!count)
 		return (0);

@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/21 17:19:10 by yabokhar         ###   ########.fr        #
+#    Updated: 2025/05/21 18:21:50 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,6 @@ FILES := main.c\
 		builtins/export_utils.c\
 		builtins/pwd.c\
 		builtins/unset.c\
-		builtins/repeat.c\
 		\
 		set_input/set_input.c\
 		set_input/set_input_utils.c\
