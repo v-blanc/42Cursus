@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:48:04 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:52:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	execute_command(t_ast *c, t_context *ctx)
 	signal(SIGQUIT, SIG_IGN);
 	if (!pid)
 		let_child_execute(c, ctx, path);
-	else if (pid < 0)
-		return (EXIT_FAILURE);
 	command_refresh(ctx->cmd_backup_fds);
 	return (wait_for_child(pid, ctx));
 }
@@ -105,8 +103,13 @@ static int	wait_for_child(pid_t pid, t_context *ctx)
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 		ctx->last_exit_status = 128 + WTERMSIG(status);
-	else
+	else 
 		ctx->last_exit_status = WEXITSTATUS(status);
+	if (errno == ECHILD)
+	{
+		print(2, "minishell: %s\n", strerror(ECHILD));
+		ctx->last_exit_status = EXIT_FAILURE;
+	}
 	return (ctx->last_exit_status);
 }
 
