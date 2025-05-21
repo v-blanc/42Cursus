@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabokhar <yabokhar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:55:35 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 17:08:43 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:05:47 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	clean_exit(int (*pipes)[2], int i, t_ast *pipe_node, t_context *ctx)
 	status = execute_ast(pipe_node->u_data.s_pipe.commands[i], ctx);
 	close(ctx->backup_fds[STDIN_FILENO]);
 	close(ctx->backup_fds[STDOUT_FILENO]);
+	close(ctx->cmd_backup_fds[STDIN_FILENO]);
+	close(ctx->cmd_backup_fds[STDOUT_FILENO]);
 	close_heredoc_fds(pipe_node);
 	gc_free_all_perm(*(ctx->head));
 	exit(status);
