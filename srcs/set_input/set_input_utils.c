@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 21:17:55 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:02:00 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	get_pwd(char **pwd)
 {
 	char	*home_path;
 
-	*pwd = getenv("PWD");
+	if (getcwd(*pwd, PATH_MAX) == NULL)
+		print(2, "minishell: getcwd: %s\n", strerror(errno));
 	if (*pwd)
 	{
 		home_path = getenv("HOME");
@@ -46,7 +47,7 @@ char	*set_readline_prompt(t_context *ctx)
 	char	*pwd;
 	char	*rl_prompt;
 
-	pwd = NULL;
+	pwd = gc_malloc(PATH_MAX, ctx->head);
 	get_pwd(&pwd);
 	rl_prompt = gc_strjoin(GREEN "minishell" RESET ":" BLUE, pwd, ctx->head);
 	if (!rl_prompt)
