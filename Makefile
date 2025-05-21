@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/21 18:21:50 by vblanc           ###   ########.fr        #
+#    Updated: 2025/05/21 18:29:21 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ fclean:
 	@make -C libft fclean
 	$(RM) $(OBJDIR)
 	$(RM) $(NAME)
+	$(RM) $(NAME_BONUS)
 
 re: fclean all
 
