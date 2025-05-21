@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:34:28 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:48:04 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ static int	wait_for_child(pid_t pid, t_context *ctx)
 		ctx->last_exit_status = 128 + WTERMSIG(status);
 	else
 		ctx->last_exit_status = WEXITSTATUS(status);
-	init_sig();
 	return (ctx->last_exit_status);
 }
 

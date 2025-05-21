@@ -6,22 +6,16 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 14:40:29 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:48:49 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "set_input.h"
 
 extern bool	g_sigint;
-extern bool	g_was_in_heredoc;
 
 int	set_readline_hook(void)
 {
-	if (g_sigint && g_was_in_heredoc)
-	{
-		g_was_in_heredoc = false;
-		return (0);
-	}
 	if (g_sigint)
 		rl_done = 1;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:46:57 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 21:15:29 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:45:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char **argv)
 	t_gc		*head;
 	t_context	*context;
 
-	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO) || !isatty(2))
+	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO)
+		|| !isatty(STDERR_FILENO))
 		return (EXIT_FAILURE);
 	head = NULL;
 	context = NULL;

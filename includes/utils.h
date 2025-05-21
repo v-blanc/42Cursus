@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:49:42 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 14:33:49 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:48:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		update_shlvl(t_gc **head);
 // sig
 
 void	init_sig(void);
-void	init_sig_heredoc(void);
 
 // print
 

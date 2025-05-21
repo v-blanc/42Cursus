@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 15:06:10 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:47:56 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 extern char	**environ;
 extern bool	g_sigint;
-extern bool	g_was_in_heredoc;
 
 int			handle_heredoc(char *delim, const bool ex, t_context *ctx);
 static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx);
@@ -29,7 +28,7 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
-	init_sig_heredoc();
+	init_sig();
 	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
 		close(pipe_fd[STDOUT_FILENO]);
@@ -38,7 +37,6 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 		print(2, "has lead to a fatal error\n");
 		exit_eof(&ctx);
 	}
-	g_was_in_heredoc = true;
 	close(pipe_fd[STDOUT_FILENO]);
 	return (pipe_fd[STDIN_FILENO]);
 }
