@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 21:08:50 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:06:04 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	execute_ast(t_ast *node, t_context *ctx)
 {
 	int		status;
-	pid_t	pid;
 
 	status = 0;
 	if (!node)
@@ -23,26 +22,10 @@ int	execute_ast(t_ast *node, t_context *ctx)
 	if (node->type == NODE_PAREN)
 	{
 		ctx->in_subshell = true;
-		pid = fork();
-		if (!pid)
-		{
-			if (handle_redirections(node, ctx))
-				exit(EXIT_FAILURE);
-			int sstatus = execute_ast(node->u_data.s_par.content, ctx);
-			close_heredoc_fds(node);
-			close(ctx->backup_fds[STDIN_FILENO]);
-			close(ctx->backup_fds[STDOUT_FILENO]);
-			close(ctx->cmd_backup_fds[STDIN_FILENO]);
-			close(ctx->cmd_backup_fds[STDOUT_FILENO]);
-			gc_free_all_perm(*ctx->head);
-			exit(sstatus);
-		}
-		else
-		{
-			wait(NULL);
-			ctx->in_subshell = false;
-			return (0);
-		}
+		if (handle_redirections(node, ctx))
+			return (-1);
+		status = execute_ast(node->u_data.s_par.content, ctx);
+		ctx->in_subshell = false;
 	}
 	else if (node->type == NODE_BINARY_OP)
 		status = handle_operators(node, ctx);

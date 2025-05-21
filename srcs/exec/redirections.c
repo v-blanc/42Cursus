@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/20 19:53:55 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:05:09 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,10 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 			|| redirs[i]->u_data.s_red.op == REDIR_APPEND)
 		{
 			if (dup2(fd, STDOUT_FILENO) < 0)
-				return (close_then_return_exit_failure(fd));
-			if (fd != STDOUT_FILENO)
-				close(fd);
+				close_then_return_exit_failure(fd);
 		}
 		else if (dup2(fd, STDIN_FILENO) < 0)
-			return (close_then_return_exit_failure(fd));
-		if (fd != STDIN_FILENO)
-			close(fd);
+			close_then_return_exit_failure(fd);
 	}
 	ctx->last_node_type = NODE_REDIR;
 	return (EXIT_SUCCESS);

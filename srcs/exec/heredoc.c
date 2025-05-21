@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 13:34:23 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 15:06:10 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,10 @@ static bool	expander_heredoc(int fd, char *line, t_context *ctx);
 int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 {
 	int	pipe_fd[2];
-	int	new_fd;
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
-	if (pipe_fd[0] <= 2)
-	{
-		new_fd = dup(pipe_fd[0]);
-		close(pipe_fd[0]);
-		pipe_fd[0] = new_fd;
-	}
 	init_sig_heredoc();
-	ctx->last_exit_status = 666;
 	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
 		close(pipe_fd[STDOUT_FILENO]);
