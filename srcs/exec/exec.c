@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:55:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 18:00:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,10 @@ static int	print_error_and_return(t_ast *node, t_context *ctx)
 	const char	*command = node->u_data.s_cmd.args[0];
 	const char	*error_message = strerror(errno);
 
-	close(ctx->cmd_backup_fds[0]);
-	close(ctx->cmd_backup_fds[1]);
+	close(ctx->backup_fds[STDIN_FILENO]);
+	close(ctx->backup_fds[STDOUT_FILENO]);
+	close(ctx->cmd_backup_fds[STDIN_FILENO]);
+	close(ctx->cmd_backup_fds[STDOUT_FILENO]);
 	if (errno == ENOENT)
 	{
 		print(2, "minishell: %s: command not found\n", command);
