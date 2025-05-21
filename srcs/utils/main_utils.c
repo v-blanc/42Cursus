@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:25:07 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 13:32:51 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:34:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context) = gc_malloc_perm(sizeof(t_context), head);
 	if (!(*context))
 		return (EXIT_FAILURE);
-	set_ptr(*context);
 	(*context)->argc = argc;
 	(*context)->argv = argv;
 	(*context)->last_exit_status = 0;

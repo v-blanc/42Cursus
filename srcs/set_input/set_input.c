@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 14:06:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:40:29 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	set_readline_hook(void)
 {
 	if (g_sigint && g_was_in_heredoc)
 	{
-		// rl_done = 0;
 		g_was_in_heredoc = false;
 		return (0);
 	}
@@ -28,17 +27,12 @@ int	set_readline_hook(void)
 	return (0);
 }
 
-static void	refresh_if_isatty(t_context **ctx)
-{
-	if (isatty(STDIN_FILENO))
-		refresh((*ctx)->backup_fds);
-}
-
 static int	get_user_input(char **input, t_context **ctx)
 {
 	char	*rl_prompt;
 
-	refresh_if_isatty(ctx);
+	if (isatty(STDIN_FILENO))
+		refresh((*ctx)->backup_fds);
 	rl_prompt = set_readline_prompt(*ctx);
 	if (rl_prompt == NULL)
 	{
@@ -62,13 +56,18 @@ static int	get_user_input(char **input, t_context **ctx)
 	return (0);
 }
 
-static void	handle_signal(t_context **ctx)
+static void	cleanup_set_input(t_ast *ast, t_context **ctx)
 {
 	if (g_sigint)
 	{
 		(*ctx)->last_exit_status = 130;
 		g_sigint = false;
 	}
+	close_heredoc_fds(ast);
+	close((*ctx)->cmd_backup_fds[STDIN_FILENO]);
+	close((*ctx)->cmd_backup_fds[STDOUT_FILENO]);
+	refresh((*ctx)->backup_fds);
+	gc_free_all((*ctx)->head);
 }
 
 void	set_input(t_context **ctx)
@@ -93,11 +92,6 @@ void	set_input(t_context **ctx)
 		}
 		free(input);
 		execute_ast(ast, *ctx);
-		close_heredoc_fds(ast);
-		close((*ctx)->cmd_backup_fds[STDIN_FILENO]);
-		close((*ctx)->cmd_backup_fds[STDOUT_FILENO]);
-		handle_signal(ctx);
-		refresh((*ctx)->backup_fds);
-		gc_free_all((*ctx)->head);
+		cleanup_set_input(ast, ctx);
 	}
 }

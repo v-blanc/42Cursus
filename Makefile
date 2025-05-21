@@ -6,7 +6,7 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 16:18:52 by yabokhar          #+#    #+#              #
-#    Updated: 2025/05/20 21:17:33 by yabokhar         ###   ########.fr        #
+#    Updated: 2025/05/21 14:33:41 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,6 @@ FILES := main.c\
 		utils/close_heredoc_fds.c\
 		utils/print.c\
 		utils/sig.c\
-		utils/pointer.c\
 		utils/exit_eof.c
 
 SRCS := $(addprefix $(SRCDIR)/, $(FILES))

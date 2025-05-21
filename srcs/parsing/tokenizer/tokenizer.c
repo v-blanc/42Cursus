@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:35:43 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 19:26:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:32:46 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,32 @@ static int	sub_tokenizer(const char *s, int *i, t_token **tok, t_gc **head)
 	return (0);
 }
 
-static int	handle_error(t_token *tok, const char *s, int *i, int len)
+static t_token	*tokensizer_loop(const char *s, int *i, int *len,
+		t_context **ctx)
 {
-	t_context	*ctx;
+	t_token	*tok;
 
-	if (!tok)
-		return (1);
-	if (tok->type == END)
+	if (is_operator_char(s[*i]))
 	{
-		if (s[*i])
+		tok = new_token(get_op_type(&s[*i], len), 0, NULL, (*ctx)->head);
+		if (!tok)
+			return (NULL);
+		if (tok->type == END)
 		{
-			print(2, "minishell: syntax error near unexpected token  `&'\n");
-			ctx = get_ptr();
-			ctx->last_exit_status = 2;
-			return (1);
+			if (s[*i])
+			{
+				print(2, "minishell: syntax error near unexpected token `&'\n");
+				(*ctx)->last_exit_status = 2;
+				return (NULL);
+			}
+			i++;
+			return (tok);
 		}
-		(*i)++;
-		return (0);
+		*i += *len;
 	}
-	(*i) += len;
-	return (0);
+	else if (sub_tokenizer(s, i, &tok, (*ctx)->head))
+		return (NULL);
+	return (tok);
 }
 
 int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
@@ -125,14 +131,7 @@ int	tokenizer(t_token **tokens, const char *s, t_context **ctx)
 			i++;
 		if (!s[i])
 			break ;
-		if (is_operator_char(s[i]))
-		{
-			tok = new_token(get_op_type(&s[i], &len), 0, NULL, (*ctx)->head);
-			if (handle_error(tok, s, &i, len))
-				return (1);
-		}
-		else if (sub_tokenizer(s, &i, &tok, (*ctx)->head))
-			return (1);
+		tok = tokensizer_loop(s, &i, &len, ctx);
 		if (!tok)
 			return (1);
 		token_add_back(tokens, tok);

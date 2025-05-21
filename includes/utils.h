@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:49:42 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 21:18:47 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:33:49 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void	init_sig_heredoc(void);
 // print
 
 void	print(int fd, const char *format, ...);
-
-// pointer
-
-void	set_ptr(void *ptr);
-void	*get_ptr(void);
 
 // exit
 
