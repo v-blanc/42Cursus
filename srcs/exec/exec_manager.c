@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:49:58 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 15:06:04 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:30:14 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ int	handle_operators(t_ast *node, t_context *ctx)
 	pid = fork();
 	if (!pid)
 	{
-		if (handle_redirections(node, ctx))
-			exit(EXIT_FAILURE);
 		exit_status = execute_ast(node->u_data.s_op.left, ctx);
 		if (type == AND && exit_status == 0)
 			exit_status = execute_ast(node->u_data.s_op.right, ctx);
 		else if (type == OR && exit_status != 0)
 			exit_status = execute_ast(node->u_data.s_op.right, ctx);
+		close(ctx->backup_fds[0]);
+		close(ctx->backup_fds[1]);
+		close_heredoc_fds(node);
 		gc_free_all_perm(*ctx->head);
 		exit(exit_status);
 	}

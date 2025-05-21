@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:30:04 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 15:55:32 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:34:28 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			execute_command(t_ast *c, t_context *ctx);
 static bool	invalid_node_or_redirs(int *error, t_ast *node, t_context *ctx);
 static void	let_child_execute(t_ast *node, t_context *ctx, char *path);
 static int	wait_for_child(pid_t pid, t_context *ctx);
-static int	print_error_and_return(t_ast *node);
+static int	print_error_and_return(t_ast *node, t_context *ctx);
 
 extern char	**environ;
 
@@ -30,25 +30,17 @@ int	execute_command(t_ast *c, t_context *ctx)
 	if (invalid_node_or_redirs(&error, c, ctx))
 		return (error);
 	if (is_builtin(c->u_data.s_cmd.args[0]))
-	{
-		if (handle_redirections(c, ctx))
-			return (1);
 		return (builtins_manager(c, &ctx));
-	}
 	path = track_paths(c->u_data.s_cmd.args[0], ctx->head);
 	if ((!is_builtin(c->u_data.s_cmd.args[0])) && (!path || access(path, X_OK)))
-		return (print_error_and_return(c));
+		return (print_error_and_return(c, ctx));
 	if (ft_strcmp(c->u_data.s_cmd.args[0], "exit") == 0)
 		exit_(c->u_data.s_cmd.args_count, c->u_data.s_cmd.args + 1, &ctx);
 	pid = fork();
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	if (!pid)
-	{
-		if (handle_redirections(c, ctx))
-			exit(EXIT_FAILURE);
 		let_child_execute(c, ctx, path);
-	}
 	else if (pid < 0)
 		return (EXIT_FAILURE);
 	command_refresh(ctx->cmd_backup_fds);
@@ -119,11 +111,13 @@ static int	wait_for_child(pid_t pid, t_context *ctx)
 	return (ctx->last_exit_status);
 }
 
-static int	print_error_and_return(t_ast *node)
+static int	print_error_and_return(t_ast *node, t_context *ctx)
 {
 	const char	*command = node->u_data.s_cmd.args[0];
 	const char	*error_message = strerror(errno);
 
+	close(ctx->cmd_backup_fds[0]);
+	close(ctx->cmd_backup_fds[1]);
 	if (errno == ENOENT)
 	{
 		print(2, "minishell: %s: command not found\n", command);

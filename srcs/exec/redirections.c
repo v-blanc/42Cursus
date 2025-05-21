@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:15:39 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:17 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:20:01 by yabokhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	handle_redirections(t_ast *c, t_context *ctx)
 				return (EXIT_FAILURE);
 			}
 		}
-		else if (dup2(fd, STDIN_FILENO) < 0)
-			close(fd);
+		else
+			dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
 	ctx->last_node_type = NODE_REDIR;
