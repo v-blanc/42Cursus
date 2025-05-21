@@ -6,11 +6,14 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:25:31 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/19 13:36:35 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 13:15:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+bool		g_sigint = false;
+bool		g_was_in_heredoc = false;
 
 static void	disable_ctrl_backslash_echo(void)
 {
@@ -23,11 +26,8 @@ static void	disable_ctrl_backslash_echo(void)
 
 static void	sig_handler(int sig)
 {
-	t_context	*ctx;
-
 	(void)sig;
-	ctx = get_ptr();
-	ctx->signal = 130;
+	g_sigint = true;
 }
 
 void	init_sig(void)
@@ -51,13 +51,8 @@ void	init_sig(void)
 
 static void	sig_handler_heredoc(int sig)
 {
-	t_context	*ctx;
-
 	(void)sig;
-	ctx = get_ptr();
-	ctx->signal = 130;
-	if (ctx->is_in_heredoc)
-		ctx->is_in_heredoc = 0;
+	g_sigint = true;
 }
 
 void	init_sig_heredoc(void)

@@ -6,20 +6,26 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:26:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 21:10:39 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:06:16 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "set_input.h"
 
+extern bool	g_sigint;
+extern bool	g_was_in_heredoc;
+
 int	set_readline_hook(void)
 {
-	t_context	*ctx;
-
-	ctx = get_ptr();
-	if (ctx->signal)
+	if (g_sigint && g_was_in_heredoc)
+	{
+		// rl_done = 0;
+		g_was_in_heredoc = false;
+		return (0);
+	}
+	if (g_sigint)
 		rl_done = 1;
-	return (!rl_done);
+	return (0);
 }
 
 static void	refresh_if_isatty(t_context **ctx)
@@ -40,12 +46,11 @@ static int	get_user_input(char **input, t_context **ctx)
 		return (1);
 	}
 	(*input) = readline(rl_prompt);
-	rl_done = 0;
-	if ((*ctx)->signal)
+	if (g_sigint)
 	{
 		free(*input);
-		(*ctx)->last_exit_status = (*ctx)->signal;
-		(*ctx)->signal = 0;
+		(*ctx)->last_exit_status = 130;
+		g_sigint = false;
 		return (1);
 	}
 	if (!is_valid_rl_input(*input, ctx))
@@ -59,10 +64,10 @@ static int	get_user_input(char **input, t_context **ctx)
 
 static void	handle_signal(t_context **ctx)
 {
-	if ((*ctx)->signal)
+	if (g_sigint)
 	{
-		(*ctx)->last_exit_status = (*ctx)->signal;
-		(*ctx)->signal = 0;
+		(*ctx)->last_exit_status = 130;
+		g_sigint = false;
 	}
 }
 

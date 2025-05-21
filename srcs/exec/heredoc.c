@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:00 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/19 21:35:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 13:34:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "utils.h"
 
 extern char	**environ;
+extern bool	g_sigint;
+extern bool	g_was_in_heredoc;
 
 int			handle_heredoc(char *delim, const bool ex, t_context *ctx);
 static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx);
@@ -24,17 +26,17 @@ static bool	expander_heredoc(int fd, char *line, t_context *ctx);
 int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 {
 	int	pipe_fd[2];
+	int	new_fd;
 
 	if (pipe(pipe_fd) < 0)
 		return (-1);
 	if (pipe_fd[0] <= 2)
 	{
-		int new_fd = dup(pipe_fd[0]);
+		new_fd = dup(pipe_fd[0]);
 		close(pipe_fd[0]);
 		pipe_fd[0] = new_fd;
 	}
 	init_sig_heredoc();
-	ctx->is_in_heredoc = 1;
 	ctx->last_exit_status = 666;
 	if (!read_input(pipe_fd[STDOUT_FILENO], delimiter, expand, ctx))
 	{
@@ -44,7 +46,7 @@ int	handle_heredoc(char *delimiter, const bool expand, t_context *ctx)
 		print(2, "has lead to a fatal error\n");
 		exit_eof(&ctx);
 	}
-	ctx->is_in_heredoc = 0;
+	g_was_in_heredoc = true;
 	close(pipe_fd[STDOUT_FILENO]);
 	return (pipe_fd[STDIN_FILENO]);
 }
@@ -57,7 +59,7 @@ static bool	read_input(int fd, char *delim, const bool ex, t_context *ctx)
 	count = 1;
 	while (true)
 	{
-		if (ctx->signal == 130)
+		if (g_sigint)
 			break ;
 		line = readline("> ");
 		if (line && line[0] == '\n' && !line[1])

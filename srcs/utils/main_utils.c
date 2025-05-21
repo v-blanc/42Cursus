@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:25:07 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/20 18:49:38 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:32:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	init_context(t_context **context, int argc, char **argv, t_gc **head)
 	(*context)->backup_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
 	if (((*context)->backup_fds[STDIN_FILENO] < 0))
 		return (EXIT_FAILURE);
-	(*context)->signal = 0;
-	(*context)->is_in_heredoc = 0;
 	(*context)->in_subshell = false;
 	tcgetattr(STDIN_FILENO, &(*context)->orig_term);
 	return (EXIT_SUCCESS);
