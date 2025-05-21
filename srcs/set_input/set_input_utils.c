@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:21:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/21 17:02:00 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/05/21 17:48:02 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static void	get_pwd(char **pwd)
 {
 	char	*home_path;
 
-	if (getcwd(*pwd, PATH_MAX) == NULL)
-		print(2, "minishell: getcwd: %s\n", strerror(errno));
+	getcwd(*pwd, PATH_MAX);
 	if (*pwd)
 	{
 		home_path = getenv("HOME");
