@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:45:00 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 12:40:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/02 20:45:23 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ void Account::makeDeposit(int deposit)
 
 bool Account::makeWithdrawal(int withdrawal)
 {
-	this->_totalNbWithdrawals++;
-	this->_totalAmount -= withdrawal;
 	Account::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";p_amount:" << this->_amount;
 	if (Account::checkAmount() >= withdrawal)
 	{
+		this->_totalNbWithdrawals++;
+		this->_totalAmount -= withdrawal;
 		this->_amount -= withdrawal;
 		std::cout << ";withdrawal:" << withdrawal << ";amount:" << this->_amount;
 		std::cout << ";nb_withdrawals:" << ++this->_nbWithdrawals << std::endl;
