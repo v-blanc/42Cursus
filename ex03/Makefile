@@ -1,5 +1,5 @@
 CC := c++
-CFLAGS := -Wall -Werror -Wextra -std=c++98 -MMD -MP -g
+CFLAGS := -Wall -Werror -Wextra -Wshadow -std=c++98 -MMD -MP -g
 
 NAME := Now_it_s_weird!
 RM := rm -rf
