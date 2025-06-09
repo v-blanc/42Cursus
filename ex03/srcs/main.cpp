@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:05:23 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 20:47:45 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/09 21:42:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
+void	get_stats(const DiamondTrap &diamondtrap)
+{
+	std::cout << "[ " << diamondtrap.getName() << " have " << diamondtrap.getAttackDamage() << " attack damage ]" << std::endl;
+	std::cout << "[ " << diamondtrap.getName() << " have " << diamondtrap.getHitPoints() << " hit points ]" << std::endl;
+	std::cout << "[ " << diamondtrap.getName() << " have " << diamondtrap.getEnergyPoints() << " energy points ]" << std::endl;
+	std::cout << std::endl;
+}
+
 int	main(void)
 {
-	DiamondTrap vincent("vincent");
-	std::cout << std::endl;
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getHitPoints() << " hit points ]" << std::endl;
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getEnergyPoints() << " energy points ]" << std::endl;
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getAttackDamage() << " attack damage ]" << std::endl;
-	std::cout << std::endl;
-	std::cout << "---------------------- whoAmI() -----------------------" << std::endl;
-	vincent.whoAmI();
-	std::cout << std::endl;
+	DiamondTrap vincent("Vincent");
+	get_stats(vincent);
 	vincent.attack("Zidane");
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getEnergyPoints() << " energy points ]" << std::endl;
-	std::cout << std::endl;
+	get_stats(vincent);
 	vincent.takeDamage(70);
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getHitPoints() << " hit points ]" << std::endl;
-	std::cout << std::endl;
+	get_stats(vincent);
 	vincent.beRepaired(1000);
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getHitPoints() << " hit points ]" << std::endl;
-	std::cout << "[ " << vincent.getName() << " have " << vincent.getEnergyPoints() << " energy points ]" << std::endl;
+	get_stats(vincent);
+	std::cout << "----------------------- whoAmI() -----------------------" << std::endl;
+	vincent.whoAmI();
 	std::cout << std::endl;
 	std::cout << "------------------- highFivesGuys() -------------------" << std::endl;
 	vincent.highFivesGuys();
