@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:56:53 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 16:44:15 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/09 19:42:15 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	main(void)
 		{
 			std::cout << std::endl;
 			std::cout << "Enter x and y coordinates of point " << i + 1;
-			std::cout << std::endl << "    x: ";
+			std::cout << std::endl << "    x_" << (i + 1) << ": ";
 			std::cin >> x;
-			std::cout << "    y: ";
+			std::cout << "    y_" << (i + 1) << ": ";
 			std::cin >> y;
 			if (i == 0)
 				a = Point(x, y);
