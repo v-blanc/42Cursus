@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 13:56:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 15:32:13 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/09 19:28:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,27 +131,27 @@ Fixed Fixed::operator/(Fixed const &rhs) const
 
 Fixed &Fixed::operator++(void)
 {
-	*this = Fixed((float const)(this->toFloat() + 0.00390625));
+	*this = Fixed((float)(this->toFloat() + 1));
 	return (*this);
 }
 
 Fixed Fixed::operator++(int)
 {
 	Fixed tmp(*this);
-	*this = Fixed((float const)(this->toFloat() + 0.00390625));
+	*this = Fixed((float)(this->toFloat() + 1));
 	return (tmp);
 }
 
 Fixed &Fixed::operator--(void)
 {
-	*this = Fixed((float const)(this->toFloat() - 0.00390625));
+	*this = Fixed((float)(this->toFloat() - 1));
 	return (*this);
 }
 
 Fixed Fixed::operator--(int)
 {
 	Fixed tmp(*this);
-	*this = Fixed((float const)(this->toFloat() - 0.00390625));
+	*this = Fixed((float)(this->toFloat() - 1));
 	return (tmp);
 }
 
