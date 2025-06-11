@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 13:59:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/11 17:09:03 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ class Cat : public Animal
 	Cat(void);
 	Cat(Cat const &src);
 	~Cat(void);
+
+	Brain *getBrain(void) const;
 
 	void makeSound(void) const;
 

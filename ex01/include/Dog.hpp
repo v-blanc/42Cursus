@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:55 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 13:59:10 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/11 17:07:24 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ class Dog : public Animal
 	Dog(void);
 	Dog(Dog const &src);
 	~Dog(void);
+
+	Brain *getBrain(void) const;
 
 	void makeSound(void) const;
 

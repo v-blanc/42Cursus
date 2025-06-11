@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 13:59:22 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/11 17:08:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ class Animal
 {
   public:
 	Animal(void);
-	Animal(std::string type);
 	Animal(Animal const &src);
 	virtual ~Animal(void);
 
 	std::string getType(void) const;
-	void setType(std::string type);
 
 	virtual void makeSound(void) const;
 
-  private:
+  protected:
 	std::string _type;
 
+  private:
 	Animal &operator=(Animal const &rhs);
 };
