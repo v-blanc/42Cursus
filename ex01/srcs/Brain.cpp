@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:19:03 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 14:01:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/11 17:02:34 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,19 @@ Brain::~Brain(void)
 	std::cout << "Brain destructor called" << std::endl;
 	if (this->_ideas)
 		delete[] this->_ideas;
+}
+
+std::string Brain::getIdea(int i) const
+{
+	if (i >= 0 && i < 100)
+		return (this->_ideas[i]);
+	return ("");
+}
+
+void Brain::setIdea(int i, std::string idea)
+{
+	if (i >= 0 && i < 100)
+		this->_ideas[i] = idea;
 }
 
 Brain &Brain::operator=(Brain const &rhs)
