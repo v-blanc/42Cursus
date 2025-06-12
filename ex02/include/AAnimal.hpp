@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 14:28:16 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/12 15:54:09 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ class AAnimal
 {
   public:
 	AAnimal(void);
-	AAnimal(std::string type);
 	AAnimal(AAnimal const &src);
 	virtual ~AAnimal(void);
 
 	std::string getType(void) const;
-	void setType(std::string type);
 
 	virtual void makeSound(void) const = 0;
 
-  private:
+  protected:
 	std::string _type;
 
+  private:
 	AAnimal &operator=(AAnimal const &rhs);
 };

@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 14:27:20 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/12 15:49:43 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ class Cat : public AAnimal
 	Cat(void);
 	Cat(Cat const &src);
 	~Cat(void);
+
+	Brain *getBrain(void) const;
 
 	void makeSound(void) const;
 

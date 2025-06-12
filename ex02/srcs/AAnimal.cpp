@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:59 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 14:28:11 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/12 15:53:53 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 AAnimal::AAnimal(void) : _type("AAnimal")
 {
 	std::cout << "AAnimal default constructor called" << std::endl;
-}
-
-AAnimal::AAnimal(std::string type) : _type(type)
-{
-	std::cout << "AAnimal constructor called" << std::endl;
 }
 
 AAnimal::AAnimal(AAnimal const &src)
@@ -36,9 +31,4 @@ AAnimal::~AAnimal(void)
 std::string AAnimal::getType(void) const
 {
 	return (this->_type);
-}
-
-void AAnimal::setType(std::string type)
-{
-	this->_type = type;
 }
