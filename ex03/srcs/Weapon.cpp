@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:54:24 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 17:56:07 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/17 19:04:20 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Weapon::~Weapon(void)
 {
 }
 
-std::string Weapon::getType(void) const
+const std::string Weapon::getType(void) const
 {
 	return (this->_type);
 }

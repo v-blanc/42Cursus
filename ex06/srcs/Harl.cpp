@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:13:02 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 20:53:31 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/17 19:35:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,31 @@ void Harl::error(void) const
 
 void Harl::complain(std::string level) const
 {
-	void (Harl::*f[4])(void) const = {&Harl::debug, &Harl::info, &Harl::warning,
-		&Harl::error};
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	for (int i = 0; i < 4; i++)
+	int i;
+
+	for (i = 0; i < 4; i++)
 	{
 		if (level == levels[i])
-		{
-			(this->*f[i])();
-			return ;
-		}
+			break ;
 	}
-	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	switch (i)
+	{
+	case 0:
+		Harl::debug();
+		std::cout << std::endl;
+	case 1:
+		Harl::info();
+		std::cout << std::endl;
+	case 2:
+		Harl::warning();
+		std::cout << std::endl;
+	case 3:
+		Harl::error();
+		std::cout << std::endl;
+		break ;
+	default:
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+		break ;
+	}
 }

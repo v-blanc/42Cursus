@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:51:34 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 17:56:06 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/17 19:04:14 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Weapon
 	Weapon(std::string type);
 	~Weapon(void);
 
-	std::string getType(void) const;
+	const std::string getType(void) const;
 	void setType(std::string new_type);
 
 	Weapon(void);

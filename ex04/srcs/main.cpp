@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 18:27:06 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/29 20:10:46 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/17 20:09:27 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	main(int argc, char **argv)
 	std::ifstream file(argv[1]);
 	if (!file.is_open())
 	{
-		std::cout << "Error: could not open file" << filename << std::endl;
+		std::cout << "Error: could not open file " << filename << std::endl;
 		return (1);
 	}
 	filename += ".replace";
 	std::ofstream new_file(filename.c_str());
 	if (!new_file.is_open())
 	{
-		std::cout << "Error: could not open file" << filename << std::endl;
+		std::cout << "Error: could not open file " << filename << std::endl;
 		return (1);
 	}
 	std::string line;
@@ -43,13 +43,12 @@ int	main(int argc, char **argv)
 	std::size_t pos;
 	while (std::getline(file, line))
 	{
-		line += "\n";
 		new_line = "";
 		offset = 0;
 		pos = 0;
 		while (offset != std::string::npos)
 		{
-			offset = line.find(s1, offset);
+			offset = line.find(s1, pos);
 			if (offset != std::string::npos)
 			{
 				new_line += line.substr(pos, offset - pos);
@@ -60,6 +59,7 @@ int	main(int argc, char **argv)
 			else
 				new_line += line.substr(pos, offset - pos);
 		}
+		new_line += "\n";
 		new_file << new_line;
 	}
 	new_file.close();
