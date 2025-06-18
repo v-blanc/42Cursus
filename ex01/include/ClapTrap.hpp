@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:03:47 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 19:34:13 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 13:30:38 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef CLAPTRAP_H
+# define CLAPTRAP_H
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 class ClapTrap
 {
@@ -43,3 +44,5 @@ class ClapTrap
 	ClapTrap(ClapTrap const &src);
 	ClapTrap &operator=(ClapTrap const &rhs);
 };
+
+#endif

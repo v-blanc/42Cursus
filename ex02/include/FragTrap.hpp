@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:42:52 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 19:46:52 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 13:31:51 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef FRAGTRAP_H
+# define FRAGTRAP_H
 
-#include "ClapTrap.hpp"
-#include <iostream>
+# include "ClapTrap.hpp"
+# include <iostream>
 
 class FragTrap : public ClapTrap
 {
@@ -28,3 +29,5 @@ class FragTrap : public ClapTrap
 	FragTrap(FragTrap const &src);
 	FragTrap &operator=(FragTrap const &rhs);
 };
+
+#endif

@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:03:50 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 19:33:30 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 13:31:08 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef SCAVTRAP_H
+# define SCAVTRAP_H
 
-#include "ClapTrap.hpp"
-#include <iostream>
+# include "ClapTrap.hpp"
+# include <iostream>
 
 class ScavTrap : public ClapTrap
 {
@@ -29,3 +30,5 @@ class ScavTrap : public ClapTrap
 	ScavTrap &operator=(ScavTrap const &rhs);
 	ScavTrap(ScavTrap const &src);
 };
+
+#endif

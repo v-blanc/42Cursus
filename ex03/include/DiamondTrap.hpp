@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:43:23 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/09 21:43:24 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:10:11 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef DIAMONTRAP_H
+# define DIAMONTRAP_H
 
-#include "ClapTrap.hpp"
-#include "FragTrap.hpp"
-#include "ScavTrap.hpp"
-#include <iostream>
-#include <string>
+# include "ClapTrap.hpp"
+# include "FragTrap.hpp"
+# include "ScavTrap.hpp"
+# include <iostream>
+# include <string>
 
 class DiamondTrap : public FragTrap, public ScavTrap
 {
@@ -33,3 +34,5 @@ class DiamondTrap : public FragTrap, public ScavTrap
 	DiamondTrap(DiamondTrap const &src);
 	DiamondTrap &operator=(DiamondTrap const &rhs);
 };
+
+#endif
