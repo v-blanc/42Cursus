@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:55 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/12 15:49:41 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:59:40 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef DOG_H
+# define DOG_H
 
-#include "AAnimal.hpp"
-#include "Brain.hpp"
+# include "AAnimal.hpp"
+# include "Brain.hpp"
 
 class Dog : public AAnimal
 {
@@ -31,3 +32,5 @@ class Dog : public AAnimal
 
 	Dog &operator=(Dog const &rhs);
 };
+
+#endif

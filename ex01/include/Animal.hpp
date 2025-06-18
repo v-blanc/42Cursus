@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/11 17:08:59 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:57:42 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef ANIMAL_H
+# define ANIMAL_H
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 class Animal
 {
@@ -32,3 +33,5 @@ class Animal
   private:
 	Animal &operator=(Animal const &rhs);
 };
+
+#endif

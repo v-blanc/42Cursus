@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/12 15:49:43 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:59:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef CAT_H
+# define CAT_H
 
-#include "AAnimal.hpp"
-#include "Brain.hpp"
+# include "AAnimal.hpp"
+# include "Brain.hpp"
 
 class Cat : public AAnimal
 {
@@ -31,3 +32,5 @@ class Cat : public AAnimal
 
 	Cat &operator=(Cat const &rhs);
 };
+
+#endif

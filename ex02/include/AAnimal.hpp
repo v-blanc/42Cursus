@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/12 15:54:09 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:58:59 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef AANIMAL_H
+# define AANIMAL_H
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 class AAnimal
 {
@@ -32,3 +33,5 @@ class AAnimal
   private:
 	AAnimal &operator=(AAnimal const &rhs);
 };
+
+#endif

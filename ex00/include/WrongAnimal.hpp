@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:22:38 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/11 16:44:39 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:53:10 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef WRONGANIMAL_H
+# define WRONGANIMAL_H
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 class WrongAnimal
 {
@@ -32,3 +33,5 @@ class WrongAnimal
 	WrongAnimal(WrongAnimal const &src);
 	WrongAnimal &operator=(WrongAnimal const &rhs);
 };
+
+#endif

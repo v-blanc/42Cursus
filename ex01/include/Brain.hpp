@@ -6,13 +6,14 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:47 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/11 17:02:19 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:57:44 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef BRAIN_H
+# define BRAIN_H
 
-#include <iostream>
+# include <iostream>
 
 class Brain
 {
@@ -29,3 +30,5 @@ class Brain
   private:
 	std::string *_ideas;
 };
+
+#endif

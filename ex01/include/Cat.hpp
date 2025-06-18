@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:18:51 by vblanc            #+#    #+#             */
-/*   Updated: 2025/06/11 17:09:03 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:58:06 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef CAT_H
+# define CAT_H
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+# include "Animal.hpp"
+# include "Brain.hpp"
 
 class Cat : public Animal
 {
@@ -31,3 +32,5 @@ class Cat : public Animal
 
 	Cat &operator=(Cat const &rhs);
 };
+
+#endif

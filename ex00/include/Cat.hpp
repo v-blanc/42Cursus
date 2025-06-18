@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vblanc <vblanc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:22:41 by vblanc            #+#    #+#             */
-/*   Updated: 2025/05/02 12:59:12 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:52:25 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef CAT_H
+# define CAT_H
 
-#include "Animal.hpp"
+# include "Animal.hpp"
 
 class Cat : public Animal
 {
@@ -26,3 +27,5 @@ class Cat : public Animal
 	Cat(Cat const &src);
 	Cat &operator=(Cat const &rhs);
 };
+
+#endif
