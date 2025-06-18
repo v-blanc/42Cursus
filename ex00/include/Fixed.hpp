@@ -6,13 +6,14 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:57:08 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 12:57:10 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 09:54:41 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef FIXED_H
+# define FIXED_H
 
-#include <iostream>
+# include <iostream>
 
 class Fixed
 {
@@ -29,3 +30,5 @@ class Fixed
 	int _value;
 	static const int _bits = 8;
 };
+
+#endif

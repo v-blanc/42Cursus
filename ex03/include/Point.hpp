@@ -1,7 +1,20 @@
-#pragma once
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/18 09:55:49 by vblanc            #+#    #+#             */
+/*   Updated: 2025/06/18 09:56:03 by vblanc           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "Fixed.hpp"
-#include <iostream>
+#ifndef POINT_H
+# define POINT_H
+
+# include "Fixed.hpp"
+# include <iostream>
 
 class Point
 {
@@ -22,3 +35,5 @@ class Point
 };
 
 std::ostream &operator<<(std::ostream &o, Point const &rhs);
+
+#endif

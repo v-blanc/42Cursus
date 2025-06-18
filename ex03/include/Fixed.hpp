@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/18 09:55:29 by vblanc            #+#    #+#             */
+/*   Updated: 2025/06/18 09:55:40 by vblanc           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#pragma once
+#ifndef FIXED_H
+# define FIXED_H
 
-#include <cmath>
-#include <iostream>
+# include <cmath>
+# include <iostream>
 
 class Fixed
 {
@@ -47,3 +59,5 @@ class Fixed
 };
 
 std::ostream &operator<<(std::ostream &o, Fixed const &rhs);
+
+#endif

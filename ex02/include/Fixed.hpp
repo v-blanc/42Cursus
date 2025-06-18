@@ -6,14 +6,15 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 13:56:14 by vblanc            #+#    #+#             */
-/*   Updated: 2025/04/30 15:31:08 by vblanc           ###   ########.fr       */
+/*   Updated: 2025/06/18 09:55:20 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef FIXED_H
+# define FIXED_H
 
-#include <cmath>
-#include <iostream>
+# include <cmath>
+# include <iostream>
 
 class Fixed
 {
@@ -58,3 +59,5 @@ class Fixed
 };
 
 std::ostream &operator<<(std::ostream &o, Fixed const &rhs);
+
+#endif
