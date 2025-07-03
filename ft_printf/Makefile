@@ -1,0 +1,45 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/13 15:48:03 by vblanc            #+#    #+#              #
+#    Updated: 2024/12/13 12:30:17 by vblanc           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC := cc
+CFLAGS := -Wall -Werror -Wextra
+
+SRCDIR := ./srcs
+OBJDIR := ./objs
+
+SRCS := ft_printf.c ft_write_numbers.c ft_write_characters.c
+SRCS := $(addprefix $(SRCDIR)/, $(SRCS))
+OBJS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o, $(SRCS))
+
+NAME := libftprintf.a
+RM := rm -rf
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	ar -rsc $(NAME) $(OBJS)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c  | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
+
+clean:
+	$(RM) $(OBJDIR)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
