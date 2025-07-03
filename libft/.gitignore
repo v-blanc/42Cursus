@@ -1,0 +1,8 @@
+a.out
+.vscode/
+objs/
+libft.a
+test_libft/bin
+test_libft/output_user
+test_libft/results
+test_libft/a.out
