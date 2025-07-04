@@ -40,7 +40,7 @@ make
 
 This will output a list of instructions to sort the numbers using two stacks.
 
-3. Test the output with the `checker_linux` (*only for linux*) program:
+3. Test the output with the `checker_linux` (*only for linux, and provided by 42*) program:
 ```
 ./push_swap 3 2 1 | ./checker_linux 3 2 1
 ```
@@ -59,3 +59,4 @@ make re         # Rebuilds everything
 
 First `make` the project, then:  
 ![Demo](assets/demo.gif)
+ 
