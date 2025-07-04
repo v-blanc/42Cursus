@@ -35,37 +35,8 @@ This project demonstrates how to encode characters as binary signals, set up sig
 - Each character is sent **bit by bit**, using `SIGUSR1` for binary `1` and `SIGUSR2` for binary `0`.
 - The server reconstructs the characters and prints the message.
 
-## 🚀 Usage
+## 🎥 Demo
 
-### 1. Build the executables
+First `make` the project, then:
 
-```
-make
-```
-
-This will compile both `server` and `client`.
-
-### 2. Start the server
-
-```
-./server
-Server PID: 12345
-```
-
-### 3. Send a message from the client
-
-    ./client 12345 "Hello, minitalk!"
-
-Where `12345` is the PID printed by the server.
-
-## 💬 Example
-
-```bash
-$ ./server
-📡 Server PID: 42782
-
-$ ./client 42782 "42 is awesome!"
-
-# Output on server side:
-42 is awesome!
-```
+![Demo](assets/demo.gif)
