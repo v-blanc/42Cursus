@@ -6,12 +6,12 @@
 #    By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 14:54:04 by vblanc            #+#    #+#              #
-#    Updated: 2025/05/01 14:12:54 by vblanc           ###   ########.fr        #
+#    Updated: 2025/07/04 19:32:39 by vblanc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -MMD -MP -pthread -o3
+CFLAGS := -Wall -Werror -Wextra -MMD -MP -pthread -O3
 
 NAME := philo
 RM := rm -rf
