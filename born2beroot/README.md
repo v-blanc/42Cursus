@@ -1,31 +1,41 @@
-#### Password policy
+# Born2beroot
 
-```bash
-$ nano /etc/login.defs
-...
-PASS_MAX_DAYS 30
-PASS_MIN_DAYS 2
-...
-$ nano /etc/pam.d/common-password
-```
+<div align="center">
 
-#### Check change hostname
+![Banner](assets/banner.png)
+![Operating System](https://img.shields.io/badge/System-Debian%20%2F%20Rocky-blue)
+![Virtualization](https://img.shields.io/badge/Virtualization-VM-lightgrey)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-```bash
-$ sudo nano /etc/hostname
-$ sudo nano /etc/hosts
-$ sudo reboot
-$ hostname
-```
+</div>
 
-#### Check sudo rules
+## 🎓 Grade
+![Grade](assets/grade.png)
 
-```bash
-$ nano /etc/sudoers.d/sudo_config
-```
+## 📘 Description
 
-#### Check crontab of script
+**Born2beroot** is a system administration and cybersecurity project.
+The goal is to create a secure, functional, and minimal virtual machine based on **Debian**, applying best practices in system hardening, user management, and service configuration
+This project introduces to **Linux system administration**, **virtualization**, **firewall configuration**, **secure SSH**, and **basic automation** using shell scripting.
 
-```bash
-$ sudo crontab -u root -e
-```
+## 🧩 Project Goals
+
+- Install and configure a virtual machine (Debian)
+- Harden the OS using security best practices
+- Set up a strong user policy with secure sudo rules
+- Configure key services (SSH, UFW, sudo, hostname, etc.)
+- Automate configurations (e.g., via scripts or configuration files)
+- Ensure compliance with **42's auditing checklist**
+
+## 🖥️ System Requirements
+
+- Virtual Machine: **Debian**
+- Virtualization: VirtualBox
+- At least **2 users**: `root` and a sudo-capable user
+- Strong password policies
+- Sudo configured with **password expiration and restrictions**
+- SSH access with security settings (port, protocol, etc.)
+- Hostname and static IP configuration
+- UFW (Debian) setup
+- Service monitoring with `cron` and custom scripts
+- Security audits via `ufw`, `apt`, etc.
