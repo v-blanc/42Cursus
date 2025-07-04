@@ -2,7 +2,7 @@
 
 ![Banner](assets/banner.png)  
 ![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Algorithm](https://img.shields.io/badge/Algorithm-Sorting-yellow)
+![Algorithm](https://img.shields.io/badge/Algorithm-Radix-yellow)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
