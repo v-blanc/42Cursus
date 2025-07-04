@@ -1,76 +1,76 @@
-# Fract-ol
+<div align="center">
 
-<div align=center>
-
-![Banner](./assets/banner.png)
-
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-[![Graphics](https://img.shields.io/badge/Graphics-MiniLibX-blue)](https://github.com/42Paris/minilibx-linux)
+![Banner](assets/banner.png)  
+![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
+![Graphics](https://img.shields.io/badge/Graphics-MiniLibX-lightblue)
+![Team](https://img.shields.io/badge/Group-Solo-teal)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-70h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+
 
 </div>
 
-## Grade
-
+## 🎓 Grade
 ![Grade](assets/grade.png)
 
-## Description
+## 📘 Description
 
-**Fract-ol** is a graphical application written in C that renders complex mathematical fractals such as the **Mandelbrot set**, **Julia sets**, and optionally the **Lotus** fractal.  
-This project explores topics such as complex numbers, graphical rendering, event-driven programming, and performance optimization.
+**fract-ol** is a graphical programming project from the 42 curriculum, where the goal is to render fractals in real time using the [MiniLibX](https://github.com/42paris/minilibx-linux) graphics library.
 
-It was developed as part of the 42 curriculum using [**MiniLibX**](https://github.com/42Paris/minilibx-linux), a lightweight graphics library.
+It involves generating mathematically complex fractals like **Mandelbrot**, **Julia**, and **Lotus**, and displaying them in a responsive, interactive window with zoom and color manipulation. This project enhances your understanding of algorithms, math, and event-driven programming in C.
 
-## Features
+## 🧠 Key Concepts
 
-- 🧠 Render multiple fractals:
-  - Mandelbrot
-  - Julia
-  - Lotus (bonus)
-- 🖱️ Mouse interaction:
-  - Scroll to zoom in/out
-- ⌨️ Keyboard shortcuts:
-  - Move, zoom, reset, change iterations, switch colors
-- Multithreaded rendering for performance
+- Complex numbers and 2D coordinates
+- Fractal generation algorithms (Mandelbrot, Julia, etc.)
+- Event handling (keyboard & mouse input)
+- Pixel drawing with [MiniLibX](https://github.com/42paris/minilibx-linux)
+- Zoom, pan, color mapping
+- Image refreshing
+- Multithreading (`bonus` part)
 
-## Demo
+## 🚀 Usage
 
-Here’s a screenshot of a rendered fractal after running `./fractol_bonus mandelbrot`:
+1. Build the project:
 
-![Fractal Screenshot](./assets/demo.png)
-
-## Usage
-
-### Requirements
-
-- Unix-based OS (macOS/Linux)
-- MiniLibX installed (usually available in 42 projects)
-
-### Build
-
-For the mandatory version, run:
 ```bash
-make
-./fractol ...
-```
-or for the bonus version, run:
-```bash
-make bonus
-./fractol_bonus ...
+make # For the mandatory part
+make bonus # For the bonus part
 ```
 
-To use multithreading, run:
+2. Run the fractal viewer:
+
+*Usage:* `./fract-ol [-mt/-h/mandelbrot/lotus/julia [cx cy]]`
 ```bash
-./fractol_bonus -mt ...
+# Exemples
+./fractol mandelbrot
+./fractol_bonus -mt julia -0.75 0
+
+# For help
+./fractol -h 
+./fractol_bonus -h
 ```
 
-## Controls
+3. Controls:
 
-| Input                     | Action                                   |
-|---------------------------|------------------------------------------|
-| `P` / `M` or Mouse Scroll | Zoom in/out                              |
-| Arrows                    | Move across the fractal                  |
-| `W` / `Q`                 | Increase or decrease iterations          |
-| `C`                       | Cycle through color palettes             |
-| `R`                       | Reset view to default                    |
-| `ESC`                     | Quit the application                     |
+| Input                     | Action                          |
+|---------------------------|---------------------------------|
+| `P` / `M` or Mouse Scroll | Zoom in/out                     |
+| Arrows                    | Move across the fractal         |
+| `W` / `Q`                 | Increase or decrease iterations |
+| `C`                       | Cycle through color palettes    |
+| `R`                       | Reset view to default           |
+| `ESC`                     | Quit the application            |
+
+4. Clean build files:
+```
+make clean      # Removes object files  
+make fclean     # Removes object files and binary  
+make re         # Rebuilds everything from scratch
+```
+
+## 🎥 Demo
+
+First `make bonus` the project, then run `./fractol_bonus mandelbrot`:  
+
+![Demo](assets/demo.gif)

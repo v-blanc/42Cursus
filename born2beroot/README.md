@@ -1,8 +1,8 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Operating System](https://img.shields.io/badge/System-Debian%20%2F%20Rocky-blue)
-![Virtualization](https://img.shields.io/badge/Virtualization-VM-lightgrey)
+![Operating System](https://img.shields.io/badge/System-Debian%20%2F%20Rocky-black)
+![Virtualization](https://img.shields.io/badge/Virtualization-VM-lightblue)
 ![Team](https://img.shields.io/badge/Group-Solo-teal)
 ![Duration](https://img.shields.io/badge/Estimated%20Hours-40h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)

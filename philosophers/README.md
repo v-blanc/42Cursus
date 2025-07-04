@@ -1,42 +1,59 @@
-# Philosophers
-
 <div align="center">
 
-![Banner](assets/banner.png)
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c) ![Mutlithreading](https://shields.io/badge/Mutlithreading-pthread-blue) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![Banner](assets/banner.png)  
+![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
+![Threads](https://img.shields.io/badge/Threads-pthreads-blue)
+![Group](https://img.shields.io/badge/Group-Solo-purple)
+![Estimated Hours](https://img.shields.io/badge/Estimated%20Hours-70h-blue)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
 
-## Grade
+## 🎓 Grade
 ![Grade](assets/grade.png)
 
-## Description
+## 📘 Description
 
-Philosophers is an implementation of the classic "Dining Philosophers Problem," which demonstrates the challenges of concurrency and synchronization. The project is based on the scenario where several philosophers are sitting around a table, alternating between eating and thinking. The goal is to properly manage **mutexes** to prevent deadlock and ensure correct synchronization of philosopher actions.
+**philosophers** is a concurrency-focused project that challenges you to implement the classic **Dining Philosophers Problem**, a well-known example in concurrency theory.  
+Using **POSIX threads and mutexes**, the project requires simulating the behavior of philosophers who must think, eat, and sleep without causing **deadlocks**, **race conditions**, or **starvation**.
 
-This project showcases the use of **C threads (pthreads)** to simulate parallel actions while avoiding resource conflicts.
+## 🧠 Key Concepts
 
-## Features
+- POSIX threads (`pthread`)
+- Mutex synchronization (`pthread_mutex`)
+- Deadlock prevention
+- Timing accuracy (`gettimeofday`, `usleep`)
+- State management and shared data access
 
-- **Simulate dining philosophers**: A configurable number of philosophers, each represented by a thread.
-- **Resource management**: Philosophers share forks, and it’s essential to prevent deadlock by correctly managing access to resources.
-- **Synchronization algorithms**: The program uses mutexes to synchronize philosopher actions and prevent race conditions.
+## 🚀 Usage
 
-## Demo
+1. Build the project:
+```
+make
+```
 
-Here’s a screenshot of the program after running `./philo 5 1000 200 100 5`:
+2. Run the program:
+```bash
+./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep]
 
-![Demo](assets/demo.png)
+# Exemple
+./philo 5 800 200 200
+```
+
+3. Clean build files:
+```bash
+make clean      # Remove object files  
+make fclean     # Remove objects and binaries  
+make re         # Rebuild everything
+```
+
+## 🎥 Demo
+
+First `make` the project, then run `./philo 5 1000 200 100 5`:  
+
+![Demo](assets/demo.gif)
+
+![Demo-visualizer](assets/demo-visualizer.png)
 
 > Visual generated using this [Philosophers Visualizer](https://nafuka11.github.io/philosophers-visualizer/)
 
-
-## Usage
-
-To run the program, run:
-
-
-```bash
-make
-./philo [number_of_philosophers] [time_to_eat] [time_to_sleep] [time_to_wait] [optional: number_of_times_each_philosopher_must_eat]
-```
