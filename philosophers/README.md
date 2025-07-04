@@ -53,7 +53,6 @@ First `make` the project, then run `./philo 5 1000 200 100 5`:
 
 ![Demo](assets/demo.gif)
 
+> Visual below generated using [Philosophers Visualizer](https://nafuka11.github.io/philosophers-visualizer/)
+
 ![Demo-visualizer](assets/demo-visualizer.png)
-
-> Visual generated using this [Philosophers Visualizer](https://nafuka11.github.io/philosophers-visualizer/)
-
