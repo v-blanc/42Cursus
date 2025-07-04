@@ -2,8 +2,8 @@
 
 ![Banner](assets/banner.png)  
 ![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Threads](https://img.shields.io/badge/Threads-pthreads-blue)
-![Group](https://img.shields.io/badge/Group-Solo-purple)
+![Threads](https://img.shields.io/badge/Threads-pthreads-lightblue)
+![Group](https://img.shields.io/badge/Group-Solo-teal)
 ![Estimated Hours](https://img.shields.io/badge/Estimated%20Hours-70h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 

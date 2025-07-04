@@ -2,7 +2,7 @@
 
 ![Banner](assets/banner.png)  
 ![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Algorithm](https://img.shields.io/badge/Algorithm-Radix-yellow)
+![Algorithm](https://img.shields.io/badge/Algorithm-Radix-lightblue)
 ![Team](https://img.shields.io/badge/Group-Solo-teal)
 ![Duration](https://img.shields.io/badge/Estimated%20Hours-60h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
