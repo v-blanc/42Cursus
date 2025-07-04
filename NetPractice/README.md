@@ -33,5 +33,6 @@ You'll learn to configure IP addresses, subnet masks, and routing in order to en
 
 ## 🎥 Demo
 
-First make the project, then:  
+Level 9 *not completed* as an example:  
+
 ![Demo](assets/demo.png)
