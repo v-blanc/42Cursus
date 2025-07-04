@@ -1,8 +1,10 @@
 <div align="center">
 
-![Banner](assets/banner.png)
+![Banner](assets/banner.png)  
 ![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
 ![Communication](https://img.shields.io/badge/IPC-Unix%20Signals-lightblue)
+![Team](https://img.shields.io/badge/Group-Solo-teal)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-50h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>

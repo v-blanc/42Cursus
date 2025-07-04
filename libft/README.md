@@ -2,6 +2,8 @@
 
 ![Banner](assets/banner.png)  
 ![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c) 
+![Team](https://img.shields.io/badge/Group-Solo-teal)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-70h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
