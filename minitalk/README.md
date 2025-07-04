@@ -1,5 +1,3 @@
-# minitalk
-
 <div align="center">
 
 ![Banner](assets/banner.png)

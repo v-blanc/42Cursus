@@ -1,65 +1,46 @@
-# ft_printf
-
 <div align="center">
 
-![Banner](assets/banner.png)
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
+![Banner](assets/banner.png)  
+![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
 
-## Grade
+## 🎓 Grade
 ![Grade](assets/grade.png)
 
-## Description
+## 📘 Description
 
-**ft_printf** is a custom implementation of the standard C function `printf`.  
-It reproduces formatted output to the standard output, handling many common format specifiers such as `%d`, `%s`, `%x`, etc., without using the standard library version of `printf`.
+**ft_printf** is a custom implementation of the standard `printf` function in C.  
+It reproduces formatted output using a restricted set of tools — without calling the original `printf`.  
+The project teaches formatted output, variadic functions, buffer and memory handling, and modular design.
 
-## Features
+The supported format specifiers include `%c`, `%s`, `%d`, `%i`, `%u`, `%x`, `%X`, `%p`, and `%%`.
 
-- Variadic functions
-- String parsing
-- Buffer and memory management
-- Formatted output
-- Code modularity and testing
+## 🧠 Key Concepts
 
-## Supported Conversions
+- Variadic functions with `<stdarg.h>`
+- Format string parsing
+- Integer and pointer base conversions
+- Character and string formatting
+- Output to standard output using `write`
+- Memory-safe design with no leaks
 
-The following conversion specifiers are implemented:
+## 🚀 Usage
 
-| Specifier | Description             |
-|-----------|-------------------------|
-| `%c`      | Character               |
-| `%s`      | String                  |
-| `%p`      | Pointer address         |
-| `%d`      | Signed decimal integer  |
-| `%i`      | Signed decimal integer  |
-| `%u`      | Unsigned decimal integer|
-| `%x`      | Lowercase hex           |
-| `%X`      | Uppercase hex           |
-| `%%`      | Print a literal `%`     |
-
-
-## Usage
+1. Build the library:
 ```
 make
 ```
 
-This will create `libftprintf.a`, a static library.
-
-```c
-#include "ft_printf.h"
-
-int main(void)
-{
-    ft_printf("Hello %s, your score is %d/100\n", "Alice", 95);
-    return 0;
-}
+2. Compile your program with it:
+```
+gcc your_file.c -L. -lftprintf
 ```
 
-Compile with your own code
-
-```
-gcc main.c -L. -lftprintf
+3. Clean build files:
+```bash
+make clean      # Removes object files  
+make fclean     # Removes objects and the library  
+make re         # Rebuilds everything
 ```

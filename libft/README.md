@@ -1,63 +1,45 @@
-# Libft
-
 <div align="center">
 
-![Banner](assets/banner.png)
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
+![Banner](assets/banner.png)  
+![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c) 
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
 
-## Grade
-
+## 🎓 Grade
 ![Grade](assets/grade.png)
 
-## Description
+## 📘 Description
 
-Libft is a foundational project that consists of rebuilding key functions from the C standard library, along with additional utilities for memory manipulation, string processing, character checks, linked lists, and more.
+**libft** is the first project of the 42 Common Core curriculum.  
+It consists of recreating a set of essential C standard library functions from scratch, in order to strengthen your understanding of low-level programming, memory management, and code architecture.
 
-This project helps reinforce a deep understanding of memory, pointers, buffer management, and data structures in C — all implemented **from scratch**, without relying on any external functions (except `write`, `malloc`, and `free`).
+All functions follow the strict 42 Norme and avoid the use of any external libraries (except `malloc`, `free`, and `write`).
 
-## Features
+## 🧠 Key Concepts
 
-- Custom implementations of standard C library functions:
-  - `strlen`, `strcpy`, `strdup`, `atoi`, `memset`, `bzero`, etc.
-- Memory and string manipulation tools
-- Character classification and conversion functions (like `isalpha`, `toupper`)
-- Singly linked list utilities:
-  - `ft_lstnew`, `ft_lstadd_front`, `ft_lstdelone`, `ft_lstmap`, etc.
-- Full modularity and strict coding standards (42 Norme)
+- Manual memory management in C
+- String and character operations
+- Pointer arithmetic
+- Function modularity and static libraries
+- Custom linked list implementation (`bonus`)
+- Clean code following strict guidelines
 
-## Usage
+## 🚀 Usage
 
-### Clone and build the library:
+1. Build the static library:
+```
+make
+```
 
-    git clone https://github.com/v-blanc/libft.git
-    cd libft
-    make
+2. Use it in your own project:
+```
+gcc main.c -L. -lft
+```
 
-### Compile with your own project:
-
-To use `libft.a` in another project:
-
-    gcc main.c -L. -lft
-
-### Clean build files:
-
-    make clean      # remove object files
-    make fclean     # remove object files + libft.a
-    make re         # rebuild everything
-
-## Example
-
-```c
-#include "libft.h"
-
-int main(void)
-{
-    const char *str = "Hello, World!";
-    char *copy = ft_strdup(str);
-    free(copy);
-    return 0;
-}
+3. Clean build files:
+```bash
+make clean      # Removes object files  
+make fclean     # Removes object files and libft.a  
+make re         # Rebuilds everything from scratch
 ```

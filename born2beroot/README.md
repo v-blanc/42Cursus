@@ -1,5 +1,3 @@
-# Born2beroot
-
 <div align="center">
 
 ![Banner](assets/banner.png)

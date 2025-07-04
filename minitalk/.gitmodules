@@ -1,6 +1,0 @@
-[submodule "includes/libft"]
-	path = includes/libft
-	url = git@github.com:v-blanc/libft.git
-[submodule "includes/ft_printf"]
-	path = includes/ft_printf
-	url = git@github.com:v-blanc/ft_printf.git
