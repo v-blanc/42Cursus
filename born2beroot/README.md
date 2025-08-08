@@ -1,7 +1,7 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Operating System](https://img.shields.io/badge/System-Debian%20%2F%20Rocky-black)
+![Operating System](https://img.shields.io/badge/System-Debian-black)
 ![Virtualization](https://img.shields.io/badge/Virtualization-VM-lightblue)
 ![Team](https://img.shields.io/badge/Group-Solo-teal)
 ![Duration](https://img.shields.io/badge/Estimated%20Hours-40h-blue)
