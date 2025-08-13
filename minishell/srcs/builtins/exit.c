@@ -1,0 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 18:33:46 by yabokhar          #+#    #+#             */
+/*   Updated: 2025/05/21 17:53:38 by vblanc           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtins.h"
+#include "exec.h"
+
+static int	is_valid_arg(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (arg[i] == '-' || arg[i] == '+')
+		i++;
+	while (arg[i])
+	{
+		if (!isdigit(arg[i++]))
+			return (0);
+	}
+	if ((int)ft_strlen(arg) > 20)
+		return (0);
+	if (arg[0] == '-' && (int)ft_strlen(arg) == 20)
+	{
+		if (ft_strncmp(arg, "-9223372036854775808", 21) > 0)
+			return (0);
+	}
+	else if ((int)ft_strlen(arg) == 19)
+	{
+		if (ft_strncmp(arg, "9223372036854775807", 20) > 0)
+			return (0);
+	}
+	return (1);
+}
+
+static void	clean(t_context **context)
+
+{
+	close((*context)->backup_fds[STDIN_FILENO]);
+	close((*context)->backup_fds[STDOUT_FILENO]);
+	close((*context)->cmd_backup_fds[STDIN_FILENO]);
+	close((*context)->cmd_backup_fds[STDOUT_FILENO]);
+	gc_free_all_perm(*((*context)->head));
+	rl_clear_history();
+}
+
+int	exit_(int args_count, char **args, t_context **context)
+{
+	int	exit_status;
+
+	exit_status = 0;
+	print(1, "exit\n");
+	if (args_count == 2)
+	{
+		if (!is_valid_arg(args[0]))
+		{
+			print(2, "minishell: exit: %s: numeric argument required\n",
+				args[0]);
+			clean(context);
+			exit(2);
+		}
+		exit_status = ft_atoi(args[0]);
+		exit_status %= 256;
+	}
+	else if (args_count > 2)
+	{
+		print(2, "minishell: exit: too many arguments\n");
+		return (1);
+	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &(*context)->orig_term);
+	clean(context);
+	exit(exit_status);
+}

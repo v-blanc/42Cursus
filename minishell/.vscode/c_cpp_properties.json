@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/includes"
+            ],
+            "defines": [
+                "_POSIX_C_SOURCE=200809L",
+                "DT_UNKNOWN",
+                "ECHOCTL"
+            ],
+            "compilerPath": "/usr/bin/cc",
+            "cStandard": "c17",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}
