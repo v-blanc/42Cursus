@@ -6,7 +6,7 @@
 /*   By: vblanc <vblanc@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:09:10 by yabokhar          #+#    #+#             */
-/*   Updated: 2025/05/21 17:10:30 by yabokhar         ###   ########.fr       */
+/*   Updated: 2025/08/13 21:26:30 by vblanc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ static bool	c_pipes(int (**pipes)[2], t_context *ctx, int cmds_nb)
 
 static void	execute_child(int i, int (*pipes)[2], t_ast *pn, t_context *ctx)
 {
-	int	status;
-
-	status = 0;
 	if (i > 0)
 	{
 		if (dup2(pipes[i - 1][STDIN_FILENO], STDIN_FILENO) < 0)
