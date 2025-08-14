@@ -26,7 +26,7 @@ The various projects must be validated in the order of the ***‘Holy Graph’**
 
 </div>
 
-*For more information about 42’s unique approach, visit [42’s official website](https://www.42network.org/).*
+*For more information about 42’s unique approach, visit [42’s official website](https://42.fr/en/homepage/).*
 
 ## 📘 Description
 
