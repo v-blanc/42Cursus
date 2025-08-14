@@ -12,7 +12,7 @@ This repository contains all the projects I completed during the **common core**
 
 ## 💡 About 42 School
 
-**[42](https://42.fr/en/homepage/)** is a **tuition-free**, **project-based**, and **peer-to-peer learning** computer science school, which is part of the global **[42 Network](https://www.42network.org/)**, with **50+ campuses worldwide**.
+**[42](https://42.fr/en/homepage/)** is a **tuition-free**, **project-based**, and **peer-to-peer learning** computer science school, which is part of the global **[42 Network](https://www.42network.org/)**, with **50+ campuses worldwide**, and **3rd** in the [**WURI ranking 2025**](https://www.wuri.world/).
 
 42’s innovative pedagogy is **100% hands-on**: there are no teachers, no classes, and no traditional schedule. Students learn through **collaborative projects**, **problem-solving**, and **self-paced work**, 24/7. The curriculum covers **algorithms, systems programming, web development, AI, cybersecurity**, and more, preparing students for careers in tech with a strong focus on **practical skills** and **adaptability**.
 
