@@ -2,18 +2,38 @@
 
 # Common Core Projetcs
 
+This repository contains all the projects I completed during the **common core** at **[42 School](https://42.fr/en/homepage/)**.
+
 > ⚠️ **Important notice for 42 students**  
 > This repository is intended as a reference and for educational purposes **only**.  
 > Directly copying, submitting, or presenting this code as your own work in the 42 curriculum is a violation of the school's academic integrity policy and may result in disciplinary action.  
 >  
 > Feel free to read, learn, and get inspired — but always write your own code.
 
-## 📘 Description
+## 💡 About 42 School
 
-This repository contains all my projects from the **42 Common Core** curriculum, organized by rank.  
+**[42](https://42.fr/en/homepage/)** is a **tuition-free**, **project-based**, and **peer-to-peer learning** computer science school, which is part of the global **[42 Network](https://www.42network.org/)**, with **50+ campuses worldwide**.
+
+42’s innovative pedagogy is **100% hands-on**: there are no teachers, no classes, and no traditional schedule. Students learn through **collaborative projects**, **problem-solving**, and **self-paced work**, 24/7. The curriculum covers **algorithms, systems programming, web development, AI, cybersecurity**, and more, preparing students for careers in tech with a strong focus on **practical skills** and **adaptability**.
+
+The **common core** (tronc commun) is the foundational part of the program, where students master **C/C++ programming, Unix, data structures, and low-level programming**, among other essential skills.
+
+The various projects must be validated in the order of the ***‘Holy Graph’*** :
+
+<div align="center">
+
+![Banner](assets/holy-graph.png)
+
+</div>
+
+
+*For more information about 42’s unique approach, visit [42’s official website](https://www.42.fr/).*
+
+## 📘 Description
+ 
 Each project folder includes source code, resources, and a dedicated `README.md` detailing the objectives, key concepts, and usage.
 
-## 📑 Project Overview
+## 📑 Project Overview - Organized by rank
 
 | Rank | Project | Languages & Technologies | Hours | Type | Description | Grade /100 |
 |:------:|:---------:|:----------:|:-------:|:------:|:-------------:|:--------:|

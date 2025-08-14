@@ -7,8 +7,13 @@
 ![Duration](https://img.shields.io/badge/Estimated%20Hours-60h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-
 </div>
+
+> ⚠️ **Important notice for 42 students**  
+> This repository is intended as a reference and for educational purposes **only**.  
+> Directly copying, submitting, or presenting this code as your own work in the 42 curriculum is a violation of the school's academic integrity policy and may result in disciplinary action.  
+>  
+> Feel free to read, learn, and get inspired — but always write your own code.
 
 ## 🎓 Grade
 ![Grade](assets/grade.png)
