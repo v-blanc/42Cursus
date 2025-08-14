@@ -1,4 +1,4 @@
-![Banner](./assets/banner.svg)
+![Banner](./assets/banner.png)
 
 # Common Core Projetcs
 
