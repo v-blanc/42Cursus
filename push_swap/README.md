@@ -1,10 +1,10 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Algorithm](https://img.shields.io/badge/Algorithm-Radix-lightblue)
-![Team](https://img.shields.io/badge/Group-Solo-teal)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-60h-blue)
+![Language](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)
+![Algorithm](https://img.shields.io/badge/Radix%20Algorithm-897BFF?logo=buffer&logoColor=white)
+![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-60h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
@@ -51,7 +51,7 @@ If everything is correct, it should print `OK`.
 Otherwise, it should print `KO`.
 
 4. Clean build files:
-```
+```bash
 make clean      # Removes object files  
 make fclean     # Removes objects and binaries  
 make re         # Rebuilds everything

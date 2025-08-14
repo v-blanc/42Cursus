@@ -1,9 +1,9 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
+![Language](https://img.shields.io/badge/-00599C?logo=c&logoColor=white)
 ![Threads](https://img.shields.io/badge/Threads-pthreads-lightblue)
-![Group](https://img.shields.io/badge/Group-Solo-teal)
+![Group](https://img.shields.io/badge/Group-Alone-gainsboro)
 ![Estimated Hours](https://img.shields.io/badge/Estimated%20Hours-70h-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 

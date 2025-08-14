@@ -1,10 +1,10 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Operating System](https://img.shields.io/badge/System-Debian-black)
-![Virtualization](https://img.shields.io/badge/Virtualization-VM-lightblue)
-![Team](https://img.shields.io/badge/Group-Solo-teal)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-40h-blue)
+![Language](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff)
+![Language](https://img.shields.io/badge/VirtualBox-2F61B4?logo=virtualbox&logoColor=fff)
+![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-50h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>

@@ -2,9 +2,10 @@
 
 ![Banner](assets/banner.png)
 
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Team](https://img.shields.io/badge/Group-Pair-yellow)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-210h-blue)
+![Language](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)
+![Language](https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=fff)
+![Pair](https://img.shields.io/badge/Group-Duo-yellow)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-210h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
@@ -58,4 +59,4 @@ First `make` the project, then:
 
 
 ## 🤝 Collaborators
-- [SiliconMoloch](https://github.com/SiliconMoloch)
+- [SiliconMoloch](https://github.com/SiliconMoloch) (FR)

@@ -1,10 +1,10 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Graphics](https://img.shields.io/badge/Graphics-MiniLibX-lightblue)
-![Team](https://img.shields.io/badge/Group-Solo-teal)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-70h-blue)
+![Language](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)
+![Language](https://img.shields.io/badge/MiniLibX-black?logo=42&logoColor=fff)
+![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-70h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 
@@ -34,8 +34,8 @@ It involves generating mathematically complex fractals like **Mandelbrot**, **Ju
 1. Build the project:
 
 ```bash
-make # For the mandatory part
-make bonus # For the bonus part
+make        # For the mandatory part
+make bonus  # For the bonus part
 ```
 
 2. Run the fractal viewer:
@@ -63,7 +63,7 @@ make bonus # For the bonus part
 | `ESC`                     | Quit the application            |
 
 4. Clean build files:
-```
+```bash
 make clean      # Removes object files  
 make fclean     # Removes object files and binary  
 make re         # Rebuilds everything from scratch

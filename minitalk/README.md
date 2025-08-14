@@ -1,10 +1,10 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![C Language](https://img.shields.io/badge/Language-C-000000?style=flat&logo=c)
-![Communication](https://img.shields.io/badge/IPC-Unix%20Signals-lightblue)
-![Team](https://img.shields.io/badge/Group-Solo-teal)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-50h-blue)
+![Language](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)
+![Language](https://img.shields.io/badge/UNIX%20Signal-809CC9?logo=sonarqubeserver&logoColor=white)
+![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-50h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>

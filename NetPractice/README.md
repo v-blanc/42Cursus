@@ -1,9 +1,9 @@
 <div align="center">
 
 ![Banner](assets/banner.png)  
-![Networking](https://img.shields.io/badge/Networking-TCP/IP-lightblue)
-![Group](https://img.shields.io/badge/Group-Solo-teal)
-![Estimated Hours](https://img.shields.io/badge/Estimated%20Hours-50h-blue)
+![Language](https://img.shields.io/badge/Network-darkgray?logo=onnx&logoColor=fff)
+![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-50h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
