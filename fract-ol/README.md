@@ -4,7 +4,7 @@
 ![Language](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)
 ![Language](https://img.shields.io/badge/MiniLibX-black?logo=42&logoColor=fff)
 ![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-70h-A65B23)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-60h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 

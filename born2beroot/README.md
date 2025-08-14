@@ -4,7 +4,7 @@
 ![Language](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff)
 ![Language](https://img.shields.io/badge/VirtualBox-2F61B4?logo=virtualbox&logoColor=fff)
 ![Solo](https://img.shields.io/badge/Group-Alone-gainsboro)
-![Duration](https://img.shields.io/badge/Estimated%20Hours-50h-A65B23)
+![Duration](https://img.shields.io/badge/Estimated%20Hours-40h-A65B23)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 </div>
