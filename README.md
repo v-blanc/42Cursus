@@ -16,7 +16,7 @@ This repository contains all the projects I completed during the **common core**
 
 42’s innovative pedagogy is **100% hands-on**: there are no teachers, no classes, and no traditional schedule. Students learn through **collaborative projects**, **problem-solving**, and **self-paced work**, 24/7. The curriculum covers **algorithms, systems programming, web development, AI, cybersecurity**, and more, preparing students for careers in tech with a strong focus on **practical skills** and **adaptability**.
 
-The **common core** (tronc commun) is the foundational part of the program, where students master **C/C++ programming, Unix, data structures, and low-level programming**, among other essential skills.
+The **common core** is the foundational part of the program, where students master **C/C++ programming, Unix, data structures, and low-level programming**, among other essential skills.
 
 The various projects must be validated in the order of the ***‘Holy Graph’*** :
 
@@ -30,8 +30,9 @@ The various projects must be validated in the order of the ***‘Holy Graph’**
 *For more information about 42’s unique approach, visit [42’s official website](https://www.42.fr/).*
 
 ## 📘 Description
- 
-Each project folder includes source code, resources, and a dedicated `README.md` detailing the objectives, key concepts, and usage.
+
+For each **C project**, a strict [**Norm**](./assets/en.norm.pdf) must be followed in order to validate the project.  
+Each project folder includes **source code**, **resources**, and a dedicated `README.md` detailing the **objectives**, **key concepts**, and **usage**.
 
 ## 📑 Project Overview - Organized by rank
 
