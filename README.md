@@ -1,6 +1,6 @@
 ![Banner](./assets/banner.png)
 
-# Common Core Projetcs
+# Common Core Projects
 
 This repository contains all the projects I completed during the **common core** at **[42 School](https://42.fr/en/homepage/)**.
 
