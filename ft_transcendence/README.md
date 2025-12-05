@@ -1,1 +1,1 @@
-# ft_transcendence - Coming soon
+# ft_transcendence - Project have to be done
